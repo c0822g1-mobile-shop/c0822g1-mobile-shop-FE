@@ -1,5 +1,5 @@
+import {WareHousing} from "./ware-housing";
 import {BillHistory} from "./bill-history";
-import {ImportsCommodityHistory} from "./imports-commodity-history";
 
 export interface Commodity {
   id?: number;
@@ -18,5 +18,5 @@ export interface Commodity {
   code_qr?: string;
   quantity?: number;
   billHistory?: BillHistory;
-  importsCommodityHistory?: ImportsCommodityHistory;
+  wareHousing?: WareHousing;
 }

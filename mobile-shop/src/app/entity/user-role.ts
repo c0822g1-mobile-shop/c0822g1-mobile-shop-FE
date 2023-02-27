@@ -1,4 +1,4 @@
 export interface UserRole {
-  id_role?: number;
-  id_user?: number;
+  roleId?: number;
+  userId?: number;
 }
