@@ -7,7 +7,8 @@
 .container {
   max-width: 100%;
   margin: auto;
-  display: inline-block;
+  /*display: flex;*/
+  /*flex-wrap: wrap;*/
 }
 .carousel {
   width: 100%;
@@ -83,4 +84,14 @@ h1{
 .see-more{
   vertical-align: middle;
   justify-content: center;
+}
+.item {
+  cursor: pointer;
+}
+.list-card{
+  cursor: pointer;
+}
+.product-items {
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CommodityService} from "../../service/commodity/commodity.service";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(private commodityService: CommodityService) { }
 
   ngOnInit(): void {
   }
 
+  searchCommodity(name: string) {
+    this.commodityService.setNameSearch(name);
+  }
 }

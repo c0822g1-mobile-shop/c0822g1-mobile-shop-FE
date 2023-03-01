@@ -4,7 +4,8 @@ import {BodyComponent} from "./body/body.component";
 
 
 const routes: Routes = [
-  {path: '', component: BodyComponent}
+  {path: '', component: BodyComponent},
+  {path: 'search/:name',component: BodyComponent}
 ];
 
 @NgModule({
