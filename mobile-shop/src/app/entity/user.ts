@@ -12,6 +12,6 @@ export interface User {
   age?: number;
   gender?: boolean;
   dateOfBirth?: string;
-  userRole: UserRole;
-  bill: Bill;
+  userRole?: UserRole;
+  bill?: Bill;
 }
