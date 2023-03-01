@@ -1,0 +1,12 @@
+.button{
+  margin-left: 20px;
+  margin-top: 10px;
+  display: none
+}
+.disabled1{
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.choose{
+  background-color: gray;
+}
