@@ -34,6 +34,12 @@ export class CustomerSelectComponent implements OnInit {
     this.getAll(this.request);
   }
 
+  /**
+   * Created by: LongPT
+   * Date create: 01/03/2023
+   * Function: get all customer
+   * @param request
+   */
   private getAll(request: { page?: any; size?: any; } | undefined): void {
     this.name = '';
     this.address = '';
@@ -47,11 +53,25 @@ export class CustomerSelectComponent implements OnInit {
     });
   }
 
+  /**
+   * Created by: LongPT
+   * Date create: 01/03/2023
+   * Function: pagination
+   * @param pageNumber
+   */
   changePage(pageNumber: number) {
     this.request.page = pageNumber;
     this.ngOnInit();
   }
 
+  /**
+   * Created by: LongPT
+   * Date create: 01/03/2023
+   * Function: search customer by name or address
+   * @param name
+   * @param address
+   * @param flag
+   */
   search(name: string, address: string, flag: boolean) {
     if (!flag) {
       this.request.page = 0;
@@ -68,11 +88,23 @@ export class CustomerSelectComponent implements OnInit {
     });
   }
 
+  /**
+   * Created by: LongPT
+   * Date create: 01/03/2023
+   * Function: select id customer
+   * @param index
+   * @param id
+   */
   selectCustomer(id: number, index: number) {
     this.customer.id = id;
     this.choice = index;
   }
 
+  /**
+   * Created by: LongPT
+   * Date create: 01/03/2023
+   * Function: get by id customer
+   */
   select() {
     this.customerService.findById(this.customer.id).subscribe(data => {
       this.customer = data;
