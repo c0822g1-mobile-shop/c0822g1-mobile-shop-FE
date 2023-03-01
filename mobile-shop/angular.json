@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "mobile-shop"
+    }
+  },
+  "defaultProject": "mobile-shop",
+  "cli": {
+    "analytics": "d56525ff-6aeb-4fa1-bc3d-59357a5bd79c"
+  }
 }
