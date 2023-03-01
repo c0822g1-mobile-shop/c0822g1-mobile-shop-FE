@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SupplierService} from "../../service/supplier.service";
 import {Supplier} from "../../../entity/supplier";
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  templateUrl: './supplier-list.component.html',
+  styleUrls: ['./supplier-list.component.css']
 })
-export class ListComponent implements OnInit {
+export class SupplierListComponent implements OnInit {
 
   supplierList;
   temp: Supplier = {};
