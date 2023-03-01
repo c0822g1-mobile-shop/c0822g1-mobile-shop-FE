@@ -1,4 +1,4 @@
-import {ImportsCommodityHistory} from "./imports-commodity-history";
+import {WareHousing} from "./ware-housing";
 
 export interface Supplier {
   id?: number;
@@ -7,5 +7,5 @@ export interface Supplier {
   address?: string;
   phoneNumber?: string;
   email?: string;
-  importsCommodityHistory?: ImportsCommodityHistory;
+  wareHousing?: WareHousing;
 }
