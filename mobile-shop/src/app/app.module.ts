@@ -8,6 +8,7 @@ import {FooterComponent} from "./home/footer/footer.component";
 import {HeaderComponent} from "./home/header/header.component";
 import {CommodityModule} from "./commodity/commodity.module";
 import {HttpClientModule} from "@angular/common/http";
+import {WarehouseModule} from "./warehouse/warehouse.module";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     HomeModule,
     CommodityModule,
-    HttpClientModule
+    HttpClientModule,
+    WarehouseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
