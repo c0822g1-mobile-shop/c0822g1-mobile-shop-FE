@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
 import {Commodity} from "../../entity/commodity";
 import {CommodityService} from "../../service/commodity.service";
@@ -18,10 +18,10 @@ export class EditCommodityComponent implements OnInit {
   commodityForm: FormGroup;
   trademarkList: Trademark[] = [];
   selectedImage: any = null;
-  commodityList: Commodity[] = [];
   fb: string | undefined;
   src: string | undefined;
   downloadURL: Observable<string> | undefined;
+  commodityList: Commodity = {};
 
   constructor(private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
@@ -44,13 +44,11 @@ export class EditCommodityComponent implements OnInit {
     this.commodityService.findCommodityById(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(next => {
       console.log(this.commodityForm.patchValue(next));
       console.log(next);
+      this.commodityList = next;
     });
     this.trademarkService.getAllTrademark().subscribe(next => {
       this.trademarkList = next;
     });
-    this.commodityService.getAllCommodity().subscribe(next => {
-      this.commodityList = next.content;
-    })
   }
 
   ngOnInit(): void {
