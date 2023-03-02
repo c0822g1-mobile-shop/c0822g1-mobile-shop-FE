@@ -19,4 +19,5 @@ export class SupplierService {
     // @ts-ignore
     return this.httpClient.patch('http://localhost:8080/list', supplier);
   }
+
 }
