@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CommodityService} from "../../service/commodity/commodity.service";
+
 import {Commodity} from "../../entity/commodity";
 import {ActivatedRoute} from "@angular/router";
+import {CommodityService} from "../../service/commodity.service";
 
 @Component({
   selector: 'app-body',
@@ -9,6 +10,13 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
+
+  /**
+   * Create by: PhucNT
+   *
+   * Date created: 01/03/2023
+   */
+
   commoditiesByQuantitySold: Commodity[];
   numberQuantitySold: number = 0;
   totalPagesQuantitySold: number;
@@ -28,10 +36,10 @@ export class BodyComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(
       next => {
         this.nameSearch = next.get('name');
+        this.searchCommodity(this.nameSearch, 0);
       }
     )
     this.getCommodityByQuantitySold(0);
-    this.searchCommodity(this.nameSearch, 0);
   }
 
   ngOnInit(): void {
@@ -39,7 +47,7 @@ export class BodyComponent implements OnInit {
 
 
   getCommodityByQuantitySold(page: number) {
-    this.commodityService.getAllByQuantity(page).subscribe(data => {
+    this.commodityService.getAllByQuantitySold(page).subscribe(data => {
       this.commoditiesByQuantitySold = data.content;
       this.numberQuantitySold = data.number;
       this.totalPagesQuantitySold = data.totalPages;

@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {CommodityService} from "../../service/commodity/commodity.service";
+import {CommodityService} from "../../service/commodity.service";
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']})
 export class HeaderComponent implements OnInit {
-  
 
-  constructor(private commodityService: CommodityService) { }
+  nameSearch = '';
+
+  constructor() { }
 
   ngOnInit(): void {
   }

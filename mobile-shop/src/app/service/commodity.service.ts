@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Commodity} from "../entity/commodity";
@@ -8,7 +8,9 @@ import {Commodity} from "../entity/commodity";
 })
 export class CommodityService {
   URL_COMMODITY = 'http://localhost:8080/api/commodity';
-  constructor(private httpClient: HttpClient) { }
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   /**
    * Create by: LongPT
@@ -42,10 +44,36 @@ export class CommodityService {
    * @return Observable Customer[]
    */
   searchCommodity(name: any,
-                 request: any): Observable<any> {
+                  request: any): Observable<any> {
     const params = request;
     const url = this.URL_COMMODITY +
-      '?name=' + name ;
+      '?name=' + name;
     return this.httpClient.get<any>(url, {params});
   }
+
+  /**
+   * Create by: PhucNT
+   * Date created: 01/03/2023
+   * Function: get list commodity search by name commodity
+   * @param name commodity
+   * @param page
+   * @return Observable content[]
+   */
+
+  searchCommodityByName(name: string, page: number): Observable<any> {
+    return this.httpClient.get<any>("http://localhost:8080/home/search?" + name + "&page=" + page);
+  }
+
+  /**
+   * Create by: PhucNT
+   * Date created: 01/03/2023
+   * Function: get list commodity by quantity sold
+   * @param page
+   * @return Observable content[]
+   */
+
+  getAllByQuantitySold(page: number): Observable<any> {
+    return this.httpClient.get<any>("http://localhost:8080/home/quantity?page=" + page);
+  }
+
 }

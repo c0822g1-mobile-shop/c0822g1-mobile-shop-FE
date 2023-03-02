@@ -1,11 +1,6 @@
 .carousel {
   width: 100%;
   position: relative;
-  padding-bottom: 10px;
-}
-
-.product {
-  background: linear-gradient(to bottom, #ff665c, #FEB58A);
 }
 
 .wrapper {
