@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
-import {Commodity} from "../../entity/commodity";
 import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {ToastrService} from "ngx-toastr";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-create-commodity',
@@ -17,6 +17,10 @@ export class CreateCommodityComponent implements OnInit {
   commodityForm: FormGroup;
   trademarkList: Trademark[] = [];
   selectedImage: any = null;
+  url: any;
+  downloadURL: Observable<string> | undefined;
+  fb: string | undefined;
+  src: string | undefined;
 
   constructor(private toastrService: ToastrService, private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
@@ -44,7 +48,34 @@ export class CreateCommodityComponent implements OnInit {
   }
 
   showPreview(event: any) {
+    var n = Date.now();
     this.selectedImage = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, this.selectedImage);
+
+
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              // lấy lại url
+              this.fb = url;
+            }
+            this.src = url;
+            console.log('link: ', this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          // in url ra
+          console.log("url :", url);
+        }
+      });
   }
 
   addCommodity() {

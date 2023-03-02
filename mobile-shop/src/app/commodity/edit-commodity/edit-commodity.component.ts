@@ -75,10 +75,10 @@ export class EditCommodityComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               // lấy lại url
-              this.fb = url;
+              this.commodityList.image = url;
             }
             this.src = url;
-            console.log('link', this.fb);
+            console.log('link', this.commodityList.image);
           });
         })
       )

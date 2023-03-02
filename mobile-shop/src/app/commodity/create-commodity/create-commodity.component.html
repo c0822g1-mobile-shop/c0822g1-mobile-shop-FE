@@ -77,6 +77,9 @@
                            id="image"
                            class="form-control-file" type="file"/>
                   </div>
+                  <div style="margin-left: 150px" class="col-md-9 pe-5">
+                    <img [src]="fb" style="width: 150px">
+                  </div>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.image.hasError('required')&&commodityForm.controls.image.touched">*
                     Không được để trống</p>
