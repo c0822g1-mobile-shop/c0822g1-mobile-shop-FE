@@ -26,7 +26,8 @@
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -125,6 +126,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "mobile-shop"
+    }
+  },
+  "defaultProject": "mobile-shop",
+  "cli": {
+    "analytics": "05f55b25-b9bf-4e14-ad74-cb1a95969f00"
+  }
 }
