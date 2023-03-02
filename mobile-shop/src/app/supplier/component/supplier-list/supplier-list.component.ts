@@ -13,7 +13,7 @@ export class SupplierListComponent implements OnInit {
   temp: Supplier = {};
   search = '';
   supplier: Supplier = null;
-  private page: number;
+  private page = 0;
   nums;
 
   constructor(private supplierService: SupplierService) {
@@ -25,7 +25,9 @@ export class SupplierListComponent implements OnInit {
 
   getAll(page: number) {
     this.supplierService.getAll(this.search, page).subscribe(next => {
+      console.log(next)
       this.supplierList = next;
+      console.log(this.supplierList)
       // @ts-ignore
       this.nums = Array.from(Array(next.totalPages).keys());
     });

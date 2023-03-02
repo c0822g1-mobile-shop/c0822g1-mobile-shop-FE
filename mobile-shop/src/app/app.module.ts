@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import {HomeModule} from "./home/home.module";
 import {FooterComponent} from "./home/footer/footer.component";
 import {HeaderComponent} from "./home/header/header.component";
+import {CommodityModule} from "./commodity/commodity.module";
+import {HttpClientModule} from "@angular/common/http";
+import {SupplierModule} from "./supplier/supplier.module";
+
 
 @NgModule({
   declarations: [
@@ -16,7 +20,10 @@ import {HeaderComponent} from "./home/header/header.component";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    CommodityModule,
+    HttpClientModule,
+    SupplierModule
   ],
   providers: [],
   bootstrap: [AppComponent]

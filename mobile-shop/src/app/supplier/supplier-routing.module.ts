@@ -7,7 +7,7 @@ const routes: Routes = [
   // {path: "supplier/create", component: SupplierCreateComponent},
   // {path: "supplier/edit/:id", component: SupplierUpdateComponent},
   // {path: "supplier/edit", component: SupplierUpdateComponent},
-  {path: "supplier/list", component: SupplierListComponent}
+  {path: 'list', component: SupplierListComponent}
 ];
 
 @NgModule({
