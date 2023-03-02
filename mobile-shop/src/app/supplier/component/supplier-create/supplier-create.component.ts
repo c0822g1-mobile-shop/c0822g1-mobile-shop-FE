@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {SupplierService} from "../../service/supplier.service";
+import {SupplierService} from "../../../service/supplier.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 
