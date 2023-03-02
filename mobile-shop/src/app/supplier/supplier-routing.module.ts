@@ -4,9 +4,6 @@ import {SupplierListComponent} from "./component/supplier-list/supplier-list.com
 
 
 const routes: Routes = [
-  // {path: "supplier/create", component: SupplierCreateComponent},
-  // {path: "supplier/edit/:id", component: SupplierUpdateComponent},
-  // {path: "supplier/edit", component: SupplierUpdateComponent},
   {path: 'list', component: SupplierListComponent}
 ];
 
