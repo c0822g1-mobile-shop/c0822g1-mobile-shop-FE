@@ -9,10 +9,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {RouterModule} from "@angular/router";
 import {SupplierRoutingModule} from "./supplier-routing.module";
+import { SupplierListComponent } from './component/supplier-list/supplier-list.component';
 
 
 @NgModule({
-  declarations: [SupplierCreateComponent, SupplierUpdateComponent],
+  declarations: [SupplierCreateComponent, SupplierUpdateComponent, SupplierListComponent],
   imports: [
     CommonModule,
     HttpClientModule,
