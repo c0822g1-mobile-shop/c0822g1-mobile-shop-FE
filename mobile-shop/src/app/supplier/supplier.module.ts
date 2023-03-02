@@ -1,22 +1,31 @@
-import {SupplierListComponent} from './component/supplier-list/supplier-list.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
-import {SupplierRoutingModule} from './supplier-routing.module';
+import {SupplierCreateComponent} from './component/supplier-create/supplier-create.component';
+import {SupplierUpdateComponent} from './component/supplier-update/supplier-update.component';
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {RouterModule} from "@angular/router";
+import {SupplierRoutingModule} from "./supplier-routing.module";
+import { SupplierListComponent } from './component/supplier-list/supplier-list.component';
+import {ToastrModule} from "ngx-toastr";
 
 
 @NgModule({
-  declarations: [SupplierListComponent],
+  declarations: [SupplierCreateComponent, SupplierUpdateComponent, SupplierListComponent],
   imports: [
     CommonModule,
-    FormsModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    RouterModule,
     SupplierRoutingModule
-  ]
+    ],
+
 })
+
 export class SupplierModule {
 }

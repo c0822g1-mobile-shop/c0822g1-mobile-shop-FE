@@ -85,9 +85,10 @@
           type="submit">
     Xoá
   </button>
-  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success">Thêm</button>
-  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-primary">Chỉnh sửa</button>
-  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary" [routerLink]="['/home']">Thoát
+  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success" [routerLink]="['/supplier/create']">Thêm</button>
+  <button [disabled]="supplier == null" style="margin-left: 10px" type="submit" class=" btn btn-outline-primary"
+          (click)="update()">Chỉnh sửa
+  </button>  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary" [routerLink]="['/home']">Thoát
   </button>
 </div>
 
@@ -113,5 +114,3 @@
     </div>
   </div>
 </div>
-
-

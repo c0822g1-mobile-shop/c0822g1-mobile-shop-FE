@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SupplierService} from "../../../service/supplier.service";
 import {Supplier} from "../../../entity/supplier";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list',
@@ -16,7 +18,7 @@ export class SupplierListComponent implements OnInit {
   private page = 0;
   nums;
 
-  constructor(private supplierService: SupplierService) {
+  constructor(private router: Router, private toastrService: ToastrService, private supplierService: SupplierService) {
   }
 
   ngOnInit(): void {
@@ -37,7 +39,12 @@ export class SupplierListComponent implements OnInit {
     this.supplierService.delete(this.supplier).subscribe(next => {
       this.supplier = null;
       this.getAll(0);
-      alert('Xoá thành công !!!');
+      // alert('Xoá thành công !!!');
+      this.toastrService.success("Xóa thành công", "Thông Báo")
     });
+  }
+
+  update() {
+    this.router.navigateByUrl("supplier/edit/" + this.supplier.id)
   }
 }

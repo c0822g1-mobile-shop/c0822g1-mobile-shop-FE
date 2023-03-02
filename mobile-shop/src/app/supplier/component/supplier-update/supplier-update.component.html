@@ -1,0 +1,130 @@
+<section>
+  <div class=" py-5">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-4">
+            <h3 class="mb-3 mt-3 text-center">CHỈNH SỬA NHÀ CUNG CẤP</h3>
+
+            <form [formGroup]="form" (ngSubmit)="updateSupplier()" class="px-md-2">
+
+              <div class="row align-items-center pt-3 pb-4">
+                <div class="col-md-4 ps-3">
+
+                  <label style="font-weight: bold" for="code" class="mb-0">Mã Số<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+
+                  <input disabled formControlName="code" type="text" id="code" name="code" placeholder="Nhập mã số"
+                         class="form-control form-control-md"/>
+
+                </div>
+              </div>
+
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+
+                  <label style="font-weight: bold" for="name" class="mb-0">Tên Nhà Cung Cấp<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+
+                  <input formControlName="name" type="text" id="name" name="name" placeholder="Nhập tên nhà cung cấp"
+                         class="form-control form-control-md"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="form.controls.name.hasError('required') && form.controls.name.touched">Không được để
+                    trống</p>
+                  <p style="color: red; position: absolute" *ngIf="form.controls.name.hasError('maxlength')">Tên nhà
+                    cung cấp không được quá 100 ký tự</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.name && !form.controls.name.hasError('required') && !form.controls.name.hasError('maxlength')">{{errors.name}}</p>
+
+                </div>
+              </div>
+
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+
+                  <label style="font-weight: bold" for="address" class="mb-0">Địa Chỉ<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+
+                  <input formControlName="address" type="text" id="address" name="address"
+                         placeholder="Nhập địa chỉ"
+                         class="form-control form-control-md"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="form.controls.address.hasError('required') && form.controls.address.touched">Không được để
+                    trống</p>
+                  <p style="color: red; position: absolute" *ngIf="form.controls.address.hasError('maxlength')">Địa chỉ
+                    không được quá 200 ký tự</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.address && !form.controls.address.hasError('required') && !form.controls.address.hasError('maxlength')">{{errors.address}}</p>
+
+                </div>
+              </div>
+
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+
+                  <label style="font-weight: bold" for="phone-number" class="mb-0">Số Điện Thoại<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+
+                  <input formControlName="phoneNumber" type="text" id="phone-number" name="phone-number"
+                         placeholder="Nhập số điện thoại" class="form-control form-control-md"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="form.controls.phoneNumber.hasError('required') && form.controls.phoneNumber.touched">Không
+                    được để trống</p>
+                  <p style="color: red; position: absolute" *ngIf="form.controls.phoneNumber.hasError('pattern')">Số
+                    điện thoại không đúng định dạng</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.phoneNumber && !form.controls.phoneNumber.hasError('required') && !form.controls.phoneNumber.hasError('pattern')">{{errors.phoneNumber}}</p>
+
+                </div>
+              </div>
+
+              <div class="row align-items-center pt-4 pb-4">
+                <div class="col-md-4 ps-3">
+
+                  <label style="font-weight: bold" for="email" class="mb-0">Email<sup
+                    style="color: red; font-size: 15px" class="m-1">*</sup></label>
+
+                </div>
+                <div style="position: relative" class="col-md-8 pe-4">
+
+                  <input formControlName="email" type="text" id="email" name="email"
+                         placeholder="Nhập email"
+                         class="form-control form-control-md"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="form.controls.email.hasError('required') && form.controls.email.touched">Không được để
+                    trống</p>
+                  <p style="color: red; position: absolute" *ngIf="form.controls.email.hasError('pattern')">Email không
+                    đúng định dạng</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.email && !form.controls.email.hasError('required') && !form.controls.email.hasError('pattern')">{{errors.email}}</p>
+
+                </div>
+              </div>
+
+              <div class=" text-center">
+                <button type="submit" class="btn btn-outline-primary m-4 w-25" [disabled]="!form.valid">Lưu</button>
+                <button type="reset" routerLink="/supplier/list" class="btn btn-outline-secondary m-4 w-25">Hủy</button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
