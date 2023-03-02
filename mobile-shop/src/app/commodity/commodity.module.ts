@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ListCommodityComponent } from './list-commodity/list-commodity.component';
+import {CreateCommodityComponent} from "./create-commodity/create-commodity.component";
+
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ListCommodityComponent} from './list-commodity/list-commodity.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "../app-routing.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {AppComponent} from "../app.component";
-
-import { CommodityRoutingModule } from './commodity-routing.module';
-import { CommoditySelectComponent } from './commodity-select/commodity-select.component';
-import {FormsModule} from "@angular/forms";
+import {CommodityRoutingModule} from './commodity-routing.module';
+import {CommoditySelectComponent} from './commodity-select/commodity-select.component';
+import {EditCommodityComponent} from "./edit-commodity/edit-commodity.component";
+import {environment} from "../../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireModule} from "@angular/fire";
 
 
 @NgModule({
-
-
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,15 +23,18 @@ import {FormsModule} from "@angular/forms";
     FormsModule,
     HttpClientModule,
     CommonModule,
-  CommodityRoutingModule,
+    CommodityRoutingModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-
   declarations: [
     CommoditySelectComponent,
-  ListCommodityComponent
+    ListCommodityComponent,
+    CreateCommodityComponent,
+    EditCommodityComponent,
+
   ],
   exports: [],
-
-
 })
-export class CommodityModule { }
+export class CommodityModule {
+}

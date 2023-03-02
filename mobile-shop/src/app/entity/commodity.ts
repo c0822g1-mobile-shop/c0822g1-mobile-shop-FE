@@ -1,4 +1,4 @@
-import {WareHousing} from "./ware-housing";
+
 import {Trademark} from "./trademark";
 
 export interface Commodity {
@@ -6,7 +6,6 @@ export interface Commodity {
   name?: string;
   cpu?: string;
   capacity?: string;
-  trademark?: Trademark;
   price?: number;
   image?: string;
   camera?: string;
@@ -17,5 +16,6 @@ export interface Commodity {
   description?: string;
   code_qr?: string;
   quantity?: number;
+  trademark?: Trademark;
 
 }

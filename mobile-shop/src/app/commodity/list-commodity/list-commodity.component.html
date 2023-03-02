@@ -1,15 +1,15 @@
 <h1 class="text-center" style="margin-top: 50px">Danh sách hàng hóa</h1>
-<form style="float: right;margin-right: 10px;margin-bottom: 30px">
+<form style="float: right;margin-right: 10px;margin-bottom: 30px;margin-top: 30px">
   <label style="margin-right: 5px">
-    <select class="form-select form-control" aria-label="Default select example">
-      <option selected>Tìm kiếm theo</option>
-      <option value="1">Tên hàng hoá</option>
-      <option value="2">Giá</option>
-      <option value="3">Số lượng</option>
+    <select #select class="form-select form-control" aria-label="Default select example">
+      <option [value]="0"  selected>Tìm kiếm theo</option>
+      <option [value]="1">Tên hàng hoá</option>
+      <option [value]="2">Giá</option>
+      <option [value]="3">Số lượng</option>
     </select>
   </label>
-  <input class="form-control me-2" style="width: 300px;display: inline;margin-right: 5px" type="search" placeholder="Tìm kiếm" aria-label="Search">
-  <button class="btn btn-outline-primary " style="width: 100px;margin-bottom: 5px" type="submit">Tìm kiếm</button>
+  <input class="form-control me-2" #input style="width: 300px;display: inline;margin-right: 5px" type="search" placeholder="Tìm kiếm" aria-label="Search">
+  <button class="btn btn-outline-primary " (click)="search(select.value,input.value)" style="width: 100px;margin-bottom: 5px" type="submit">Tìm kiếm</button>
 </form>
 <div style="height: 450px">
   <table class="table text-center table-hover">
@@ -20,7 +20,7 @@
       <th scope="col" style="width: 300px">Giá(VND)</th>
       <th scope="col" style="width: 300px">CPU</th>
       <th scope="col" style="width: 300px">Lưu trữ</th>
-      <th scope="col" style="width: 300px">Số lượng còn(Cái)</th>
+      <th scope="col" style="width: 300px">Số lượng trong kho (Cái)</th>
     </tr>
     </thead>
     <tbody class="text-center">
@@ -37,8 +37,8 @@
   </table>
 </div>
 <div style="margin-bottom: 10px">
-<button class="btn btn-outline-primary" style="margin-left: 20px; margin-top: 10px">Thêm mới</button>
-<button class="btn btn-outline-primary disabled1" [disabled]="index == -1"  id="edit1">Chỉnh sửa</button>
+<button class="btn btn-outline-primary" routerLink="/commodity/create" style="margin-left: 20px; margin-top: 10px">Thêm mới</button>
+<button class="btn btn-outline-primary disabled1" [disabled]="index == -1"  id="edit1" [routerLink]="['/commodity/edit',index]">Chỉnh sửa</button>
 
 <button type="button" class="btn btn-outline-danger disabled1" [disabled]="index == -1"  data-toggle="modal" data-target="#staticBackdrop">
   Xóa
