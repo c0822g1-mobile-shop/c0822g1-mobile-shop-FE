@@ -7,18 +7,22 @@ import {SupplierModule} from "./supplier/supplier.module";
 import {HeaderComponent} from "./home/header/header.component";
 import {BodyComponent} from "./home/body/body.component";
 import {FooterComponent} from "./home/footer/footer.component";
+import {HomeModule} from "./home/home.module";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BodyComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SupplierModule
+    SupplierModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,112 @@
+<div class="container-builder">
+  <h1 style="text-align: center">Nhà cung cấp</h1>
+  <div style="float: right">
+    <div class="input-group mb-3"><input class="form-control me-1" type="text" placeholder="Tìm kiếm"
+                                         aria-label="Search"
+                                         class="form-control" [(ngModel)]="search">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-primary" type="button" (click)="getAll(0)">Tìm kiếm</button>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <table class="table table-striped table-hover" style="width: 100%">
+    <thead>
+    <tr>
+      <th>STT</th>
+      <th>MS</th>
+      <th>Tên nhà cung cấp</th>
+      <th>Địa chỉ</th>
+      <th>SĐT</th>
+      <th>E-mail</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let item of supplierList.content;index as i" (click)="supplier = item"
+        [class.table-active]="item == supplier">
+      <td>{{i + 1}}</td>
+      <td>{{item.code}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.address}}</td>
+      <td>{{item.phoneNumber}}</td>
+      <td>{{item.email}}</td>
+
+    </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+<!--    Phân trang-->
+
+<div class="container-fluid" *ngIf="supplierList?.content?.length != 0">
+  <nav style="float: right" aria-label="Page navigation example">
+    <ul *ngIf="supplierList.totalPages > 3" class="pagination">
+      <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
+                               (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
+
+      <li class="page-item" [class.active]="supplierList.pageable.pageNumber < supplierList.totalPages -1"><a
+        (click)="getAll(supplierList.pageable.pageNumber)" class="page-link"> {{supplierList.pageable.pageNumber
+      + ((supplierList.pageable.pageNumber + 1 == supplierList.totalPages) ? 0 : 1)}}
+      </a></li>
+
+      <li class="page-item"><a
+        class="page-link"> ...
+      </a></li>
+
+      <li class="page-item" [class.active]="supplierList.totalPages - 1 == supplierList.pageable.pageNumber"><a
+        (click)="getAll(supplierList.totalPages - 1)" class="page-link"> {{supplierList.totalPages}}
+      </a></li>
+
+      <li class="page-item"><a class="page-link" [ngClass]="supplierList.last ? 'disabled': ''"
+                               (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
+    </ul>
+
+
+    <ul class="pagination" *ngIf="supplierList.totalPages <= 3">
+      <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
+                               (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
+
+      <li *ngFor="let num of nums" class="page-item" [class.active]="num == supplierList.pageable.pageNumber"><a
+        (click)="getAll(num)" class="page-link"> {{num + 1}}
+      </a></li>
+
+      <li class="page-item"><a class="page-link" [ngClass]="supplierList.last ? 'disabled': ''"
+                               (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
+    </ul>
+  </nav>
+</div>
+
+
+<div class="d-flex justify-content-center">
+  <button [disabled]="supplier == null" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 50px"
+          type="submit"
+          class=" btn btn-outline-danger">Xoá
+  </button>
+  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success">Thêm</button>
+  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-primary">Chỉnh sửa</button>
+  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary">Thoát</button>
+</div>
+
+<!--Xoá-->
+<div id="exampleModal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác nhận xoá nhà cung cấp</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa nhà cung cấp: <label style="color: red">{{supplier?.name}}</label> này không?</p>
+        Lưu ý: Hành động này không thể hoàn tác!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">Xoá</button>
+      </div>
+    </div>
+  </div>
+</div>
