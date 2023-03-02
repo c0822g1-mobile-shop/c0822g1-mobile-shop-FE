@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommodityService} from "../../service/commodity/commodity.service";
 import {Commodity} from "../../entity/commodity";
-import {log} from "util";
-import {Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-body',
@@ -22,11 +21,17 @@ export class BodyComponent implements OnInit {
   firstPage: boolean;
   lastPage: boolean;
   message = '';
+  nameSearch = '';
+  commodity: Commodity = {};
 
-
-  constructor(private commodityService: CommodityService) {
+  constructor(private commodityService: CommodityService,private activatedRoute:ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe(
+      next => {
+        this.nameSearch = next.get('name');
+      }
+    )
     this.getCommodityByQuantitySold(0);
-    this.searchCommodity(this.commodityService.getNameSearch(), 0);
+    this.searchCommodity(this.nameSearch, 0);
   }
 
   ngOnInit(): void {
@@ -35,7 +40,6 @@ export class BodyComponent implements OnInit {
 
   getCommodityByQuantitySold(page: number) {
     this.commodityService.getAllByQuantity(page).subscribe(data => {
-      console.log(data);
       this.commoditiesByQuantitySold = data.content;
       this.numberQuantitySold = data.number;
       this.totalPagesQuantitySold = data.totalPages;
@@ -44,11 +48,11 @@ export class BodyComponent implements OnInit {
     });
   }
 
+
   searchCommodity(name: string, page: number) {
     this.commodityService.searchCommodityByName(name, page).subscribe(data => {
-        console.log(data);
         this.commodities = data.content;
-        this.numberQuantitySold = data.number;
+        this.number = data.number;
         this.totalPages = data.totalPages;
         this.firstPage = data.first;
         this.lastPage = data.last;
@@ -58,4 +62,9 @@ export class BodyComponent implements OnInit {
       }
     );
   }
+
+  watchDetail(commodity: Commodity) {
+    this.commodity = commodity;
+  }
+
 }

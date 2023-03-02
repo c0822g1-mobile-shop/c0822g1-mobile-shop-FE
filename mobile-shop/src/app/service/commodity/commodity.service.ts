@@ -32,12 +32,4 @@ export class CommodityService {
     return this.httpClient.get<any>("http://localhost:8080/home/quantity?page=" + page);
   }
 
-  setNameSearch(name: String) {
-    // @ts-ignore
-    this.nameSearch = name;
-  }
-
-  getNameSearch(){
-    return this.nameSearch;
-  }
 }

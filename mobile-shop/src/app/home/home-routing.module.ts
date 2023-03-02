@@ -5,7 +5,7 @@ import {BodyComponent} from "./body/body.component";
 
 const routes: Routes = [
   {path: '', component: BodyComponent},
-  {path: 'search/:name',component: BodyComponent}
+  {path: 'home/:name',component: BodyComponent}
 ];
 
 @NgModule({

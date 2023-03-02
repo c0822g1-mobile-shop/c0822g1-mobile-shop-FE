@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  {path:'home', loadChildren: () => import("./home/home.module").then(module => module.HomeModule)},
+  {path:'home', loadChildren: () => import("./home/home-routing.module").then(module => module.HomeRoutingModule)},
   {path: 'commodity',loadChildren: ()=> import("./commodity/commodity.module").then(module => module.CommodityModule)},
   {path: 'login',loadChildren: ()=> import("./log-in/log-in.module").then(module => module.LogInModule)},
   {path: "information",loadChildren:()=> import("./manager-information/manager-information.module").then(module => module.ManagerInformationModule)},

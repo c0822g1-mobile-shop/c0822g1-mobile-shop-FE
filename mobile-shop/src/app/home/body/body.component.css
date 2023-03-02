@@ -1,97 +1,184 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-.container {
-  max-width: 100%;
-  margin: auto;
-  /*display: flex;*/
-  /*flex-wrap: wrap;*/
-}
 .carousel {
   width: 100%;
   position: relative;
-  padding: 10px;
-}
-.card {
-  display: flex;
-  margin: 0 10px;
-}
-.product{
-  background-color: #ff665c;
-  margin: 0 10px;
-  padding-bottom: 100px;
+  padding-bottom: 10px;
 }
 
-.product-items{
-  display: flex;
-  padding: 10px;
+.product {
+  background: linear-gradient(to bottom, #ff665c, #FEB58A);
 }
-.item{
-  width: 20%;
-  padding: 10px;
-  margin: 20px 5px 0 5px;
+
+.wrapper {
+  max-width: 1170px;
+}
+
+.footing {
   text-align: center;
-  background-color:#FFFFFF;
-  border: none;
-  border-radius:25px;
-}
-.item:hover{
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  margin: 10px 0;
 }
 
-.product-items img{
-  width: 100%;
+h3 {
+  font-size: 18px;
+  padding: 10px 20px;
+  display: inline-block;
+  background-color: #dddddd;
+  font-weight: 500;
   margin-bottom: 10px;
-  text-align: center;
 }
 
-.item button{
-  margin-top: 10px;
-  height: 30px;
-  padding: 0 10px;
-  cursor: pointer;
-  border: none;
-}
-.item button:hover{
-  background-color: #fbd957;
-}
-.list-main{
-  margin: 10px 10px;
-  padding-bottom: 70px;
-  background-color: #ff663c;
-  max-width: 1480px;
-}
-h1{
-  text-align: center;
-  vertical-align: middle;
-  padding: 30px 0;
-}
-.list-card:hover{
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-}
-.list-card{
-  margin-top: 10px;
-  border-radius: 20px;
-}
-.product-list{
-  padding: 0 10px;
-}
-.see-more{
-  vertical-align: middle;
-  justify-content: center;
-}
-.item {
-  cursor: pointer;
-}
-.list-card{
-  cursor: pointer;
-}
-.product-items {
+ul.products {
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  width: 100%;
+  margin-left: 60px;
 }
+
+ul.products li {
+  flex-basis: 17%;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 10px 5px;
+}
+
+ul.products li .product-top {
+  position: relative;
+  overflow: hidden;
+}
+
+ul.products li .product-top .product-thumb {
+  display: block;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+
+ul.products li:hover .product-top .product-thumb img {
+  transform: scale(1.1);
+  transition: 0.5s ease-in-out;
+}
+
+ul.products li .product-top .product-thumb img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  position: absolute;
+  top: auto;
+  border-radius: 10px;
+}
+
+ul.products li .product-top a.buy-now {
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  background-color: red;
+  color: white;
+  padding: 10px 0;
+  position: absolute;
+  width: 100%;
+  bottom: -80px;
+  transition: 0.5s ease-in-out;
+  opacity: 0.75;
+}
+
+ul.products li:hover .product-top a.buy-now {
+  bottom: 0;
+}
+
+ul.products li .product-info {
+  padding: 10px 0;
+}
+
+ul.products li .product-info a {
+  display: block;
+  text-decoration: none;
+}
+
+ul.products li .product-info a.product-cat {
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 3px 0;
+}
+
+ul.products li .product-info a.product-name {
+  padding: 2px 0;
+  font-weight: 600;
+}
+
+div.previous {
+  width: 20px;
+  padding-top: 90px;
+  margin-right: 20px;
+}
+
+div.previous a, div.next a {
+
+}
+
+div.next {
+  width: 20px;
+  padding-top: 90px;
+  margin-left: 20px;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.fade {
+  transition: 0.5s ease-in-out;
+}
+
+.modal-header {
+  background: linear-gradient(to bottom, orange, #FEB58A);
+  text-align: center;
+  border: none;
+}
+
+.modal-body {
+  background: linear-gradient(to bottom, #FEB58A, #ff665c);
+  display: inline-block;
+}
+
+
+.modal-body .card {
+  margin-left: 140px;
+}
+
+.modal-body .card {
+  max-width: 200px;
+  max-height: 300px;
+}
+
+.card-info ul li {
+  list-style: none;
+}
+.card-info ul li span{
+  display: block;
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+.modal-footer button {
+  background-color: orange;
+  border: none;
+}
+
+.modal-footer button:hover {
+  background-color: #ff665c;
+}
+table, th, td {
+  border: 1px solid white;
+  color: black;
+}
+table {
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+

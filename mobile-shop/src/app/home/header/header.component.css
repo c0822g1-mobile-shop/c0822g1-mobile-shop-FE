@@ -326,3 +326,32 @@ li .dropdown {
 .links {
   display: contents !important;
 }
+
+.tasksInput{
+  width: 300px;
+}
+
+.tasksInput input {
+  max-width: 300px;
+}
+
+.tasksInput a {
+  position: relative;
+  padding: 3px 10px 16px;
+  border-radius: 4px;
+  margin-left: 5px;
+  background: whitesmoke;
+  font-weight: bold ;
+  vertical-align: middle;
+}
+
+.tasksInput a:hover{
+cursor: pointer;
+}
+
+
+label.tasksInput a svg {
+  padding-top: 10px;
+  max-height: 30px;
+  max-width: 30px;
+}
