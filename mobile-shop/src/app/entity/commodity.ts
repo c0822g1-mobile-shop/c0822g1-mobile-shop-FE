@@ -1,12 +1,10 @@
-import {WareHousing} from "./ware-housing";
-import {BillHistory} from "./bill-history";
+import {Trademark} from "./trademark";
 
 export interface Commodity {
   id?: number;
   name?: string;
   cpu?: string;
   capacity?: string;
-  trademark?: string;
   price?: number;
   image?: string;
   camera?: string;
@@ -17,6 +15,5 @@ export interface Commodity {
   description?: string;
   code_qr?: string;
   quantity?: number;
-  billHistory?: BillHistory;
-  wareHousing?: WareHousing;
+  trademark?: Trademark;
 }
