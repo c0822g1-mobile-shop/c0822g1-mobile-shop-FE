@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
 import {Commodity} from "../../entity/commodity";
 import {CommodityService} from "../../service/commodity.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TrademarkService} from "../../service/trademark.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
@@ -18,12 +18,12 @@ export class EditCommodityComponent implements OnInit {
   commodityForm: FormGroup;
   trademarkList: Trademark[] = [];
   selectedImage: any = null;
+  commodityList: Commodity = {};
   fb: string | undefined;
   src: string | undefined;
   downloadURL: Observable<string> | undefined;
-  commodityList: Commodity = {};
 
-  constructor(private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
+  constructor(private router: Router, private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
@@ -39,7 +39,7 @@ export class EditCommodityComponent implements OnInit {
       origin: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       codeQr: new FormControl('', [Validators.required]),
-      quantity: new FormControl('', [Validators.required])
+      quantity: new FormControl('')
     });
     this.commodityService.findCommodityById(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(next => {
       console.log(this.commodityForm.patchValue(next));
@@ -60,13 +60,10 @@ export class EditCommodityComponent implements OnInit {
   }
 
   showPreview(event: any) {
-    var n = Date.now();
     this.selectedImage = event.target.files[0];
-    const filePath = `RoomsImages/${n}`;
+    const filePath = this.selectedImage.name;
     const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`RoomsImages/${n}`, this.selectedImage);
-
-
+    const task = this.storage.upload(filePath, this.selectedImage);
     task
       .snapshotChanges()
       .pipe(
@@ -82,28 +79,17 @@ export class EditCommodityComponent implements OnInit {
           });
         })
       )
-      .subscribe(url => {
-        if (url) {
-          // in url ra
-          console.log("url :", url);
-        }
-      });
+      .subscribe();
   }
 
   editCommodity() {
-    // upload image to firebase
-    const nameImg = this.selectedImage.name;
-    const fileRef = this.storage.ref(nameImg);
-    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe((url) => {
-          this.commodityForm.patchValue({image: url});
-          // Call API to edit commodity
-          this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(() => {
-            alert("Chỉnh sửa thành công");
-          })
-        });
+    if (this.commodityForm.invalid) {
+      alert("Chú ý: Form phải điền đúng định dạng")
+    } else {
+      this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(() => {
+        alert("Chỉnh sửa thành công");
+        this.router.navigateByUrl('/commodity/list');
       })
-    ).subscribe();
+    }
   }
 }

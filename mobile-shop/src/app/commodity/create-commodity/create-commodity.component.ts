@@ -5,7 +5,6 @@ import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
-import {ToastrService} from "ngx-toastr";
 import {Observable} from "rxjs";
 
 @Component({
@@ -22,22 +21,21 @@ export class CreateCommodityComponent implements OnInit {
   fb: string | undefined;
   src: string | undefined;
 
-  constructor(private toastrService: ToastrService, private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
+  constructor(private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),
-      cpu: new FormControl('', [Validators.required]),
-      capacity: new FormControl('', [Validators.required]),
+      cpu: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(50)]),
+      capacity: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(20)]),
       trademark: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, Validators.min(0), Validators.max(2000000000)]),
       image: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
-      camera: new FormControl('', [Validators.required]),
-      selfie: new FormControl('', [Validators.required]),
-      screenSize: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+. ]*"), Validators.minLength(5), Validators.maxLength(20)]),
-      guarantee: new FormControl('', [Validators.required]),
-      origin: new FormControl('', [Validators.required]),
+      camera: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
+      selfie: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
+      screenSize: new FormControl('', [Validators.required, Validators.pattern("[0-9.]* [a-z]*"), Validators.minLength(5), Validators.maxLength(20)]),
+      guarantee: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ0-9A-Z ]*"), Validators.minLength(20), Validators.maxLength(20)]),
+      origin: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*"), Validators.minLength(1), Validators.maxLength(20)]),
       description: new FormControl('', [Validators.required]),
-      codeQr: new FormControl('', [Validators.required]),
-      quantity: new FormControl('', [Validators.required])
+      codeQr: new FormControl('', [Validators.required, Validators.pattern("[Q][R][0-9][0-9]")])
     });
     this.trademarkService.getAllTrademark().subscribe(next => {
       this.trademarkList = next;
@@ -48,13 +46,10 @@ export class CreateCommodityComponent implements OnInit {
   }
 
   showPreview(event: any) {
-    var n = Date.now();
     this.selectedImage = event.target.files[0];
-    const filePath = `RoomsImages/${n}`;
+    const filePath = this.selectedImage.name;
     const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`RoomsImages/${n}`, this.selectedImage);
-
-
+    const task = this.storage.upload(filePath, this.selectedImage);
     task
       .snapshotChanges()
       .pipe(
@@ -65,36 +60,23 @@ export class CreateCommodityComponent implements OnInit {
               // lấy lại url
               this.fb = url;
             }
+            this.commodityForm.patchValue({image: url});
             this.src = url;
             console.log('link: ', this.fb);
           });
         })
       )
-      .subscribe(url => {
-        if (url) {
-          // in url ra
-          console.log("url :", url);
-        }
-      });
+      .subscribe();
   }
 
   addCommodity() {
-    // upload image to firebase
-    const nameImg = this.selectedImage.name;
-    const fileRef = this.storage.ref(nameImg);
-    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe((url) => {
-
-          this.commodityForm.patchValue({image: url});
-
-          // Call API to create commodity
-          this.commodityService.addCommodity(this.commodityForm.value).subscribe(() => {
-            this.toastrService.success("Thêm mới hàng hóa thành công", "Thông báo");
-            this.commodityForm.reset();
-          })
-        });
+    if (this.commodityForm.invalid) {
+      alert("Chú ý: Form chưa điền đúng định dạng hoặc chưa điền đầy đủ thông tin")
+    } else {
+      this.commodityService.addCommodity(this.commodityForm.value).subscribe(() => {
+        alert("Thêm mới thành công")
+        this.commodityForm.reset();
       })
-    ).subscribe();
+    }
   }
 }

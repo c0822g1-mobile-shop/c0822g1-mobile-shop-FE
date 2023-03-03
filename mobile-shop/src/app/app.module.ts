@@ -8,24 +8,32 @@ import {AngularFireStorageModule} from "@angular/fire/storage";
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {CommodityModule} from "./commodity/commodity.module";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
+import {HeaderComponent} from "./home/header/header.component";
+import {FooterComponent} from "./home/footer/footer.component";
+import {BodyComponent} from "./home/body/body.component";
+
+import {HomeModule} from "./home/home.module";
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HomeModule,
+    CommodityModule,
     HttpClientModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    ReactiveFormsModule,
-    FormsModule,
-    CommodityModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot()
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

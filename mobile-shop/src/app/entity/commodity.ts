@@ -1,3 +1,4 @@
+
 import {Trademark} from "./trademark";
 
 export interface Commodity {
@@ -16,4 +17,5 @@ export interface Commodity {
   code_qr?: string;
   quantity?: number;
   trademark?: Trademark;
+
 }

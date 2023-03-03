@@ -1,12 +1,12 @@
-<div class="row">
+<div class="row" style="margin: 40px">
   <div class="col-2"></div>
   <div class="col-8">
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-9">
-          <h1 align="center">Thêm mới thông tin hàng hóa</h1>
           <div class="card" style="border-radius: 15px;">
             <div class="card-body">
+              <h1 align="center">Thêm mới thông tin hàng hóa</h1>
               <form [formGroup]="commodityForm" (ngSubmit)="addCommodity()">
                 <div class="row align-items-center pt-4 pb-3">
                   <div class="col-md-3 ps-5">
@@ -23,13 +23,13 @@
                     Không được để trống</p>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.name.hasError('pattern')&&commodityForm.controls.name.touched">*
-                    Không được nhập ký tự đặc biệt</p>
+                    Không được nhập ký tự đặc biệt (Ví dụ: Iphone 14)</p>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.name.hasError('minlength')&&commodityForm.controls.name.touched">*
-                    Không được nhập ít hơn 5 chữ</p>
+                    Không được nhập quá ít</p>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.name.hasError('maxlength')&&commodityForm.controls.name.touched">*
-                    Không được nhập quá 200 chữ</p>
+                    Không được nhập quá dài</p>
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">
@@ -40,7 +40,9 @@
                   <div class="col-md-9 pe-5">
                     <select formControlName="trademark" required id="trademark" class="form-control"
                             aria-label="Default select example">
-                      <option *ngFor="let trademark of trademarkList" [ngValue]="trademark">{{trademark.name}}</option>
+                      <option value="" style="text-align: center">-----Chọn-----</option>
+                      <option style="text-align: center" *ngFor="let trademark of trademarkList"
+                              [ngValue]="trademark">{{trademark.name}}</option>
                     </select>
                   </div>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
@@ -65,7 +67,7 @@
                     Không được nhập giá nhỏ hơn 0</p>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.price.hasError('max')&&commodityForm.controls.price.touched">*
-                    Không được nhập giá lớn hơn 2.000.000.000</p>
+                    Không được nhập giá quá lớn</p>
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">
@@ -77,18 +79,15 @@
                            id="image"
                            class="form-control-file" type="file"/>
                   </div>
+                  <div style="margin-left: 160px" class="col-md-9 pe-5">
+                    <input type="text" readonly formControlName="image" class="form-control">
+                  </div>
                   <div style="margin-left: 150px" class="col-md-9 pe-5">
                     <img [src]="fb" style="width: 150px">
                   </div>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.image.hasError('required')&&commodityForm.controls.image.touched">*
                     Không được để trống</p>
-                  <p style="font-weight: bold;color: red;margin-left: 190px"
-                     *ngIf="commodityForm.controls.image.hasError('minlength')&&commodityForm.controls.image.touched">*
-                    Không được ít hơn 5 chữ</p>
-                  <p style="font-weight: bold;color: red;margin-left: 190px"
-                     *ngIf="commodityForm.controls.image.hasError('maxlength')&&commodityForm.controls.image.touched">*
-                    Không được quá 200 chữ</p>
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">
@@ -107,15 +106,15 @@
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.screenSize.hasError('pattern')&&commodityForm.controls.screenSize.touched">
                     *
-                    Không được chứa ký tự đặc biệt</p>
+                    Không được chứa ký tự đặc biệt và đúng định dạng (Ví dụ: 6.4 inch)</p>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.screenSize.hasError('minlength')&&commodityForm.controls.screenSize.touched">
                     *
-                    Không được nhập ít hơn 5 chữ</p>
+                    Không được nhập quá ít</p>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.screenSize.hasError('maxlength')&&commodityForm.controls.screenSize.touched">
                     *
-                    Không được nhập quá 20 chữ</p>
+                    Không được nhập quá dài</p>
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">
@@ -129,6 +128,17 @@
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.camera.hasError('required')&&commodityForm.controls.camera.touched">*
                     Không được để trống</p>
+                  <p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.camera.hasError('pattern')&&commodityForm.controls.camera.touched">*
+                    Không được nhập ký tự đặc biệt và đúng định dạng (Ví dụ: 200 MP)</p>
+                  <p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.camera.hasError('minlength')&&commodityForm.controls.camera.touched">
+                    *
+                    Không được nhập quá ít</p>
+                  <p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.camera.hasError('maxlength')&&commodityForm.controls.camera.touched">
+                    *
+                    Không được nhập quá dài</p>
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">
@@ -142,6 +152,17 @@
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.selfie.hasError('required')&&commodityForm.controls.selfie.touched">*
                     Không được để trống</p>
+                  <p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.selfie.hasError('pattern')&&commodityForm.controls.selfie.touched">*
+                    Không được nhập ký tụ đặc biệt và đúng định dạng (Ví dụ: 200 MP)</p>
+                  <p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.selfie.hasError('minlength')&&commodityForm.controls.selfie.touched">
+                    *
+                    Không được nhập quá ít</p>
+                  <p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.selfie.hasError('maxlength')&&commodityForm.controls.selfie.touched">
+                    *
+                    Không được nhập quá dài</p>
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">
@@ -242,7 +263,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hủy thêm mới thông tin hàng hóa</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Hủy bỏ </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -252,7 +273,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
-        <button type="submit" class="btn btn-danger">Có</button>
+        <button data-dismiss="modal" type="submit" class="btn btn-danger" routerLink="/commodity/list">Có</button>
       </div>
     </div>
   </div>
