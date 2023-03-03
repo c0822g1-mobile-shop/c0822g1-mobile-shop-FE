@@ -61,7 +61,7 @@ export class CommodityService {
    */
 
   searchCommodityByName(name: string, page: number): Observable<any> {
-    return this.httpClient.get<any>("http://localhost:8080/home/search?" + name + "&page=" + page);
+    return this.httpClient.get<any>("http://localhost:8080/home/search?name=" + name + "&page=" + page);
   }
 
   /**
