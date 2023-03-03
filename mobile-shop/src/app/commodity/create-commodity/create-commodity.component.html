@@ -177,12 +177,12 @@
                      *ngIf="commodityForm.controls.cpu.hasError('required')&&commodityForm.controls.cpu.touched">*
                     Không được để trống</p><p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.cpu.hasError('pattern')&&commodityForm.controls.cpu.touched">*
-                    Không được nhập ký tự đặc biệt (Ví dụ: </p><p style="font-weight: bold;color: red;margin-left: 190px"
+                    Không được nhập ký tự đặc biệt và đúng định dạng (Ví dụ: Hexa-Core)</p><p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.cpu.hasError('minlength')&&commodityForm.controls.cpu.touched">*
-                    Không được để trống</p>
+                    Không được nhập quá ít</p>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.cpu.hasError('maxlength')&&commodityForm.controls.cpu.touched">*
-                    Không được để trống</p>
+                    Không được nhập quá dài</p>
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">

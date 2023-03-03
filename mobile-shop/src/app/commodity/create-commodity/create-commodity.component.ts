@@ -24,8 +24,8 @@ export class CreateCommodityComponent implements OnInit {
   constructor(private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),
-      cpu: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(50)]),
-      capacity: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(20)]),
+      cpu: new FormControl('', [Validators.required, Validators.pattern("[-a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(50)]),
+      capacity: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [G][B]"), Validators.minLength(5), Validators.maxLength(20)]),
       trademark: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, Validators.min(0), Validators.max(2000000000)]),
       image: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
