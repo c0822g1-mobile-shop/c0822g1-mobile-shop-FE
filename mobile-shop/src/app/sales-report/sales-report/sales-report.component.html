@@ -1,4 +1,4 @@
-<section class="vh-100 gradient-custom">
+<section class="vh-120 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
@@ -48,8 +48,8 @@
             <input class="btn btn-outline-primary" type="submit" value="Xem" (click)="salesReport(startDay.value,endDay.value)"/>
             <br>
             <br>
-            <p>Tổng số đơn hàng: {{sales.totalQuantity}}</p>
-            <p>Tổng doanh thu: {{sales.revenue}} VND</p>
+            <p *ngIf="sales">Tổng số đơn hàng: {{sales.totalQuantity}}</p>
+            <p *ngIf="sales">Tổng doanh thu: {{sales.revenue | currency:'VND':''}} VND</p>
 
             <div class="row">
               <canvas id="myChart"></canvas>

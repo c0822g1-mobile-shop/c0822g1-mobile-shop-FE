@@ -13,7 +13,7 @@ export class SalesReportComponent implements OnInit {
   revenues: number[] = [];
   dateBuy: string[] = [];
 
-  sales: SalesReport={};
+  sales: SalesReport;
 
   constructor(private salesReportService: SalesReportService) {
   }
