@@ -19,7 +19,6 @@ export class EditCommodityComponent implements OnInit {
   trademarkList: Trademark[] = [];
   selectedImage: any = null;
   commodityList: Commodity = {};
-  fb: string | undefined;
   src: string | undefined;
   downloadURL: Observable<string> | undefined;
 
@@ -61,11 +60,10 @@ export class EditCommodityComponent implements OnInit {
   }
 
   showPreview(event: any) {
-    var n = Date.now();
     this.selectedImage = event.target.files[0];
-    const filePath = `RoomsImages/${n}`;
+    const filePath = this.selectedImage.name;
     const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`RoomsImages/${n}`, this.selectedImage);
+    const task = this.storage.upload(filePath,this.selectedImage);
 
 
     task
@@ -76,19 +74,14 @@ export class EditCommodityComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               // lấy lại url
-              this.fb = url;
+              this.commodityList.image = url;
             }
             this.src = url;
-            console.log('link', this.fb);
+            // console.log('link', this.commodityList.image);
           });
         })
       )
-      .subscribe(url => {
-        if (url) {
-          // in url ra
-          console.log("url :", url);
-        }
-      });
+      .subscribe();
   }
 
   editCommodity() {

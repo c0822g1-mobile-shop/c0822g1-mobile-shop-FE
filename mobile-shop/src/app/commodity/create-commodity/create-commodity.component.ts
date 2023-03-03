@@ -5,6 +5,7 @@ import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-create-commodity',
@@ -15,6 +16,9 @@ export class CreateCommodityComponent implements OnInit {
   commodityForm: FormGroup;
   trademarkList: Trademark[] = [];
   selectedImage: any = null;
+  downloadURL: Observable<string> | undefined;
+  fb: string | undefined;
+  src: string | undefined;
 
   constructor(private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
@@ -42,6 +46,25 @@ export class CreateCommodityComponent implements OnInit {
 
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
+    const filePath = this.selectedImage.name;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, this.selectedImage);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              // lấy lại url
+              this.fb = url;
+            }
+            this.src = url;
+            // console.log('link: ', this.fb);
+          });
+        })
+      )
+      .subscribe();
   }
 
   addCommodity() {

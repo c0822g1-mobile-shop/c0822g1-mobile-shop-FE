@@ -13,3 +13,6 @@
 .choose:hover{
   background-color: gray;
 }
+.widthBtn{
+  width: 70px;
+}

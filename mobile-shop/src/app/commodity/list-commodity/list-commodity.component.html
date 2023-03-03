@@ -37,7 +37,7 @@
   </table>
 </div>
 <div style="margin-bottom: 10px">
-<button class="btn btn-outline-primary" routerLink="/commodity/create" style="margin-left: 20px; margin-top: 10px">Thêm mới</button>
+<button class="btn btn-outline-success" routerLink="/commodity/create" style="margin-left: 20px; margin-top: 10px">Thêm mới</button>
 <button class="btn btn-outline-primary disabled1" [disabled]="index == -1"  id="edit1" [routerLink]="['/commodity/edit',index]">Chỉnh sửa</button>
 
 <button type="button" class="btn btn-outline-danger disabled1" [disabled]="index == -1"  data-toggle="modal" data-target="#staticBackdrop">
@@ -55,7 +55,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Xác nhận xóa hàng hóa</h5>
+        <h3 class="modal-title" id="staticBackdropLabel">Xác nhận xóa hàng hóa</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -64,8 +64,8 @@
         Bạn có muốn xóa mặt hàng <b>{{item}}</b> không?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
-        <button type="button" class="btn btn-primary"  data-dismiss="modal"  (click)="delete(index)">Có</button>
+        <button type="button" class="btn btn-secondary widthBtn" data-dismiss="modal">Không</button>
+        <button type="button" class="btn btn-primary widthBtn"  data-dismiss="modal"  (click)="delete(index)">Có</button>
       </div>
     </div>
   </div>

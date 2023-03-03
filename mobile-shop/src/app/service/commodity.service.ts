@@ -42,7 +42,14 @@ export class CommodityService {
   changePage(page: number): Observable<Commodity[]> {
     return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/list?page=" + page)
   }
-
+  /**
+   * Create by: CongBD
+   * Date created: 01/03/2023
+   * Function: search commodity
+   * @param id
+   * @param type
+   * @return Observable Commodity[]
+   */
   search(id: number,type: string): Observable<Commodity[]> {
     return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/search/"+id+"/" + type)
   }
