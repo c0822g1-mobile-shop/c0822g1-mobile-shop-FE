@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
 import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {Commodity} from "../../entity/commodity";
 
 @Component({
   selector: 'app-create-commodity',
@@ -20,6 +21,7 @@ export class CreateCommodityComponent implements OnInit {
   downloadURL: Observable<string> | undefined;
   fb: string | undefined;
   src: string | undefined;
+  commodityList: Commodity[] = [];
 
   constructor(private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
@@ -32,10 +34,10 @@ export class CreateCommodityComponent implements OnInit {
       camera: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
       selfie: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
       screenSize: new FormControl('', [Validators.required, Validators.pattern("[0-9.]* [a-z]*"), Validators.minLength(5), Validators.maxLength(20)]),
-      guarantee: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ0-9A-Z ]*"), Validators.minLength(20), Validators.maxLength(20)]),
-      origin: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*"), Validators.minLength(1), Validators.maxLength(20)]),
+      guarantee: new FormControl('', [Validators.required, Validators.pattern("[0-9]*"), Validators.maxLength(2)]),
+      origin: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*"), Validators.minLength(2), Validators.maxLength(20)]),
       description: new FormControl('', [Validators.required]),
-      codeQr: new FormControl('', [Validators.required, Validators.pattern("[Q][R][0-9][0-9]")])
+      codeQr: new FormControl('', [Validators.required, Validators.pattern("[Q][R][0-9]*"), Validators.minLength(5), Validators.maxLength(5)])
     });
     this.trademarkService.getAllTrademark().subscribe(next => {
       this.trademarkList = next;
@@ -43,6 +45,26 @@ export class CreateCommodityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.commodityService.getAll2().subscribe(next => {
+      this.commodityList = next;
+      console.log(next)
+    })
+  }
+
+  checkDuplicationName(name: string) {
+    for (let i = 0; i < this.commodityList.length; i++) {
+      if (this.commodityList[i].name == name) {
+        this.commodityForm.controls.name.setErrors({'invalidName': true})
+      }
+    }
+  }
+
+  checkDuplicationQR(codeQr: string) {
+    for (let i = 0; i < this.commodityList.length; i++) {
+      if (this.commodityList[i].codeQr == codeQr) {
+        this.commodityForm.controls.codeQr.setErrors({'invalidCodeQR': true})
+      }
+    }
   }
 
   showPreview(event: any) {

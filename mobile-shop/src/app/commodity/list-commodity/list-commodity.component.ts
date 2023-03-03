@@ -17,6 +17,7 @@ export class ListCommodityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAll();
   }
 
   private getAll() {
@@ -36,7 +37,7 @@ export class ListCommodityComponent implements OnInit {
     if (id != null) {
       this.commodityService.delete(this.index).subscribe(next => {
         alert("xóa thành công")
-        this.getAll()
+        this.getAll();
       }, error => {
       }, () => {
       });

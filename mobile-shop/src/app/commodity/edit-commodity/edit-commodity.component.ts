@@ -19,27 +19,26 @@ export class EditCommodityComponent implements OnInit {
   trademarkList: Trademark[] = [];
   selectedImage: any = null;
   commodityList: Commodity = {};
-  fb: string | undefined;
   src: string | undefined;
   downloadURL: Observable<string> | undefined;
+  commodities: Commodity[] = [];
 
   constructor(private router: Router, private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       id: new FormControl(''),
-      name: new FormControl('', [Validators.required]),
-      cpu: new FormControl('', [Validators.required]),
-      capacity: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),
+      cpu: new FormControl('', [Validators.required, Validators.pattern("[-a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(50)]),
+      capacity: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [G][B]"), Validators.minLength(5), Validators.maxLength(20)]),
       trademark: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
-      image: new FormControl('', [Validators.required]),
-      camera: new FormControl('', [Validators.required]),
-      selfie: new FormControl('', [Validators.required]),
-      screenSize: new FormControl('', [Validators.required]),
-      guarantee: new FormControl('', [Validators.required]),
-      origin: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.min(0), Validators.max(2000000000)]),
+      image: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
+      camera: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
+      selfie: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
+      screenSize: new FormControl('', [Validators.required, Validators.pattern("[0-9.]* [a-z]*"), Validators.minLength(5), Validators.maxLength(20)]),
+      guarantee: new FormControl('', [Validators.required, Validators.pattern("[0-9]*"), Validators.maxLength(2)]),
+      origin: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*"), Validators.minLength(2), Validators.maxLength(20)]),
       description: new FormControl('', [Validators.required]),
-      codeQr: new FormControl('', [Validators.required]),
-      quantity: new FormControl('')
+      codeQr: new FormControl('', [Validators.required, Validators.pattern("[Q][R][0-9]*"), Validators.minLength(5), Validators.maxLength(5)])
     });
     this.commodityService.findCommodityById(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(next => {
       console.log(this.commodityForm.patchValue(next));
@@ -52,11 +51,31 @@ export class EditCommodityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.commodityService.getAll2().subscribe(next => {
+      this.commodities = next;
+      console.log(next)
+    })
   }
 
 
   compareFun(item1, item2) {
     return item1 && item2 ? item1.id === item2.id : item1 === item2;
+  }
+
+  checkDuplicationName(name: string) {
+    for (let i = 0; i < this.commodities.length; i++) {
+      if (this.commodities[i].name == name) {
+        this.commodityForm.controls.name.setErrors({'inValidName': true})
+      }
+    }
+  }
+
+  checkDuplicationQR(codeQr: string) {
+    for (let i = 0; i < this.commodities.length; i++) {
+      if (this.commodities[i].codeQr == codeQr) {
+        this.commodityForm.controls.codeQr.setErrors({'invalidCodeQR': true})
+      }
+    }
   }
 
   showPreview(event: any) {

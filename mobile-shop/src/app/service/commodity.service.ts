@@ -21,7 +21,9 @@ export class CommodityService {
   getAll(): Observable<any> {
     return this.httpClient.get<any>(this.URL_COMMODITY + "/list")
   }
-
+  getAll2(): Observable<any> {
+    return this.httpClient.get<any>(this.URL_COMMODITY + "/getList")
+  }
   /**
    * Create by: CongBD
    * Date created: 01/03/2023
