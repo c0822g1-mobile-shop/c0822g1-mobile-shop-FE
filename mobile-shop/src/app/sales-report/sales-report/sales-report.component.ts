@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {SalesReportService} from "../../service/sales-report.service";
 import {SalesReport} from "../../entity/sales-report";
 import {Chart} from 'chart.js';
+import {ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-sales-report',
@@ -9,18 +10,27 @@ import {Chart} from 'chart.js';
   styleUrls: ['./sales-report.component.css']
 })
 export class SalesReportComponent implements OnInit {
+  @ViewChild('commodityId') commodityId!: ElementRef;
 
   revenues: number[] = [];
   dateBuy: string[] = [];
-
+  showCommodityInput: boolean = false;
   sales: SalesReport;
+
+  radioOptions: string = 'option1';
 
   constructor(private salesReportService: SalesReportService) {
   }
 
-  ngOnInit(): void {
+  toggleCommodityInput(option: string): void {
+    this.showCommodityInput = this.radioOptions === 'option3';
+    this.revenues = [];
+    this.dateBuy = [];
   }
 
+  ngOnInit(): void {
+    this.toggleCommodityInput(this.radioOptions)
+  }
 
 
   /**
@@ -30,23 +40,45 @@ export class SalesReportComponent implements OnInit {
    * @param startDay: string
    * @param endDay: string
    */
-  salesReport(startDay: string, endDay: string) {
-    this.salesReportService.salesReport(startDay, endDay).subscribe(data=>{
-      this.sales = data;
-    });
 
-    this.salesReportService.listReport(startDay, endDay).subscribe(data=>{
-      for (let i = 0; i < data.length; i++){
-        // @ts-ignore
-        this.revenues.push(data[i].revenue);
-        console.log(data[i].revenue)
-        // @ts-ignore
-        this.dateBuy.push(data[i].buyDate);
-      }
-      console.log(this.revenues)
-      console.log(this.dateBuy)
-      this.drawChart()
-    })
+  salesReport(startDay: string, endDay: string, radioOptions: string, commodityId: any) {
+    if (radioOptions === 'option1') {
+
+      this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data=>{
+        this.sales = data;
+
+      });
+
+      this.salesReportService.getAll(startDay.toString(), endDay.toString()).subscribe(data=>{
+        console.log(data)
+        for (let i = 0; i < data.length; i++){
+          // @ts-ignore
+          this.revenues.push(data[i].revenue);
+          console.log(data[i].revenue)
+          // @ts-ignore
+          this.dateBuy.push(data[i].buyDate);
+        }
+        this.drawChart(this.dateBuy,this.revenues)
+      })
+    }else if (radioOptions === 'option3') {
+      this.salesReportService.salesReportById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data=>{
+        this.sales = data;
+      });
+
+      this.salesReportService.getAllById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data=>{
+        console.log(data)
+        for (let i = 0; i < data.length; i++){
+          // @ts-ignore
+          this.revenues.push(data[i].revenue);
+          console.log(data[i].revenue)
+          // @ts-ignore
+          this.dateBuy.push(data[i].buyDate);
+        }
+        console.log(this.revenues)
+        console.log(this.dateBuy)
+        this.drawChart(this.dateBuy,this.revenues)
+      })
+    }
   }
 
 
@@ -55,19 +87,21 @@ export class SalesReportComponent implements OnInit {
    * Date created: 02/03/2023
    * Function: initialize chart
    */
-  drawChart(){
-    new Chart('myChart',{
+  drawChart(dateBuy: string[], revenues: number[]) {
+    new Chart('myChart', {
       type: 'bar',
-      data:{
-        labels: this.dateBuy,
-        datasets:[{
-          label:'Doanh thu',
-          data: this.revenues,
-          backgroundColor: 'rgba(255,255,0,0.28)' ,
+      data: {
+        labels: dateBuy,
+        datasets: [{
+          label: 'Doanh thu',
+          data: revenues,
+          backgroundColor: 'rgba(255,255,0,0.28)',
           borderColor: 'black',
           borderWidth: 3,
         }],
       }
     })
   }
+
+
 }

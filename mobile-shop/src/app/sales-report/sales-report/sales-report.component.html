@@ -10,7 +10,7 @@
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
                   <label class="form-label" for="firstName">Từ ngày</label>
-                  <input type="date" #startDay id="firstName" class="form-control form-control-lg" />
+                  <input type="date" #startDay id="firstName" class="form-control form-control-lg"/>
                 </div>
               </div>
 
@@ -18,34 +18,37 @@
 
                 <div class="form-outline">
                   <label class="form-label" for="lastName">Đến ngày</label>
-                  <input type="date" #endDay id="lastName" class="form-control form-control-lg" />
+                  <input type="date" #endDay id="lastName" class="form-control form-control-lg"/>
                 </div>
               </div>
             </div>
 
             <div class="row">
-<!--              <div class="col-md-3 mb-4 d-flex align-items-center">-->
-<!--                <div class="form-outline datepicker ">-->
-<!--                  <p >Báo cáo: </p>-->
-<!--                </div>-->
-<!--              </div>-->
+              <div class="col-md-3 mb-4 d-flex align-items-center">
+                <div class="form-outline datepicker ">
+                  <p>Báo cáo: </p>
+                </div>
+              </div>
 
-<!--              <div class="col-md-9 mb-4">-->
-<!--                <div class="form-check">-->
-<!--                  <input class="form-check-input" type="radio" name="radioOptions" id="all"-->
-<!--                         value="option1" checked />-->
-<!--                  <label class="form-check-label" for="all">Tất cả</label>-->
-<!--                </div>-->
+              <div class="form-check col-md-4">
+                <input class="form-check-input" type="radio" #option1 name="radioOptions" id="all" value="option1"
+                       [(ngModel)]="radioOptions"
+                       (change)="toggleCommodityInput(option1.value)"/>
+                <label class="form-check-label" for="all">Tất cả</label>
+              </div>
 
-<!--                <div class="form-check">-->
-<!--                  <input class="form-check-input" type="radio" name="radioOptions" id="theoMa"-->
-<!--                         value="option3" />-->
-<!--                  <label class="form-check-label" for="theoMa">Theo mã sản phẩm: </label>-->
-<!--                  <input type="text" placeholder="Nhập mã"/>-->
-<!--                </div>-->
-<!--              </div>-->
+              <div class="form-check col-md-5">
+                <input class="form-check-input" type="radio" #option2 name="radioOptions" id="theoMa" value="option3"
+                       [(ngModel)]="radioOptions"
+                       (change)="toggleCommodityInput(option2.value)"/>
+                <label class="form-check-label" for="theoMa">Theo mã sản phẩm:</label>
+                <input *ngIf="showCommodityInput" type="number" [(ngModel)]="commodityId" name="commodityId" placeholder="Nhập mã"/>
+              </div>
             </div>
-            <input class="btn btn-outline-primary" type="submit" value="Xem" (click)="salesReport(startDay.value,endDay.value)"/>
+
+
+            <button class="btn btn-outline-primary" (click)="salesReport(startDay.value, endDay.value, radioOptions, commodityId)">Xem</button>
+
             <br>
             <br>
             <p *ngIf="sales">Tổng số đơn hàng: {{sales.totalQuantity}}</p>
@@ -56,8 +59,8 @@
             </div>
 
             <div class="text-center">
-              <input class="btn btn-outline-primary m-2" type="submit" value="Quay lại" />
-              <input class="btn btn-outline-secondary m-2" type="submit" value="Thoát" />
+              <input class="btn btn-outline-primary m-2" type="submit" value="Quay lại"/>
+              <input class="btn btn-outline-secondary m-2" type="submit" value="Thoát"/>
             </div>
           </div>
         </div>
