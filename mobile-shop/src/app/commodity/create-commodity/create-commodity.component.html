@@ -175,6 +175,13 @@
                   </div>
                   <p style="font-weight: bold;color: red;margin-left: 190px"
                      *ngIf="commodityForm.controls.cpu.hasError('required')&&commodityForm.controls.cpu.touched">*
+                    Không được để trống</p><p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.cpu.hasError('pattern')&&commodityForm.controls.cpu.touched">*
+                    Không được nhập ký tự đặc biệt (Ví dụ: </p><p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.cpu.hasError('minlength')&&commodityForm.controls.cpu.touched">*
+                    Không được để trống</p>
+                  <p style="font-weight: bold;color: red;margin-left: 190px"
+                     *ngIf="commodityForm.controls.cpu.hasError('maxlength')&&commodityForm.controls.cpu.touched">*
                     Không được để trống</p>
                 </div>
                 <div class="row align-items-center py-3">
