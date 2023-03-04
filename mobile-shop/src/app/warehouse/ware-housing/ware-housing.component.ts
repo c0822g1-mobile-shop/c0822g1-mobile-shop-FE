@@ -17,7 +17,6 @@ export class WareHousingComponent implements OnInit {
 
   constructor(private findSupplierService: FindSupplierService) {
     this.getAllSupplier(name)
-
     console.log(this.supplier)
 
     if (this.supplier != null){

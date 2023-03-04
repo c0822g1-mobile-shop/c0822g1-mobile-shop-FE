@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 import { WarehouseRoutingModule } from './warehouse-routing.module';
 import { WareHousingComponent } from './ware-housing/ware-housing.component';
 import {FormsModule} from "@angular/forms";
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFireModule} from "@angular/fire";
+import {environment} from "../../environments/environment";
+import {CommodityModule} from "../commodity/commodity.module";
 
 
 @NgModule({
@@ -11,7 +15,10 @@ import {FormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     WarehouseRoutingModule,
-    FormsModule
+    FormsModule,
+    CommodityModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment)
   ]
 })
 export class WarehouseModule { }
