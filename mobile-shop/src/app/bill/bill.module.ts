@@ -12,10 +12,10 @@ import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [CustomerSelectComponent],
+  declarations: [CustomerSelectComponent, BillCreateComponent],
     imports: [
         CommonModule,
-        BillRoutingModule, FormsModule
+        BillRoutingModule, FormsModule,ReactiveFormsModule
     ]
 
 })
