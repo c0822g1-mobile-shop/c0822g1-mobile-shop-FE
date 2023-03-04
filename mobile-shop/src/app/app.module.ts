@@ -14,6 +14,14 @@ import {BodyComponent} from "./home/body/body.component";
 
 import {HomeModule} from "./home/home.module";
 
+import {FooterComponent} from "./home/footer/footer.component";
+import {HeaderComponent} from "./home/header/header.component";
+import {CommodityModule} from "./commodity/commodity.module";
+import {HttpClientModule} from "@angular/common/http";
+import {WarehouseModule} from "./warehouse/warehouse.module";
+
+
+
 
 
 @NgModule({
@@ -33,6 +41,9 @@ import {HomeModule} from "./home/home.module";
     FormsModule,
     CommodityModule,
     HttpClientModule,
+
+    WarehouseModule
+
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
