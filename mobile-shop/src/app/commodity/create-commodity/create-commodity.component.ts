@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
 import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
@@ -85,6 +85,8 @@ export class CreateCommodityComponent implements OnInit {
             this.commodityForm.patchValue({image: url});
             this.src = url;
             console.log('link: ', this.fb);
+            this.src = url;
+            // console.log('link: ', this.fb);
           });
         })
       )

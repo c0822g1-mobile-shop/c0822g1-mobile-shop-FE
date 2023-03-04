@@ -83,6 +83,8 @@ export class EditCommodityComponent implements OnInit {
     const filePath = this.selectedImage.name;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, this.selectedImage);
+
+
     task
       .snapshotChanges()
       .pipe(

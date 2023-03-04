@@ -57,8 +57,12 @@ export class ListCommodityComponent implements OnInit {
   }
 
   search(value: number, value2: string) {
+    if (value2 == "") {
+      this.getAll();
+    }
     this.commodityService.search(value, value2).subscribe(next => {
       this.commodity = next;
     })
+
   }
 }
