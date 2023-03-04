@@ -15,6 +15,7 @@ import {BodyComponent} from "./home/body/body.component";
 import {HomeModule} from "./home/home.module";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,8 @@ import {HomeModule} from "./home/home.module";
     ReactiveFormsModule,
     FormsModule,
     HomeModule,
+    ReactiveFormsModule,
+    FormsModule,
     CommodityModule,
     HttpClientModule,
     AngularFireStorageModule,
