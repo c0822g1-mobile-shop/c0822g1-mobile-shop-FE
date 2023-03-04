@@ -9,6 +9,7 @@ import {CommodityService} from "../../service/commodity.service";
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.css']
 })
+
 export class BodyComponent implements OnInit {
 
   /**
