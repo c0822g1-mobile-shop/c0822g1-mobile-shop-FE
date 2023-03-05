@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BillRoutingModule } from './bill-routing.module';
 
@@ -12,11 +12,12 @@ import {CommoditySelectComponent} from "../commodity/commodity-select/commodity-
 
 
 @NgModule({
-T
-  declarations: [CustomerSelectComponent, BillCreateComponent, CommoditySelectComponent],
+
+  declarations: [CustomerSelectComponent, BillCreateComponent],
     imports: [
         CommonModule,
         BillRoutingModule, FormsModule, ReactiveFormsModule, CommodityModule
-    ]
+    ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class BillModule { }

@@ -1,10 +1,14 @@
+// @ts-ignore
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CommodityService} from "../../service/commodity.service";
+// @ts-ignore
 import {Router} from "@angular/router";
+// @ts-ignore
 import {Title} from "@angular/platform-browser";
 import {Commodity} from "../../entity/commodity";
 import {CommodityJson} from "../../entity/commodity-json";
 
+// @ts-ignore
 @Component({
   selector: 'app-commodity-select',
   templateUrl: './commodity-select.component.html',

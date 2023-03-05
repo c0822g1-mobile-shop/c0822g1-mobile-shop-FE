@@ -1,8 +1,10 @@
+// @ts-ignore
 import {Component, Input, OnInit} from '@angular/core';
 import {FindSupplierService} from "../../service/find-supplier.service";
 import {Supplier} from "../../entity/supplier";
 import {Commodity} from "../../entity/commodity";
 
+// @ts-ignore
 @Component({
   selector: 'app-ware-housing',
   templateUrl: './ware-housing.component.html',

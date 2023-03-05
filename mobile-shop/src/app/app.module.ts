@@ -1,10 +1,16 @@
+// @ts-ignore
 import {BrowserModule} from '@angular/platform-browser';
+// @ts-ignore
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+// @ts-ignore
 import {HttpClientModule} from "@angular/common/http";
+// @ts-ignore
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+// @ts-ignore
 import {AngularFireStorageModule} from "@angular/fire/storage";
+// @ts-ignore
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {CommodityModule} from "./commodity/commodity.module";
@@ -14,16 +20,14 @@ import {BodyComponent} from "./home/body/body.component";
 
 import {HomeModule} from "./home/home.module";
 
-import {FooterComponent} from "./home/footer/footer.component";
-import {HeaderComponent} from "./home/header/header.component";
-import {CommodityModule} from "./commodity/commodity.module";
-import {HttpClientModule} from "@angular/common/http";
+
 import {WarehouseModule} from "./warehouse/warehouse.module";
 
 
 
 
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +46,7 @@ import {WarehouseModule} from "./warehouse/warehouse.module";
     CommodityModule,
     HttpClientModule,
 
-    WarehouseModule
+    WarehouseModule,
 
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

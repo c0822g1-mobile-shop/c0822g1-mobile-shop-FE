@@ -1,7 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Bill} from "../../entity/bill";
-import {Observable} from "rxjs";
 
 import {User} from "../../entity/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -10,7 +7,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BillService} from "../../service/bill/bill.service";
 import {Title} from "@angular/platform-browser";
 import {BillHistory} from "../../entity/bill-history";
-// @ts-ignore
 import Swal from 'sweetalert2';
 
 
@@ -30,7 +26,6 @@ export class BillCreateComponent implements OnInit {
   billHistory: BillHistory = {};
   user: User[] = [];
 
-  billHistory: BillHistory = {};
 
   formCreateBill: FormGroup = new FormGroup({});
   userId: number;
