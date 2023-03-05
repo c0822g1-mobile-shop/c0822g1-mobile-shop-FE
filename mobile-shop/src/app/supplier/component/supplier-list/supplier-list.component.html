@@ -88,8 +88,7 @@
           type="submit">
     Xoá
   </button>
-  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success" [routerLink]="['/supplier/create']">
-    Thêm
+  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success" routerLink="/supplier/create">Thêm
   </button>
   <button [disabled]="supplier == null" style="margin-left: 10px" type="submit" class=" btn btn-outline-primary"
           (click)="update()">Chỉnh sửa

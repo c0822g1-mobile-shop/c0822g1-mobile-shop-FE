@@ -1,3 +1,4 @@
+<script src="../supplier-list/supplier-list.component.spec.ts"></script>
 <section>
   <div class=" py-5">
     <div class="row d-flex justify-content-center align-items-center">
@@ -18,10 +19,15 @@
                 <div style="position: relative" class="col-md-8 pe-4">
 
                   <input formControlName="code" type="text" id="code" name="code" placeholder="Nhập mã số"
-                         class="form-control form-control-md"/>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.code.hasError('required') && form.controls.code.touched">Không được để trống</p>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.code.hasError('pattern') && form.controls.code.touched">Mã số không đúng định dạng</p>
-                  <p style="color: red; position: absolute" *ngIf="errors.code && !form.controls.code.hasError('required') && !form.controls.code.hasError('pattern')">{{errors.code}}</p>
+                         class="form-control form-control-md" (focusin)="reset()"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.code.hasError('required')) || form.controls.code.hasError('required') && form.controls.code.touched">
+                    Không được để trống</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.code.hasError('pattern')) || form.controls.code.hasError('pattern') && form.controls.code.touched">
+                    Mã số không đúng định dạng</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.code && !form.controls.code.hasError('required') && !form.controls.code.hasError('pattern')">{{errors.code}}</p>
 
 
                 </div>
@@ -37,10 +43,15 @@
                 <div style="position: relative" class="col-md-8 pe-4">
 
                   <input formControlName="name" type="text" id="name" name="name" placeholder="Nhập tên nhà cung cấp"
-                         class="form-control form-control-md"/>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.name.hasError('required') && form.controls.name.touched">Không được để trống</p>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.name.hasError('maxlength')">Tên nhà cung cấp không được quá 100 ký tự</p>
-                  <p style="color: red; position: absolute" *ngIf="errors.name && !form.controls.name.hasError('required') && !form.controls.name.hasError('maxlength')">{{errors.name}}</p>
+                         class="form-control form-control-md" (focusin)="reset()"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.name.hasError('required')) || form.controls.name.hasError('required') && form.controls.name.touched">
+                    Không được để trống</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.name.hasError('maxlength')) || form.controls.name.hasError('maxlength') && form.controls.name.touched">
+                    Tên nhà cung cấp không được quá 100 ký tự</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.name && !form.controls.name.hasError('required') && !form.controls.name.hasError('maxlength')">{{errors.name}}</p>
 
                 </div>
               </div>
@@ -55,10 +66,15 @@
                 <div style="position: relative" class="col-md-8 pe-4">
 
                   <input formControlName="address" type="text" id="address" name="address" placeholder="Nhập địa chỉ"
-                         class="form-control form-control-md"/>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.address.hasError('required') && form.controls.address.touched">Không được để trống</p>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.address.hasError('maxlength')">Địa chỉ không được quá 200 ký tự</p>
-                  <p style="color: red; position: absolute" *ngIf="errors.address && !form.controls.address.hasError('required') && !form.controls.address.hasError('maxlength')">{{errors.address}}</p>
+                         class="form-control form-control-md" (focusin)="reset()"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.address.hasError('required')) || form.controls.address.hasError('required') && form.controls.address.touched">
+                    Không được để trống</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.address.hasError('maxlength')) || form.controls.address.hasError('maxlength') && form.controls.address.touched">
+                    Địa chỉ không được quá 200 ký tự</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.address && !form.controls.address.hasError('required') && !form.controls.address.hasError('maxlength')">{{errors.address}}</p>
 
                 </div>
               </div>
@@ -73,10 +89,15 @@
                 <div style="position: relative" class="col-md-8 pe-4">
 
                   <input formControlName="phoneNumber" type="text" id="phone-number" name="phone-number"
-                         placeholder="Nhập số diện thoại" class="form-control form-control-md"/>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.phoneNumber.hasError('required') && form.controls.phoneNumber.touched">Không được để trống</p>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.phoneNumber.hasError('pattern')">Số điện thoại không đúng định dạng</p>
-                  <p style="color: red; position: absolute" *ngIf="errors.phoneNumber && !form.controls.phoneNumber.hasError('required') && !form.controls.phoneNumber.hasError('pattern')">{{errors.phoneNumber}}</p>
+                         placeholder="Nhập số diện thoại" class="form-control form-control-md" (focusin)="reset()"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.phoneNumber.hasError('required')) || form.controls.phoneNumber.hasError('required') && form.controls.phoneNumber.touched">
+                    Không được để trống</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.phoneNumber.hasError('pattern')) || form.controls.phoneNumber.hasError('pattern') && form.controls.phoneNumber.touched">
+                    Số điện thoại không đúng định dạng</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.phoneNumber && !form.controls.phoneNumber.hasError('required') && !form.controls.phoneNumber.hasError('pattern')">{{errors.phoneNumber}}</p>
 
                 </div>
               </div>
@@ -91,16 +112,21 @@
                 <div style="position: relative" class="col-md-8 pe-4">
 
                   <input formControlName="email" type="text" id="email" name="email" placeholder="Nhập email"
-                         class="form-control form-control-md"/>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.email.hasError('required') && form.controls.email.touched">Không được để trống</p>
-                  <p style="color: red; position: absolute" *ngIf="form.controls.email.hasError('pattern')">Email không đúng định dạng</p>
-                  <p style="color: red; position: absolute" *ngIf="errors.email && !form.controls.email.hasError('required') && !form.controls.email.hasError('pattern')">{{errors.email}}</p>
+                         class="form-control form-control-md" (focusin)="reset()"/>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.email.hasError('required')) || form.controls.email.hasError('required') && form.controls.email.touched">
+                    Không được để trống</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="(clickButton && form.controls.email.hasError('pattern')) || form.controls.email.hasError('pattern') && form.controls.email.touched">
+                    Email không đúng định dạng</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="errors.email && !form.controls.email.hasError('required') && !form.controls.email.hasError('pattern')">{{errors.email}}</p>
 
                 </div>
               </div>
 
               <div class=" text-center">
-                <button type="submit" class="btn btn-outline-primary m-4 w-25" [disabled]="!form.valid">Lưu</button>
+                <button type="submit" class="btn btn-outline-primary m-4 w-25">Lưu</button>
                 <button type="reset" routerLink="/supplier/list" class="btn btn-outline-secondary m-4 w-25">Hủy</button>
 
               </div>

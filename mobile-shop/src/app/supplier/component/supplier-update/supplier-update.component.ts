@@ -20,6 +20,8 @@ export class SupplierUpdateComponent implements OnInit {
     email: new FormControl("", [Validators.required, Validators.pattern("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")])
   });
 
+  clickButton = false;
+
   errors = {
     email: '', phoneNumber: '', name: '', address: ''
   };
@@ -69,7 +71,15 @@ export class SupplierUpdateComponent implements OnInit {
           }
         }
       });
+    } else {
+      this.clickButton = true;
     }
   }
 
+  reset() {
+    this.errors.email = '';
+    this.errors.phoneNumber = '';
+    this.errors.name = '';
+    this.errors.address = '';
+  }
 }
