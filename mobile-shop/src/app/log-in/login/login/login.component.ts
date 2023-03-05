@@ -5,6 +5,7 @@ import {TokenService} from "../../service/token.service";
 import {Router} from "@angular/router";
 import {ShareService} from "../../service/share.service";
 import Swal from "sweetalert2";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
@@ -31,11 +32,11 @@ export class LoginComponent implements OnInit {
     roles: new FormControl('customer')
   });
 
-  constructor(private loginService: LoginService, private token: TokenService, private router: Router, private share: ShareService) {
+  constructor(private title:Title,private loginService: LoginService, private token: TokenService, private router: Router, private share: ShareService) {
   }
 
   ngOnInit(): void {
-
+  this.title.setTitle('Trang Đăng Nhập');
   }
 
   login() {
