@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TokenService} from "../../log-in/service/token.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-body',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
-
-  constructor() { }
+  isLogger = false;
+  constructor(private token:TokenService,private router:Router) { }
 
   ngOnInit(): void {
+    this.isLogger = this.token.isLogger();
   }
 
 }

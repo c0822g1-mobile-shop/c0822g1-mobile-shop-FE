@@ -1,0 +1,72 @@
+<h1 class="text-center" style="margin-top: 50px">Danh sách hàng hóa</h1>
+<form style="float: right;margin-right: 10px;margin-bottom: 30px;margin-top: 30px">
+  <label style="margin-right: 5px">
+    <select #select class="form-select form-control" aria-label="Default select example">
+      <option [value]="0"  selected>Tìm kiếm theo</option>
+      <option [value]="1">Tên hàng hoá</option>
+      <option [value]="2">Giá</option>
+      <option [value]="3">Số lượng</option>
+    </select>
+  </label>
+  <input class="form-control me-2" #input style="width: 300px;display: inline;margin-right: 5px" type="search" placeholder="Tìm kiếm" aria-label="Search">
+  <button class="btn btn-outline-primary " (click)="search(select.value,input.value)" style="width: 100px;margin-bottom: 5px" type="submit">Tìm kiếm</button>
+</form>
+<div style="height: 450px">
+  <table class="table text-center table-hover">
+    <thead>
+    <tr>
+      <th scope="col" style="width: 100px">STT</th>
+      <th scope="col" style="width: 300px">Tên</th>
+      <th scope="col" style="width: 300px">Giá(VND)</th>
+      <th scope="col" style="width: 300px">CPU</th>
+      <th scope="col" style="width: 300px">Lưu trữ</th>
+      <th scope="col" style="width: 300px">Số lượng trong kho (Cái)</th>
+    </tr>
+    </thead>
+    <tbody class="text-center">
+    <tr [class.choose]="commodity.id == index" (click)="choice(commodity.id,commodity.name)" style="cursor: pointer"  *ngFor="let commodity of commodity['content'], index as i">
+      <th scope="row">{{i+1}}</th>
+      <td>{{commodity.name}}</td>
+      <td>{{commodity.price | currency: 'VND': 'symbol'}}</td>
+      <td>{{commodity.cpu}}</td>
+      <td>{{commodity.capacity}}</td>
+      <td>{{commodity.quantity}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+<div style="margin-bottom: 10px">
+<button class="btn btn-outline-primary" routerLink="/commodity/create" style="margin-left: 20px; margin-top: 10px">Thêm mới</button>
+<button class="btn btn-outline-primary disabled1" [disabled]="index == -1"  id="edit1" [routerLink]="['/commodity/edit',index]">Chỉnh sửa</button>
+
+<button type="button" class="btn btn-outline-danger disabled1" [disabled]="index == -1"  data-toggle="modal" data-target="#staticBackdrop">
+  Xóa
+</button>
+<nav aria-label="Page navigation example" style="float: right;margin-right: 10px; margin-top: 10px">
+  <ul class="pagination">
+    <li class="page-item"><button class="page-link" (click)="previousPage()">Trước</button></li>
+    <li class="page-item"><b class="page-link">Trang {{commodity['number']+1}}</b></li>
+    <li class="page-item"><button class="page-link" (click)="nextPage()">Sau</button></li>
+  </ul>
+</nav>
+</div>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Xác nhận xóa hàng hóa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa mặt hàng <b>{{item}}</b> không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal"  (click)="delete(index)">Có</button>
+      </div>
+    </div>
+  </div>
+</div>
