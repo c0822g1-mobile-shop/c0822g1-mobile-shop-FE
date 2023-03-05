@@ -10,27 +10,25 @@
               <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" >
                 Chọn sản phẩm
               </button>
-              <button type="reset" class="btn btn-outline-secondary m-4 w-25">Quét Mã QR</button>
+              <button type="reset" class="btn btn-outline-secondary m-4 w-25" data-toggle="modal" data-target="#exampleModalQR">Quét Mã QR</button>
             </div>
             <div class="row align-items-center pt-3 pb-2">
               <div class="col-md-4 ps-3">
 
-                <label style="font-weight: bold" for="code" class="mb-0">Tên Hàng<sup
+                <label style="font-weight: bold"  class="mb-0">Tên Hàng<sup
                   style="color: red; font-size: 15px">*</sup></label>
               </div>
-              <div class="col-md-8 pe-4">
-                <input type="text" id="code" name="code" readonly placeholder="Ex: Tên hàng"
-                       class="form-control form-control-md"/>
+              <div class="col-md-8 pe-4" *ngIf="commodityQR">
+                {{commodityQR.name}}
               </div >
             </div>
             <div class="row align-items-center pt-4 pb-3">
               <div class="col-md-4 ps-3">
-                <label style="font-weight: bold" for="name" class="mb-0">Giá<sup
+                <label style="font-weight: bold" class="mb-0">Giá<sup
                   style="color: red; font-size: 15px">*</sup></label>
               </div>
-              <div class="col-md-8 pe-4">
-                <input type="text" id="name" name="name" readonly placeholder="Ex: Giá"
-                       class="form-control form-control-md"/>
+              <div class="col-md-8 pe-4" *ngIf="commodityQR">
+                {{commodityQR.price}}
               </div>
             </div>
             <div class="row align-items-center pt-4 pb-3">
@@ -69,7 +67,7 @@
               </div>
             </div>
             <div class=" text-center">
-              <button type="submit" class="btn btn-outline-primary m-4 w-25">Lưu</button>
+              <button type="submit" class="btn btn-outline-primary m-4 w-25" >Lưu</button>
               <button type="reset" class="btn btn-outline-secondary m-4 w-25">Hủy</button>
             </div>
           </div>
@@ -148,4 +146,6 @@
     </div>
   </div>
 </div>
+
+<app-scan-qr-code (commodities)="handleQrCodeResult($event)"></app-scan-qr-code>
 <app-commodity-select></app-commodity-select>

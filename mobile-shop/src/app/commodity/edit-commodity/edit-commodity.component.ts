@@ -23,7 +23,8 @@ export class EditCommodityComponent implements OnInit {
   src: string | undefined;
   downloadURL: Observable<string> | undefined;
 
-  constructor(private router: Router,private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
+  constructor(private router: Router,private commodityService: CommodityService, private activatedRoute: ActivatedRoute,
+              private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),

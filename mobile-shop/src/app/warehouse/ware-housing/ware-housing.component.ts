@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FindSupplierService} from "../../service/find-supplier.service";
 import {Supplier} from "../../entity/supplier";
+import {Commodity} from "../../entity/commodity";
 
 @Component({
   selector: 'app-ware-housing',
@@ -14,8 +15,10 @@ export class WareHousingComponent implements OnInit {
   suppliers: Supplier = {
     name: ""
   };
+  commodityQR: Commodity;
 
   constructor(private findSupplierService: FindSupplierService) {
+
     this.getAllSupplier(name)
     console.log(this.supplier)
 
@@ -45,5 +48,10 @@ export class WareHousingComponent implements OnInit {
     this.findSupplierService.getAllSupplier(name).subscribe(data =>{
       this.findSupplier = data;
     })
+  }
+
+  handleQrCodeResult(commodity: Commodity) {
+    this.commodityQR = commodity;
+    console.log(this.commodityQR)
   }
 }

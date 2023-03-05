@@ -15,6 +15,7 @@ export class WarehousingService {
   wareHousing(id: number, commodity: Commodity){
    return this.httpClient.put("http://localhost:8080/api/wareHousing/" + id,commodity);
   }
+
   findByIdCommodity(id): Observable<any>{
    return this.httpClient.get<any>("http://localhost:8080/api/commodity/find/"+ id)
   }

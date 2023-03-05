@@ -7,14 +7,15 @@ import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {BodyComponent} from "./home/body/body.component";
 import {HomeModule} from "./home/home.module";
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {WarehouseModule} from "./warehouse/warehouse.module";
 import {FooterComponent} from "./home/footer/footer.component";
 import {HeaderComponent} from "./home/header/header.component";
 import {CommodityModule} from "./commodity/commodity.module";
-
-
+import {SalesReportModule} from "./sales-report/sales-report.module";
+import {ToastrModule} from "ngx-toastr";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -38,7 +39,14 @@ import {CommodityModule} from "./commodity/commodity.module";
     WarehouseModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-  ],schemas:[CUSTOM_ELEMENTS_SCHEMA],
+    SalesReportModule,
+    ToastrModule.forRoot(),
+    RouterModule,
+    WarehouseModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
   exports: []
