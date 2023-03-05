@@ -6,10 +6,10 @@ import {SupplierUpdateComponent} from './component/supplier-update/supplier-upda
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ToastrModule} from "ngx-toastr";
 import {RouterModule} from "@angular/router";
 import {SupplierRoutingModule} from "./supplier-routing.module";
 import { SupplierListComponent } from './component/supplier-list/supplier-list.component';
+import {ToastrModule} from "ngx-toastr";
 
 
 @NgModule({

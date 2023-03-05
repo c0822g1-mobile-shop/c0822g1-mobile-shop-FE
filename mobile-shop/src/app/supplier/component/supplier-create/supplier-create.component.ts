@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SupplierService} from "../../../service/supplier.service";
-import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-supplier-create',
@@ -25,7 +26,11 @@ export class SupplierCreateComponent implements OnInit {
   });
   clickButton = false;
 
-  constructor(private router: Router, private supplierService: SupplierService, private toastrService: ToastrService) {
+  constructor(private router: Router,
+              private supplierService: SupplierService,
+              private toastrService: ToastrService,
+              private titleService: Title) {
+    this.titleService.setTitle("Thêm mới nhà cung cấp");
   }
 
   ngOnInit(): void {

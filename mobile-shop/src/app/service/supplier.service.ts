@@ -31,4 +31,5 @@ export class SupplierService {
   updateSupplier(supplier: Supplier){
     return this.httpClient.put("http://localhost:8080/supplier/update", supplier);
   }
+
 }

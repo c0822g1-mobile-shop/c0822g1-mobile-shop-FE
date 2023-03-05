@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SupplierService} from "../../../service/supplier.service";
 import {ToastrService} from "ngx-toastr";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-supplier-update',
@@ -29,7 +30,10 @@ export class SupplierUpdateComponent implements OnInit {
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private supplierService: SupplierService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private titleService: Title) {
+
+    this.titleService.setTitle("Chỉnh sửa nhà cung cấp");
 
     this.activatedRoute.paramMap.subscribe(next => {
       const id = +next.get("id")

@@ -1,11 +1,12 @@
 <div class="container-builder">
   <h1 style="text-align: center">Nhà cung cấp</h1>
   <div style="float: right">
-    <div class="input-group mb-3"><input class="form-control me-1" type="text" placeholder="Tìm kiếm"
+    <div class="input-group mb-3"><input class="form-control me-1" type="text" placeholder="Tìm kiếm nhà cung cấp"
                                          aria-label="Search"
-                                         [(ngModel)]="search">
+                                         [(ngModel)]="search" style="margin-right: 21px">
       <div class="input-group-prepend">
-        <button class="btn btn-outline-primary" type="button" (click)="getAll(0)">Tìm kiếm</button>
+        <button style="margin-right: 20px" class="btn btn-outline-primary" type="button" (click)="getAll(0)">Tìm kiếm
+        </button>
       </div>
     </div>
   </div>
@@ -59,10 +60,10 @@
         (click)="getAll(supplierList.totalPages - 1)" class="page-link"> {{supplierList.totalPages}}
       </a></li>
 
-      <li class="page-item"><a class="page-link" [ngClass]="supplierList.last ? 'disabled': ''"
+      <li class="page-item"><a class="page-link"
+                               [ngClass]="supplierList.number + 1 == supplierList.totalPages? 'disabled': ''"
                                (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
     </ul>
-
 
     <ul class="pagination" *ngIf="supplierList.totalPages <= 3">
       <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
@@ -72,7 +73,8 @@
         (click)="getAll(num)" class="page-link"> {{num + 1}}
       </a></li>
 
-      <li class="page-item"><a class="page-link" [ngClass]="supplierList.last ? 'disabled': ''"
+      <li class="page-item"><a class="page-link"
+                               [ngClass]="supplierList.number + 1 == supplierList.totalPages? 'disabled': ''"
                                (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
     </ul>
   </nav>
@@ -89,9 +91,11 @@
   <button [disabled]="supplier == null" style="margin-left: 10px" type="submit" class=" btn btn-outline-primary"
           (click)="update()">Chỉnh sửa
   </button>
-  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary">Thoát</button>
+  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary" [routerLink]="['/home']">Thoát
+  </button>
 </div>
 
+<br>
 
 <!-- Modal -->
 <div class="modal" id="exampleModal" tabindex="-1">
@@ -99,9 +103,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Xác nhận xoá nhà cung cấp</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"> <img src="https://img.icons8.com/color/48/null/close-window.png"/> </span>
-        </button>
       </div>
       <div class="modal-body">
         <p>Bạn có chắc chắn muốn xóa nhà cung cấp: <label style="color: red">{{supplier?.name}}</label> này không?</p>
