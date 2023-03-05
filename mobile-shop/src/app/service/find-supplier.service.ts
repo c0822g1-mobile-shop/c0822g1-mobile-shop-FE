@@ -8,7 +8,6 @@ import {Supplier} from "../entity/supplier";
 })
 export class FindSupplierService {
 
-
   constructor(private httpClient: HttpClient) {}
 
   getAllSupplier(name: string):Observable<Supplier[]>{

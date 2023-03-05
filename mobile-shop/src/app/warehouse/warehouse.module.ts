@@ -6,25 +6,29 @@ import { CommonModule } from '@angular/common';
 import { WarehouseRoutingModule } from './warehouse-routing.module';
 import { WareHousingComponent } from './ware-housing/ware-housing.component';
 // @ts-ignore
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 // @ts-ignore
 import {AngularFireStorageModule} from "@angular/fire/storage";
 // @ts-ignore
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../../environments/environment";
 import {CommodityModule} from "../commodity/commodity.module";
+import {ScanQrCodeModule} from "../scan-qr-code/scan-qr-code.module";
 
 
 // @ts-ignore
 @NgModule({
   declarations: [WareHousingComponent],
-  imports: [
-    CommonModule,
-    WarehouseRoutingModule,
-    FormsModule,
-    CommodityModule,
-    AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment)
-  ]
+    imports: [
+        CommonModule,
+        WarehouseRoutingModule,
+        FormsModule,
+        CommodityModule,
+        AngularFireStorageModule,
+        AngularFireModule.initializeApp(environment),
+        ScanQrCodeModule,
+        ReactiveFormsModule,
+
+    ]
 })
 export class WarehouseModule { }

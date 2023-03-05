@@ -21,10 +21,11 @@ import {BodyComponent} from "./home/body/body.component";
 import {HomeModule} from "./home/home.module";
 
 
+import {SalesReportModule} from "./sales-report/sales-report.module";
+
 import {WarehouseModule} from "./warehouse/warehouse.module";
-
-
-
+import {ToastrModule} from "ngx-toastr";
+import {RouterModule} from "@angular/router";
 
 
 // @ts-ignore
@@ -46,12 +47,15 @@ import {WarehouseModule} from "./warehouse/warehouse.module";
     CommodityModule,
     HttpClientModule,
 
+
+
+    SalesReportModule,
+    ToastrModule.forRoot(),
+    RouterModule,
     WarehouseModule,
 
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]
