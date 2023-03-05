@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CommodityService} from "../../service/commodity.service";
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
@@ -11,7 +11,6 @@ import {CommodityJson} from "../../entity/commodity-json";
   styleUrls: ['./commodity-select.component.css']
 })
 export class CommoditySelectComponent implements OnInit {
-
 
   commodities: Commodity[] = [];
   commodityInfo!: CommodityJson;
