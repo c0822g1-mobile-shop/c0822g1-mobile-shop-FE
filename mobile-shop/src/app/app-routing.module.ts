@@ -9,14 +9,11 @@ const routes: Routes = [
   {path: "information",loadChildren:()=> import("./manager-information/manager-information.module").then(module => module.ManagerInformationModule)},
   {path: "sales",loadChildren: ()=> import("./manager-sales/manager-sales.module").then(module => module.ManagerSalesModule)},
   {path: "report",loadChildren:() => import("./report/report.module").then(module => module.ReportModule)},
-  {path: "supplier",loadChildren: () => import("./supplier/supplier.module").then(module => module.SupplierModule)},
   {path: 'sale-report',loadChildren: () => import("./sales-report/sales-report.module").then(module => module.SalesReportModule)},
   {path: "warehouse", loadChildren: () => import("./warehouse/warehouse-routing.module").then(module => module.WarehouseRoutingModule)},
+  {path: "supplier",loadChildren: () => import("./supplier/supplier-routing.module").then(module => module.SupplierRoutingModule)},
   {path: "bill", loadChildren: () => import("./bill/bill.module").then(module => module.BillModule)
   }
-
-
-
 ];
 
 
