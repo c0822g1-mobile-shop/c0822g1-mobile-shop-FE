@@ -6,8 +6,8 @@ export interface BillHistory {
   id?: number;
   idCommodity?: number;
   billId?: number;
+  numberOfPurchases?: number;
   userId?: number
-
   commodity?: Commodity;
   bill?: Bill;
   user?: User;

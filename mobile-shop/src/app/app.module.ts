@@ -1,3 +1,7 @@
+import {HttpClientModule} from "@angular/common/http";
+import {ManageCustomerModule} from "./manage-customer/manage-customer.module";
+import {BillHistoryRoutingModule} from "./bill-history/bill-history-routing.module";
+import {BillHistoryModule} from "./bill-history/bill-history.module";
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
@@ -23,11 +27,14 @@ import {WarehouseModule} from "./warehouse/warehouse.module";
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    ManageCustomerModule,
+    BillHistoryModule
     SupplierModule,
     ReactiveFormsModule,
     FormsModule,
