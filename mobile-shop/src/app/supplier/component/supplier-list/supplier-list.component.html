@@ -83,7 +83,7 @@
 
 
 <div class="d-flex justify-content-center">
-  <button [disabled]="supplier == null" class=" btn btn-outline-danger" data-toggle="modal"
+  <button [disabled]="supplier == null" (click)="delete(supplier)" class=" btn btn-outline-danger" data-toggle="modal"
           data-target="#exampleModal" style="margin-left: 50px"
           type="submit">
     Xoá
@@ -100,19 +100,19 @@
 <br>
 
 <!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Xác nhận xoá nhà cung cấp</h5>
-      </div>
-      <div class="modal-body">
-        <p>Bạn có chắc chắn muốn xóa nhà cung cấp: <label style="color: red">{{supplier?.name}}</label> này không?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Xoá</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="modal" id="exampleModal" tabindex="-1">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title">Xác nhận xoá nhà cung cấp</h5>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <p>Bạn có chắc chắn muốn xóa nhà cung cấp: <label style="color: red">{{supplier?.name}}</label> này không?</p>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>-->
+<!--        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Xoá</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
