@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FindSupplierService} from "../../service/find-supplier.service";
 import {Supplier} from "../../entity/supplier";
+import {Commodity} from "../../entity/commodity";
 
 @Component({
   selector: 'app-ware-housing',
@@ -8,6 +9,7 @@ import {Supplier} from "../../entity/supplier";
   styleUrls: ['./ware-housing.component.css']
 })
 export class WareHousingComponent implements OnInit {
+
 
   findSupplier: Supplier [] = [];
   supplier: number;
