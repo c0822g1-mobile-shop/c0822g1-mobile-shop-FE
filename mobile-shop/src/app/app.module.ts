@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import {HeaderComponent} from "./home/header/header.component";
 import {FooterComponent} from "./home/footer/footer.component";
 import {HomeModule} from "./home/home.module";
+import {HttpClientModule} from "@angular/common/http";
+import {ManageCustomerModule} from "./manage-customer/manage-customer.module";
+import {BillHistoryRoutingModule} from "./bill-history/bill-history-routing.module";
+import {BillHistoryModule} from "./bill-history/bill-history.module";
 
 @NgModule({
   declarations: [
@@ -16,7 +20,10 @@ import {HomeModule} from "./home/home.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    HttpClientModule,
+    ManageCustomerModule,
+    BillHistoryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

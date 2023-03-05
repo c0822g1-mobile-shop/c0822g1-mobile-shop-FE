@@ -1,55 +1,53 @@
 <h1 align="center">Lịch sử mua hàng</h1>
-<form>
-  <div class="container">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Họ và tên: Nguyễn Lê Huy</th>
-      </tr>
-      <tr>
-        <th>Giới tính: Nam</th>
-      </tr>
-      <tr>
-        <th>Số điện thoại: 089854762</th>
-      </tr>
-      <tr>
-        <th>Email: huynl4@gmail.com</th>
-      </tr>
-      <tr>
-        <th>Tuổi: 24</th>
-      </tr>
-      <tr>
-        <th>Số lần mua hàng: 3</th>
-      </tr>
-      </thead>
-    </table>
-  </div>
-</form>
+
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Họ và tên: {{billHistoryInfo.name}}</th>
+    </tr>
+    <tr>
+      <th *ngIf="billHistoryInfo.gender =='true' ,else esleGender">Giới tính: Nam</th>
+      <ng-template #esleGender>
+        <th *ngIf="billHistoryInfo.gender == 'false' ">Giới tính: Nữ</th>
+      </ng-template>
+    </tr>
+    <tr>
+      <th>Số điện thoại: {{billHistoryInfo.phoneNumber}}</th>
+    </tr>
+    <tr>
+      <th>Email: {{billHistoryInfo.email}}</th>
+    </tr>
+    <tr>
+      <th>Tuổi: {{billHistoryInfo.age}}</th>
+    </tr>
+    <tr>
+      <th>Số lần mua hàng: {{billHistoryInfos.length}}</th>
+    </tr>
+    </thead>
+  </table>
+</div>
 
 
 <h2 align="center" style="color: black">Chi tiết lịch sử mua hàng</h2>
-<form>
-  <table class=" table table-striped table-hover">
-    <thead>
-    <tr>
-      <th>Stt</th>
-      <th>Ngày mua</th>
-      <th>Sản phẩm mua</th>
-      <th>Số lượng</th>
-      <th>Số tiền</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of billHistory; index as i">
-      <td>{{i + 1}}</td>
-      <td>{{item.buyDate}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.quantity}}</td>
-      <td>{{item.quantity}}</td>
-      <td>{{item.quantity}}</td>
-    </tr>
-    </tbody>
-  </table>
-  
 
-</form>
+<table class=" table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Stt</th>
+    <th>Ngày mua</th>
+    <th>Sản phẩm mua</th>
+    <th>Số tiền</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of billHistoryInfos; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{item.buyDate}}</td>
+    <td>{{item.product}}</td>
+    <td>{{item.total}}</td>
+  </tr>
+  </tbody>
+</table>
+
+

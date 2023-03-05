@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {BillHistoryService} from "../../service/bill-history.service";
 import {BillHistory} from "../../entity/bill-history";
 import {ActivatedRoute} from "@angular/router";
+import {ManageListService} from "../../service/manage-list.service";
+import {User} from "../../entity/user";
+import {BillHistoryInfo} from "../../entity/bill-history-info";
 
 @Component({
   selector: 'app-bill-history-list',
@@ -11,18 +14,44 @@ import {ActivatedRoute} from "@angular/router";
 export class BillHistoryListComponent implements OnInit {
   billHistory: BillHistory;
   id: number;
+  item: User;
+  billList;
+  billHistoryInfos:BillHistoryInfo[]=[];
+  billHistoryInfo:BillHistoryInfo={};
 
   constructor(private billHistoryService: BillHistoryService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private manageListService: ManageListService) {
+    this.activatedRoute.paramMap.subscribe(next => {
+      this.id = +next.get('id');
+      this.getByIdManage(this.id);
+      console.log(this.id);
+      // this.getByIdManage(this.id);
+
+
+    });
+    // this.manageListService.getAllManager().subscribe(next => {
+    //   this.item = next;
+    // })
   }
 
   ngOnInit(): void {
-    this.getAllBillHistory();
+    // this.getAllBillHistory();
   }
 
-  getAllBillHistory() {
-    this.billHistoryService.getAllBillHistory(this.id).subscribe(next =>{
-      this.billHistory = next;
-    });
+  // phương thức test ko chạy
+  // getAllBillHistory() {
+  //   this.billHistoryService.getAllBillHistory(this.id).subscribe(next => {
+  //     this.billHistory = next;
+  //   });
+  // }
+
+// phương thức lấy theo id
+  getByIdManage(id: number) {
+    this.billHistoryService.findById(id).subscribe(next => {
+        this.billHistoryInfos=next;
+      console.log(this.billHistoryInfos);
+      this.billHistoryInfo=this.billHistoryInfos[0];
+    })
   }
 }
