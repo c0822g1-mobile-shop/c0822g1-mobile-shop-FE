@@ -33,7 +33,7 @@
                 <div style="position: relative" class="col-md-8 pe-4">
 
                   <input formControlName="name" type="text" id="name" name="name" placeholder="Nhập tên nhà cung cấp"
-                         class="form-control form-control-md"/>
+                         class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.name.hasError('required')) || form.controls.name.hasError('required') && form.controls.name.touched">
                     Không được để trống</p>
@@ -57,7 +57,7 @@
 
                   <input formControlName="address" type="text" id="address" name="address"
                          placeholder="Nhập địa chỉ"
-                         class="form-control form-control-md"/>
+                         class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.address.hasError('required')) || form.controls.address.hasError('required') && form.controls.address.touched">
                     Không được để trống</p>
@@ -80,7 +80,7 @@
                 <div style="position: relative" class="col-md-8 pe-4">
 
                   <input formControlName="phoneNumber" type="text" id="phone-number" name="phone-number"
-                         placeholder="Nhập số điện thoại" class="form-control form-control-md"/>
+                         placeholder="Nhập số điện thoại" class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.phoneNumber.hasError('required')) || form.controls.phoneNumber.hasError('required') && form.controls.phoneNumber.touched">
                     Không được để trống</p>
@@ -104,7 +104,7 @@
 
                   <input formControlName="email" type="text" id="email" name="email"
                          placeholder="Nhập email"
-                         class="form-control form-control-md"/>
+                         class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.email.hasError('required')) || form.controls.email.hasError('required') && form.controls.email.touched">
                     Không được để trống</p>

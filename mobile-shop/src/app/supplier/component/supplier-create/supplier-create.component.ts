@@ -24,7 +24,6 @@ export class SupplierCreateComponent implements OnInit {
     email: new FormControl("", [Validators.required, Validators.pattern("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")])
   });
   clickButton = false;
-  showParagraph: boolean = true;
 
   constructor(private router: Router, private supplierService: SupplierService, private toastrService: ToastrService) {
   }
@@ -57,8 +56,16 @@ export class SupplierCreateComponent implements OnInit {
           }
         }
       })
-    }else {
+    } else {
       this.clickButton = true;
     }
+  }
+
+  reset() {
+    this.errors.email = '';
+    this.errors.phoneNumber = '';
+    this.errors.code = '';
+    this.errors.name = '';
+    this.errors.address = '';
   }
 }

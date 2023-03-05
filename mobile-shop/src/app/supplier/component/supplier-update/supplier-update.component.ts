@@ -71,9 +71,15 @@ export class SupplierUpdateComponent implements OnInit {
           }
         }
       });
-    }else {
+    } else {
       this.clickButton = true;
     }
   }
 
+  reset() {
+    this.errors.email = '';
+    this.errors.phoneNumber = '';
+    this.errors.name = '';
+    this.errors.address = '';
+  }
 }
