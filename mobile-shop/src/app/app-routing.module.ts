@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: "report",loadChildren:() => import("./report/report.module").then(module => module.ReportModule)},
   {path: "supplier",loadChildren: () => import("./supplier/supplier.module").then(module => module.SupplierModule)},
 
-  {path: "warehouse", loadChildren: () => import("./warehouse/warehouse-routing.module").then(module => module.WarehouseRoutingModule)}
+  // {path: "warehouse", loadChildren: () => import("./warehouse/warehouse-routing.module").then(module => module.WarehouseRoutingModule)}
 
   {path: "warehouse", loadChildren: () => import("./warehouse/warehouse.module").then(module => module.WarehouseModule)},
   {path: "bill", loadChildren: () => import("./bill/bill.module").then(module => module.BillModule)

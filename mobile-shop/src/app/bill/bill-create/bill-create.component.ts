@@ -30,7 +30,6 @@ export class BillCreateComponent implements OnInit {
   billHistory: BillHistory = {};
   user: User[] = [];
 
-  billHistory: BillHistory = {};
 
   formCreateBill: FormGroup = new FormGroup({});
   userId: number;

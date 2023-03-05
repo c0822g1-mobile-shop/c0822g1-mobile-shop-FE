@@ -14,7 +14,7 @@ import {CommodityModule} from "../commodity/commodity.module";
   declarations: [WareHousingComponent],
   imports: [
     CommonModule,
-    WarehouseRoutingModule,
+    // WarehouseRoutingModule,
     FormsModule,
     CommodityModule,
     AngularFireStorageModule,

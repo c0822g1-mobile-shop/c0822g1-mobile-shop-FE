@@ -16,6 +16,7 @@ import {AngularFireModule} from "@angular/fire";
 
 @NgModule({
   imports: [
+    AppRoutingModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
