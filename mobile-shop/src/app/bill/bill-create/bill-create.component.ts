@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Bill} from "../../entity/bill";
 import {Observable} from "rxjs";
+
 import {User} from "../../entity/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Commodity} from "../../entity/commodity";
@@ -9,6 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BillService} from "../../service/bill/bill.service";
 import {Title} from "@angular/platform-browser";
 import {BillHistory} from "../../entity/bill-history";
+// @ts-ignore
 import Swal from 'sweetalert2';
 
 
@@ -18,9 +20,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./bill-create.component.css']
 })
 export class BillCreateComponent implements OnInit {
+
+  @Input()
+  customer: User = {};
+  eventSelected = new EventEmitter();
+  @Input()
+  commodity: Commodity = {};
+  eventSelected2 = new EventEmitter();
   billHistory: BillHistory = {};
   user: User[] = [];
-  commodity: Commodity[] = [];
+
+  billHistory: BillHistory = {};
+
   formCreateBill: FormGroup = new FormGroup({});
   userId: number;
   commodityId: number;

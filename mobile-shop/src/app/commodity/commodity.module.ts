@@ -26,7 +26,6 @@ import {AngularFireModule} from "@angular/fire";
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  
   declarations: [
     CommoditySelectComponent,
     ListCommodityComponent,
@@ -34,7 +33,9 @@ import {AngularFireModule} from "@angular/fire";
     EditCommodityComponent,
 
   ],
-  exports: [],
+    exports: [
+        CommoditySelectComponent
+    ],
 })
 export class CommodityModule {
 }
