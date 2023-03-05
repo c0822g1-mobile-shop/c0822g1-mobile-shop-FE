@@ -1,0 +1,114 @@
+
+<div class="modal fade " id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DANH SÁCH SẢN PHẨM TRONG KHO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="d-flex justify-content-center">
+          <input #nameSearch style="width: 300px; margin-left: 20px" class="form-control" name="name" type="search" placeholder="Tìm kiếm theo tên" aria-label="Search">
+          <button style="margin-left: 20px" class="btn btn-outline-success" type="button" (click)="search(nameSearch.value, false)">
+            Tìm
+            kiếm
+          </button>
+        </form>
+        <div class="d-flex justify-content-center" style="margin-top: 20px">
+          <button [disabled]="commodity.id == 0" data-dismiss="modal" type="submit" class="btn btn-outline-primary" (click)="select() ; choice = -1">Chọn</button>
+          <button [disabled]="commodity.id == 0" data-dismiss="modal" type="submit" class="btn btn-outline-danger" (click)="commodity.id = 0 ; choice = -1" style="margin-left: 20px">Hủy Chọn</button>
+        </div>
+        <table class="table center table-hover" style="margin-top: 30px">
+          <thead>
+          <tr>
+            <th style="text-align: center; width: 10%">STT</th>
+            <th style="text-align: center; width: 25%">Tên</th>
+            <th style="text-align: center; width: 15%">Giá(VNĐ)</th>
+            <th style="text-align: center; width: 20%">CPU</th>
+            <th style="text-align: center; width: 20%">Dung lượng</th>
+          </tr>
+          </thead>
+          <tr *ngIf="commodities.length == 0; else elseBlock">
+            <td colspan="10" class="text-danger" style="text-align: center"><h4>Không có dữ liệu.</h4></td>
+          </tr>
+          <ng-template #elseBlock>
+            <tbody class="text-center">
+            <tr [class.choice]="i == choice" style="cursor: pointer" *ngFor="let item of commodities; index as i" (click)="selectCommodity(item.id,i)">
+              <td>{{(i + 1) + (request.page * request.size)}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.price}}</td>
+              <td>{{item.cpu}}</td>
+              <td>{{item.capacity}}</td>
+            </tr>
+            </tbody>
+          </ng-template>
+        </table>
+      </div>
+      <div style="min-height: 60px">
+        <div *ngIf="commodities.length != 0; else elseBlockPagination">
+          <div *ngIf="commodityInfo" class="d-flex justify-content-center" id="last-row">
+            <div>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item" [ngClass]="commodityInfo.first ? 'disabled': ''">
+                    <a role="button" class="page-link" (click)="changePage(0)">Trang đầu</a>
+                  </li>
+                  <li class="page-item" [ngClass]="commodityInfo.first ? 'disabled': ''">
+                    <a role="button" class="page-link" (click)="changePage(commodityInfo.number - 1)"><</a>
+                  </li>
+                  <li class="page-item" *ngIf="commodityInfo.number - 3 > 0">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number - 4)">{{commodityInfo.number - 3}}</a>
+                  </li>
+                  <li class="page-item" *ngIf="commodityInfo.number - 2 > 0">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number - 3)">{{commodityInfo.number - 2}}</a>
+                  </li>
+                  <li class="page-item" *ngIf="commodityInfo.number - 1 > 0">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number - 2)">{{commodityInfo.number - 1}}</a>
+                  </li>
+                  <li class="page-item" *ngIf="commodityInfo.number > 0">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number - 1)">{{commodityInfo.number}}</a>
+                  </li>
+                  <li class="page-item active"><a class="page-link">{{commodityInfo.number + 1}}</a></li>
+                  <li class="page-item" *ngIf="commodityInfo.number + 2 <= commodityInfo.totalPages">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number + 1)">{{commodityInfo.number + 2}}</a>
+                  </li>
+                  <li class="page-item" *ngIf="commodityInfo.number + 3 <= commodityInfo.totalPages">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number + 2)">{{commodityInfo.number + 3}}</a>
+                  </li>
+                  <li class="page-item" *ngIf="commodityInfo.number + 4 <= commodityInfo.totalPages">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number + 3)">{{commodityInfo.number + 4}}</a>
+                  </li>
+                  <li class="page-item" *ngIf="commodityInfo.number + 5 <= commodityInfo.totalPages">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number + 4)">{{commodityInfo.number + 5}}</a>
+                  </li>
+                  <li class="page-item" [ngClass]="commodityInfo.last ? 'disabled': ''">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.number + 1)">></a>
+                  </li>
+                  <li class="page-item" [ngClass]="commodityInfo.last ? 'disabled': ''">
+                    <a role="button" class="page-link"
+                       (click)="changePage(commodityInfo.totalPages - 1)">
+                      Trang cuối
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <ng-template #elseBlockPagination></ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
