@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SupplierService} from "../../../service/supplier.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {Title} from "@angular/platform-browser";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-supplier-create',
@@ -25,7 +27,11 @@ export class SupplierCreateComponent implements OnInit {
   });
   clickButton = false;
 
-  constructor(private router: Router, private supplierService: SupplierService, private toastrService: ToastrService) {
+  constructor(private router: Router,
+              private supplierService: SupplierService,
+              private toastrService: ToastrService,
+              private titleService: Title) {
+    this.titleService.setTitle("Thêm mới nhà cung cấp");
   }
 
   ngOnInit(): void {
@@ -35,9 +41,27 @@ export class SupplierCreateComponent implements OnInit {
     if (this.form.valid) {
       this.supplierService.createSupplier(this.form.value).subscribe(next => {
         this.router.navigateByUrl("supplier/list")
-        this.toastrService.success("Thêm mới thành công", "Thông báo")
+
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Thêm mới thành công!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+
       }, error => {
+
         console.log(error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Thêm mới thất bại!',
+          text: 'Thêm mới thất bại vui lòng điền đúng tất cả thông tin',
+          showConfirmButton: false,
+          timer: 2000
+        });
+
         for (let i = 0; i < error.error.length; i++) {
           if (error.error && error.error[i].field === "email") {
             this.errors.email = error.error[i].defaultMessage;
@@ -57,6 +81,16 @@ export class SupplierCreateComponent implements OnInit {
         }
       })
     } else {
+
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Thêm mới thất bại!',
+        text: 'Thêm mới thất bại vui lòng điền đúng tất cả thông tin',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
       this.clickButton = true;
     }
   }
@@ -68,4 +102,6 @@ export class SupplierCreateComponent implements OnInit {
     this.errors.name = '';
     this.errors.address = '';
   }
+
+
 }
