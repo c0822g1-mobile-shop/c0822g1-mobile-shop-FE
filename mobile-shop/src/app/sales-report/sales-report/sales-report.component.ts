@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {SalesReportService} from "../../service/sales-report.service";
 import {SalesReport} from "../../entity/sales-report";
 import {Chart} from 'chart.js';
-import {ViewChild} from '@angular/core';
+import Swal from 'sweetalert2';
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 
 @Component({
@@ -73,7 +73,6 @@ export class SalesReportComponent implements OnInit {
     if (this.radioOptions === 'option1') {
       this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data=>{
         this.sales = data;
-
       });
       this.salesReportService.getAll(startDay.toString(), endDay.toString()).subscribe(data=>{
         console.log(data)
@@ -102,6 +101,8 @@ export class SalesReportComponent implements OnInit {
         console.log(this.revenues)
         console.log(this.dateBuy)
         this.drawChart(this.dateBuy,this.revenues)
+      },error=>{
+        Swal.fire('', 'Mã sản phẩm này không tồn tại', 'error');
       })
     }
   }

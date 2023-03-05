@@ -3,7 +3,7 @@ import {ScanQrCodeService} from "../../service/scan-qr-code.service";
 import {Commodity} from "../../entity/commodity";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
-import {error} from "@angular/compiler/src/util";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-scan-qr-code',
@@ -48,7 +48,7 @@ export class ScanQrCodeComponent implements OnInit {
       this.commodities.emit(data);
     },error => {
 
-      this.toast.error("Không có sản phẩm có mã QR này","Thông báo")
+      Swal.fire('', 'Không có sản phẩm có mã QR này', 'error');
       this.router.navigateByUrl("warehouse")
     });
   }
