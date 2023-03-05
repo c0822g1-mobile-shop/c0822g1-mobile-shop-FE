@@ -3,6 +3,7 @@ import {SalesReportService} from "../../service/sales-report.service";
 import {SalesReport} from "../../entity/sales-report";
 import {Chart} from 'chart.js';
 import {ViewChild} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-sales-report',
@@ -10,27 +11,51 @@ import {ViewChild} from '@angular/core';
   styleUrls: ['./sales-report.component.css']
 })
 export class SalesReportComponent implements OnInit {
-  @ViewChild('commodityId') commodityId!: ElementRef;
 
   revenues: number[] = [];
   dateBuy: string[] = [];
+
   showCommodityInput: boolean = false;
   sales: SalesReport;
+
+  reportForm: FormGroup;
 
   radioOptions: string = 'option1';
 
   constructor(private salesReportService: SalesReportService) {
+    this.reportForm = new FormGroup({
+      startDay: new FormControl("",[Validators.required]),
+      endDay: new FormControl("",[Validators.required]),
+      commodityId: new FormControl()
+    });
+    this.reportForm.setValidators(this.dateRangeValidator.bind(this.reportForm));
   }
 
+  dateRangeValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const startDay = control.get('startDay').value;
+    const endDay = control.get('endDay').value;
+
+    if (startDay && endDay && new Date(startDay) > new Date(endDay)) {
+      return { 'invalidRange': true };
+    }
+    return null;
+  }
+
+
   toggleCommodityInput(option: string): void {
-    this.showCommodityInput = this.radioOptions === 'option3';
-    this.revenues = [];
-    this.dateBuy = [];
+    if (option === 'option3') {
+      this.showCommodityInput = true;
+      this.radioOptions = option;
+    } else {
+      this.showCommodityInput = false;
+      this.radioOptions = option;
+    }
   }
 
   ngOnInit(): void {
     this.toggleCommodityInput(this.radioOptions)
   }
+
 
 
   /**
@@ -41,14 +66,15 @@ export class SalesReportComponent implements OnInit {
    * @param endDay: string
    */
 
-  salesReport(startDay: string, endDay: string, radioOptions: string, commodityId: any) {
-    if (radioOptions === 'option1') {
-
+  salesReport(startDay: string, endDay: string) {
+    this.revenues = [];
+    this.dateBuy = [];
+    const commodityId = this.reportForm.controls['commodityId'].value;
+    if (this.radioOptions === 'option1') {
       this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data=>{
         this.sales = data;
 
       });
-
       this.salesReportService.getAll(startDay.toString(), endDay.toString()).subscribe(data=>{
         console.log(data)
         for (let i = 0; i < data.length; i++){
@@ -60,11 +86,10 @@ export class SalesReportComponent implements OnInit {
         }
         this.drawChart(this.dateBuy,this.revenues)
       })
-    }else if (radioOptions === 'option3') {
+    }else if (this.radioOptions === 'option3') {
       this.salesReportService.salesReportById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data=>{
         this.sales = data;
       });
-
       this.salesReportService.getAllById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data=>{
         console.log(data)
         for (let i = 0; i < data.length; i++){

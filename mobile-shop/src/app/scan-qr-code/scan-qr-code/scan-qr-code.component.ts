@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ScanQrCodeService} from "../../service/scan-qr-code.service";
 import {Commodity} from "../../entity/commodity";
+import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-scan-qr-code',
@@ -8,10 +11,24 @@ import {Commodity} from "../../entity/commodity";
   styleUrls: ['./scan-qr-code.component.css']
 })
 export class ScanQrCodeComponent implements OnInit {
-  qrInfo: '123';
-  with = 300;
-  commodities: Commodity;
-  constructor(private scanQrService: ScanQrCodeService) { }
+  qrInfo = [
+    '123',
+    '456',
+    '789'
+  ];
+  selectedQR = null;
+  private selectedQRCode: string = null;
+
+  selectQR(index: number) {
+    this.selectedQR = index;
+    this.selectedQRCode = this.qrInfo[index];
+  }
+
+  @Output() commodities = new EventEmitter<Commodity>();
+
+  constructor(private scanQrService: ScanQrCodeService,
+              private router: Router,
+              private toast: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -26,8 +43,14 @@ export class ScanQrCodeComponent implements OnInit {
    * @return Observable Commodity
    */
   findByQRCode() {
-    this.scanQrService.findByQRCode(this.qrInfo).subscribe(data=>{
-      this.commodities = data;
-    })
+    this.scanQrService.findByQRCode(this.selectedQRCode).subscribe(data=>{
+      console.log(this.selectedQRCode)
+      this.commodities.emit(data);
+    },error => {
+
+      this.toast.error("Không có sản phẩm có mã QR này","Thông báo")
+      this.router.navigateByUrl("warehouse")
+    });
   }
+
 }

@@ -1,5 +1,6 @@
 import {Bill} from "./bill";
 import {UserRole} from "./user-role";
+import {BillHistory} from "./bill-history";
 
 export interface User {
   id?: number;
@@ -14,4 +15,5 @@ export interface User {
   dateOfBirth?: string;
   userRole?: UserRole;
   bill?: Bill;
+  billHistory?: BillHistory;
 }

@@ -1,23 +1,22 @@
-<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Quét mã QR
-</button>
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalQR" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Quét mã QR</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Chọn mã QR</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
       </div>
-      <div class="modal-body text-center"  style="box-sizing: border-box">
+      <div class="modal-body text-center d-flex justify-content-around row"  style="box-sizing: border-box">
 
-        <qr-code [value]="qrInfo" [size]="with" ></qr-code>
+        <div class="modal-body text-center d-flex justify-content-around row" style="box-sizing: border-box">
+          <qr-code *ngFor="let qr of qrInfo; let index = index" [value]="qr" [ngClass]="{'selected': selectedQR === index}" (click)="selectQR(index)" class="btn col-md-3 m-1"></qr-code>
+        </div>
 
       </div>
       <div class="modal-footer text-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="findByQRCode()">Xác nhận</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="findByQRCode()">Xác nhận</button>
       </div>
     </div>
   </div>
 </div>
+
+
