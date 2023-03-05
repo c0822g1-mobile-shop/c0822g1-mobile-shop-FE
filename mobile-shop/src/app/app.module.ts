@@ -10,23 +10,14 @@ import {environment} from "../environments/environment";
 import {CommodityModule} from "./commodity/commodity.module";
 import {HeaderComponent} from "./home/header/header.component";
 import {FooterComponent} from "./home/footer/footer.component";
-import {BodyComponent} from "./home/body/body.component";
-
-
+import {ToastrModule} from "ngx-toastr";
 import { AppRoutingModule } from './app-routing.module';
 import {SupplierModule} from "./supplier/supplier.module";
 import {HeaderComponent} from "./home/header/header.component";
-
-import {BodyComponent} from "./home/body/body.component";
 import {FooterComponent} from "./home/footer/footer.component";
 import {HomeModule} from "./home/home.module";
 import {CommodityModule} from "./commodity/commodity.module";
-import {HttpClientModule} from "@angular/common/http";
 import {WarehouseModule} from "./warehouse/warehouse.module";
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -45,9 +36,10 @@ import {WarehouseModule} from "./warehouse/warehouse.module";
     FormsModule,
     CommodityModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
     WarehouseModule
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
