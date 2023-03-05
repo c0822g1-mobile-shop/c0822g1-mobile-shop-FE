@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {Commodity} from "../../entity/commodity";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CommodityService} from "../../service/commodity.service";
+import {log} from "util";
 
 @Component({
   selector: 'app-body',
@@ -29,11 +30,10 @@ export class BodyComponent implements OnInit {
   totalPages: number;
   firstPage: boolean;
   lastPage: boolean;
-  message = '';
   nameSearch = '';
   commodity: Commodity = {};
 
-  constructor(private commodityService: CommodityService,private activatedRoute:ActivatedRoute) {
+  constructor(private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private route: Router) {
     this.activatedRoute.paramMap.subscribe(
       next => {
         this.nameSearch = next.get('name');
@@ -65,9 +65,8 @@ export class BodyComponent implements OnInit {
         this.totalPages = data.totalPages;
         this.firstPage = data.first;
         this.lastPage = data.last;
-        this.message = ''
-      }, error => {
-        this.message = "Không tìm thấy kết quả nào";
+      }, error =>{
+        this.route.navigateByUrl('/error/' + error.error);
       }
     );
   }

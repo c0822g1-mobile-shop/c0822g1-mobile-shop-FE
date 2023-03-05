@@ -35,7 +35,7 @@ ul.products li {
   flex-basis: 17%;
   padding: 0;
   box-sizing: border-box;
-  margin: 10px 5px;
+  margin: 10px 7.5px;
 }
 
 ul.products li .product-top {
@@ -153,7 +153,8 @@ a:hover {
 .card-info ul li {
   list-style: none;
 }
-.card-info ul li span{
+
+.card-info ul li span {
   display: block;
 }
 
@@ -169,20 +170,36 @@ a:hover {
 .modal-footer button:hover {
   background-color: #ff665c;
 }
+
 table, th, td {
   border: 1px solid white;
   color: black;
 }
+
 table {
   margin-top: 10px;
   border-collapse: collapse;
 }
-.card-info table tr th{
+
+.card-info table tr th {
   padding: 5px 20px;
 }
+
 .card-info table tr td {
   padding-right: 260px;
 }
+
 .product img {
   margin-bottom: 20px;
+}
+
+a span {
+  color: black;
+  background-color: orange;
+  height: 70px;
+  border-radius: 20px;
+  width: 33px;
+}
+.product-name {
+  font-weight: 600;
 }

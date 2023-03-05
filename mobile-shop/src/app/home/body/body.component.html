@@ -47,7 +47,7 @@
         </div>
         <div class="product-info">
           <a href="" class="product-cat"></a>
-          <a href="" class="product-name">{{commodity.name}}</a>
+          <a href="" class="product-name">{{commodity.name | titlecase}}</a>
           <div class="product-price">{{commodity.price | currency: "VND"}}</div>
         </div>
       </li>
@@ -59,38 +59,38 @@
     </ul>
   </div>
 </div>
-
 <div class="product">
-  <img width="100%" height="120" src="https://firebasestorage.googleapis.com/v0/b/c0822g1-mobile-shop-d949d.appspot.com/o/anh2.PNG?alt=media&token=3bde8fb6-57a8-4c49-9d7d-e06f22a7a629">
+  <img width="100%" height="120"
+       src="https://firebasestorage.googleapis.com/v0/b/c0822g1-mobile-shop-d949d.appspot.com/o/anh2.PNG?alt=media&token=3bde8fb6-57a8-4c49-9d7d-e06f22a7a629">
   <div class="wrapper">
-      <ul class="products">
-        <div class="previous">
-          <a class="previous" (click)="searchCommodity(nameSearch,number - 1)" *ngIf="!firstPage">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </a>
-        </div>
-        <li *ngFor="let commodity of commodities">
-          <div class="product-item">
-            <div class="product-top">
-              <a href="" class="product-thumb">
-                <img [src]="commodity.image">
-              </a>
-              <a class="buy-now" data-toggle="modal" (click)="watchDetail(commodity)" data-target="#detail">Mua ngay</a>
-            </div>
+    <ul class="products">
+      <div class="previous">
+        <a class="previous" (click)="searchCommodity(nameSearch,number - 1)" *ngIf="!firstPage">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+      </div>
+      <li *ngFor="let commodity of commodities">
+        <div class="product-item">
+          <div class="product-top">
+            <a href="" class="product-thumb">
+              <img [src]="commodity.image">
+            </a>
+            <a class="buy-now" data-toggle="modal" (click)="watchDetail(commodity)" data-target="#detail">Mua ngay</a>
           </div>
-          <div class="product-info">
-            <a href="" class="product-cat"></a>
-            <a href="" class="product-name">{{commodity.name}}</a>
-            <div class="product-price">{{commodity.price  | currency: "VND"}}</div>
-          </div>
-        </li>
-        <div class="next">
-          <a class="next" (click)="searchCommodity(nameSearch,number + 1)" *ngIf="!lastPage">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </a>
         </div>
-      </ul>
-    </div>
+        <div class="product-info">
+          <a href="" class="product-cat"></a>
+          <a href="" class="product-name">{{commodity.name | titlecase}}</a>
+          <div class="product-price">{{commodity.price  | currency: "VND"}}</div>
+        </div>
+      </li>
+      <div class="next">
+        <a class="next" (click)="searchCommodity(nameSearch,number + 1)" *ngIf="!lastPage">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+      </div>
+    </ul>
+  </div>
 </div>
 <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -105,7 +105,7 @@
         <div class="card">
           <img [src]="commodity.image" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title" style="color: crimson ">{{commodity.name}}</h5>
+            <h5 class="card-title" style="color: crimson ">{{commodity.name | titlecase}}</h5>
             <p style="color: red; font-weight: bold" class="card-text">{{commodity.price | currency: "VND"}}</p>
           </div>
         </div>
