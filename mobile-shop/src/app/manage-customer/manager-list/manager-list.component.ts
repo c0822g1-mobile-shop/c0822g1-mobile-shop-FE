@@ -3,6 +3,7 @@ import {ManageListService} from "../../service/manage-list.service";
 import {User} from "../../entity/user";
 import {Manager} from "../../entity/manager";
 import {ManageInfoJson} from "../../entity/manageInfoJson";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-manager-list',
@@ -25,7 +26,8 @@ export class ManagerListComponent implements OnInit {
   pageNumber = 0;
   totalPages = 0;
 
-  constructor(private managerService: ManageListService) {
+  constructor(private managerService: ManageListService,private titleService: Title) {
+    this.titleService.setTitle("Quản lý báo cáo khách hàng");
   }
 
   ngOnInit(): void {
