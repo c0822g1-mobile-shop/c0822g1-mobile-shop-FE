@@ -15,9 +15,10 @@ import {FooterComponent} from "./home/footer/footer.component";
 import {HomeModule} from "./home/home.module";
 import {CommodityModule} from "./commodity/commodity.module";
 import {SalesReportModule} from "./sales-report/sales-report.module";
-import {ToastrModule} from "ngx-toastr";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
+
+import {ToastrModule} from "ngx-toastr";
 
 
 @NgModule({
@@ -48,10 +49,11 @@ import {CommonModule} from "@angular/common";
     RouterModule,
     WarehouseModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     WarehouseModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    WarehouseModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],

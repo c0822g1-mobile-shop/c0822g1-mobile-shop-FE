@@ -1,1 +1,6 @@
-  
+ul {
+  text-align: left;
+}
+ul li a {
+  color: blue;
+}

@@ -4,6 +4,7 @@ import {LoginService} from "../../service/login.service";
 import {TokenService} from "../../service/token.service";
 import {Router} from "@angular/router";
 import {ShareService} from "../../service/share.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
             next.gender, next.dateOfBirth, next.avatar, next.roles, 'session');
         }
         this.share.sendClickEvent();
-        this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/home/')
       }, error => {
         this.message = error.error.message
       }
@@ -62,7 +63,23 @@ export class LoginComponent implements OnInit {
     this.passwordError = '';
     this.loginService.register(this.registerForm.value).subscribe(next => {
       document.getElementById('dismiss').click();
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Đăng kí thành công!',
+        text: 'Chúc mừng ' + this.registerForm.controls.name.value + ' đã có tài khoản',
+        showConfirmButton: false,
+        timer: 2000
+      });
     }, error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Đăng kí thất bại!',
+        text: 'Vui lòng điền thông tin đầy đủ',
+        showConfirmButton: false,
+        timer: 2000
+      })
       for (let i = 0; i < error.error.length; i++) {
         if (error.error[i].field == 'name') {
           this.nameError = error.error[i].defaultMessage;
