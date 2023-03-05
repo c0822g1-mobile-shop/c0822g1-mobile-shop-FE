@@ -1,6 +1,8 @@
+import {HttpClientModule} from "@angular/common/http";
+import {ManageCustomerModule} from "./manage-customer/manage-customer.module";
+import {BillHistoryModule} from "./bill-history/bill-history.module";
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {AngularFireModule} from "@angular/fire";
@@ -33,6 +35,9 @@ import {ToastrModule} from "ngx-toastr";
     SupplierModule,
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    ManageCustomerModule,
+    BillHistoryModule,
     SupplierModule,
     ReactiveFormsModule,
     FormsModule,

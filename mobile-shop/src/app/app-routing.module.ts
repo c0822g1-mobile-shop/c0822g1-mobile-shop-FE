@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {BillHistoryRoutingModule} from "./bill-history/bill-history-routing.module";
 
 const routes: Routes = [
   {path:'', loadChildren: () => import("./home/home-routing.module").then(module => module.HomeRoutingModule)},
@@ -10,10 +10,12 @@ const routes: Routes = [
   {path: "sales",loadChildren: ()=> import("./manager-sales/manager-sales.module").then(module => module.ManagerSalesModule)},
   {path: "report",loadChildren:() => import("./report/report.module").then(module => module.ReportModule)},
   {path: 'sale-report',loadChildren: () => import("./sales-report/sales-report.module").then(module => module.SalesReportModule)},
-  {path: "warehouse", loadChildren: () => import("./warehouse/warehouse-routing.module").then(module => module.WarehouseRoutingModule)},
   {path: "supplier",loadChildren: () => import("./supplier/supplier-routing.module").then(module => module.SupplierRoutingModule)},
+  {path: "manager", loadChildren: () => import("./manage-customer/manage-customer-routing.module").then(module => module.ManageCustomerRoutingModule)},
+  {path: "warehouse", loadChildren: () => import("./warehouse/warehouse-routing.module").then(module => module.WarehouseRoutingModule)},
   {path: "bill", loadChildren: () => import("./bill/bill.module").then(module => module.BillModule)
   }
+
 ];
 
 
