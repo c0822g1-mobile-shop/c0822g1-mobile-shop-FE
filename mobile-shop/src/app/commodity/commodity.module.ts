@@ -26,7 +26,6 @@ import {AngularFireModule} from "@angular/fire";
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-
   declarations: [
     CommoditySelectComponent,
     ListCommodityComponent,
