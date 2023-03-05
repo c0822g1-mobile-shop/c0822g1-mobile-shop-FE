@@ -12,10 +12,14 @@ import {HeaderComponent} from "./home/header/header.component";
 import {FooterComponent} from "./home/footer/footer.component";
 import {BodyComponent} from "./home/body/body.component";
 
-import {HomeModule} from "./home/home.module";
 
-import {FooterComponent} from "./home/footer/footer.component";
+import { AppRoutingModule } from './app-routing.module';
+import {SupplierModule} from "./supplier/supplier.module";
 import {HeaderComponent} from "./home/header/header.component";
+
+import {BodyComponent} from "./home/body/body.component";
+import {FooterComponent} from "./home/footer/footer.component";
+import {HomeModule} from "./home/home.module";
 import {CommodityModule} from "./commodity/commodity.module";
 import {HttpClientModule} from "@angular/common/http";
 import {WarehouseModule} from "./warehouse/warehouse.module";
@@ -29,11 +33,11 @@ import {WarehouseModule} from "./warehouse/warehouse.module";
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    BodyComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SupplierModule,
     ReactiveFormsModule,
     FormsModule,
     HomeModule,
@@ -41,13 +45,9 @@ import {WarehouseModule} from "./warehouse/warehouse.module";
     FormsModule,
     CommodityModule,
     HttpClientModule,
-
     WarehouseModule
-
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]
