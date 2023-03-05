@@ -48,12 +48,16 @@ export class CommodityService {
    * Function: search commodity
    * @param id
    * @param type
+   * @param page
    * @return Observable Commodity[]
    */
   search(id: number,type: string): Observable<Commodity[]> {
     return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/search/"+id+"/" + type)
   }
 
+  search2(id: number,type: string,page: number): Observable<Commodity[]> {
+    return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/search/"+id+"/" + type+"?page="+ page)
+  }
 
   /**
    * Create by: LongPT

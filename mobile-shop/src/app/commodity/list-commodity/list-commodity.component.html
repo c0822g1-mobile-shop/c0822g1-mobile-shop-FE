@@ -1,16 +1,17 @@
 <h1 class="text-center" style="margin-top: 50px">Danh sách hàng hóa</h1>
 <form style="float: right;margin-right: 10px;margin-bottom: 30px;margin-top: 30px">
   <label style="margin-right: 5px">
-    <select #select class="form-select form-control" aria-label="Default select example">
+    <select #select (change)="choose(select.value)" class="form-select form-control" aria-label="Default select example">
       <option [value]="0"  selected>Tìm kiếm theo</option>
       <option [value]="1">Tên hàng hoá</option>
       <option [value]="2">Giá</option>
       <option [value]="3">Số lượng</option>
     </select>
   </label>
-  <input class="form-control me-2" #input style="width: 300px;display: inline;margin-right: 5px" type="search" placeholder="Tìm kiếm" aria-label="Search">
-  <button class="btn btn-outline-primary " (click)="search(select.value,input.value)" style="width: 100px;margin-bottom: 5px" type="submit">Tìm kiếm</button>
+  <input class="form-control me-2" #input [readOnly]="selects == 0" style="width: 300px;display: inline;margin-right: 5px" type="search" placeholder="Tìm kiếm" aria-label="Search">
+  <button class="btn btn-outline-primary " (click)="search(select.value,input.value)" [disabled]="selects == 0" style="width: 100px;margin-bottom: 5px" type="submit">Tìm kiếm</button>
 </form>
+<button class="btn btn-outline-success" (click)="getAll()" style="margin-left: 20px; margin-top: 10px">Tất cả hàng hóa</button>
 <div style="height: 450px">
   <table class="table text-center table-hover">
     <thead>
@@ -32,7 +33,6 @@
       <td>{{commodity.capacity}}</td>
       <td>{{commodity.quantity}}</td>
     </tr>
-
     </tbody>
   </table>
 </div>
@@ -46,7 +46,7 @@
 <nav aria-label="Page navigation example" style="float: right;margin-right: 10px; margin-top: 10px">
   <ul class="pagination">
     <li class="page-item"><button class="page-link" (click)="previousPage()">Trước</button></li>
-    <li class="page-item"><b class="page-link">Trang {{commodity['number']+1}}</b></li>
+    <li class="page-item"><b class="page-link"> Trang {{commodity['number']+1}}</b></li>
     <li class="page-item"><button class="page-link" (click)="nextPage()">Sau</button></li>
   </ul>
 </nav>
