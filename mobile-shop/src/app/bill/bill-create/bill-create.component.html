@@ -296,6 +296,11 @@
                 <div class="col-md-5 ">
                   <!--  <button class="btn btn-outline-primary " (click)="addNewContacts()">-->
                   <!--   Chọn khách hàng cũ-->
+                  <!--  </button>--><<<<<<< commodity+customer-LongPT
+                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal1" (click)="customer.id = 0">
+                    Chọn khách hàng
+
+
                   <!--  </button>-->
                   <button routerLink="" class="btn btn-outline-primary ">
                     Chọn khách hàng cũ
@@ -425,7 +430,9 @@
                   <!--                  <button class="btn btn-outline-primary " (click)="addNewContacts()">-->
                   <!--                    Chọn sản phẩm-->
                   <!--                  </button>-->
-                  <button routerLink="" class="btn btn-outline-primary ">
+
+                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal2" (click)="commodity.id = 0">
+
                     Chọn sản phẩm
                   </button>
                 </div>
@@ -545,5 +552,8 @@
       </div>
     </form>
   </div>
-
 </div>
+
+<app-customer-select [customer] = "customer" ></app-customer-select>
+<app-commodity-select [commodity] = "commodity"></app-commodity-select>
+
