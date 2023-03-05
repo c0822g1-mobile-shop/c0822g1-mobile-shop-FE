@@ -12,6 +12,7 @@ export class CommodityService {
   constructor(private httpClient: HttpClient) {
   }
 
+
   /**
    * Create by: CongBD
    * Date created: 01/03/2023
@@ -46,6 +47,7 @@ export class CommodityService {
   search(id: number,type: string): Observable<Commodity[]> {
     return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/search/"+id+"/" + type)
   }
+
 
 
   /**
