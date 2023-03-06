@@ -9,4 +9,5 @@ export interface Bill {
   quantity?: number;
   paymentMethod?: string;
   billHistory?: BillHistory;
+  billPrint?: boolean;
 }
