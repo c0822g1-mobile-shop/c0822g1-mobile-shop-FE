@@ -21,4 +21,7 @@ export class LoginService {
   register(obj):Observable<any> {
     return this.http.post('http://localhost:8080/api/auth/signup',{username: obj.username,name: obj.name,email:obj.email,password:obj.password,roles: [obj.roles]});
   }
+  changePassword(obj):Observable<any> {
+    return this.http.post('http://localhost:8080/api/auth/change-password',{username: this.tokenService.getUsername(),password: obj.password,newPassword:obj.newPassword,confirmPassword:obj.confirmPassword})
+  }
 }

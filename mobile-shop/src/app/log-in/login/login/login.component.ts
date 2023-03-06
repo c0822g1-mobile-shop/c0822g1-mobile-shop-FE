@@ -31,12 +31,16 @@ export class LoginComponent implements OnInit {
     password: new FormControl(),
     roles: new FormControl('customer')
   });
-
+  islogged = false;
   constructor(private title:Title,private loginService: LoginService, private token: TokenService, private router: Router, private share: ShareService) {
   }
 
   ngOnInit(): void {
   this.title.setTitle('Trang Đăng Nhập');
+  this.islogged = this.token.isLogger();
+  if (this.islogged) {
+    this.router.navigateByUrl('/home/')
+  }
   }
 
   login() {

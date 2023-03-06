@@ -7,7 +7,7 @@
             <h1 style="text-align: center; font-weight: bold"> Nhập Kho </h1>
             <br>
             <div class=" text-center">
-              <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" >
+              <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="commodity.id = 0" >
                 Chọn sản phẩm
               </button>
               <button type="reset" class="btn btn-outline-secondary m-4 w-25" data-toggle="modal" data-target="#exampleModalQR">Quét Mã QR</button>
@@ -19,7 +19,9 @@
                   style="color: red; font-size: 15px">*</sup></label>
               </div>
               <div class="col-md-8 pe-4" *ngIf="commodityQR">
-                {{commodityQR.name}}
+                <input type="text" name="phone-number"
+                     value="{{commodityQR.name}}"  placeholder="Ex: Tên hàng" class="form-control form-control-md"/>
+
               </div >
             </div>
             <div class="row align-items-center pt-4 pb-3">
@@ -28,7 +30,8 @@
                   style="color: red; font-size: 15px">*</sup></label>
               </div>
               <div class="col-md-8 pe-4" *ngIf="commodityQR">
-                {{commodityQR.price}}
+                <input type="text" name="phone-number"
+                       value="{{commodityQR.price}}"  placeholder="Ex: Tên hàng" class="form-control form-control-md"/>
               </div>
             </div>
             <div class="row align-items-center pt-4 pb-3">
@@ -36,7 +39,9 @@
                 <label style="font-weight: bold" class="mb-0">Hình ảnh<sup
                   style="color: red; font-size: 15px">*</sup></label>
               </div>
-              <!-- <img src="{{}}}" alt="">-->
+              <div class="col-md-8 pe-4" *ngIf="commodityQR">
+                <img style="height: 90px;width: 90px" src="{{commodityQR.image}}">
+              </div>
             </div>
             <div class="row align-items-center pt-4 pb-3">
               <div class="col-md-4 ps-3">
@@ -67,7 +72,7 @@
               </div>
             </div>
             <div class=" text-center">
-              <button type="submit" class="btn btn-outline-primary m-4 w-25" >Lưu</button>
+              <button type="submit" class="btn btn-outline-primary m-4 w-25" (click)="save(commodityQR.id, +quantity.value)"  >Lưu</button>
               <button type="reset" class="btn btn-outline-secondary m-4 w-25">Hủy</button>
             </div>
           </div>
@@ -148,4 +153,4 @@
 </div>
 
 <app-scan-qr-code (commodities)="handleQrCodeResult($event)"></app-scan-qr-code>
-<app-commodity-select></app-commodity-select>
+<app-commodity-select (commodities1)="handleQrCodeResult($event)"></app-commodity-select>

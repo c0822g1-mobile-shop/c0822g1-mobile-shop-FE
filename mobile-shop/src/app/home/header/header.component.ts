@@ -13,7 +13,7 @@ import loader from "@angular-devkit/build-angular/src/angular-cli-files/plugins/
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  role = 'none';
   name = 'Thông tin cá nhân'
   isLogged = false;
   constructor(private token: TokenService,private router: Router,private share: ShareService) {
@@ -28,13 +28,15 @@ export class HeaderComponent implements OnInit {
     this.isLogged = this.token.isLogger()
     if (this.isLogged) {
       this.name = this.token.getName();
+      this.role = this.token.getRole();
     }
   }
   logout() {
-    this.name = 'Thông tin cá nhân'
+    this.role = 'none';
+    this.name = 'Thông tin cá nhân';
     this.isLogged = false;
     this.token.logout();
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/home');
   }
 
   checkProfile() {

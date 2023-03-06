@@ -1,1 +1,21 @@
-<p>cart works!</p>
+<h1 class="text-center" style="margin-top: 150px">Giỏ Hàng</h1>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Tên Sản Phẩm</th>
+    <th>Hình Ảnh</th>
+    <th>Đơn Giá</th>
+    <th>Số Lượng</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let x of carts;index as i">
+    <td>{{i+1}}</td>
+    <td>{{x.name}}</td>
+    <td><img src="{{x.image}}" style="height: 90px;width: 90px"></td>
+    <td>{{x.price}}</td>
+    <td>{{x.quantity}}</td>
+  </tr>
+  </tbody>
+</table>

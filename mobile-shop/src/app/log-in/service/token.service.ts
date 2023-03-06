@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Cart} from "../../entity/cart";
 
 const TOKEN = 'Token_key';
 const ID = 'Id_key';
@@ -13,11 +14,13 @@ const DATEOFBIRTH = 'DateOfBirth_key';
 const AVATAR = 'Avatar_key';
 const ROLE = 'Role_key';
 const STORAGE = 'Storage_key';
+const CART = 'Cart_key';
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
   json = '';
+  cart: Cart[];
 
   constructor() { }
   isLogger() {
@@ -29,12 +32,45 @@ export class TokenService {
     sessionStorage.removeItem(STORAGE);
     sessionStorage.setItem(STORAGE,storage);
   }
+
   public getStorage(){
+    this.setCart(this.cart);
     if (localStorage.getItem(STORAGE) == 'local' || sessionStorage.getItem(STORAGE) == 'local') {
       return localStorage.getItem(STORAGE);
     }else {
       return sessionStorage.getItem(STORAGE);
     }
+  }
+  public setCart(cart: Cart[]) {
+    sessionStorage.removeItem(CART);
+    sessionStorage.setItem(CART,JSON.stringify(cart));
+  }
+  public upQuantity(name: string,carts: Cart[]) {
+    for (let i = 0; i < carts.length; i++) {
+      if (carts[i].name == name) {
+        carts[i].quantity++;
+        break
+      }
+    }
+  }
+  public checkExist(name: string) {
+    for (let i = 0; i < this.getCart().length; i++) {
+      if (this.getCart()[i].name == name) {
+        return true;
+      }
+    }
+    return false;
+  }
+  public getCart() {
+    const carts = sessionStorage.getItem(CART);
+    if(carts == 'undefined') {
+      return this.cart;
+    } else {
+      this.cart = JSON.parse(carts);
+      return this.cart;
+    }
+
+
   }
   public setToken(token: string) {
     if (this.getStorage() == 'local') {

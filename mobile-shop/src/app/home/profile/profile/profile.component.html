@@ -1,4 +1,4 @@
-<div class="container emp-profile">
+<div class="container emp-profile" style="margin-top: 78px;">
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
@@ -20,10 +20,10 @@
           <p class="proile-rating">RANKINGS : <span>8/10</span></p>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Thông Tin</a>
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Giới thiệu</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bảo Mật</a>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Cá Nhân</a>
             </li>
           </ul>
         </div>
@@ -36,16 +36,16 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-work">
-          <p>WORK LINK</p>
-          <a href="">Website Link</a><br/>
-          <a href="">Bootsnipp Profile</a><br/>
-          <a href="">Bootply Profile</a>
-          <p>SKILLS</p>
-          <a href="">Web Designer</a><br/>
-          <a href="">Web Developer</a><br/>
-          <a href="">WordPress</a><br/>
-          <a href="">WooCommerce</a><br/>
-          <a href="">PHP, .Net</a><br/>
+          <p></p>
+          <a href=""></a><br/>
+          <a href=""></a><br/>
+          <a href=""></a>
+          <p></p>
+          <a href=""></a><br/>
+          <a href=""></a><br/>
+          <a href=""></a><br/>
+          <a href=""></a><br/>
+          <a href=""></a><br/>
         </div>
       </div>
       <div class="col-md-8">
@@ -116,28 +116,6 @@
               </div>
               <div class="col-md-6">
                 <p>{{age}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>English Level</label>
-              </div>
-              <div class="col-md-6">
-                <p>Expert</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Availability</label>
-              </div>
-              <div class="col-md-6">
-                <p>6 months</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <label>Your Bio</label><br/>
-                <p>Your detail description</p>
               </div>
             </div>
           </div>
@@ -212,13 +190,59 @@
               <span class="text-danger">{{avatarError}}</span>
             </div>
           </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Đổi Mật Khẩu</label>
+            <div class="col-sm-10">
+              <button class="btn btn-outline-primary" data-toggle="modal" data-target="#staticBackdrop2" type="button">+</button>
+            </div>
+          </div>
           <div class="modal-footer">
             <button type="button" id="dismiss" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
             <button type="submit" class="btn btn-primary" >Xác Nhận</button>
           </div>
         </form>
       </div>
-
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel2">Cập nhật mật khẩu</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formPassword" (ngSubmit)="changePassword()">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Mật khẩu cũ</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" formControlName="password">
+              <span class="text-danger">{{passwordError}}</span>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Mật khẩu mới</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" formControlName="newPassword">
+              <span class="text-danger">{{newPasswordError}}</span>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Mật khẩu xác nhận</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" formControlName="confirmPassword">
+              <span class="text-danger">{{confirmPasswordError}}</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="dismiss2" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            <button type="submit" class="btn btn-primary" >Xác Nhận</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

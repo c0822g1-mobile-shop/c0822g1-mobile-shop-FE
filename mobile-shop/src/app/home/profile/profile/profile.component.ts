@@ -5,6 +5,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {LoginService} from "../../../log-in/service/login.service";
 import {$} from "protractor";
+import {Title} from "@angular/platform-browser";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-profile',
@@ -38,12 +40,17 @@ export class ProfileComponent implements OnInit {
     dateOfBirth: new FormControl(),
     avatar: new FormControl()
   })
-
-  constructor(private token: TokenService, private router: Router, private userService: LoginService) {
+  formPassword = new FormGroup({
+    password: new FormControl(),
+    newPassword: new FormControl(),
+    confirmPassword: new FormControl()
+  })
+  constructor(private token: TokenService, private router: Router, private userService: LoginService,private title:Title) {
 
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Trang cá nhân');
     if (!this.token.isLogger()) {
       this.router.navigateByUrl('/home')
     } else {
@@ -87,7 +94,21 @@ export class ProfileComponent implements OnInit {
       this.gender = this.form.controls.gender.value;
       this.dateOfBirth = this.form.controls.dateOfBirth.value;
       document.getElementById('dismiss').click()
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Chúc mừng ' + this.name + ' đã cập nhật thông tin thành công',
+        showConfirmButton: false,
+        timer: 2500
+      })
     }, error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Vui lòng điền đầy đủ thông tin vào ông trống',
+        showConfirmButton: false,
+        timer: 2500
+      })
       for (let i = 0; i < error.error.length; i++) {
         if (error.error[i].field == 'name') {
           this.nameError = error.error[i].defaultMessage;
@@ -106,7 +127,44 @@ export class ProfileComponent implements OnInit {
         }
       }
     })
-
-
   }
+  passwordError = '';
+  newPasswordError = '';
+  confirmPasswordError = '';
+  changePassword() {
+    this.passwordError = '';
+    this.newPasswordError = '';
+    this.confirmPasswordError = '';
+    this.userService.changePassword(this.formPassword.value).subscribe(
+      next => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Chúc mừng ' + this.name + ' đã cập nhật mật khẩu thành công',
+          showConfirmButton: false,
+          timer: 2500
+        })
+        document.getElementById('dismiss2').click()
+      },error => {
+        console.log(error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Thay đổi mật khẩu thất bại',
+          showConfirmButton: false,
+          timer: 2500
+        })
+        for (let i = 0; i < error.error.length; i++) {
+          if (error.error[i].field == 'password') {
+            this.passwordError = error.error[i].defaultMessage;
+          } else if (error.error[i].field == 'newPassword') {
+            this.newPasswordError = error.error[i].defaultMessage;
+          } else if (error.error[i].field == 'confirmPassword') {
+            this.confirmPasswordError = error.error[i].defaultMessage;
+          }
+        }
+      }
+    )
+  }
+
 }
