@@ -1,9 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ScanQrCodeService} from "../../service/scan-qr-code.service";
 import {Commodity} from "../../entity/commodity";
-import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
-import Swal from 'sweetalert2';
+import {Router} from "@angular/router"
+
+import Swal from "sweetalert2";
+
 
 @Component({
   selector: 'app-scan-qr-code',
@@ -12,9 +13,9 @@ import Swal from 'sweetalert2';
 })
 export class ScanQrCodeComponent implements OnInit {
   qrInfo = [
-    '123',
-    '456',
-    '789'
+    'QR001',
+    'QR0099',
+    'QR002'
   ];
   selectedQR = null;
   private selectedQRCode: string = null;

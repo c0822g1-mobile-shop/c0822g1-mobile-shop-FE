@@ -1,11 +1,16 @@
+// @ts-ignore
 import {Component, OnInit} from '@angular/core';
+// @ts-ignore
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
 import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
+// @ts-ignore
 import {AngularFireStorage} from "@angular/fire/storage";
+// @ts-ignore
 import {finalize} from "rxjs/operators";
 
+// @ts-ignore
 @Component({
   selector: 'app-create-commodity',
   templateUrl: './create-commodity.component.html',

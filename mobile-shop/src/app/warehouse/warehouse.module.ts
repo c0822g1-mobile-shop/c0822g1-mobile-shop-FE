@@ -1,9 +1,12 @@
+// @ts-ignore
 import { NgModule } from '@angular/core';
+// @ts-ignore
 import { CommonModule } from '@angular/common';
 
 import { WarehouseRoutingModule } from './warehouse-routing.module';
 import { WareHousingComponent } from './ware-housing/ware-housing.component';
-import {FormsModule} from "@angular/forms";
+// @ts-ignore
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 // @ts-ignore
 import {AngularFireStorageModule} from "@angular/fire/storage";
 // @ts-ignore
@@ -13,6 +16,7 @@ import {CommodityModule} from "../commodity/commodity.module";
 import {ScanQrCodeModule} from "../scan-qr-code/scan-qr-code.module";
 
 
+// @ts-ignore
 @NgModule({
   declarations: [WareHousingComponent],
     imports: [
@@ -23,6 +27,7 @@ import {ScanQrCodeModule} from "../scan-qr-code/scan-qr-code.module";
         AngularFireStorageModule,
         AngularFireModule.initializeApp(environment),
         ScanQrCodeModule,
+        ReactiveFormsModule,
 
     ]
 })

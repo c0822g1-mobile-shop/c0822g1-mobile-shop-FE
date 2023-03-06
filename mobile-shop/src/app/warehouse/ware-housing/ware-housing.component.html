@@ -6,70 +6,83 @@
           <div class="card-body p-4 p-md-4">
             <h1 style="text-align: center; font-weight: bold"> Nhập Kho </h1>
             <br>
-            <div class=" text-center">
-              <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" >
-                Chọn sản phẩm
-              </button>
-              <button type="reset" class="btn btn-outline-secondary m-4 w-25" data-toggle="modal" data-target="#exampleModalQR">Quét Mã QR</button>
-            </div>
-            <div class="row align-items-center pt-3 pb-2">
-              <div class="col-md-4 ps-3">
+              <div class=" text-center">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+                  Chọn sản phẩm
+                </button>
+                <button type="reset" class="btn btn-outline-secondary m-4 w-25" data-toggle="modal"
+                        data-target="#exampleModalQR">Quét mã QR
+                </button>
+              </div>
+              <div class="row align-items-center pt-3 pb-2">
+                <div class="col-md-4 ps-3">
 
-                <label style="font-weight: bold"  class="mb-0">Tên Hàng<sup
-                  style="color: red; font-size: 15px">*</sup></label>
-              </div>
-              <div class="col-md-8 pe-4" *ngIf="commodityQR">
-                {{commodityQR.name}}
-              </div >
-            </div>
-            <div class="row align-items-center pt-4 pb-3">
-              <div class="col-md-4 ps-3">
-                <label style="font-weight: bold" class="mb-0">Giá<sup
-                  style="color: red; font-size: 15px">*</sup></label>
-              </div>
-              <div class="col-md-8 pe-4" *ngIf="commodityQR">
-                {{commodityQR.price}}
-              </div>
-            </div>
-            <div class="row align-items-center pt-4 pb-3">
-              <div class="col-md-4 ps-3">
-                <label style="font-weight: bold" class="mb-0">Hình ảnh<sup
-                  style="color: red; font-size: 15px">*</sup></label>
-              </div>
-              <!-- <img src="{{}}}" alt="">-->
-            </div>
-            <div class="row align-items-center pt-4 pb-3">
-              <div class="col-md-4 ps-3">
-
-                <label style="font-weight: bold" for="phone-number" class="mb-0">Số lượng<sup
-                  style="color: red; font-size: 15px">*</sup></label>
-              </div>
-              <div class="col-md-8 pe-4">
-
-                <input type="number" id="phone-number" #quantity name="phone-number"
-                       placeholder="Ex: Số Lượng" class="form-control form-control-md"/>
-              </div>
-            </div>
-            <div class="row align-items-center pt-4 pb-3">
-              <div class="col-md-4 ps-3">
-                <label style="font-weight: bold">Nhà Cung Cấp</label>
-              </div>
-              <div class="row col-md-8 pe-4">
-                <div style="display: inline-flex" class="input-group mb-3">
-
-                  <input type="text" [value]="suppliers.name" readonly class="form-control w-50"
-                         id="exampleDatepicker4 "
-                        style="margin-left: 15px" placeholder="Ex: Nhà cung cấp"/>
-                  <button type="button" class="btn btn-outline-primary" style="margin-left: 10px" data-toggle="modal"
-                          data-target="#exampleModal1">Tìm Nhà Cung Cấp
-                  </button>
+                  <label style="font-weight: bold" class="mb-0">Tên Hàng<sup
+                    style="color: red; font-size: 15px">*</sup></label>
+                </div>
+                <div class="col-md-8 pe-4" *ngIf="commodityQR">
+                  <input
+                    [value]="commodityQR.name" readonly placeholder="Ex: Tên hàng"
+                    class="form-control form-control-md"/>
                 </div>
               </div>
-            </div>
-            <div class=" text-center">
-              <button type="submit" class="btn btn-outline-primary m-4 w-25" >Lưu</button>
-              <button type="reset" class="btn btn-outline-secondary m-4 w-25">Hủy</button>
-            </div>
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-4 ps-3">
+                  <label style="font-weight: bold" class="mb-0">Giá<sup
+                    style="color: red; font-size: 15px">*</sup></label>
+                </div>
+                <div class="col-md-8 pe-4" *ngIf="commodityQR">
+                  <input
+                    [value]="commodityQR.price" readonly placeholder="Ex: Giá"
+                    class="form-control form-control-md"/>
+                </div>
+              </div>
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-4 ps-3">
+                  <label style="font-weight: bold" class="mb-0">Hình ảnh<sup
+                    style="color: red; font-size: 15px">*</sup></label>
+                </div>
+                <div class="col-md-8 pe-4" *ngIf="commodityQR">
+                  <img style="height: 90px;width: 90px" src="{{commodityQR.image}}">
+                </div>
+              </div>
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-4 ps-3">
+
+                  <label style="font-weight: bold" for="phone-number" class="mb-0">Số lượng<sup
+                    style="color: red; font-size: 15px">*</sup></label>
+                </div>
+                <div class="col-md-8 pe-4">
+                  <form [formGroup]="form">
+                  <input type="number" id="phone-number" #quantity formControlName="quantity" name="phone-number"
+                         placeholder="Ex: Số Lượng" class="form-control form-control-md"/>
+                  <span style="color: red" *ngIf="form.controls.quantity.hasError('required') && form.controls.quantity.touched">Không được để trống</span>
+                  <span style="color: red" *ngIf="form.controls.quantity.hasError('min') && form.controls.quantity.touched">Không được bé hơn 0</span>
+                  </form>
+                </div>
+              </div>
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-4 ps-3">
+                  <label style="font-weight: bold">Nhà Cung Cấp</label>
+                </div>
+                <div class="row col-md-8 pe-4">
+                  <div style="display: inline-flex" class="input-group mb-3">
+
+                    <input type="text" [value]="suppliers.name" #supplierss readonly class="form-control w-50"
+                           id="exampleDatepicker4 "
+                           style="margin-left: 15px" placeholder="Ex: Nhà cung cấp"/>
+                    <button type="button" class="btn btn-outline-primary" style="margin-left: 10px" data-toggle="modal"
+                            data-target="#exampleModal1">Tìm Nhà Cung Cấp
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class=" text-center">
+                <button type="submit" class="btn btn-outline-primary m-4 w-25"
+                        (click)="save(commodityQR.id, +quantity.value)" [disabled]="commodityQR==null || supplierss.value == '' || !form.valid">Lưu
+                </button>
+                <button type="reset" class="btn btn-outline-secondary m-4 w-25" [routerLink]="['/home']">Hủy</button>
+              </div>
           </div>
         </div>
       </div>
@@ -86,66 +99,69 @@
         </button>
       </div>
       <div class="modal-body">
-          <nav class="navbar navbar-expand-lg ">
-            <div class="container-fluid">
-              <a style="font-weight: bold" class="navbar-brand" href="#">Tìm Kiếm Theo</a>
-              <select class="form-select m-4 w-25" aria-label="Default select example">
-                <option>Nhà cung cấp</option>
-                <option>Tên nhà cung cấp</option>
-                <option>Địa chỉ</option>
-                <option>Email</option>
-              </select>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <input class="form-control me-2" type="search" #nameSearch placeholder="Tìm Kiếm"
-                       aria-label="Search">
-                <div class="col-md-4 ps-3">
-                  <button class="btn btn-outline-primary" style="width: 100px" (click)="search(nameSearch.value)" >Tìm Kiếm</button>
-                </div>
+        <nav class="navbar navbar-expand-lg ">
+          <div class="container-fluid">
+            <a style="font-weight: bold" class="navbar-brand" href="#">Tìm Kiếm Theo</a>
+            <select class="form-select m-4 w-25" aria-label="Default select example">
+              <option>Nhà cung cấp</option>
+              <option>Tên nhà cung cấp</option>
+              <option>Địa chỉ</option>
+              <option>Email</option>
+            </select>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <input class="form-control me-2" type="search" #nameSearch placeholder="Tìm Kiếm"
+                     aria-label="Search">
+              <div class="col-md-4 ps-3">
+                <button class="btn btn-outline-primary" style="width: 100px" (click)="search(nameSearch.value)">Tìm
+                  Kiếm
+                </button>
               </div>
             </div>
-          </nav>
-          <br>
-          <br>
-          <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-              <th scope="col">STT</th>
-              <th scope="col">Tên Nhà Cung Cấp</th>
-              <th scope="col">Địa Chỉ</th>
-              <th scope="col">Số Điện Thoại</th>
-              <th scope="col">Email</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let x of findSupplier['content']; index as i"
-                [class.table-active]="x.id == supplier" (click)="suppliers = x" data-dismiss="modal">
-              <td>{{i + 1}}</td>
-              <td>{{x.name}}</td>
-              <td>{{x.address}}</td>
-              <td>{{x.email}}</td>
-              <td>{{x.phoneNumber}}</td>
-            </tr>
-            </tbody>
-          </table>
-          <div style="margin-left: 70%">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Sau</a>
-                </li>
-              </ul>
-            </nav>
           </div>
+        </nav>
+        <br>
+        <br>
+        <table class="table table-striped table-hover">
+          <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên Nhà Cung Cấp</th>
+            <th scope="col">Địa Chỉ</th>
+            <th scope="col">Số Điện Thoại</th>
+            <th scope="col">Email</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let x of findSupplier['content']; index as i"
+              [class.table-active]="x.id == supplier" (click)="suppliers = x" data-dismiss="modal">
+            <td>{{i + 1}}</td>
+            <td>{{x.name}}</td>
+            <td>{{x.address}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.phoneNumber}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div style="margin-left: 70%">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Sau</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+
 <app-scan-qr-code (commodities)="handleQrCodeResult($event)"></app-scan-qr-code>
-<app-commodity-select></app-commodity-select>
+<app-commodity-select (commodities1)="handleQrCodeResult($event)"></app-commodity-select>

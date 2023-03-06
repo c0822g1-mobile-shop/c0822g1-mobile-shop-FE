@@ -11,7 +11,7 @@ import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "
   styleUrls: ['./sales-report.component.css']
 })
 export class SalesReportComponent implements OnInit {
-
+  private chart: Chart;
   revenues: number[] = [];
   dateBuy: string[] = [];
 
@@ -26,7 +26,7 @@ export class SalesReportComponent implements OnInit {
     this.reportForm = new FormGroup({
       startDay: new FormControl("",[Validators.required]),
       endDay: new FormControl("",[Validators.required]),
-      commodityId: new FormControl()
+      commodityId: new FormControl("",[Validators.required])
     });
     this.reportForm.setValidators(this.dateRangeValidator.bind(this.reportForm));
   }
@@ -43,12 +43,16 @@ export class SalesReportComponent implements OnInit {
 
 
   toggleCommodityInput(option: string): void {
+    const commodityIdControl = this.reportForm.get('commodityId');
     if (option === 'option3') {
       this.showCommodityInput = true;
       this.radioOptions = option;
+      commodityIdControl.enable();
+
     } else {
       this.showCommodityInput = false;
       this.radioOptions = option;
+      commodityIdControl.disable();
     }
   }
 
@@ -69,7 +73,7 @@ export class SalesReportComponent implements OnInit {
   salesReport(startDay: string, endDay: string) {
     this.revenues = [];
     this.dateBuy = [];
-    this.drawChart(this.dateBuy,this.revenues)
+    this.drawChart(this.dateBuy,this.revenues);
     const commodityId = this.reportForm.controls['commodityId'].value;
     if (this.radioOptions === 'option1') {
       this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data=>{
@@ -115,7 +119,10 @@ export class SalesReportComponent implements OnInit {
    * Function: initialize chart
    */
   drawChart(dateBuy: string[], revenues: number[]) {
-    new Chart('myChart', {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    this.chart = new Chart('myChart', {
       type: 'bar',
       data: {
         labels: dateBuy,
