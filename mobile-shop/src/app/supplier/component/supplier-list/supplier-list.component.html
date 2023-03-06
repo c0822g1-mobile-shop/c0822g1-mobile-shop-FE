@@ -1,4 +1,5 @@
-<div class="container-builder">
+<div class="container-builder" style="margin-top: 80px">
+  <br>
   <h1 style="text-align: center">Nhà cung cấp</h1>
   <div style="float: right">
     <div class="input-group mb-3"><input class="form-control me-1" type="text" placeholder="Tìm kiếm nhà cung cấp"
@@ -30,7 +31,7 @@
       <td>{{i + 1}}</td>
       <td>{{item?.code}}</td>
       <td>{{item?.name}}</td>
-      <td>{{item?.address | slice: 0 : 20}}</td>
+      <td>{{item?.address | slice: 0 : 20}}...</td>
       <td>{{item?.phoneNumber}}</td>
       <td>{{item?.email}}</td>
     </tr>
@@ -87,7 +88,8 @@
           type="submit">
     Xoá
   </button>
-  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success" routerLink="/supplier/create">Thêm</button>
+  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success" routerLink="/supplier/create">Thêm
+  </button>
   <button [disabled]="supplier == null" style="margin-left: 10px" type="submit" class=" btn btn-outline-primary"
           (click)="update()">Chỉnh sửa
   </button>

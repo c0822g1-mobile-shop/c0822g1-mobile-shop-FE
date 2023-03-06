@@ -3,6 +3,7 @@ import {SupplierService} from "../../../service/supplier.service";
 import {Supplier} from "../../../entity/supplier";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-list',
@@ -18,7 +19,9 @@ export class SupplierListComponent implements OnInit {
   private page = 0;
   nums;
 
-  constructor(private router: Router, private toastrService: ToastrService, private supplierService: SupplierService) {
+  constructor(private router: Router, private toastrService: ToastrService, private supplierService: SupplierService,
+              private titleService: Title) {
+    this.titleService.setTitle("Nhà cung cấp");
   }
 
   ngOnInit(): void {

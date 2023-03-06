@@ -1,0 +1,179 @@
+<h1 align="left" style="color: black;margin-top: 30px;text-align: center">Quản lý báo cáo khách hàng</h1>
+<form class="card-header">
+  <div class="container">
+    <h5 style="color: black">Tùy chọn lọc:</h5>
+    <div class="row">
+      <div class="col-3">
+        <div class="form-check">
+          <input id="all" class="form-check-input" type="radio" name="flexRadioDefault" checked>
+          <label for="all" class="form-check-label" >
+            Tất cả
+          </label>
+        </div>
+      </div>
+      <div class="col">
+        <div  class="form-check">
+          <input id="loc" class="form-check-input" type="radio" name="flexRadioDefault">
+          <label for="loc" class="form-check-label">
+            Chọn lọc
+          </label>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="">
+            <label class="form-check-label" (change)="gender.value">
+              Giới tính
+            </label>
+            <select #gender name="" id="" style="margin-left: 4%">
+              <option  value="">Chon gioi tinh</option>
+              <option  value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+            </select>
+          </div>
+          <div class="form-check">
+
+            <input  class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Tuổi
+            </label>
+            <input #age name="age" type="number" style="margin-left:60px">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <div style="margin-left: 30%">
+        <button (click)="search(age.value,gender.value,false)" class="btn btn-outline-primary">Lọc</button>
+      </div>
+</form>
+<h1 align="left" style="color: black;margin-top: 40px">Danh sách khách hàng</h1>
+<div>
+  <table class=" table table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Stt</th>
+      <th>Họ và tên</th>
+      <th>Giới tính</th>
+      <th>Tuổi</th>
+      <th>Địa chỉ email</th>
+      <th>Số điện thoại</th>
+      <th>Lịch sử mua hàng</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of manageInfoJson?.content; index as i">
+      <td>{{i + 1}}</td>
+      <td>{{item.name}}</td>
+      <td *ngIf="item.gender">Nam</td>
+      <td *ngIf="!item.gender">Nữ</td>
+      <td>{{item.age}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.phoneNumber}}</td>
+      <td><a [routerLink]="['/bill-history',item.id]" class="btn btn-outline-danger">Xem</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!--      Phân trang-->
+
+<!--  <div class="container-fluid" *ngIf="manageList?.content?.length != 0">-->
+<!--    <nav style="float: right" aria-label="Page navigation example">-->
+<!--      <ul *ngIf="manageList.totalPages > 3" class="pagination">-->
+<!--        <li class="page-item"><a class="page-link" [ngClass]="manageList.first ? 'disabled': ''"-->
+<!--                                 (click)="getAllManageList(manageList.number - 1)">Trang trước</a></li>-->
+
+<!--        <li class="page-item" [class.active]="manageList.pageable.pageNumber < manageList.totalPages -1"><a-->
+<!--          (click)="getAllManageList(manageList.pageable.pageNumber)" class="page-link"> {{manageList.pageable.pageNumber-->
+<!--        + ((manageList.pageable.pageNumber + 1 == manageList.totalPages) ? 0 : 1)}}-->
+<!--        </a></li>-->
+
+<!--        <li class="page-item"><a-->
+<!--          class="page-link"> ...-->
+<!--        </a></li>-->
+
+<!--        <li class="page-item" [class.active]="manageList.totalPages - 1 == manageList.pageable.pageNumber"><a-->
+<!--          (click)="getAllManageList(manageList.totalPages - 1)" class="page-link"> {{manageList.totalPages}}-->
+<!--        </a></li>-->
+
+<!--        <li class="page-item"><a class="page-link" [ngClass]="manageList.last ? 'disabled': ''"-->
+<!--                                 (click)="getAllManageList(manageList.number + 1)">Trang sau</a></li>-->
+<!--      </ul>-->
+
+
+<!--      <ul class="pagination" *ngIf="manageList.totalPages <= 3">-->
+<!--        <li class="page-item"><a class="page-link" [ngClass]="manageList.first ? 'disabled': ''"-->
+<!--                                 (click)="getAllManageList(manageList.number - 1)">Trang trước</a></li>-->
+
+<!--        <li *ngFor="let num of nums" class="page-item" [class.active]="num == manageList.pageable.pageNumber"><a-->
+<!--          (click)="getAllManageList(num)" class="page-link"> {{num + 1}}-->
+<!--        </a></li>-->
+
+<!--        <li class="page-item"><a class="page-link" [ngClass]="manageList.last ? 'disabled': ''"-->
+<!--                                 (click)="getAllManageList(manageList.number + 1)">Trang sau</a></li>-->
+<!--      </ul>-->
+<!--    </nav>-->
+<!--  </div>-->
+
+
+<div style="min-height: 60px;margin-left: 70%">
+  <div *ngIf="manageInfoJson?.content?.length != 0; else elseBlockPagination">
+    <div class="d-flex justify-content-center" id="last-row">
+      <div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item" [ngClass]="manageInfoJson?.first ? 'disabled': ''">
+              <a role="button" class="page-link" (click)="changePage(0)">Trang đầu</a>
+            </li>
+            <li class="page-item" [ngClass]="manageInfoJson?.first ? 'disabled': ''">
+<!--              <a role="button" class="page-link" (click)="changePage(manageInfoJson?.number - 1)"><</a>-->
+            </li>
+            <li class="page-item" *ngIf="manageInfoJson?.number - 3 > 0">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.number - 4)">{{manageInfoJson?.number - 3}}</a>
+            </li>
+            <li class="page-item" *ngIf="manageInfoJson?.number - 2 > 0">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.number - 3)">{{manageInfoJson?.number - 2}}</a>
+            </li>
+            <li class="page-item" *ngIf="manageInfoJson?.number - 1 > 0">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.number - 2)">{{manageInfoJson?.number - 1}}</a>
+            </li>
+            <li class="page-item" *ngIf="manageInfoJson?.number > 0">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.number - 1)">{{manageInfoJson?.number}}</a>
+            </li>
+            <li class="page-item active"><a class="page-link">{{manageInfoJson?.number + 1}}</a></li>
+            <li class="page-item" *ngIf="manageInfoJson?.number + 2 <= manageInfoJson?.totalPages">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.number + 1)">{{manageInfoJson?.number + 2}}</a>
+            </li>
+            <li class="page-item" *ngIf="manageInfoJson?.number + 3 <= manageInfoJson?.totalPages">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.number + 2)">{{manageInfoJson?.number + 3}}</a>
+            </li>
+            <li class="page-item" *ngIf="manageInfoJson?.number + 4 <= manageInfoJson?.totalPages">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.number + 3)">{{manageInfoJson?.number + 4}}</a>
+            </li>
+            <li class="page-item" *ngIf="manageInfoJson?.number + 5 <= manageInfoJson?.totalPages">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.number + 4)">{{manageInfoJson?.number + 5}}</a>
+            </li>
+            <li class="page-item" [ngClass]="manageInfoJson?.last ? 'disabled': ''">
+<!--              <a role="button" class="page-link"-->
+<!--                 (click)="changePage(manageInfoJson?.number + 1)">></a>-->
+            </li>
+            <li class="page-item" [ngClass]="manageInfoJson?.last ? 'disabled': ''">
+              <a role="button" class="page-link"
+                 (click)="changePage(manageInfoJson?.totalPages - 1)">
+                Trang sau
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlockPagination style="color: red">Không có dữ liệu</ng-template>
+</div>
+
