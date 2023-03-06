@@ -27,8 +27,7 @@ export class ScanQrCodeComponent implements OnInit {
   @Output() commodities = new EventEmitter<Commodity>();
 
   constructor(private scanQrService: ScanQrCodeService,
-              private router: Router,
-              private toast: ToastrService) { }
+              private router: Router) { }
 
   ngOnInit(): void {
   }

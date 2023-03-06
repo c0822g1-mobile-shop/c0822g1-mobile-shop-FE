@@ -69,6 +69,7 @@ export class SalesReportComponent implements OnInit {
   salesReport(startDay: string, endDay: string) {
     this.revenues = [];
     this.dateBuy = [];
+    this.drawChart(this.dateBuy,this.revenues)
     const commodityId = this.reportForm.controls['commodityId'].value;
     if (this.radioOptions === 'option1') {
       this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data=>{
