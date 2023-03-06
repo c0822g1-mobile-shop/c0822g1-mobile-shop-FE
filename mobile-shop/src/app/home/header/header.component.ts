@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {ShareService} from "../../log-in/service/share.service";
 
 
 @Component({
@@ -9,10 +11,15 @@ import {Component, OnInit} from '@angular/core';
 export class HeaderComponent implements OnInit {
 
 
-  constructor() {
+  constructor(private router:Router,private share:ShareService) {
   }
 
   ngOnInit(): void {
   }
 
+  search1(value: string) {
+
+    this.share.sendClickEvent()
+    this.router.navigate(['home', value])
+  }
 }

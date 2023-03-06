@@ -3,18 +3,13 @@ import {CommonModule} from '@angular/common';
 
 import {HomeRoutingModule} from './home-routing.module';
 import {BodyComponent} from "./body/body.component";
-import {NoticeComponent} from "./notice/notice.component";
-
 
 
 @NgModule({
   declarations: [
-    BodyComponent,
-    NoticeComponent
+    BodyComponent
   ],
-  exports: [
-    NoticeComponent
-  ],
+  exports: [],
   imports: [
     CommonModule,
     HomeRoutingModule

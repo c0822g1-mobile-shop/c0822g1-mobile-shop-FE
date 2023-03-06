@@ -29,6 +29,7 @@ ul.products {
   justify-content: center;
   width: 100%;
   margin-left: 60px;
+  margin-bottom: 0;
 }
 
 ul.products li {
@@ -190,9 +191,11 @@ table {
 }
 
 .product img {
-  margin-bottom: 20px;
+  border-radius: 0;
 }
-
+.product {
+  background-color: lightgray;
+}
 a span {
   color: black;
   background-color: orange;
