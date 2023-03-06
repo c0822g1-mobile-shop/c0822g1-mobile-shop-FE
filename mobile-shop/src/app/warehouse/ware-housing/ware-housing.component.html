@@ -1,7 +1,7 @@
-<section>
-  <div class=" py-5">
-    <div class="row d-flex justify-content-center align-items-center">
-      <div class="col-lg-8 col-xl-6">
+<section class="vh-120 gradient-custom">
+  <div class=" container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-8">
         <div class="card rounded-3">
           <div class="card-body p-4 p-md-4">
             <h1 style="text-align: center; font-weight: bold"> Nhập Kho </h1>
@@ -55,7 +55,7 @@
                 <div class="col-md-8 pe-4">
                   <form [formGroup]="form">
                   <input type="number" id="phone-number" #quantity formControlName="quantity" name="phone-number"
-                         placeholder="Ex: Số Lượng" class="form-control form-control-md"/>
+                         class="form-control form-control-md"/>
                   <span style="color: red" *ngIf="form.controls.quantity.hasError('required') && form.controls.quantity.touched">Không được để trống</span>
                   <span style="color: red" *ngIf="form.controls.quantity.hasError('min') && form.controls.quantity.touched">Không được bé hơn 0</span>
                   </form>
@@ -68,10 +68,9 @@
                 <div class="row col-md-8 pe-4">
                   <div style="display: inline-flex" class="input-group mb-3">
 
-                    <input type="text" [value]="suppliers.name" #supplierss readonly class="form-control w-50"
-                           id="exampleDatepicker4 "
-                           style="margin-left: 15px" placeholder="Ex: Nhà cung cấp"/>
-                    <button type="button" class="btn btn-outline-primary" style="margin-left: 10px" data-toggle="modal"
+                    <input style="margin-left: 12px" type="text" [value]="suppliers.name" #supplierss readonly class="form-control w-50"
+                           id="exampleDatepicker4 "/>
+                    <button style="margin-left: 10px" type="button" class="btn btn-outline-primary" data-toggle="modal"
                             data-target="#exampleModal1">Tìm Nhà Cung Cấp
                     </button>
                   </div>
@@ -101,7 +100,7 @@
       <div class="modal-body">
         <nav class="navbar navbar-expand-lg ">
           <div class="container-fluid">
-            <a style="font-weight: bold" class="navbar-brand" href="#">Tìm Kiếm Theo</a>
+            <a style="font-weight: bold" class="navbar-brand" >Tìm Kiếm Theo</a>
             <select class="form-select m-4 w-25" aria-label="Default select example">
               <option>Nhà cung cấp</option>
               <option>Tên nhà cung cấp</option>
@@ -112,7 +111,7 @@
               <input class="form-control me-2" type="search" #nameSearch placeholder="Tìm Kiếm"
                      aria-label="Search">
               <div class="col-md-4 ps-3">
-                <button class="btn btn-outline-primary" style="width: 100px" (click)="search(nameSearch.value)">Tìm
+                <button class="btn btn-outline-primary" style="width: 100px" (click)="search(nameSearch.value,0)">Tìm
                   Kiếm
                 </button>
               </div>
@@ -142,21 +141,15 @@
           </tr>
           </tbody>
         </table>
-        <div style="margin-left: 70%">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Sau</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+
+
+        <nav aria-label="Page navigation example" style="float: right;margin-right: 10px; margin-top: 10px">
+          <ul class="pagination">
+            <li class="page-item"><button class="page-link" (click)="previousPage()">Trước</button></li>
+            <li class="page-item"><b class="page-link">Trang {{findSupplier['number']+1}}</b></li>
+            <li class="page-item"><button class="page-link" (click)="nextPage()">Sau</button></li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
