@@ -56,8 +56,8 @@ export class SupplierUpdateComponent implements OnInit {
         icon: 'error',
         title: 'Không tìm thấy nhà cung cấp!',
         text: 'Vui lòng làm mới trang và thử lại',
-        showConfirmButton: true,
-        confirmButtonColor: '#808080',
+        showConfirmButton: false,
+        timer: 2000
       });
 
       this.router.navigateByUrl("supplier/list")
