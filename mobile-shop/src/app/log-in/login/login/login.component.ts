@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
         timer: 2000
       });
     }, error => {
+      console.log(error)
       Swal.fire({
         position: 'center',
         icon: 'error',
