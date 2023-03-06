@@ -69,16 +69,6 @@ export class CommodityService {
     return this.httpClient.get<any>(this.URL_COMMODITY, {params});
   }
 
-  /**
-   * Create by: LongPT
-   * Date created: 01/03/2023
-   * Function: get commodity by id from BE
-   * @param id: number
-   * @return Observable Customer[]
-   */
-  findById(id: number): Observable<Commodity> {
-    return this.httpClient.get<Commodity>(`${(this.URL_COMMODITY)}/${id}`);
-  }
 
   /**
    * Create by: LongPT
@@ -115,7 +105,7 @@ export class CommodityService {
    * @return Observable Commodity[]
    */
   findCommodityById(id): Observable<any> {
-    return this.httpClient.get<any>("http://localhost:8080/api/commodity/find/" + id);
+    return this.httpClient.get<any>("http://localhost:8080/api/commodity/" + id);
   }
 
   /**

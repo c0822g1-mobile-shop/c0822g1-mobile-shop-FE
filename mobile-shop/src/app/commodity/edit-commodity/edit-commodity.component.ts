@@ -8,6 +8,7 @@ import {TrademarkService} from "../../service/trademark.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {Observable} from "rxjs";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-edit-commodity',
@@ -105,12 +106,47 @@ export class EditCommodityComponent implements OnInit {
 
   editCommodity() {
     if (this.commodityForm.invalid) {
-      alert("Chú ý: Form phải điền đúng định dạng")
+      Swal.fire({
+        title: 'Chú ý',
+        html: 'Thông tin phải điền đầy đủ và đúng định dạng !',
+        icon: 'warning',
+        confirmButtonColor: 'blue',
+        confirmButtonText: 'Đã hiểu'
+      })
     } else {
       this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(() => {
-        alert("Chỉnh sửa thành công");
-        this.router.navigateByUrl('/commodity/list');
+        Swal.fire({
+          title: 'Thành công',
+          html: 'Thêm mới thông tin hàng hóa thành công',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 3000
+        }).then((result) => {
+          if (result.isDismissed) {
+            this.router.navigateByUrl('/commodity/list');
+          }
+        });
+
       })
     }
+
+  }
+
+  cancel() {
+    Swal.fire({
+      title: 'Hủy bỏ',
+      html: 'Bạn có muốn hủy bỏ thêm mới thông tin hàng hóa ?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Hủy',
+      showConfirmButton: true,
+      confirmButtonText: 'Có',
+      confirmButtonColor: 'red'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl("/commodity/list");
+        }
+      }
+    );
   }
 }

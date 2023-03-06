@@ -7,6 +7,8 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {Commodity} from "../../entity/commodity";
+import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-commodity',
@@ -23,7 +25,7 @@ export class CreateCommodityComponent implements OnInit {
   src: string | undefined;
   commodityList: Commodity[] = [];
 
-  constructor(private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
+  constructor(private router: Router, private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),
       cpu: new FormControl('', [Validators.required, Validators.pattern("[-a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(50)]),
@@ -95,12 +97,40 @@ export class CreateCommodityComponent implements OnInit {
 
   addCommodity() {
     if (this.commodityForm.invalid) {
-      alert("Chú ý: Form chưa điền đúng định dạng hoặc chưa điền đầy đủ thông tin")
+      Swal.fire({
+        title: 'Chú ý',
+        html: 'Thông tin phải điền đầy đủ và đúng định dạng !',
+        icon: 'warning',
+        confirmButtonColor: 'blue',
+        confirmButtonText: 'Đã hiểu'
+      })
     } else {
       this.commodityService.addCommodity(this.commodityForm.value).subscribe(() => {
-        alert("Thêm mới thành công")
+        Swal.fire(
+          'Thành công',
+          'Thêm mới thông tin hàng hóa thành công',
+          'success'
+        );
         this.commodityForm.reset();
       })
     }
+  }
+
+  cancel() {
+    Swal.fire({
+      title: 'Hủy bỏ',
+      html: 'Bạn có muốn hủy bỏ thêm mới thông tin hàng hóa ?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Hủy',
+      showConfirmButton: true,
+      confirmButtonText: 'Có',
+      confirmButtonColor: 'red'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl("/commodity/list");
+        }
+      }
+    );
   }
 }
