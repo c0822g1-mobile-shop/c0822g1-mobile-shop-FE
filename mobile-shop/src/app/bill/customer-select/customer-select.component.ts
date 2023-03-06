@@ -23,7 +23,6 @@ export class CustomerSelectComponent implements OnInit {
   name = '';
   address = '';
   customer: User = {};
-  typeSearch = 0;
   constructor(private customerService: CustomerService,
               private router: Router,
               private titleService: Title) {
