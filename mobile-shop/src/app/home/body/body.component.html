@@ -47,7 +47,7 @@
         </div>
         <div class="product-info">
           <a href="" class="product-cat"></a>
-          <a href="" class="product-name">{{commodity.name | titlecase}}</a>
+          <a href="" class="product-name">{{commodity.name | slice: 0 :20 | titlecase}}</a>
           <div class="product-price">{{commodity.price | currency: "VND"}}</div>
         </div>
       </li>
@@ -80,7 +80,7 @@
         </div>
         <div class="product-info">
           <a href="" class="product-cat"></a>
-          <a href="" class="product-name">{{commodity.name | titlecase}}</a>
+          <a href="" class="product-name">{{commodity.name | slice: 0 :20 | titlecase}}</a>
           <div class="product-price">{{commodity.price  | currency: "VND"}}</div>
         </div>
       </li>
@@ -105,7 +105,7 @@
         <div class="card">
           <img [src]="commodity.image" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title" style="color: crimson ">{{commodity.name | titlecase}}</h5>
+            <h5 class="card-title" style="color: crimson ">{{commodity.name | titlecase }}</h5>
             <p style="color: red; font-weight: bold" class="card-text">{{commodity.price | currency: "VND"}}</p>
           </div>
         </div>
@@ -143,7 +143,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="addToCart(commodity.id,commodity.image,commodity.name,commodity.price)" class="btn btn-primary">Thêm vào giỏ hàng</button>
+        <button type="button" (click)="addToCart(commodity.id,commodity.image,commodity.name,commodity.price)"
+                class="btn btn-primary">Thêm vào giỏ hàng
+        </button>
       </div>
     </div>
   </div>
