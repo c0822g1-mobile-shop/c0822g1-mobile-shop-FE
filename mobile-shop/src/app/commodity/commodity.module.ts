@@ -39,7 +39,6 @@ import {AngularFireModule} from "@angular/fire";
     ListCommodityComponent,
     CreateCommodityComponent,
     EditCommodityComponent,
-
   ],
     exports: [
         CommoditySelectComponent
