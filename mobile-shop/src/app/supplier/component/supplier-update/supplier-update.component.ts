@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SupplierService} from "../../../service/supplier.service";
 import {ToastrService} from "ngx-toastr";
+import {Title} from "@angular/platform-browser";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-supplier-update',
@@ -29,7 +31,10 @@ export class SupplierUpdateComponent implements OnInit {
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private supplierService: SupplierService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private titleService: Title) {
+
+    this.titleService.setTitle("Chỉnh sửa nhà cung cấp");
 
     this.activatedRoute.paramMap.subscribe(next => {
       const id = +next.get("id")
@@ -45,8 +50,18 @@ export class SupplierUpdateComponent implements OnInit {
     this.supplierService.findSupplier(id).subscribe(next => {
       this.form.patchValue(next);
     }, error => {
+
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Không tìm thấy nhà cung cấp!',
+        text: 'Vui lòng làm mới trang và thử lại',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
       this.router.navigateByUrl("supplier/list")
-      this.toastrService.error("Không tìm thấy nhà cung cấp", "Thông báo")
+
     })
   }
 
@@ -54,8 +69,26 @@ export class SupplierUpdateComponent implements OnInit {
     if (this.form.valid) {
       this.supplierService.updateSupplier(this.form.value).subscribe(next => {
         this.router.navigateByUrl("supplier/list")
-        this.toastrService.success("Chỉnh sửa thành công", "Thông báo")
+
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Chỉnh sửa thành công!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+
       }, error => {
+
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Chỉnh sửa thất bại!',
+          text: 'Chỉnh sửa thất bại vui lòng điền đúng tất cả thông tin',
+          showConfirmButton: false,
+          timer: 2000
+        });
+
         for (let i = 0; i < error.error.length; i++) {
           if (error.error && error.error[i].field === "email") {
             this.errors.email = error.error[i].defaultMessage;
@@ -72,6 +105,16 @@ export class SupplierUpdateComponent implements OnInit {
         }
       });
     } else {
+
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Chỉnh sửa thất bại!',
+        text: 'Chỉnh sửa thất bại vui lòng điền đúng tất cả thông tin',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
       this.clickButton = true;
     }
   }
