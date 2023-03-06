@@ -62,8 +62,7 @@ export class ListCommodityComponent implements OnInit {
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Xóa thành công!',
-            text: 'Hàng hóa: ' + this.item,
+            title: 'Xóa thành công ',
             showConfirmButton: false,
             timer: 2000
           });

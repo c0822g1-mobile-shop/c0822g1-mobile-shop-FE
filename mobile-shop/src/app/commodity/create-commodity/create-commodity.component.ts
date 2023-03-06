@@ -105,13 +105,15 @@ export class CreateCommodityComponent implements OnInit {
         confirmButtonText: 'Đã hiểu'
       })
     } else {
-      this.commodityService.addCommodity(this.commodityForm.value).subscribe(() => {
+      this.commodityService.addCommodity(this.commodityForm.value).subscribe(next => {
         Swal.fire(
           'Thành công',
           'Thêm mới thông tin hàng hóa thành công',
           'success'
         );
         this.commodityForm.reset();
+      }, error => {
+        console.log(error)
       })
     }
   }
