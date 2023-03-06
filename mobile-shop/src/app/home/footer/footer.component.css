@@ -1,6 +1,9 @@
 ul {
   text-align: left;
 }
+ul li {
+  padding: 10px 0;
+}
 ul li a {
   color: blue;
 }

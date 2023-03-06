@@ -21,6 +21,7 @@ header {
   z-index: 99;
   box-shadow: 0 0 10px yellowgreen;
   background-color: orange;
+  margin-bottom: 50px;
 }
 
 #chk1 {
@@ -256,7 +257,7 @@ header ul li div a {
     padding-right: 0px;
     color: black;
     font-weight: 400;
-    width: 500px;
+    width: 490px;
     margin-left: 10px;
   }
 
