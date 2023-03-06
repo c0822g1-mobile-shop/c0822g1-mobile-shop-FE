@@ -12,38 +12,39 @@
     </div>
   </div>
   <br>
+  <div style="height: 350px">
+    <table class="table text-center table-hover" style="width: 100%">
+      <thead>
+      <tr>
+        <th style="width: 100px">STT</th>
+        <th style="width: 100px">MS</th>
+        <th style="width: 300px">Tên nhà cung cấp</th>
+        <th style="width: 100px">Địa chỉ</th>
+        <th style="width: 200px">SĐT</th>
+        <th style="width: 300px">E-mail</th>
+      </tr>
+      </thead>
+      <tbody>
 
-  <table class="table text-center table-hover" style="width: 100%">
-    <thead>
-    <tr>
-      <th style="width: 100px">STT</th>
-      <th style="width: 100px">MS</th>
-      <th style="width: 300px">Tên nhà cung cấp</th>
-      <th style="width: 100px">Địa chỉ</th>
-      <th style="width: 200px">SĐT</th>
-      <th style="width: 300px">E-mail</th>
-    </tr>
-    </thead>
-    <tbody>
+      <tr *ngFor="let item of supplierList['content'], index as i" (click)="supplier = item"
+          [class.table-active]="item == supplier">
+        <td>{{i + 1}}</td>
+        <td>{{item?.code}}</td>
+        <td>{{item?.name}}</td>
+        <td>{{item?.address}}</td>
+        <td>{{item?.phoneNumber}}</td>
+        <td>{{item?.email}}</td>
+      </tr>
+      </tbody>
+    </table>
 
-    <tr *ngFor="let item of supplierList['content'], index as i" (click)="supplier = item"
-        [class.table-active]="item == supplier">
-      <td>{{i + 1}}</td>
-      <td>{{item?.code}}</td>
-      <td>{{item?.name}}</td>
-      <td>{{item?.address}}</td>
-      <td>{{item?.phoneNumber}}</td>
-      <td>{{item?.email}}</td>
-    </tr>
-    </tbody>
-  </table>
-
+  </div>
 </div>
 
 <!--    Phân trang-->
 
 <div class="container-fluid" *ngIf="supplierList?.content?.length != 0">
-  <nav style="float: right" aria-label="Page navigation example">
+  <nav aria-label="Page navigation example" style="float: right;margin-right: 10px; margin-top: 10px">
     <ul *ngIf="supplierList.totalPages > 3" class="pagination">
       <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
                                (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
