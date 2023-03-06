@@ -10,11 +10,15 @@ import {RouterModule} from "@angular/router";
 import {SupplierRoutingModule} from "./supplier-routing.module";
 import { SupplierListComponent } from './component/supplier-list/supplier-list.component';
 import {ToastrModule} from "ngx-toastr";
+import {BrowserModule} from "@angular/platform-browser";
+import {AppRoutingModule} from "../app-routing.module";
 
 
 @NgModule({
   declarations: [SupplierCreateComponent, SupplierUpdateComponent, SupplierListComponent],
   imports: [
+    AppRoutingModule,
+    BrowserModule,
     CommonModule,
     HttpClientModule,
     FormsModule,

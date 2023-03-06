@@ -1,10 +1,14 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+// @ts-ignore
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {CommodityService} from "../../service/commodity.service";
+// @ts-ignore
 import {Router} from "@angular/router";
+// @ts-ignore
 import {Title} from "@angular/platform-browser";
 import {Commodity} from "../../entity/commodity";
 import {CommodityJson} from "../../entity/commodity-json";
 
+// @ts-ignore
 @Component({
   selector: 'app-commodity-select',
   templateUrl: './commodity-select.component.html',
@@ -26,6 +30,8 @@ export class CommoditySelectComponent implements OnInit {
               private titleService: Title) {
     this.titleService.setTitle('Chọn sản phẩm có sẵn.');
   }
+
+  @Output() commodities1 = new EventEmitter<Commodity>();
 
   ngOnInit(): void {
     this.getAll(this.request);
@@ -101,7 +107,7 @@ export class CommoditySelectComponent implements OnInit {
   select() {
     this.commodityService.findById(this.commodity.id).subscribe(data => {
       this.commodity = data;
-      alert(this.commodity.name);
+      this.commodities1.emit(data)
     }, error => {
       this.commodity = {}
     });
