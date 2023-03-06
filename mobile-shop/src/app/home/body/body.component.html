@@ -97,7 +97,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">Thông tin chi tiết</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" id="dissmis" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -143,7 +143,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Thêm vào giỏ hàng</button>
+        <button type="button" (click)="addToCart(commodity.id,commodity.image,commodity.name,commodity.price)" class="btn btn-primary">Thêm vào giỏ hàng</button>
       </div>
     </div>
   </div>

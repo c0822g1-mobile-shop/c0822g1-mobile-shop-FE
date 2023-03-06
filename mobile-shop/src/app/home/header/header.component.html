@@ -1,3 +1,4 @@
+
 <header class="sticky-top">
   <input type="checkbox" name="" id="chk1">
   <img routerLink="/"
@@ -14,7 +15,7 @@
     </div>
   </div>
   <ul>
-    <li>
+    <li *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_EMPLOYEE'">
       <div class="dropdown">
         <a class="nut_dropdown">Chức năng</a>
         <div class="noidung_dropdown">
@@ -22,15 +23,17 @@
             <a class="dropdown-item" href="#">Trang chủ Admin</a>
             <a class="dropdown-item" href="#">Quản lí nhân viên</a>
             <a class="dropdown-item" routerLink="supplier/list">Quản lí nhà cung cấp</a>
+<!--            <a *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_EMPLOYEE'" class="dropdown-item" href="#">Quản lý nhân viên</a>-->
+<!--            <a class="dropdown-item" href="#">Quản lý kinh doanh</a>-->
+            <a  class="dropdown-item" routerLink="/manager/">Quản lý báo cáo</a>
           </div>
           <div class="dropdown-row">
-            <a class="dropdown-item" href="#">Quản lí nhập kho</a>
-            <a class="dropdown-item" href="#">Quản lí kinh doanh</a>
-            <a class="dropdown-item" href="#">Quản lí bán hàng</a>
+            <a class="dropdown-item" routerLink="/warehouse">Quản lý nhập kho</a>
+            <a  class="dropdown-item" routerLink="/supplier/list">Quản lý nhà cung cấp</a>
+            <a  class="dropdown-item" [routerLink]="['/sale-report']">Quản lý bán hàng</a>
           </div>
           <div class="dropdown-row">
-            <a class="dropdown-item" routerLink="/commodity/list">Quản lí hàng hóa</a>
-            <a class="dropdown-item" href="#">Quản lí báo cáo</a>
+            <a  class="dropdown-item" routerLink="/commodity/list">Quản lý hàng hóa</a>
           </div>
         </div>
       </div>
@@ -42,21 +45,23 @@
           d="M96 96c0-35.3 28.7-64 64-64H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H80c-44.2 0-80-35.8-80-80V128c0-17.7 14.3-32 32-32s32 14.3 32 32V400c0 8.8 7.2 16 16 16s16-7.2 16-16V96zm64 24v80c0 13.3 10.7 24 24 24H424c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24H184c-13.3 0-24 10.7-24 24zm0 184c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm160 0c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H336c-8.8 0-16 7.2-16 16zM160 400c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm160 0c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/>
       </svg>
       Tin tức</a></li>
-    <li><a href="#">
+    <li *ngIf="isLogged == true && role == 'ROLE_CUSTOMER'" style="cursor: pointer" routerLink="/cart"><a>
       <svg class="iconm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
         <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
         <path
           d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
       </svg>
-      <span style="height: 15px; width: 15px;position: absolute;top: 1.5rem"
-            class="badge rounded-pill badge-notification bg-danger">1</span>Giỏ hàng</a></li>
-    <li><a href="#">
+      <span style="height: 15px; width: 15px;position: absolute"
+            class="badge rounded-pill badge-notification bg-danger"></span>Giỏ hàng</a></li>
+    <li (click)="checkProfile()"><a >
       <svg class="iconm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
         <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
         <path
           d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
       </svg>
-      Thông tin cá nhân</a></li>
+      {{name}}</a></li>
+    <li style="cursor: pointer"  *ngIf="isLogged == true" (click)="logout()"><a >
+      Đăng xuất</a></li>
   </ul>
   <div class="menu">
     <label for="chk1">
@@ -68,3 +73,4 @@
     </label>
   </div>
 </header>
+
