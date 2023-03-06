@@ -45,7 +45,7 @@
       </div>
 </form>
 <h1 align="left" style="color: black;margin-top: 40px">Danh sách khách hàng</h1>
-<div>
+<div style="text-align: center">
   <table class=" table table-striped table-hover">
     <thead>
     <tr>
@@ -66,8 +66,11 @@
       <td *ngIf="!item.gender">Nữ</td>
       <td>{{item.age}}</td>
       <td>{{item.email}}</td>
-      <td>{{item.phoneNumber}}</td>
+      <td>{{item.phoneNumber | slice:0:3 }} {{item.phoneNumber | slice:3:6}} {{item.phoneNumber | slice:6:10}}</td>
       <td><a [routerLink]="['/bill-history',item.id]" class="btn btn-outline-danger">Xem</a></td>
+    </tr>
+    <tr style="height: 47px" *ngFor="let size of [].constructor(5 - manageInfoJson.numberOfElements)">
+      <td *ngFor="let height of [].constructor(7)"></td>
     </tr>
     </tbody>
   </table>

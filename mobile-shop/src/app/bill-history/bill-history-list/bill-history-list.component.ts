@@ -12,6 +12,9 @@ import {BillHistoryInfo} from "../../entity/bill-history-info";
   styleUrls: ['./bill-history-list.component.css']
 })
 export class BillHistoryListComponent implements OnInit {
+
+
+
   billHistory: BillHistory;
   id: number;
   item: User;
