@@ -50,7 +50,7 @@ export class ListCommodityComponent implements OnInit {
     Swal.fire({
       title: 'Bạn có muốn xóa?',
       text: 'Hàng hóa: ' + this.item,
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -111,8 +111,8 @@ export class ListCommodityComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'warning',
-          title: 'Không tìm thấy kết quả nào',
-          text:  value2,
+          title: 'Không tìm thấy',
+          text: 'Kết quả bạn cần tìm là: ' +'" '+ value2 +' " '+ ' không có',
           showConfirmButton: false,
           timer: 2000
         });

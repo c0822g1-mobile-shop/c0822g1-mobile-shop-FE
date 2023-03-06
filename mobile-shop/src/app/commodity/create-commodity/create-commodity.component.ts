@@ -98,45 +98,39 @@ export class CreateCommodityComponent implements OnInit {
   addCommodity() {
     if (this.commodityForm.invalid) {
       Swal.fire({
-        title: 'Chú ý: Form chưa điền đúng định dạng hoặc chưa điền đầy đủ thông tin!',
+        title: 'Chú ý',
+        html: 'Thông tin phải điền đầy đủ và đúng định dạng !',
         icon: 'warning',
-        text:'hãy nhập đầy đủ thông tin ',
-
-        showConfirmButton: false,
-        timer: 2000
+        confirmButtonColor: 'blue',
+        confirmButtonText: 'Đã hiểu'
       })
     } else {
-      this.commodityService.addCommodity(this.commodityForm.value).subscribe(next => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Thêm mới thành công',
-          showConfirmButton: false,
-          timer: 2000
-        });
+      this.commodityService.addCommodity(this.commodityForm.value).subscribe(() => {
+        Swal.fire(
+          'Thành công',
+          'Thêm mới thông tin hàng hóa thành công',
+          'success'
+        );
         this.commodityForm.reset();
-      }, error => {
-        console.log(error)
       })
     }
   }
-  showListCommodity(){
+
+  cancel() {
     Swal.fire({
-      title: 'Bạn có muốn thoát khỏi trang thêm mới thông tin hàng hóa này không ?',
-      icon: 'warning',
+      title: 'Hủy bỏ',
+      html: 'Bạn có muốn hủy bỏ thêm mới thông tin hàng hóa ?',
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: 'gray',
+      cancelButtonText: 'Hủy',
+      showConfirmButton: true,
       confirmButtonText: 'Có',
-      cancelButtonText: 'Không'
+      confirmButtonColor: 'red'
     }).then((result) => {
-      if (result.isConfirmed) {
-        this.commodityService.getAll().subscribe(next => {
-          this.router.navigateByUrl('/commodity/list');
-        }, error => {
-          console.log(error);
-        });
+        if (result.isConfirmed) {
+          this.router.navigateByUrl("/commodity/list");
+        }
       }
-    });
+    );
   }
 }

@@ -107,24 +107,46 @@ export class EditCommodityComponent implements OnInit {
   editCommodity() {
     if (this.commodityForm.invalid) {
       Swal.fire({
-        title: 'Chú ý: Form chưa điền đúng định dạng hoặc chưa điền đầy đủ thông tin!',
+        title: 'Chú ý',
+        html: 'Thông tin phải điền đầy đủ và đúng định dạng !',
         icon: 'warning',
-        text:'hãy nhập lại thông tin ',
-
-        showConfirmButton: false,
-        timer: 3000
+        confirmButtonColor: 'blue',
+        confirmButtonText: 'Đã hiểu'
       })
     } else {
       this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(() => {
         Swal.fire({
-          position: 'center',
+          title: 'Thành công',
+          html: 'Thêm mới thông tin hàng hóa thành công',
           icon: 'success',
-          title: 'Chỉnh sửa thành công',
           showConfirmButton: false,
           timer: 3000
+        }).then((result) => {
+          if (result.isDismissed) {
+            this.router.navigateByUrl('/commodity/list');
+          }
         });
-        this.router.navigateByUrl('/commodity/list');
+
       })
     }
+
+  }
+
+  cancel() {
+    Swal.fire({
+      title: 'Hủy bỏ',
+      html: 'Bạn có muốn hủy bỏ thêm mới thông tin hàng hóa ?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Hủy',
+      showConfirmButton: true,
+      confirmButtonText: 'Có',
+      confirmButtonColor: 'red'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl("/commodity/list");
+        }
+      }
+    );
   }
 }
