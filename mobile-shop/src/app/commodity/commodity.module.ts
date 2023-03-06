@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CommoditySelectComponent } from './commodity-select/commodity-select.component';
 import { CommodityRoutingModule } from './commodity-routing.module';
 import {CreateCommodityComponent} from "./create-commodity/create-commodity.component";
 import {ListCommodityComponent} from './list-commodity/list-commodity.component';
@@ -12,6 +11,7 @@ import {EditCommodityComponent} from "./edit-commodity/edit-commodity.component"
 import {environment} from "../../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {AngularFireModule} from "@angular/fire";
+import {CommoditySelectComponent} from "./commodity-select/commodity-select.component";
 
 
 @NgModule({
@@ -31,7 +31,6 @@ import {AngularFireModule} from "@angular/fire";
     ListCommodityComponent,
     CreateCommodityComponent,
     EditCommodityComponent,
-
   ],
     exports: [
         CommoditySelectComponent

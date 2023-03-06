@@ -30,12 +30,10 @@ export class BillCreateComponent implements OnInit {
   billHistory: BillHistory = {};
   user: User[] = [];
 
-  billHistory: BillHistory = {};
-
   formCreateBill: FormGroup = new FormGroup({});
   userId: number;
   commodityId: number;
-  userInfo:User={
+  userInfo: User = {
     // name:"Quốc Trung",
     // phoneNumber:"123456789",
     // address:"ĐN",
@@ -80,8 +78,8 @@ export class BillCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  saveBill():void{
-    this.billService.saveBill(this.commodityId, this.userId).subscribe(() =>{
+  saveBill(): void {
+    this.billService.saveBill(this.commodityId, this.userId).subscribe(() => {
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -106,9 +104,9 @@ export class BillCreateComponent implements OnInit {
   }
 
   choiseCustomer(value: string) {
-    this.userId=Number(value);
-    this.billService.findById(this.userId).subscribe(data=>{
-      this.userInfo=data;
+    this.userId = Number(value);
+    this.billService.findById(this.userId).subscribe(data => {
+      this.userInfo = data;
     })
   }
 }

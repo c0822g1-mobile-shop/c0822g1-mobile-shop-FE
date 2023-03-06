@@ -1,9 +1,10 @@
-import {Bill} from "./bill";
+import {User} from "./user";
 import {UserRole} from "./user-role";
-import {BillHistory} from "./bill-history";
+import {Bill} from "./bill";
 
-export interface User {
+export interface Manager {
   id?: number;
+  quantity?: number;
   name?: string;
   username?: string;
   password?: string;
@@ -11,9 +12,8 @@ export interface User {
   email?: string;
   address?: string;
   age?: number;
-  gender?: string;
+  gender?: boolean;
   dateOfBirth?: string;
-  userRole?: UserRole;
-  bill?: Bill;
-  billHistory?: BillHistory;
+  userRole: UserRole;
+  bill: Bill;
 }
