@@ -3,7 +3,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Commodity} from "../../entity/commodity";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommodityService} from "../../service/commodity.service";
-import {log} from "util";
+import Swal from 'sweetalert2';
+import {ShareService} from "../../log-in/service/share.service";
 
 @Component({
   selector: 'app-body',
@@ -33,17 +34,17 @@ export class BodyComponent implements OnInit {
   nameSearch = '';
   commodity: Commodity = {};
 
-  constructor(private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private route: Router) {
+  constructor(private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private shareService: ShareService) {
     this.activatedRoute.paramMap.subscribe(
       next => {
-        this.nameSearch = next.get('name');
-        this.searchCommodity(this.nameSearch, 0);
+        this.searchCommodity(next.get('name'), 0);
       }
-    )
+    );
     this.getCommodityByQuantitySold(0);
   }
 
   ngOnInit(): void {
+
   }
 
 
@@ -60,15 +61,23 @@ export class BodyComponent implements OnInit {
 
   searchCommodity(name: string, page: number) {
     this.commodityService.searchCommodityByName(name, page).subscribe(data => {
-        this.commodities = data.content;
-        this.number = data.number;
-        this.totalPages = data.totalPages;
-        this.firstPage = data.first;
-        this.lastPage = data.last;
-      }, error =>{
-        this.route.navigateByUrl('/error/' + error.error);
-      }
-    );
+      this.commodities = data.content;
+      this.number = data.number;
+      this.totalPages = data.totalPages;
+      this.firstPage = data.first;
+      this.lastPage = data.last;
+    }, error => {
+      Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'Không tìm thấy tìm kiếm nào của bạn',
+          color: 'red',
+          text: name,
+          showConfirmButton: true,
+          timer: 10000
+        }
+      );
+    });
   }
 
   watchDetail(commodity: Commodity) {

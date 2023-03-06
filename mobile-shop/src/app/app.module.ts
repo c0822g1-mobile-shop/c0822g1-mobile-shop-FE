@@ -1,19 +1,14 @@
-import {HttpClientModule} from "@angular/common/http";
 import {ManageCustomerModule} from "./manage-customer/manage-customer.module";
 import {BillHistoryRoutingModule} from "./bill-history/bill-history-routing.module";
 import {BillHistoryModule} from "./bill-history/bill-history.module";
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
-import {CommodityModule} from "./commodity/commodity.module";
-import {HeaderComponent} from "./home/header/header.component";
-import {FooterComponent} from "./home/footer/footer.component";
 import {ToastrModule} from "ngx-toastr";
 import { AppRoutingModule } from './app-routing.module';
 import {SupplierModule} from "./supplier/supplier.module";
@@ -34,7 +29,7 @@ import {WarehouseModule} from "./warehouse/warehouse.module";
     AppRoutingModule,
     HttpClientModule,
     ManageCustomerModule,
-    BillHistoryModule
+    BillHistoryModule,
     SupplierModule,
     ReactiveFormsModule,
     FormsModule,
@@ -44,7 +39,7 @@ import {WarehouseModule} from "./warehouse/warehouse.module";
     CommodityModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    WarehouseModule
+    WarehouseModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
