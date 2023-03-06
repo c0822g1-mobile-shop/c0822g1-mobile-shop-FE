@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   logout() {
+    this.share.sendClickEvent();
     this.role = 'none';
     this.name = 'Thông tin cá nhân';
     this.isLogged = false;
