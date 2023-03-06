@@ -30,7 +30,7 @@
       <td>{{i + 1}}</td>
       <td>{{item?.code}}</td>
       <td>{{item?.name}}</td>
-      <td>{{item?.address}}</td>
+      <td>{{item?.address | slice: 0 : 20}}</td>
       <td>{{item?.phoneNumber}}</td>
       <td>{{item?.email}}</td>
     </tr>
