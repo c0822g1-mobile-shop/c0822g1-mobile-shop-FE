@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenService} from "../../log-in/service/token.service";
 import {Commodity} from "../../entity/commodity";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -18,7 +18,6 @@ import {ShareService} from "../../log-in/service/share.service";
 })
 
 export class BodyComponent implements OnInit {
-  isLogger = false;
    cart: Cart ={
      id : 0,
      name: '',
@@ -26,6 +25,7 @@ export class BodyComponent implements OnInit {
      price: 0
    };
    carts: Cart[] = [];
+  isLogged = false;
   /**
    * Create by: PhucNT
    *
@@ -58,9 +58,16 @@ export class BodyComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.isLogger = this.token.isLogger();
+    this.isLogged = this.token.isLogger();
+    this.loader();
+    this.shareService.getClickEvent().subscribe(next => {
+      this.loader()
+    })
   }
 
+  loader() {
+    this.isLogged = this.token.isLogger();
+  }
 
   getCommodityByQuantitySold(page: number) {
     this.commodityService.getAllByQuantitySold(page).subscribe(data => {
@@ -140,5 +147,45 @@ export class BodyComponent implements OnInit {
 
 
 
+    if (this.isLogged) {
+      if (this.token.getCart() != undefined) {
+        this.carts = this.token.getCart();
+        this.cart.name = names;
+        this.cart.image = images;
+        this.cart.price = prices;
+        if (this.token.checkExist(this.cart.name)) {
+          this.token.upQuantity(this.cart.name, this.carts)
+        } else {
+          this.cart.quantity = 1;
+          this.carts.push(this.cart);
+        }
+        this.token.setCart(this.carts);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Đã thêm sản phẩm ' + this.cart.name + ' vào giỏ hàng',
+          showConfirmButton: false,
+          timer: 2500
+        })
+
+      } else {
+        this.cart.name = names;
+        this.cart.image = images;
+        this.cart.price = prices;
+        this.cart.quantity = 1;
+        this.carts.push(this.cart);
+        this.token.setCart(this.carts);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Đã thêm sản phẩm ' + this.cart.name + ' vào giỏ hàng',
+          showConfirmButton: false,
+          timer: 2500
+        })
+      }
+    } else {
+      document.getElementById("dissmis").click()
+      this.route.navigateByUrl('/login')
+    }
   }
 }
