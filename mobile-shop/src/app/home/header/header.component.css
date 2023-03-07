@@ -13,7 +13,7 @@
 
 header {
   width: 100%;
-  height: 100px;
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,6 +21,7 @@ header {
   z-index: 99;
   box-shadow: 0 0 10px yellowgreen;
   background-color: orange;
+  margin-bottom: 30px;
 }
 
 #chk1 {
@@ -33,7 +34,7 @@ i {
 }
 
 header img {
-  height: 100px;
+  height: 80px;
   width: 100px;
 }
 
@@ -68,7 +69,7 @@ header .search-box {
     padding-right: 40px;
   color: black;
   font-weight: 300;
-  width: 400px;
+  width: 500px;
   margin-left: 10px;
 }
 
@@ -94,6 +95,7 @@ header ul {
 header ul li {
   list-style: none;
   padding: 10px 0;
+  padding: 10px;
 }
 
 header ul li:hover {
@@ -125,8 +127,8 @@ header img:hover {
 
 div.dropdown-row > a.dropdown-item {
   display: inline-block;
-  width: 32%;
-  padding: 50px;
+  width: 40%;
+  padding: 60px 0;
   vertical-align: top;
 }
 
@@ -154,12 +156,12 @@ div.dropdown-row > a.dropdown-item {
 
 /* Nội dung Dropdown */
 .noidung_dropdown {
-  top: 30px;
-  left: -5px;
-  display: none;
+  top: 35px;
+  left: -10px;
+  /*display: none;*/
   position: absolute;
   background-color: white;
-  width: 600px;
+  width: 550px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
@@ -206,7 +208,6 @@ header ul li div a {
 
   header {
     width: 100%;
-    height: 100px;
     display: flex;
     justify-content: left;
     align-items: center;
@@ -214,7 +215,7 @@ header ul li div a {
 
   header ul {
     position: fixed;
-    top: 100px;
+    top: 80px;
     left: -100%;
     background: orange;
     width: 40%;
@@ -256,7 +257,7 @@ header ul li div a {
     padding-right: 0px;
     color: black;
     font-weight: 400;
-    width: 500px;
+    width: 660px;
     margin-left: 10px;
   }
 
@@ -316,11 +317,6 @@ header ul li div a {
     height: 600px;
     flex-direction: column;
     transition: right 0.5s linear;
-  }
-
-  .noidung_dropdown {
-    width: 1000px;
-    height: 500px;
   }
 
   .search-box button {

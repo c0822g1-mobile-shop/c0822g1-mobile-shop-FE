@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   this.title.setTitle('Trang Đăng Nhập');
   this.islogged = this.token.isLogger();
   if (this.islogged) {
-    this.router.navigateByUrl('/home/')
+    this.router.navigateByUrl('/')
   }
   }
 
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
             next.gender, next.dateOfBirth, next.avatar, next.roles, 'session');
         }
         this.share.sendClickEvent();
-        this.router.navigateByUrl('/home/')
+        this.router.navigateByUrl('/')
       }, error => {
         this.message = error.error.message
       }
