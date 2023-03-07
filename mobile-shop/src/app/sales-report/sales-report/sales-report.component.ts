@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {SalesReportService} from "../../service/sales-report.service";
 import {SalesReport} from "../../entity/sales-report";
+import Swal from 'sweetalert2';
 // @ts-ignore
 import {Chart} from 'chart.js';
-import Swal from 'sweetalert2';
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 
 @Component({
@@ -13,6 +13,7 @@ import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "
 })
 export class SalesReportComponent implements OnInit {
   private chart: Chart;
+
   revenues: number[] = [];
   dateBuy: string[] = [];
 
