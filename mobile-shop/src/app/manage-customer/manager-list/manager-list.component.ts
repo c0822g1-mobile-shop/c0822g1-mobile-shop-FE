@@ -11,6 +11,7 @@ import {Title} from "@angular/platform-browser";
   styleUrls: ['./manager-list.component.css']
 })
 export class ManagerListComponent implements OnInit {
+  choise:any;
   manageList;
   nums;
   ageSearch = '0';
