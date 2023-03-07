@@ -91,21 +91,22 @@
                     <label for="image" style="font-weight: bold" class="mb-0">Hình ảnh hàng hóa:<sup
                       style="color: red;font-size: 15px" title="Bắt buộc">*</sup> </label>
                   </div>
-                  <div class="col-md-9 pe-5" style="position: relative">
+                  <div class="col-md-9 pe-5">
                     <input (change)="showPreview($event)" required
                            id="image"
                            class="form-control-file" type="file"/>
+                  </div>
+                  <div class="col-md-9 pe-5" style="position: relative;margin-left: 150px">
+                    <input style="display: none" type="text" readonly formControlName="image" class="form-control">
                     <p style="color: red;position: absolute"
                        *ngIf="(clickButton&&commodityForm.controls.image.hasError('required'))||
                        commodityForm.controls.image.hasError('required')&&commodityForm.controls.image.touched">*
                       Không được để trống.</p>
                   </div>
-                  <div class="col-md-9 pe-5">
-                    <input style="display: none" type="text" readonly formControlName="image" class="form-control">
-                    <div style="margin-left: 150px" class="col-md-9 pe-5">
-                      <img [src]="fb" style="width: 150px">
-                    </div>
+                  <div style="margin-left: 150px" class="col-md-9 pe-5">
+                    <img [src]="fb" style="width: 150px">
                   </div>
+
 
                 </div>
                 <div class="row align-items-center py-3">
