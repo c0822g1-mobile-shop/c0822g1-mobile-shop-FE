@@ -6,8 +6,8 @@ import {Supplier} from "../../entity/supplier";
 import {Commodity} from "../../entity/commodity";
 import {WarehousingService} from "../../service/warehousing.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import Swal from 'sweetalert2';
 import {error} from "@angular/compiler/src/util";
+import Swal from 'sweetalert2';
 
 // @ts-ignore
 @Component({
@@ -29,6 +29,7 @@ export class WareHousingComponent implements OnInit {
   });
   nums;
 
+  commodity:Commodity ;
 
   constructor(private findSupplierService: FindSupplierService,
               private wareHousingService: WarehousingService) {
@@ -81,6 +82,4 @@ export class WareHousingComponent implements OnInit {
       console.log(error);
     });
   }
-
-
 }

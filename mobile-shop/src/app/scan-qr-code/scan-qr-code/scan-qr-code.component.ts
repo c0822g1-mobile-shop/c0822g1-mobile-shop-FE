@@ -1,10 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ScanQrCodeService} from "../../service/scan-qr-code.service";
 import {Commodity} from "../../entity/commodity";
-import {Router} from "@angular/router"
 
 import Swal from "sweetalert2";
 
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-scan-qr-code',
@@ -49,7 +49,6 @@ export class ScanQrCodeComponent implements OnInit {
     },error => {
 
       Swal.fire('', 'Không có sản phẩm có mã QR này', 'error');
-      this.router.navigateByUrl("warehouse")
     });
   }
 
