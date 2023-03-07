@@ -26,10 +26,10 @@ export class SalesReportComponent implements OnInit {
 
   constructor(private salesReportService: SalesReportService) {
     this.reportForm = new FormGroup({
-      startDay: new FormControl("",[Validators.required]),
-      endDay: new FormControl("",[Validators.required]),
+      startDay: new FormControl("", [Validators.required]),
+      endDay: new FormControl("", [Validators.required]),
 
-      commodityId: new FormControl("",[Validators.required])
+      commodityId: new FormControl("", [Validators.required])
     });
     this.reportForm.setValidators(this.dateRangeValidator.bind(this.reportForm));
   }
@@ -39,7 +39,7 @@ export class SalesReportComponent implements OnInit {
     const endDay = control.get('endDay').value;
 
     if (startDay && endDay && new Date(startDay) > new Date(endDay)) {
-      return { 'invalidRange': true };
+      return {'invalidRange': true};
     }
     return null;
   }
@@ -65,7 +65,6 @@ export class SalesReportComponent implements OnInit {
   }
 
 
-
   /**
    * Create by: DuongLTH
    * Date created: 02/03/2023
@@ -77,30 +76,30 @@ export class SalesReportComponent implements OnInit {
   salesReport(startDay: string, endDay: string) {
     this.revenues = [];
     this.dateBuy = [];
-    this.drawChart(this.dateBuy,this.revenues);
+    this.drawChart(this.dateBuy, this.revenues);
     const commodityId = this.reportForm.controls['commodityId'].value;
     if (this.radioOptions === 'option1') {
-      this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data=>{
+      this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data => {
         this.sales = data;
       });
-      this.salesReportService.getAll(startDay.toString(), endDay.toString()).subscribe(data=>{
+      this.salesReportService.getAll(startDay.toString(), endDay.toString()).subscribe(data => {
         console.log(data)
-        for (let i = 0; i < data.length; i++){
+        for (let i = 0; i < data.length; i++) {
           // @ts-ignore
           this.revenues.push(data[i].revenue);
           console.log(data[i].revenue)
           // @ts-ignore
           this.dateBuy.push(data[i].buyDate);
         }
-        this.drawChart(this.dateBuy,this.revenues)
+        this.drawChart(this.dateBuy, this.revenues)
       })
-    }else if (this.radioOptions === 'option3') {
-      this.salesReportService.salesReportById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data=>{
+    } else if (this.radioOptions === 'option3') {
+      this.salesReportService.salesReportById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data => {
         this.sales = data;
       });
-      this.salesReportService.getAllById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data=>{
+      this.salesReportService.getAllById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data => {
         console.log(data)
-        for (let i = 0; i < data.length; i++){
+        for (let i = 0; i < data.length; i++) {
           // @ts-ignore
           this.revenues.push(data[i].revenue);
           console.log(data[i].revenue)
@@ -109,9 +108,9 @@ export class SalesReportComponent implements OnInit {
         }
         console.log(this.revenues)
         console.log(this.dateBuy)
-        this.drawChart(this.dateBuy,this.revenues)
+        this.drawChart(this.dateBuy, this.revenues)
 
-      },error=>{
+      }, error => {
         Swal.fire('', 'Mã sản phẩm này không tồn tại', 'error');
       })
     }
@@ -124,7 +123,9 @@ export class SalesReportComponent implements OnInit {
    * Function: initialize chart
    */
   drawChart(dateBuy: string[], revenues: number[]) {
-
+    if (this.chart) {
+      this.chart.destroy();
+    }
     this.chart = new Chart('myChart', {
       type: 'bar',
       data: {
@@ -139,6 +140,4 @@ export class SalesReportComponent implements OnInit {
       }
     })
   }
-
-
 }
