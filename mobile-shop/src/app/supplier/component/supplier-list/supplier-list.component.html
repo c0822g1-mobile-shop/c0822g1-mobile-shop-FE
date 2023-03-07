@@ -1,4 +1,4 @@
-<div class=" container py-5 h-100">
+<div style="margin-right: 70px;margin-left: 70px">
   <div class="container-builder" style="margin-top: 80px">
     <br>
     <h1 style="text-align: center">Nhà cung cấp</h1>
@@ -7,7 +7,7 @@
                                            aria-label="Search"
                                            [(ngModel)]="search" style="margin-right: 21px">
         <div class="input-group-prepend">
-          <button style="margin-right: 20px" class="btn btn-outline-primary" type="button" (click)="getAll(0)">Tìm kiếm
+          <button class="btn btn-outline-primary" type="button" (click)="getAll(0)">Tìm kiếm
           </button>
         </div>
       </div>
@@ -44,7 +44,7 @@
   <!--    Phân trang-->
 
   <div class="container-fluid" *ngIf="supplierList?.content?.length != 0">
-    <nav aria-label="Page navigation example" style="float: right;margin-right: 10px; margin-top: 10px">
+    <nav aria-label="Page navigation example" style="float: right; margin-top: 10px">
       <ul *ngIf="supplierList.totalPages > 3" class="pagination">
         <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
                                  (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
