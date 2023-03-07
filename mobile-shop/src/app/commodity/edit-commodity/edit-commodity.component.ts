@@ -23,8 +23,24 @@ export class EditCommodityComponent implements OnInit {
   src: string | undefined;
   downloadURL: Observable<string> | undefined;
   commodities: Commodity[] = [];
+  clickButton = false;
+  errors = {
+    name: '',
+    cpu: '',
+    capacity: '',
+    trademark: '',
+    price: '',
+    image: '',
+    camera: '',
+    selfie: '',
+    screenSize: '',
+    guarantee: '',
+    origin: '',
+    codeQr: ''
+  }
 
-  constructor(private router: Router, private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
+  constructor(private router: Router, private commodityService: CommodityService, private activatedRoute: ActivatedRoute,
+              private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),
@@ -105,31 +121,46 @@ export class EditCommodityComponent implements OnInit {
   }
 
   editCommodity() {
-    if (this.commodityForm.invalid) {
-      Swal.fire({
-        title: 'Chú ý',
-        html: 'Thông tin phải điền đầy đủ và đúng định dạng !',
-        icon: 'warning',
-        confirmButtonColor: 'blue',
-        confirmButtonText: 'Đã hiểu'
+    if (this.commodityForm.valid) {
+      this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(() => {
+        this.router.navigateByUrl("/commodity/list")
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Chỉnh sửa thành công!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }, error => {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Chỉnh sửa thất bại!',
+          text: 'Chỉnh sửa thất bại vui lòng điền đúng tất cả thông tin',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        for (let i = 0; i < error.error.length; i++) {
+          if (error.error && error.error[i].field === 'name') {
+            this.errors.name = error.error[i].defaultMessage;
+          }
+          if (error.error && error.error[i].field === 'codeQr') {
+            this.errors.codeQr = error.error[i].defaultMessage;
+          }
+        }
       })
     } else {
-      this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(() => {
-        Swal.fire({
-          title: 'Thành công',
-          html: 'Thêm mới thông tin hàng hóa thành công',
-          icon: 'success',
-          showConfirmButton: false,
-          timer: 3000
-        }).then((result) => {
-          if (result.isDismissed) {
-            this.router.navigateByUrl('/commodity/list');
-          }
-        });
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Chỉnh sửa thất bại!',
+        text: 'Chỉnh sửa thất bại vui lòng điền đúng tất cả thông tin',
+        showConfirmButton: false,
+        timer: 2000
+      });
 
-      })
+      this.clickButton = true;
     }
-
   }
 
   cancel() {

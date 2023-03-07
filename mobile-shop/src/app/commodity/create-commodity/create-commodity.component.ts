@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from "@angular/core";
 import {Trademark} from "../../entity/trademark";
+import {Observable} from "rxjs";
+import {finalize} from "rxjs/operators";
+import Swal from "sweetalert2";
+import {Commodity} from "../../entity/commodity";
+import {Router} from "@angular/router";
 import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
 import {AngularFireStorage} from "@angular/fire/storage";
-import {finalize} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {Commodity} from "../../entity/commodity";
-import Swal from "sweetalert2";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-commodity',
@@ -24,10 +25,23 @@ export class CreateCommodityComponent implements OnInit {
   fb: string | undefined;
   src: string | undefined;
   commodityList: Commodity[] = [];
-
+  errors = {
+    name: '',
+    cpu: '',
+    capacity: '',
+    trademark: '',
+    price: '',
+    image: '',
+    camera: '',
+    selfie: '',
+    screenSize: '',
+    guarantee: '',
+    origin: '',
+    codeQr: ''
+  }
+  clickButton = false;
 
   constructor(private router: Router, private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
-
     this.commodityForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),
       cpu: new FormControl('', [Validators.required, Validators.pattern("[-a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(50)]),
@@ -38,7 +52,7 @@ export class CreateCommodityComponent implements OnInit {
       camera: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
       selfie: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
       screenSize: new FormControl('', [Validators.required, Validators.pattern("[0-9.]* [a-z]*"), Validators.minLength(5), Validators.maxLength(20)]),
-      guarantee: new FormControl('', [Validators.required, Validators.pattern("[0-9]*"), Validators.maxLength(20)]),
+      guarantee: new FormControl('', [Validators.required, Validators.pattern("[0-9]*"), Validators.maxLength(2)]),
       origin: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*"), Validators.minLength(2), Validators.maxLength(20)]),
       description: new FormControl('', [Validators.required]),
       codeQr: new FormControl('', [Validators.required, Validators.pattern("[Q][R][0-9]*"), Validators.minLength(5), Validators.maxLength(5)])
@@ -98,23 +112,44 @@ export class CreateCommodityComponent implements OnInit {
   }
 
   addCommodity() {
-    if (this.commodityForm.invalid) {
-      Swal.fire({
-        title: 'Chú ý',
-        html: 'Thông tin phải điền đầy đủ và đúng định dạng !',
-        icon: 'warning',
-        confirmButtonColor: 'blue',
-        confirmButtonText: 'Đã hiểu'
-      })
-    } else {
+    if (this.commodityForm.valid) {
       this.commodityService.addCommodity(this.commodityForm.value).subscribe(() => {
-        Swal.fire(
-          'Thành công',
-          'Thêm mới thông tin hàng hóa thành công',
-          'success'
-        );
-        this.commodityForm.reset();
+        this.router.navigateByUrl("/commodity/list")
+        Swal.fire({
+          position: 'center',
+          title: 'Thêm mới thành công',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }, error => {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Thêm mới thất bại!',
+          text: 'Thêm mới thất bại vui lòng điền đúng tất cả thông tin',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        for (let i = 0; i <error.error.length ; i++) {
+          if (error.error && error.error[i].field === 'name'){
+            this.errors.name = error.error[i].defaultMessage;
+          }
+          if (error.error && error.error[i].field === 'codeQr') {
+            this.errors.codeQr = error.error[i].defaultMessage;
+          }
+        }
       })
+    }else {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Thêm mới thất bại!',
+        text: 'Thêm mới thất bại vui lòng điền đúng tất cả thông tin',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      this.clickButton = true;
     }
   }
 

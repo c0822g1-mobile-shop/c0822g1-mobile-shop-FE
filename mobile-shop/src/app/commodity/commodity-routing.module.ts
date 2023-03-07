@@ -1,5 +1,10 @@
+// @ts-ignore
 import { NgModule } from '@angular/core';
+// @ts-ignore
 import { Routes, RouterModule } from '@angular/router';
+
+
+
 import {CommoditySelectComponent} from "./commodity-select/commodity-select.component";
 import {ListCommodityComponent} from "./list-commodity/list-commodity.component";
 import {CreateCommodityComponent} from "./create-commodity/create-commodity.component";
@@ -22,6 +27,7 @@ const routes: Routes = [
   }
   ]
 ;
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
