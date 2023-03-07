@@ -1,23 +1,23 @@
-<section class="vh-120 gradient-custom">
+<section class="vh-120 gradient-custom ">
   <div class=" container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-lg-8 col-xl-8">
-        <div class="card rounded-3">
-          <div class="card-body p-4 p-md-4">
+        <div class="card rounded-3" style="margin-top: 80px">
+          <div class="card-body p-4 p-md-4" >
             <h1 style="text-align: center; font-weight: bold"> Nhập Kho </h1>
             <br>
               <div class=" text-center">
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="commodityQR = null">
                   Chọn sản phẩm
                 </button>
                 <button type="reset" class="btn btn-outline-secondary m-4 w-25" data-toggle="modal"
-                        data-target="#exampleModalQR">Quét Mã QR
+                        data-target="#exampleModalQR" (click)="commodityQR = null">Quét mã QR
                 </button>
               </div>
               <div class="row align-items-center pt-3 pb-2">
                 <div class="col-md-4 ps-3">
 
-                  <label style="font-weight: bold" class="mb-0">Tên Hàng<sup
+                  <label style="font-weight: bold" class="mb-0">Tên hàng<sup
                     style="color: red; font-size: 15px">*</sup></label>
                 </div>
                 <div class="col-md-8 pe-4" *ngIf="commodityQR">
@@ -49,12 +49,12 @@
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
 
-                  <label style="font-weight: bold" for="phone-number" class="mb-0">Số lượng<sup
+                  <label style="font-weight: bold"  class="mb-0">Số lượng<sup
                     style="color: red; font-size: 15px">*</sup></label>
                 </div>
                 <div class="col-md-8 pe-4">
                   <form [formGroup]="form">
-                  <input type="number" id="phone-number" #quantity formControlName="quantity" name="phone-number"
+                  <input type="number"  #quantity formControlName="quantity" name="phone-number"
                          class="form-control form-control-md"/>
                   <span style="color: red" *ngIf="form.controls.quantity.hasError('required') && form.controls.quantity.touched">Không được để trống</span>
                   <span style="color: red" *ngIf="form.controls.quantity.hasError('min') && form.controls.quantity.touched">Không được bé hơn 0</span>
@@ -63,15 +63,16 @@
               </div>
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold">Nhà Cung Cấp</label>
+                  <label style="font-weight: bold"  class="mb-0">Nhà cung cấp<sup
+                    style="color: red; font-size: 15px">*</sup></label>
                 </div>
                 <div class="row col-md-8 pe-4">
                   <div style="display: inline-flex" class="input-group mb-3">
 
                     <input style="margin-left: 12px" type="text" [value]="suppliers.name" #supplierss readonly class="form-control w-50"
-                           id="exampleDatepicker4 "/>
+                    />
                     <button style="margin-left: 10px" type="button" class="btn btn-outline-primary" data-toggle="modal"
-                            data-target="#exampleModal1">Tìm Nhà Cung Cấp
+                            data-target="#exampleModal1">Tìm nhà cung cấp
                     </button>
                   </div>
                 </div>
@@ -100,18 +101,11 @@
       <div class="modal-body">
         <nav class="navbar navbar-expand-lg ">
           <div class="container-fluid">
-            <a style="font-weight: bold" class="navbar-brand" >Tìm Kiếm Theo</a>
-            <select class="form-select m-4 w-25" aria-label="Default select example">
-              <option>Nhà cung cấp</option>
-              <option>Tên nhà cung cấp</option>
-              <option>Địa chỉ</option>
-              <option>Email</option>
-            </select>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <input class="form-control me-2" type="search" #nameSearch placeholder="Tìm Kiếm"
+              <input style="margin-left: 30px" class="form-control me-2" type="search" #nameSearch placeholder="Tìm kiếm theo tên"
                      aria-label="Search">
               <div class="col-md-4 ps-3">
-                <button class="btn btn-outline-primary" style="width: 100px" (click)="search(nameSearch.value,0)">Tìm
+                <button  class="btn btn-outline-primary" style="width: 100px; margin-left: 30px" (click)="search(nameSearch.value,0)">Tìm
                   Kiếm
                 </button>
               </div>
@@ -145,16 +139,15 @@
 
         <nav aria-label="Page navigation example" style="float: right;margin-right: 10px; margin-top: 10px">
           <ul class="pagination">
-            <li class="page-item"><button class="page-link" (click)="previousPage()">Trước</button></li>
+            <li class="page-item"><button class="page-link" (click)="previousPage()">Trang Trước</button></li>
             <li class="page-item"><b class="page-link">Trang {{findSupplier['number']+1}}</b></li>
-            <li class="page-item"><button class="page-link" (click)="nextPage()">Sau</button></li>
+            <li class="page-item"><button class="page-link" (click)="nextPage()">Trang Sau</button></li>
           </ul>
         </nav>
       </div>
     </div>
   </div>
 </div>
-
 
 <app-scan-qr-code (commodities)="handleQrCodeResult($event)"></app-scan-qr-code>
 <app-commodity-select (commodities1)="handleQrCodeResult($event)"></app-commodity-select>

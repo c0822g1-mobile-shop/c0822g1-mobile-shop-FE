@@ -23,6 +23,7 @@ import {AngularFireModule} from "@angular/fire";
 // @ts-ignore
 @NgModule({
   imports: [
+    AppRoutingModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -39,11 +40,12 @@ import {AngularFireModule} from "@angular/fire";
     ListCommodityComponent,
     CreateCommodityComponent,
     EditCommodityComponent,
-
   ],
+
   exports: [
     CommoditySelectComponent
   ],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CommodityModule {

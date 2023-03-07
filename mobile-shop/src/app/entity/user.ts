@@ -11,7 +11,7 @@ export interface User {
   email?: string;
   address?: string;
   age?: number;
-  gender?: boolean;
+  gender?: string;
   dateOfBirth?: string;
   userRole?: UserRole;
   bill?: Bill;

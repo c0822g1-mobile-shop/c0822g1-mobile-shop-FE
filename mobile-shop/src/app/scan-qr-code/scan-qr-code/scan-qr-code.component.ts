@@ -15,7 +15,7 @@ export class ScanQrCodeComponent implements OnInit {
   qrInfo = [
     'QR001',
     'QR0099',
-    'QR002'
+    'QR002',
   ];
   selectedQR = null;
   private selectedQRCode: string = null;

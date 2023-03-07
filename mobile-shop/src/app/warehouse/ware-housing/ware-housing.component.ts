@@ -7,7 +7,6 @@ import {Commodity} from "../../entity/commodity";
 import {WarehousingService} from "../../service/warehousing.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import Swal from 'sweetalert2';
-import {error} from "@angular/compiler/src/util";
 
 // @ts-ignore
 @Component({
@@ -27,6 +26,7 @@ export class WareHousingComponent implements OnInit {
   });
   page;
   nums;
+  commodity: any;
 
 
   constructor(private findSupplierService: FindSupplierService,
@@ -86,7 +86,6 @@ export class WareHousingComponent implements OnInit {
 
     });
     }
-
 
 
   handleQrCodeResult(commodity: Commodity) {

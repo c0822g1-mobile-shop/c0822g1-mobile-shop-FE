@@ -14,7 +14,7 @@ export interface Commodity {
   guarantee?: string;
   origin?: string;
   description?: string;
-  code_qr?: string;
+  codeQr?: string;
   quantity?: number;
   trademark?: Trademark;
 
