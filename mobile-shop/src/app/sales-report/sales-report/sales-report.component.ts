@@ -3,7 +3,7 @@ import {SalesReportService} from "../../service/sales-report.service";
 import {SalesReport} from "../../entity/sales-report";
 // @ts-ignore
 import {Chart} from 'chart.js';
-import {ViewChild} from '@angular/core';
+import Swal from 'sweetalert2';
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 
 @Component({
@@ -12,7 +12,7 @@ import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "
   styleUrls: ['./sales-report.component.css']
 })
 export class SalesReportComponent implements OnInit {
-
+  private chart: Chart;
   revenues: number[] = [];
   dateBuy: string[] = [];
 
@@ -27,7 +27,7 @@ export class SalesReportComponent implements OnInit {
     this.reportForm = new FormGroup({
       startDay: new FormControl("",[Validators.required]),
       endDay: new FormControl("",[Validators.required]),
-      commodityId: new FormControl()
+      commodityId: new FormControl("",[Validators.required])
     });
     this.reportForm.setValidators(this.dateRangeValidator.bind(this.reportForm));
   }
@@ -44,12 +44,16 @@ export class SalesReportComponent implements OnInit {
 
 
   toggleCommodityInput(option: string): void {
+    const commodityIdControl = this.reportForm.get('commodityId');
     if (option === 'option3') {
       this.showCommodityInput = true;
       this.radioOptions = option;
+      commodityIdControl.enable();
+
     } else {
       this.showCommodityInput = false;
       this.radioOptions = option;
+      commodityIdControl.disable();
     }
   }
 
@@ -70,11 +74,11 @@ export class SalesReportComponent implements OnInit {
   salesReport(startDay: string, endDay: string) {
     this.revenues = [];
     this.dateBuy = [];
+    this.drawChart(this.dateBuy,this.revenues);
     const commodityId = this.reportForm.controls['commodityId'].value;
     if (this.radioOptions === 'option1') {
       this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data=>{
         this.sales = data;
-
       });
       this.salesReportService.getAll(startDay.toString(), endDay.toString()).subscribe(data=>{
         console.log(data)
@@ -103,6 +107,8 @@ export class SalesReportComponent implements OnInit {
         console.log(this.revenues)
         console.log(this.dateBuy)
         this.drawChart(this.dateBuy,this.revenues)
+      },error=>{
+        Swal.fire('', 'Mã sản phẩm này không tồn tại', 'error');
       })
     }
   }
@@ -114,7 +120,10 @@ export class SalesReportComponent implements OnInit {
    * Function: initialize chart
    */
   drawChart(dateBuy: string[], revenues: number[]) {
-    new Chart('myChart', {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    this.chart = new Chart('myChart', {
       type: 'bar',
       data: {
         labels: dateBuy,

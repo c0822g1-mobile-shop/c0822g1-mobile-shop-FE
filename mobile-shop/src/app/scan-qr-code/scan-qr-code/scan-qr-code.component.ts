@@ -1,10 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ScanQrCodeService} from "../../service/scan-qr-code.service";
 import {Commodity} from "../../entity/commodity";
-import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
-import {error} from "@angular/compiler/src/util";
+import {Router} from "@angular/router"
+
 import Swal from "sweetalert2";
+
 
 @Component({
   selector: 'app-scan-qr-code',
@@ -28,8 +28,7 @@ export class ScanQrCodeComponent implements OnInit {
   @Output() commodities = new EventEmitter<Commodity>();
 
   constructor(private scanQrService: ScanQrCodeService,
-              private router: Router,
-              private toast: ToastrService) { }
+              private router: Router) { }
 
   ngOnInit(): void {
   }
