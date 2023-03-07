@@ -6,6 +6,7 @@ import {Commodity} from "../../entity/commodity";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommodityService} from "../../service/commodity.service";
 import {Cart} from "../../entity/cart";
+// @ts-ignore
 import Swal from 'sweetalert2';
 import {ShareService} from "../../log-in/service/share.service";
 

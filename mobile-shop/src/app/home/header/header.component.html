@@ -19,13 +19,11 @@
         <a class="nut_dropdown">Quản lí</a>
         <div class="noidung_dropdown">
           <div class="dropdown-row">
-            <!--            <a *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_EMPLOYEE'" class="dropdown-item" href="#">Quản lý nhân viên</a>-->
-            <!--            <a class="dropdown-item" href="#">Quản lý kinh doanh</a>-->
             <a class="dropdown-item" routerLink="/manager/">Quản lý báo cáo</a>
-            <a class="dropdown-item" routerLink="/supplier/list">Quản lý nhà cung cấp</a>
+            <a class="dropdown-item" routerLink="/warehouse">Quản lý nhập kho</a>
           </div>
           <div class="dropdown-row">
-            <a class="dropdown-item" routerLink="/warehouse">Quản lý nhập kho</a>
+            <a class="dropdown-item" routerLink="/supplier/list">Quản lý nhà cung cấp</a>
             <a class="dropdown-item" [routerLink]="['/sale-report']">Quản lý bán hàng</a>
           </div>
           <div class="dropdown-row">
