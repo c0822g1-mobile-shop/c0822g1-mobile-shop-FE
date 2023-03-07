@@ -27,17 +27,34 @@ export class SupplierListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll(0);
+
   }
 
   getAll(page: number) {
-    debugger
     this.supplierService.getAll(this.search, page).subscribe(next => {
-      console.log(next)
-      this.supplierList = next;
-      console.log(this.supplierList)
-      // @ts-ignore
-      this.nums = Array.from(Array(next.totalPages).keys());
+      // console.log(next)
+      // this.supplierList = next;
+      // console.log(this.supplierList)
+      // // @ts-ignore
+      // this.nums = Array.from(Array(next.totalPages).keys());
+
+      if (next['content'].length == 0) {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'Không tìm thấy',
+          text: 'Kết quả bạn cần tìm không có',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      } else {
+        this.supplierList = next;
+        // @ts-ignore
+        this.nums = Array.from(Array(next.totalPages).keys());
+      }
+
     });
+
   }
 
   delete(supplier: Supplier) {

@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
     this.name = 'Thông tin cá nhân';
     this.isLogged = false;
     this.token.logout();
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/');
   }
 
 
