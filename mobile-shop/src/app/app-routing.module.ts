@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {BillHistoryRoutingModule} from "./bill-history/bill-history-routing.module";
+
 
 const routes: Routes = [
   {path:'', loadChildren: () => import("./home/home-routing.module").then(module => module.HomeRoutingModule)},
@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: "supplier",loadChildren: () => import("./supplier/supplier-routing.module").then(module => module.SupplierRoutingModule)},
   {path: "manager", loadChildren: () => import("./manage-customer/manage-customer-routing.module").then(module => module.ManageCustomerRoutingModule)},
   {path: "warehouse", loadChildren: () => import("./warehouse/warehouse-routing.module").then(module => module.WarehouseRoutingModule)},
-  {path: "bill", loadChildren: () => import("./bill/bill.module").then(module => module.BillModule)
+  {path: "bill", loadChildren: () => import("./bill/bill-routing.module").then(module => module.BillRoutingModule)
   }
 
 ];

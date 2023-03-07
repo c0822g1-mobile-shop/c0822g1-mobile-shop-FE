@@ -27,6 +27,7 @@ import {CommonModule} from "@angular/common";
 
 import {ToastrModule} from "ngx-toastr";
 import {BrowserModule} from "@angular/platform-browser";
+import {BillModule} from "./bill/bill.module";
 
 
 // @ts-ignore
@@ -35,36 +36,36 @@ import {BrowserModule} from "@angular/platform-browser";
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    BodyComponent
   ],
-  imports: [
-    CommonModule,
-    SupplierModule,
-    BrowserModule,
-    AppRoutingModule,
-    ManageCustomerModule,
-    BillHistoryModule,
-    SupplierModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HomeModule,
-    ReactiveFormsModule,
-    FormsModule,
-    CommodityModule,
-    WarehouseModule,
-    AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    SalesReportModule,
-    ToastrModule.forRoot(),
-    RouterModule,
-    WarehouseModule,
-    AngularFireStorageModule,
-    WarehouseModule,
-    AngularFireStorageModule,
-    WarehouseModule,
-    AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
-  ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [
+        CommonModule,
+        SupplierModule,
+        BrowserModule,
+        AppRoutingModule,
+        ManageCustomerModule,
+        BillHistoryModule,
+        SupplierModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HomeModule,
+        ReactiveFormsModule,
+        FormsModule,
+        CommodityModule,
+        WarehouseModule,
+        AngularFireStorageModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        SalesReportModule,
+        ToastrModule.forRoot(),
+        RouterModule,
+        WarehouseModule,
+        AngularFireStorageModule,
+        WarehouseModule,
+        AngularFireStorageModule,
+        WarehouseModule,
+        AngularFireStorageModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        BillModule
+    ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
   exports: []

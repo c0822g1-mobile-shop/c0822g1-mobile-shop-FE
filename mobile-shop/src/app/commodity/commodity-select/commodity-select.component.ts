@@ -109,7 +109,8 @@ export class CommoditySelectComponent implements OnInit {
       this.commodity = data;
       this.commodities1.emit(data)
     }, error => {
-      this.commodity = {}
+      this.commodity = {
+      }
     });
   }
 }

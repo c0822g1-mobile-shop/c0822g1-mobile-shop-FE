@@ -13,12 +13,15 @@ import {CommodityModule} from '../commodity/commodity.module';
 @NgModule({
 
 
-  declarations: [CustomerSelectComponent, BillCreateComponent],
-  imports: [
-    CommonModule,
-    BillRoutingModule, FormsModule, ReactiveFormsModule, CommodityModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    declarations: [CustomerSelectComponent, BillCreateComponent],
+    imports: [
+        CommonModule,
+        BillRoutingModule, FormsModule, ReactiveFormsModule, CommodityModule
+    ],
+    exports: [
+        BillCreateComponent
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class BillModule {
