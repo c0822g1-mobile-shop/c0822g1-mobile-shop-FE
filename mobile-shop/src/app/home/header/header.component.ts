@@ -4,6 +4,8 @@ import loader from "@angular-devkit/build-angular/src/angular-cli-files/plugins/
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ShareService} from "../../log-in/service/share.service";
+import {User} from "../../entity/user";
+import {LoginService} from "../../log-in/service/login.service";
 
 
 
@@ -13,11 +15,11 @@ import {ShareService} from "../../log-in/service/share.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  user: User;
   role = 'none';
   name = 'Thông tin cá nhân'
   isLogged = false;
-  constructor(private token: TokenService,private router: Router,private share: ShareService) {
+  constructor(private login:LoginService,private token: TokenService,private router: Router,private share: ShareService) {
   }
 
 
@@ -31,17 +33,20 @@ export class HeaderComponent implements OnInit {
   loader() {
     this.isLogged = this.token.isLogger()
     if (this.isLogged) {
-      this.name = this.token.getName();
+      this.login.profile(this.token.getUsername()).subscribe(next => {
+        this.user = next;
+        this.name = this.user.name;
+      })
+
       this.role = this.token.getRole();
     }
   }
   logout() {
-    this.share.sendClickEvent();
     this.role = 'none';
     this.name = 'Thông tin cá nhân';
     this.isLogged = false;
     this.token.logout();
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/');
   }
 
 

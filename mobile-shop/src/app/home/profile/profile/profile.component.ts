@@ -7,6 +7,8 @@ import {LoginService} from "../../../log-in/service/login.service";
 import {$} from "protractor";
 import {Title} from "@angular/platform-browser";
 import Swal from "sweetalert2";
+import {User} from "../../../entity/user";
+import {ShareService} from "../../../log-in/service/share.service";
 
 @Component({
   selector: 'app-profile',
@@ -14,14 +16,6 @@ import Swal from "sweetalert2";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  name = '';
-  phoneNumber = '';
-  email = '';
-  address = '';
-  age = '';
-  gender = '';
-  dateOfBirth = '';
-  avatar = '';
   nameError = '';
   phoneNumberError = '';
   emailError = '';
@@ -30,6 +24,7 @@ export class ProfileComponent implements OnInit {
   genderError = '';
   dateOfBirthError = '';
   avatarError = '';
+  user: User;
   form = new FormGroup({
     name: new FormControl(),
     phoneNumber: new FormControl(),
@@ -40,12 +35,13 @@ export class ProfileComponent implements OnInit {
     dateOfBirth: new FormControl(),
     avatar: new FormControl()
   })
+  role = '';
   formPassword = new FormGroup({
     password: new FormControl(),
     newPassword: new FormControl(),
     confirmPassword: new FormControl()
   })
-  constructor(private token: TokenService, private router: Router, private userService: LoginService,private title:Title) {
+  constructor(private share:ShareService,private token: TokenService, private router: Router, private userService: LoginService,private title:Title) {
 
   }
 
@@ -55,52 +51,58 @@ export class ProfileComponent implements OnInit {
       this.router.navigateByUrl('/home')
     } else {
       this.getInfo();
-      this.getValue();
     }
   }
 
   getValue() {
-    this.form.controls.name.patchValue(this.name);
-    this.form.controls.phoneNumber.patchValue(this.phoneNumber);
-    this.form.controls.email.patchValue(this.email);
-    this.form.controls.gender.patchValue(this.gender);
-    this.form.controls.address.patchValue(this.address);
-    this.form.controls.age.patchValue(this.age);
-    this.form.controls.dateOfBirth.patchValue(this.dateOfBirth);
-    this.form.controls.avatar.patchValue(this.avatar);
+    this.form.controls.name.patchValue(this.user.name);
+    this.form.controls.phoneNumber.patchValue(this.user.phoneNumber);
+    this.form.controls.email.patchValue(this.user.email);
+    this.form.controls.gender.patchValue(this.user.gender);
+    this.form.controls.address.patchValue(this.user.address);
+    // @ts-ignore
+    let timeDiff = Math.abs(Date.now() - new Date(this.user.dateOfBirth));
+    this.form.controls.age.patchValue(Math.floor((timeDiff / (1000 * 3600 * 24))/365))
+    this.form.controls.dateOfBirth.patchValue(this.user.dateOfBirth);
+    this.form.controls.avatar.patchValue(this.user.avatar);
   }
 
   getInfo() {
-    this.name = this.token.getName();
-    this.phoneNumber = this.token.getPhoneNumber();
-    this.email = this.token.getEmail();
-    this.avatar = this.token.getAvatar();
-    this.address = this.token.getAddress();
-    this.age = this.token.getAge();
-    this.gender = this.token.getGender();
-    this.dateOfBirth = this.token.getDateOfBirth();
+    this.userService.profile(this.token.getUsername()).subscribe(
+      next => {
+        this.user = next;
+        // @ts-ignore
+        let timeDiff = Math.abs(Date.now() - new Date(this.user.dateOfBirth));
+        this.user.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+        this.role = this.user.role;
+        console.log(this.token.getRole())
+        this.getValue();
+
+      }
+    )
   }
 
   update() {
+    this.nameError = '';
+    this.phoneNumberError = '';
+    this.emailError = '';
+    this.addressError = '';
+    this.ageError = '';
+    this.genderError = '';
+    this.dateOfBirthError = '';
+    this.avatarError = '';
+
     this.userService.updateUser(this.form.value).subscribe(next => {
-      console.log(next);
-      console.log('Thành công');
-      this.name = this.form.controls.name.value;
-      this.phoneNumber = this.form.controls.phoneNumber.value;
-      this.email = this.form.controls.email.value;
-      this.avatar = this.form.controls.avatar.value;
-      this.address = this.form.controls.address.value;
-      this.age = this.form.controls.age.value;
-      this.gender = this.form.controls.gender.value;
-      this.dateOfBirth = this.form.controls.dateOfBirth.value;
       document.getElementById('dismiss').click()
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Chúc mừng ' + this.name + ' đã cập nhật thông tin thành công',
+        title: 'Chúc mừng ' + this.user.name + ' đã cập nhật thông tin thành công',
         showConfirmButton: false,
         timer: 2500
       })
+      this.share.sendClickEvent();
+      this.getInfo();
     }, error => {
       Swal.fire({
         position: 'center',
@@ -140,7 +142,7 @@ export class ProfileComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Chúc mừng ' + this.name + ' đã cập nhật mật khẩu thành công',
+          title: 'Chúc mừng ' + this.user.name + ' đã cập nhật mật khẩu thành công',
           showConfirmButton: false,
           timer: 2500
         })
@@ -166,5 +168,4 @@ export class ProfileComponent implements OnInit {
       }
     )
   }
-
 }

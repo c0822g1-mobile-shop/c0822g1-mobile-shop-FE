@@ -27,6 +27,8 @@ import {CommonModule} from "@angular/common";
 
 import {ToastrModule} from "ngx-toastr";
 import {BrowserModule} from "@angular/platform-browser";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./log-in/security/auth.interceptor";
 
 
 // @ts-ignore
@@ -65,7 +67,11 @@ import {BrowserModule} from "@angular/platform-browser";
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   exports: []
 })
