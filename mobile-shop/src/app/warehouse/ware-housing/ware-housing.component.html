@@ -82,7 +82,7 @@
                 <button type="submit" class="btn btn-outline-primary m-4 w-25"
                         (click)="save(commodityQR.id, +quantity.value)" [disabled]="commodityQR==null || supplierss.value == '' || !form.valid">Lưu
                 </button>
-                <button type="reset" class="btn btn-outline-secondary m-4 w-25" [routerLink]="['/home']">Hủy</button>
+                <button type="reset" class="btn btn-outline-secondary m-4 w-25" [routerLink]="['/']">Thoát</button>
               </div>
           </div>
         </div>
@@ -119,11 +119,11 @@
 
         <table class="table table-striped table-hover">
           <thead>
-          <tr class="btn-info">
+          <tr class="bg-info">
             <th scope="col">STT</th>
             <th scope="col">Tên Nhà Cung Cấp</th>
             <th scope="col">Địa Chỉ</th>
-            <th scope="col">Email</th>
+            <th scope="col">E-mail</th>
             <th scope="col">Số Điện Thoại</th>
           </tr>
           </thead>

@@ -24,10 +24,13 @@
           </div>
           <div class="dropdown-row">
             <a class="dropdown-item" routerLink="/supplier/list">Quản lý nhà cung cấp</a>
-            <a class="dropdown-item" [routerLink]="['/sale-report']">Quản lý bán hàng</a>
-          </div>
-          <div class="dropdown-row">
             <a class="dropdown-item" routerLink="/commodity/list">Quản lý hàng hóa</a>
+
+          </div>
+          <div class="dropdown-row" *ngIf="role == 'ROLE_ADMIN'">
+            <a class="dropdown-item" routerLink="/bill/">Quản lý bán hàng</a>
+
+            <a class="dropdown-item" [routerLink]="['/sale-report']">Báo cáo bán hàng</a>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 // @ts-ignore
 import {Chart} from 'chart.js';
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-sales-report',
@@ -24,7 +25,7 @@ export class SalesReportComponent implements OnInit {
 
   radioOptions: string = 'option1';
 
-  constructor(private salesReportService: SalesReportService) {
+  constructor(private salesReportService: SalesReportService,private title:Title) {
     this.reportForm = new FormGroup({
       startDay: new FormControl("",[Validators.required]),
       endDay: new FormControl("",[Validators.required]),
@@ -59,6 +60,7 @@ export class SalesReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Báo cáo bán hàng')
     this.toggleCommodityInput(this.radioOptions)
   }
 

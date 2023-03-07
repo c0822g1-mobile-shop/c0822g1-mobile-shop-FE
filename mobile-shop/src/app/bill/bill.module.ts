@@ -16,7 +16,8 @@ import {CommodityModule} from '../commodity/commodity.module';
     CommonModule,
     BillRoutingModule, FormsModule, ReactiveFormsModule, CommodityModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 
 
 })

@@ -8,7 +8,6 @@
         <div class="card-header">
           <label></label>
         </div>
-
         <div class="card-body">
           <div class="row">
             <div class="col-md-7">
@@ -19,18 +18,10 @@
                 <div class="col-md-5 ">
                   <!--  <button class="btn btn-outline-primary " (click)="addNewContacts()">-->
                   <!--   Chọn khách hàng cũ-->
-                  <!--  </button>--><<<<<<< commodity+customer-LongPT
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal1" (click)="customer.id = 0">
+                  <!--  </button>-->
+                  <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                          data-target="#exampleModal1">
                     Chọn khách hàng
-
-                  </button>
-                </div>
-                <div class="col-md-5">
-                  <!-- <button class="btn btn-outline-primary" (click)="scanQRCode()">-->
-                  <!--     Quét mã QR-->
-                  <!-- </button>-->
-                  <button class="btn btn-outline-primary">
-                    Quét mã QR
                   </button>
                 </div>
                 <div class="col-md-1"></div>
@@ -47,9 +38,10 @@
 
                 </div>
                 <div class="col-md-7">
-                  <input formControlName="name" id="name" type="text" class="form-control">
+                  <input formControlName="name" [value]="customer1.name" id="name" type="text" class="form-control">
                   <!--<span style="color: red">Lưu ý: Tên khách hàng không được để trống</span>-->
-                  <div class="text-danger" *ngIf="formCreateBill.controls.name.touched && formCreateBill.controls.name.touched else elseBlock">
+                  <div class="text-danger"
+                       *ngIf="formCreateBill.controls.name.touched && formCreateBill.controls.name.touched else elseBlock">
                     <span *ngIf="formCreateBill.controls.name.hasError('required')">Tên không được để trống.</span>
                     <span *ngIf="formCreateBill.controls.name.hasError('pattern')">Tên chưa đúng định dạng, vd: Bùi Hùng.</span>
                   </div>
@@ -66,7 +58,8 @@
                   <label for="phone"> Số điện thoại <span style="color: red">(*)</span>:</label>
                 </div>
                 <div class="col-md-7">
-                  <input formControlName="phoneNumber" id="phone" type="text" class="form-control">
+                  <input formControlName="phoneNumber" [value]="customer1.phoneNumber" id="phone" type="text"
+                         class="form-control">
                   <!--<span style="color: red">Lưu ý: SĐT khách hàng không được để trống</span>-->
                 </div>
                 <div class="col-md-1"></div>
@@ -78,7 +71,7 @@
                   <label for="address"> Địa chỉ <span style="color: red">(*)</span>:</label>
                 </div>
                 <div class="col-md-7">
-                  <input formControlName="address" id="address" type="text"
+                  <input formControlName="address" [value]="customer1.address" id="address" type="text"
                          class="form-control">
                   <!--<span style="color: red">Lưu ý: Địa chỉ khách hàng không được để trống</span>-->
                 </div>
@@ -88,31 +81,10 @@
               <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-3" style="margin-top: 8px">
-                  <label for="age"> Tuổi <span style="color: red">(*)</span>:</label>
-                </div>
-                <div class="col-md-2">
-                  <input formControlName="age" id="age" type="number" class="form-control">
-                </div>
-                <div class="col-md-6"></div>
-              </div>
-              <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-3" style="margin-top: 8px"></div>
-                <div class="col-md-7" style="margin-top: 8px">
-                  <!--<span style="color: red">Lưu ý: Tuổi khách hàng không được để trống</span>-->
-                </div>
-                <div class="col-md-1"></div>
-
-              </div>
-
-              <br>
-              <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-3" style="margin-top: 8px">
                   <label for="email"> E-mail <span style="color: red">(*)</span>:</label>
                 </div>
                 <div class="col-md-7">
-                  <input formControlName="email" id="email" type="text" class="form-control">
+                  <input formControlName="email" [value]="customer1.email" id="email" type="text" class="form-control">
                   <!--<span style="color: red">Lưu ý: Email khách hàng không được để trống</span>-->
                 </div>
                 <div class="col-md-1"></div>
@@ -139,15 +111,8 @@
               <div class="row ">
                 <div class="col-md-1"></div>
                 <div class="col-md-8 ">
-                  <!--                  <button class="btn btn-outline-primary " (click)="addNewContacts()">-->
-                  <!--                    Chọn sản phẩm-->
-                  <!--                  </button>-->
-                  <!--                  <button class="btn btn-outline-primary " (click)="addNewContacts()">-->
-                  <!--                    Chọn sản phẩm-->
-                  <!--                  </button>-->
-
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal2" (click)="commodity.id = 0">
-
+                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal"
+                          (click)="commodity.id = 0">
                     Chọn sản phẩm
                   </button>
                 </div>
@@ -155,7 +120,6 @@
               </div>
               <br>
               <br>
-
               <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-4">
@@ -163,7 +127,7 @@
                 </div>
                 <div class="col-md-6">
                   <input formControlName="commodityName" id="commodityName" type="text"
-                         class="form-control">
+                         [value]="commodity.name" disabled class="form-control">
                 </div>
                 <div class="col-md-1"></div>
               </div>
@@ -175,7 +139,7 @@
                 </div>
                 <div class="col-md-4">
                   <input formControlName="price" id="price" type="text"
-                         class="form-control"></div>
+                         [value]="commodity.price" disabled class="form-control"></div>
                 <div class="col-md-3"></div>
               </div>
               <br>
@@ -185,8 +149,8 @@
                   <label for="productAmount"> Số lượng <span style="color: red">(*)</span>:</label>
                 </div>
                 <div class="col-md-2">
-                  <input formControlName="quantity" id="productAmount" type="number"
-                         class="form-control">
+                  <input formControlName="quantity" id="productAmount" type="text"
+                         [value]="commodity.quantity" disabled class="form-control">
                 </div>
                 <div class="col-md-5" style="margin-top: 8px">Cái</div>
 
@@ -202,14 +166,6 @@
               <br>
               <div class="row ">
                 <div class="col-md-1"></div>
-                <div class="col-md-8 ">
-                  <!--                  <button class="btn btn-outline-primary " (click)="addNewContacts()">-->
-                  <!--                    Thêm sản phẩm-->
-                  <!--                  </button>-->
-                  <button class="btn btn-outline-primary ">
-                    Thêm sản phẩm
-                  </button>
-                </div>
                 <div class="col-md-3"></div>
               </div>
 
@@ -223,7 +179,7 @@
               <label for="moneyTotal"> Thành tiền :</label>
             </div>
             <div class="col-md-4" style="margin-left: 2.5%">
-              <span formControlName="" id="moneyTotal" ></span>
+              <span formControlName="" id="moneyTotal"></span>
             </div>
             <!--                        <div class="col-md-3" style="margin-top: 8px"></div>-->
             <div class="col-md-1"></div>
@@ -268,7 +224,5 @@
     </form>
   </div>
 </div>
-
-<!--<app-customer-select [customer] = "customer" ></app-customer-select>-->
-<!--<app-commodity-select [commodity] = "commodity"></app-commodity-select>-->
-
+<!--<app-customer-select (customer1)="getCustomer($event)"></app-customer-select>-->
+<!--<app-commodity-select (commodities1)="getCommodity($event)"></app-commodity-select>-->

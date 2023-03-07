@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import Swal from 'sweetalert2';
+import {TokenService} from "../../../log-in/service/token.service";
 
 @Component({
   selector: 'app-list',
@@ -19,8 +20,8 @@ export class SupplierListComponent implements OnInit {
   supplier: Supplier = null;
   private page = 0;
   nums;
-
-  constructor(private router: Router, private toastrService: ToastrService, private supplierService: SupplierService,
+  role = 'none'
+  constructor(private token:TokenService,private router: Router, private toastrService: ToastrService, private supplierService: SupplierService,
               private titleService: Title) {
     this.titleService.setTitle("Nhà cung cấp");
   }
@@ -31,6 +32,7 @@ export class SupplierListComponent implements OnInit {
   }
 
   getAll(page: number) {
+   this.role = this.token.getRole()
     this.supplierService.getAll(this.search, page).subscribe(next => {
       console.log(next)
       // console.log(next)
