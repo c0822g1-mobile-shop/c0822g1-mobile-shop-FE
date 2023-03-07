@@ -29,6 +29,7 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserModule} from "@angular/platform-browser";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './log-in/security/auth.interceptor';
+import {ScanQrCodeModule} from "./scan-qr-code/scan-qr-code.module";
 
 
 // @ts-ignore
@@ -40,6 +41,7 @@ import { AuthInterceptor } from './log-in/security/auth.interceptor';
     BodyComponent
   ],
   imports: [
+    ScanQrCodeModule,
     CommonModule,
     SupplierModule,
     BrowserModule,
@@ -55,7 +57,6 @@ import { AuthInterceptor } from './log-in/security/auth.interceptor';
     CommodityModule,
     WarehouseModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     SalesReportModule,
     ToastrModule.forRoot(),
     RouterModule,

@@ -1,8 +1,11 @@
+// @ts-ignore
 import {Component, OnInit} from '@angular/core';
 import {CommodityService} from "../../service/commodity.service";
 import Swal from 'sweetalert2';
+// @ts-ignore
 import {Title} from "@angular/platform-browser";
 
+// @ts-ignore
 @Component({
   selector: 'app-list-commodity',
   templateUrl: './list-commodity.component.html',
@@ -50,7 +53,7 @@ export class ListCommodityComponent implements OnInit {
     Swal.fire({
       title: 'Bạn có muốn xóa?',
       text: 'Hàng hóa: ' + this.item,
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -62,8 +65,7 @@ export class ListCommodityComponent implements OnInit {
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Xóa thành công!',
-            text: 'Hàng hóa: ' + this.item,
+            title: 'Xóa thành công ',
             showConfirmButton: false,
             timer: 2000
           });
@@ -98,10 +100,24 @@ export class ListCommodityComponent implements OnInit {
         this.commodity = next;
       })
     }
+  }
 
+  page1(num:number){
+    if (this.search2) {
+      this.commodityService.search2(this.value1, this.value2, num).subscribe(next => {
+        this.commodity = next;
+      })
+    } else {
+      this.commodityService.changePage(num).subscribe(next => {
+        this.commodity = next;
+      })
+    }
   }
 
   search(value: number, value2: string) {
+    if (value2==""){
+      this.getAll()
+    }
     this.value1 = value;
     this.value2 = value2;
     this.search2 = true;
@@ -111,8 +127,8 @@ export class ListCommodityComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'warning',
-          title: 'Không tìm thấy kết quả nào',
-          text:  value2,
+          title: 'Không tìm thấy',
+          text: 'Kết quả bạn cần tìm là: ' +'" '+ value2 +' " '+ ' không có',
           showConfirmButton: false,
           timer: 2000
         });

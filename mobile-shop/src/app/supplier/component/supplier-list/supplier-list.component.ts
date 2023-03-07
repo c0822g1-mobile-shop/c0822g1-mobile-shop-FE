@@ -4,6 +4,7 @@ import {Supplier} from "../../../entity/supplier";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-list',
@@ -32,8 +33,17 @@ export class SupplierListComponent implements OnInit {
     debugger
     this.supplierService.getAll(this.search, page).subscribe(next => {
       console.log(next)
+      if (next['content'].length == 0) {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'Không tìm thấy',
+          text: 'Kết quả bạn cần tìm là: ' + '" ' + this.search + ' " ' + ' không có',
+          showConfirmButton: false,
+          timer: 2000
+
+        })}
       this.supplierList = next;
-      console.log(this.supplierList)
       // @ts-ignore
       this.nums = Array.from(Array(next.totalPages).keys());
     });
