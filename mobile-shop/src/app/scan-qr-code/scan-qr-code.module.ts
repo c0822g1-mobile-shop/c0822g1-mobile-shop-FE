@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {ScanQrCodeRoutingModule} from './scan-qr-code-routing.module';
 import {ScanQrCodeComponent} from './scan-qr-code/scan-qr-code.component';
 // @ts-ignore
+
 import {QRCodeModule} from "angular2-qrcode";
 import {ToastrModule} from "ngx-toastr";
 import {RouterModule} from "@angular/router";
@@ -24,3 +25,4 @@ import {RouterModule} from "@angular/router";
 })
 export class ScanQrCodeModule {
 }
+

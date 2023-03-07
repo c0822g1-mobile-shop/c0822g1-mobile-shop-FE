@@ -27,8 +27,6 @@ export class EditCommodityComponent implements OnInit {
 
   constructor(private router: Router,private commodityService: CommodityService, private activatedRoute: ActivatedRoute,
               private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
-
-
     this.commodityForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),

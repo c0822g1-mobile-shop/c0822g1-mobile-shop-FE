@@ -1,11 +1,10 @@
-<script src="../supplier-list/supplier-list.component.spec.ts"></script>
-<section>
-  <div style="margin-top: 100px" class=" py-5">
+<section class="vh-120 gradient-custom" style="margin-top: 105px">
+  <div class=" ml-5 mr-5 py-5">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-lg-8 col-xl-6">
         <div class="card rounded-3">
           <div class="card-body p-4 p-md-4">
-            <h3 class="mb-3 mt-3 text-center">THÊM MỚI NHÀ CUNG CẤP</h3>
+            <h1 class="mb-3 mt-3 text-center">Thêm mới nhà cung cấp</h1>
 
             <form [formGroup]="form" (ngSubmit)="createSupplier()" class="px-md-2">
 
@@ -22,10 +21,10 @@
                          class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.code.hasError('required')) || form.controls.code.hasError('required') && form.controls.code.touched">
-                    Không được để trống</p>
+                    Không được để trống.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.code.hasError('pattern')) || form.controls.code.hasError('pattern') && form.controls.code.touched">
-                    Mã số không đúng định dạng</p>
+                    Mã số không đúng định dạng.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="errors.code && !form.controls.code.hasError('required') && !form.controls.code.hasError('pattern')">{{errors.code}}</p>
 
@@ -46,10 +45,10 @@
                          class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.name.hasError('required')) || form.controls.name.hasError('required') && form.controls.name.touched">
-                    Không được để trống</p>
+                    Không được để trống.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.name.hasError('maxlength')) || form.controls.name.hasError('maxlength') && form.controls.name.touched">
-                    Tên nhà cung cấp không được quá 100 ký tự</p>
+                    Tên nhà cung cấp không được quá 100 ký tự.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="errors.name && !form.controls.name.hasError('required') && !form.controls.name.hasError('maxlength')">{{errors.name}}</p>
 
@@ -69,10 +68,10 @@
                          class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.address.hasError('required')) || form.controls.address.hasError('required') && form.controls.address.touched">
-                    Không được để trống</p>
+                    Không được để trống.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.address.hasError('maxlength')) || form.controls.address.hasError('maxlength') && form.controls.address.touched">
-                    Địa chỉ không được quá 200 ký tự</p>
+                    Địa chỉ không được quá 200 ký tự.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="errors.address && !form.controls.address.hasError('required') && !form.controls.address.hasError('maxlength')">{{errors.address}}</p>
 
@@ -92,10 +91,10 @@
                          placeholder="Nhập số diện thoại" class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.phoneNumber.hasError('required')) || form.controls.phoneNumber.hasError('required') && form.controls.phoneNumber.touched">
-                    Không được để trống</p>
+                    Không được để trống.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.phoneNumber.hasError('pattern')) || form.controls.phoneNumber.hasError('pattern') && form.controls.phoneNumber.touched">
-                    Số điện thoại không đúng định dạng</p>
+                    Số điện thoại không đúng định dạng.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="errors.phoneNumber && !form.controls.phoneNumber.hasError('required') && !form.controls.phoneNumber.hasError('pattern')">{{errors.phoneNumber}}</p>
 
@@ -115,10 +114,10 @@
                          class="form-control form-control-md" (focusin)="reset()"/>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.email.hasError('required')) || form.controls.email.hasError('required') && form.controls.email.touched">
-                    Không được để trống</p>
+                    Không được để trống.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.email.hasError('pattern')) || form.controls.email.hasError('pattern') && form.controls.email.touched">
-                    Email không đúng định dạng</p>
+                    Email không đúng định dạng.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="errors.email && !form.controls.email.hasError('required') && !form.controls.email.hasError('pattern')">{{errors.email}}</p>
 
@@ -138,5 +137,4 @@
       </div>
     </div>
   </div>
-
 </section>

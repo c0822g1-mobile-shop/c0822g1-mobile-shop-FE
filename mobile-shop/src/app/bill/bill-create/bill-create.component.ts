@@ -26,6 +26,7 @@ export class BillCreateComponent implements OnInit {
   billHistory: BillHistory = {};
   user: User[] = [];
 
+
   formCreateBill: FormGroup = new FormGroup({});
   userId: number;
   commodityId: number;

@@ -40,10 +40,10 @@ import {CommoditySelectComponent} from "./commodity-select/commodity-select.comp
     CreateCommodityComponent,
     EditCommodityComponent,
   ],
-    exports: [
-        CommoditySelectComponent
-    ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
+  exports: [
+    CommoditySelectComponent
+  ],
 })
 export class CommodityModule {
 }

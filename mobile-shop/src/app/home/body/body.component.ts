@@ -1,4 +1,3 @@
-import {Component, OnInit} from '@angular/core';
 import {TokenService} from "../../log-in/service/token.service";
 import {Commodity} from "../../entity/commodity";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -7,6 +6,9 @@ import {Cart} from "../../entity/cart";
 import Swal from 'sweetalert2';
 import {ShareService} from "../../log-in/service/share.service";
 
+
+// @ts-ignore
+import { Component, OnInit } from '@angular/core';
 
 // @ts-ignore
 @Component({

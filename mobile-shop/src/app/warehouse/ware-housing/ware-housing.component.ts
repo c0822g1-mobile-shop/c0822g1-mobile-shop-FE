@@ -5,8 +5,9 @@ import {FindSupplierService} from "../../service/find-supplier.service";
 import {Supplier} from "../../entity/supplier";
 import {Commodity} from "../../entity/commodity";
 import {WarehousingService} from "../../service/warehousing.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import Swal from 'sweetalert2';
+import {error} from "@angular/compiler/src/util";
 
 // @ts-ignore
 @Component({
@@ -15,19 +16,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./ware-housing.component.css']
 })
 export class WareHousingComponent implements OnInit {
+
+  set;
   findSupplier: Supplier [] = [];
   supplier: number;
   suppliers: Supplier = {
     name: ""
   };
-
   commodityQR: Commodity;
   form: FormGroup = new FormGroup({
-    name: new FormControl(),
-    price: new FormControl(),
-    image: new FormControl()
+    quantity: new FormControl("", [Validators.required, Validators.min(0)]),
+    // supplier: new FormControl("", [Validators.required]),
   });
-  commodity:Commodity ;
+  nums;
+
 
   constructor(private findSupplierService: FindSupplierService,
               private wareHousingService: WarehousingService) {
@@ -66,7 +68,10 @@ export class WareHousingComponent implements OnInit {
   }
 
   save(id: number, quantity: number) {
+
+
     this.wareHousingService.wareHousing(id, quantity).subscribe(next => {
+      console.log(next)
       Swal.fire({
         position: 'center',
         icon: 'success',
