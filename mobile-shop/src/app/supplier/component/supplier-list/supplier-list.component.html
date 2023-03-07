@@ -9,110 +9,122 @@
       <div class="input-group-prepend">
         <button style="margin-right: 20px" class="btn btn-outline-primary" type="button" (click)="getAll(0)">Tìm kiếm
         </button>
+<div style="margin-right: 70px;margin-left: 70px">
+  <div class="container-builder" style="margin-top: 80px">
+    <br>
+    <h1 style="text-align: center">Nhà cung cấp</h1>
+    <div style="float: right">
+      <div class="input-group mb-3"><input class="form-control me-1" type="text" placeholder="Tìm kiếm nhà cung cấp"
+                                           aria-label="Search"
+                                           [(ngModel)]="search" style="margin-right: 21px">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-primary" type="button" (click)="getAll(0)">Tìm kiếm
+          </button>
+        </div>
       </div>
     </div>
+    <br>
+    <div style="height: 350px">
+      <table class="table text-center table-hover" style="width: 100%">
+        <thead>
+        <tr class="bg-info">
+          <th style="width: 100px">STT</th>
+          <th style="width: 100px">MS</th>
+          <th style="width: 300px">Tên nhà cung cấp</th>
+          <th style="width: 100px">Địa chỉ</th>
+          <th style="width: 200px">SĐT</th>
+          <th style="width: 300px">E-mail</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let item of supplierList['content'], index as i" (click)="supplier = item"
+            [class.table-active]="item == supplier">
+          <td>{{i + 1}}</td>
+          <td>{{item?.code}}</td>
+          <td class="text-left">{{item?.name}}</td>
+          <td class="text-left">{{item?.address | slice: 0:30}}...</td>
+          <td>{{item?.phoneNumber}}</td>
+          <td class="text-left">{{item?.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <br>
 
-  <table class="table text-center table-hover" style="width: 100%">
-    <thead>
-    <tr>
-      <th style="width: 100px">STT</th>
-      <th style="width: 100px">MS</th>
-      <th style="width: 300px">Tên nhà cung cấp</th>
-      <th style="width: 100px">Địa chỉ</th>
-      <th style="width: 200px">SĐT</th>
-      <th style="width: 300px">E-mail</th>
-    </tr>
-    </thead>
-    <tbody>
+  <!--    Phân trang-->
 
-    <tr *ngFor="let item of supplierList['content'], index as i" (click)="supplier = item"
-        [class.table-active]="item == supplier">
-      <td>{{i + 1}}</td>
-      <td>{{item?.code}}</td>
-      <td>{{item?.name}}</td>
-      <td>{{item?.address}}</td>
-      <td>{{item?.phoneNumber}}</td>
-      <td>{{item?.email}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="container-fluid" *ngIf="supplierList?.content?.length != 0">
+    <nav aria-label="Page navigation example" style="float: right; margin-top: 10px">
+      <ul *ngIf="supplierList.totalPages > 3" class="pagination">
+        <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
+                                 (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
 
+        <li class="page-item" [class.active]="supplierList.pageable.pageNumber < supplierList.totalPages -1"><a
+          (click)="getAll(supplierList.pageable.pageNumber)" class="page-link"> {{supplierList.pageable.pageNumber
+        + ((supplierList.pageable.pageNumber + 1 == supplierList.totalPages) ? 0 : 1)}}
+        </a></li>
+
+        <li class="page-item"><a
+          class="page-link"> ...
+        </a></li>
+
+        <li class="page-item" [class.active]="supplierList.totalPages - 1 == supplierList.pageable.pageNumber"><a
+          (click)="getAll(supplierList.totalPages - 1)" class="page-link"> {{supplierList.totalPages}}
+        </a></li>
+
+        <li class="page-item"><a class="page-link"
+                                 [ngClass]="supplierList.number + 1 == supplierList.totalPages? 'disabled': ''"
+                                 (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
+      </ul>
+
+      <ul class="pagination" *ngIf="supplierList.totalPages <= 3">
+        <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
+                                 (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
+
+        <li *ngFor="let num of nums" class="page-item" [class.active]="num == supplierList.pageable.pageNumber"><a
+          (click)="getAll(num)" class="page-link"> {{num + 1}}
+        </a></li>
+
+        <li class="page-item"><a class="page-link"
+                                 [ngClass]="supplierList.number + 1 == supplierList.totalPages? 'disabled': ''"
+                                 (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="d-flex justify-content-center" style="position: relative;left: -240px">
+    <button [disabled]="supplier == null" (click)="delete(supplier)" class=" btn btn-outline-danger" data-toggle="modal"
+            data-target="#exampleModal" style="margin-left: 50px"
+            type="submit">
+      Xoá
+    </button>
+    <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success" routerLink="/supplier/create">
+      Thêm mới
+    </button>
+    <button [disabled]="supplier == null" style="margin-left: 10px" type="submit" class=" btn btn-outline-primary"
+            (click)="update()">Chỉnh sửa
+    </button>
+    <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary" [routerLink]="['/']">Thoát
+    </button>
+  </div>
 </div>
-
-<!--    Phân trang-->
-
-<div class="container-fluid" *ngIf="supplierList?.content?.length != 0">
-  <nav style="float: right" aria-label="Page navigation example">
-    <ul *ngIf="supplierList.totalPages > 3" class="pagination">
-      <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
-                               (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
-
-      <li class="page-item" [class.active]="supplierList.pageable.pageNumber < supplierList.totalPages -1"><a
-        (click)="getAll(supplierList.pageable.pageNumber)" class="page-link"> {{supplierList.pageable.pageNumber
-      + ((supplierList.pageable.pageNumber + 1 == supplierList.totalPages) ? 0 : 1)}}
-      </a></li>
-
-      <li class="page-item"><a
-        class="page-link"> ...
-      </a></li>
-
-      <li class="page-item" [class.active]="supplierList.totalPages - 1 == supplierList.pageable.pageNumber"><a
-        (click)="getAll(supplierList.totalPages - 1)" class="page-link"> {{supplierList.totalPages}}
-      </a></li>
-
-      <li class="page-item"><a class="page-link"
-                               [ngClass]="supplierList.number + 1 == supplierList.totalPages? 'disabled': ''"
-                               (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
-    </ul>
-
-    <ul class="pagination" *ngIf="supplierList.totalPages <= 3">
-      <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
-                               (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
-
-      <li *ngFor="let num of nums" class="page-item" [class.active]="num == supplierList.pageable.pageNumber"><a
-        (click)="getAll(num)" class="page-link"> {{num + 1}}
-      </a></li>
-
-      <li class="page-item"><a class="page-link"
-                               [ngClass]="supplierList.number + 1 == supplierList.totalPages? 'disabled': ''"
-                               (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
-    </ul>
-  </nav>
-</div>
-
-
-<div class="d-flex justify-content-center">
-  <button [disabled]="supplier == null" class=" btn btn-outline-danger" data-toggle="modal"
-          data-target="#exampleModal" style="margin-left: 50px"
-          type="submit">
-    Xoá
-  </button>
-  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success" routerLink="/supplier/create">Thêm</button>
-  <button [disabled]="supplier == null" style="margin-left: 10px" type="submit" class=" btn btn-outline-primary"
-          (click)="update()">Chỉnh sửa
-  </button>
-  <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary" [routerLink]="['/home']">Thoát
-  </button>
-</div>
-
 <br>
 
 <!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Xác nhận xoá nhà cung cấp</h5>
-      </div>
-      <div class="modal-body">
-        <p>Bạn có chắc chắn muốn xóa nhà cung cấp: <label style="color: red">{{supplier?.name}}</label> này không?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Xoá</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="modal" id="exampleModal" tabindex="-1">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title">Xác nhận xoá nhà cung cấp</h5>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <p>Bạn có chắc chắn muốn xóa nhà cung cấp: <label style="color: red">{{supplier?.name}}</label> này không?</p>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>-->
+<!--        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Xoá</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

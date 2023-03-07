@@ -4,6 +4,9 @@ import {Commodity} from "../../entity/commodity";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 
+import Swal from "sweetalert2";
+
+
 @Component({
   selector: 'app-scan-qr-code',
   templateUrl: './scan-qr-code.component.html',
@@ -11,9 +14,9 @@ import {ToastrService} from "ngx-toastr";
 })
 export class ScanQrCodeComponent implements OnInit {
   qrInfo = [
-    '123',
-    '456',
-    '789'
+    'QR001',
+    'QR0099',
+    'QR002',
   ];
   selectedQR = null;
   private selectedQRCode: string = null;
@@ -48,6 +51,7 @@ export class ScanQrCodeComponent implements OnInit {
     }, error => {
 
       this.toast.error("Không có sản phẩm có mã QR này", "Thông báo")
+      Swal.fire('', 'Không có sản phẩm có mã QR này', 'error');
       this.router.navigateByUrl("warehouse")
     });
   }

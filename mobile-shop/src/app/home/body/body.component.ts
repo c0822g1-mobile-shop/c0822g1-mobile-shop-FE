@@ -1,5 +1,6 @@
 
 import {Component, OnInit} from '@angular/core';
+// @ts-ignore
 import {TokenService} from "../../log-in/service/token.service";
 import {Commodity} from "../../entity/commodity";
 import {ActivatedRoute, Router} from "@angular/router";
