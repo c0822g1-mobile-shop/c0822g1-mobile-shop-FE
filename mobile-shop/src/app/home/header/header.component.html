@@ -1,9 +1,8 @@
-
 <header class="sticky-top">
   <input type="checkbox" name="" id="chk1">
   <img routerLink="/"
-       src="https://firebasestorage.googleapis.com/v0/b/c0822g1-mobile-shop-d949d.appspot.com/o/N%E1%BB%99i%20dung%20%C4%91o%E1%BA%A1n%20v%C4%83n%20b%E1%BA%A3n%20c%E1%BB%A7a%20b%E1%BA%A1n.png?alt=media&token=d2004c68-5083-49d4-bf33-f5d7673b743b">
-  <div class="logo"><h1>C0822G1</h1>
+       src="https://firebasestorage.googleapis.com/v0/b/c0822g1-mobile-shop-d949d.appspot.com/o/Thi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn.png?alt=media&token=07d45ac3-ddd9-4d3f-a2ab-1498a059e886">
+  <div class="logo">
     <div class="search-box">
       <input #search type="text" id="srch" placeholder="Tìm kiếm theo tên điện thoại:Iphone...">
       <button (click)="search1(search.value)">
@@ -17,20 +16,18 @@
   <ul>
     <li *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_EMPLOYEE'">
       <div class="dropdown">
-        <a class="nut_dropdown">Chức năng</a>
+        <a class="nut_dropdown">Quản lí</a>
         <div class="noidung_dropdown">
           <div class="dropdown-row">
-<!--            <a *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_EMPLOYEE'" class="dropdown-item" href="#">Quản lý nhân viên</a>-->
-<!--            <a class="dropdown-item" href="#">Quản lý kinh doanh</a>-->
-            <a  class="dropdown-item" routerLink="/manager/">Quản lý báo cáo</a>
-          </div>
-          <div class="dropdown-row">
+            <a class="dropdown-item" routerLink="/manager/">Quản lý báo cáo</a>
             <a class="dropdown-item" routerLink="/warehouse">Quản lý nhập kho</a>
-            <a  class="dropdown-item" routerLink="/supplier/list">Quản lý nhà cung cấp</a>
-            <a  class="dropdown-item" [routerLink]="['/sale-report']">Quản lý bán hàng</a>
           </div>
           <div class="dropdown-row">
-            <a  class="dropdown-item" routerLink="/commodity/list">Quản lý hàng hóa</a>
+            <a class="dropdown-item" routerLink="/supplier/list">Quản lý nhà cung cấp</a>
+            <a class="dropdown-item" [routerLink]="['/sale-report']">Quản lý bán hàng</a>
+          </div>
+          <div class="dropdown-row">
+            <a class="dropdown-item" routerLink="/commodity/list">Quản lý hàng hóa</a>
           </div>
         </div>
       </div>
@@ -50,14 +47,14 @@
       </svg>
       <span style="height: 15px; width: 15px;position: absolute"
             class="badge rounded-pill badge-notification bg-danger"></span>Giỏ hàng</a></li>
-    <li (click)="checkProfile()"><a >
+    <li (click)="checkProfile()"><a>
       <svg class="iconm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
         <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
         <path
           d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
       </svg>
       {{name}}</a></li>
-    <li style="cursor: pointer"  *ngIf="isLogged == true" (click)="logout()"><a >
+    <li style="cursor: pointer" *ngIf="isLogged == true" (click)="logout()"><a>
       Đăng xuất</a></li>
   </ul>
   <div class="menu">

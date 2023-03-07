@@ -6,7 +6,7 @@
       <div class="col-3">
         <div class="custom-control custom-radio custom-control-inline">
           <input type="radio" id="all" name="customRadioInline" class="custom-control-input" checked (click)="choise=0">
-          <label class="custom-control-label" for="all">Tất cả</label>
+          <label class="custom-control-label" for="all" (click)="getAll()">Tất cả</label>
         </div>
       </div>
       <div class="col">
@@ -120,7 +120,7 @@
 
 
 <div style="min-height: 60px;margin-left: 70%">
-  <div *ngIf="manageInfoJson?.content?.length != 0; else elseBlockPagination">
+  <div *ngIf="manageInfoJson?.content?.length != 0">
     <div class="d-flex justify-content-center" id="last-row">
       <div>
         <nav aria-label="Page navigation example">
@@ -129,7 +129,6 @@
               <a role="button" class="page-link" (click)="changePage(0)">Trang trước</a>
             </li>
             <li class="page-item" [ngClass]="manageInfoJson?.first ? 'disabled': ''">
-              <!--              <a role="button" class="page-link" (click)="changePage(manageInfoJson?.number - 1)"><</a>-->
             </li>
             <li class="page-item" *ngIf="manageInfoJson?.number - 3 > 0">
               <a role="button" class="page-link"
@@ -165,8 +164,6 @@
                  (click)="changePage(manageInfoJson?.number + 4)">{{manageInfoJson?.number + 5}}</a>
             </li>
             <li class="page-item" [ngClass]="manageInfoJson?.last ? 'disabled': ''">
-              <!--              <a role="button" class="page-link"-->
-              <!--                 (click)="changePage(manageInfoJson?.number + 1)">></a>-->
             </li>
             <li class="page-item" [ngClass]="manageInfoJson?.last ? 'disabled': ''">
               <a role="button" class="page-link"
@@ -179,6 +176,5 @@
       </div>
     </div>
   </div>
-  <ng-template #elseBlockPagination style="color: red">Không có dữ liệu</ng-template>
 </div>
 

@@ -14,13 +14,12 @@ import {BillHistoryInfo} from "../../entity/bill-history-info";
 export class BillHistoryListComponent implements OnInit {
 
 
-
   billHistory: BillHistory;
   id: number;
   item: User;
   billList;
-  billHistoryInfos:BillHistoryInfo[]=[];
-  billHistoryInfo:BillHistoryInfo={};
+  billHistoryInfos: BillHistoryInfo[] = [];
+  billHistoryInfo: BillHistoryInfo = {};
 
   constructor(private billHistoryService: BillHistoryService,
               private activatedRoute: ActivatedRoute,
@@ -29,32 +28,20 @@ export class BillHistoryListComponent implements OnInit {
       this.id = +next.get('id');
       this.getByIdManage(this.id);
       console.log(this.id);
-      // this.getByIdManage(this.id);
 
 
     });
-    // this.manageListService.getAllManager().subscribe(next => {
-    //   this.item = next;
-    // })
   }
 
   ngOnInit(): void {
-    // this.getAllBillHistory();
   }
-
-  // phương thức test ko chạy
-  // getAllBillHistory() {
-  //   this.billHistoryService.getAllBillHistory(this.id).subscribe(next => {
-  //     this.billHistory = next;
-  //   });
-  // }
 
 // phương thức lấy theo id
   getByIdManage(id: number) {
     this.billHistoryService.findById(id).subscribe(next => {
-        this.billHistoryInfos=next;
+      this.billHistoryInfos = next;
       console.log(this.billHistoryInfos);
-      this.billHistoryInfo=this.billHistoryInfos[0];
+      this.billHistoryInfo = this.billHistoryInfos[0];
     })
   }
 }

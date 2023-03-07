@@ -4,6 +4,7 @@ import {User} from "../../entity/user";
 import {Manager} from "../../entity/manager";
 import {ManageInfoJson} from "../../entity/manageInfoJson";
 import {Title} from "@angular/platform-browser";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-manager-list',
@@ -11,33 +12,27 @@ import {Title} from "@angular/platform-browser";
   styleUrls: ['./manager-list.component.css']
 })
 export class ManagerListComponent implements OnInit {
-  choise:any;
+  choise: any;
   manageList;
   nums;
-  ageSearch = '0';
-  genderSearch = '0';
   private page: number;
-  // temp: User = {};
   user: Manager = null;
   list: Manager[] = [];
   manageInfoJson!: ManageInfoJson;
   age = '';
   gender = '';
   request = {page: 0, size: 5};
-  pageNumber = 0;
   totalPages = 0;
 
-  constructor(private managerService: ManageListService,private titleService: Title) {
+  constructor(private managerService: ManageListService, private titleService: Title) {
     this.titleService.setTitle("Quản lý báo cáo khách hàng");
   }
 
   ngOnInit(): void {
-    // this.getAllManageList(this.request);
-    // this.getAllList();
     this.search(this.age, this.gender, true);
   }
 
-  getAllManageList(request : {page: number, size: number}) {
+  getAllManageList(request: { page: number, size: number }) {
     this.managerService.getAllManageList(request).subscribe(next => {
       this.manageList = next;
       this.list = next;
@@ -45,6 +40,7 @@ export class ManagerListComponent implements OnInit {
       this.manageInfoJson = next;
     });
   }
+
 
   getAllList() {
     this.managerService.getAllManager().subscribe(next => {
@@ -58,31 +54,37 @@ export class ManagerListComponent implements OnInit {
     if (!flag) {
       this.request.page = 0;
     }
-    // this.age = age;
-    // this.gender = gender;
     this.managerService.search(
       age,
       gender,
       this.request).subscribe(data => {
-      this.manageInfoJson = data;
-      console.log(data)
-      // if ((age !== '' || gender !== '') && !flag) {
-      // }
-    }, error => {
 
-      flag = true;
-    }, () => {
-    });
+        if (data['content'].length == 0) {
+          Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: 'Không tìm thấy',
+            text: 'Kết quả bạn cần tìm không có',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        } else {
+          this.manageList = data; this.manageInfoJson = data;
+          // @ts-ignore
+          this.nums = Array.from(Array(next.totalPages).keys());
+        }
+      }
+    );
   }
-  //
-  // reload(): void {
-  // //   this.request.page = 0;
-  //   this.getAllManageList(this.request);
-  // }
+
 
 
   changePage(pageNumber: number): void {
     this.request.page = pageNumber;
     this.search(this.age, this.gender, true);
+  }
+
+  getAll() {
+    this.getAllManageList(this.request);
   }
 }
