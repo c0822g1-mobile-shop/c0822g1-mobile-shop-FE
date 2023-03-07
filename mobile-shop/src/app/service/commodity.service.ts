@@ -12,6 +12,7 @@ export class CommodityService {
   constructor(private httpClient: HttpClient) {
   }
 
+
   /**
    * Create by: CongBD
    * Date created: 01/03/2023
@@ -44,6 +45,7 @@ export class CommodityService {
   changePage(page: number): Observable<Commodity[]> {
     return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/list?page=" + page)
   }
+
   /**
    * Create by: CongBD
    * Date created: 01/03/2023
@@ -91,12 +93,38 @@ export class CommodityService {
   }
 
   /**
-   * Create by: DanhHD
+   <<<<<<< HEAD
+   * Create by: PhucNT
    * Date created: 01/03/2023
-   * Function: create commodity
+   * Function: get list commodity search by name commodity
+   * @param name commodity
+   * @param page
+   * @return Observable content[]
+   */
+
+  searchCommodityByName(name: string, page: number): Observable<any> {
+    return this.httpClient.get<any>("http://localhost:8080/home/search?name=" + name + "&page=" + page);
+  }
+
+  /**
+   * Create by: PhucNT
+   * Date created: 01/03/2023
+   * Function: get list commodity by quantity sold
+   * @param page
+   * @return Observable content[]
+   */
+
+  getAllByQuantitySold(page: number): Observable<any> {
+    return this.httpClient.get<any>("http://localhost:8080/home/quantity?page=" + page);
+  }
+
+  /** Createby: DanhHD
+   * Datecreated: 01 / 03 / 2023
+   * Function:create commodity
    * @param commodity
    * @return Observable Commodity[]
    */
+
   addCommodity(commodity): Observable<any> {
     return this.httpClient.post("http://localhost:8080/api/commodity/create", commodity);
   }
@@ -108,8 +136,10 @@ export class CommodityService {
    * @param id
    * @return Observable Commodity[]
    */
+
   findCommodityById(id): Observable<any> {
     return this.httpClient.get<any>("http://localhost:8080/api/commodity/" + id);
+
   }
 
   /**
@@ -123,5 +153,4 @@ export class CommodityService {
   editCommodity(id, commodity): Observable<any> {
     return this.httpClient.put<any>("http://localhost:8080/api/commodity/edit/" + id, commodity);
   }
-
 }

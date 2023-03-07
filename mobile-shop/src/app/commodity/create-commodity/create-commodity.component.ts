@@ -1,15 +1,24 @@
+
+// @ts-ignore
 import {Component, OnInit} from '@angular/core';
+// @ts-ignore
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
 import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
+// @ts-ignore
 import {AngularFireStorage} from "@angular/fire/storage";
+// @ts-ignore
 import {finalize} from "rxjs/operators";
+// @ts-ignore
 import {Observable} from "rxjs";
 import {Commodity} from "../../entity/commodity";
 import Swal from "sweetalert2";
+// @ts-ignore
 import {Router} from "@angular/router";
 
+
+// @ts-ignore
 @Component({
   selector: 'app-create-commodity',
   templateUrl: './create-commodity.component.html',
@@ -98,6 +107,7 @@ export class CreateCommodityComponent implements OnInit {
   addCommodity() {
     if (this.commodityForm.invalid) {
       Swal.fire({
+
         title: 'Chú ý',
         html: 'Thông tin phải điền đầy đủ và đúng định dạng !',
         icon: 'warning',
@@ -111,12 +121,14 @@ export class CreateCommodityComponent implements OnInit {
           'Thêm mới thông tin hàng hóa thành công',
           'success'
         );
+
         this.commodityForm.reset();
       }, error => {
         console.log(error)
       })
     }
   }
+
 
   cancel() {
     Swal.fire({

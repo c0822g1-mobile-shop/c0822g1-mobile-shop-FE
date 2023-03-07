@@ -1,15 +1,22 @@
+// @ts-ignore
 import {Component, Inject, OnInit} from '@angular/core';
+// @ts-ignore
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
 import {Commodity} from "../../entity/commodity";
 import {CommodityService} from "../../service/commodity.service";
+// @ts-ignore
 import {ActivatedRoute, Router} from "@angular/router";
 import {TrademarkService} from "../../service/trademark.service";
+// @ts-ignore
 import {AngularFireStorage} from "@angular/fire/storage";
+// @ts-ignore
 import {finalize} from "rxjs/operators";
+// @ts-ignore
 import {Observable} from "rxjs";
 import Swal from "sweetalert2";
 
+// @ts-ignore
 @Component({
   selector: 'app-edit-commodity',
   templateUrl: './edit-commodity.component.html',
@@ -24,7 +31,9 @@ export class EditCommodityComponent implements OnInit {
   downloadURL: Observable<string> | undefined;
   commodities: Commodity[] = [];
 
+
   constructor(private router: Router, private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
+
     this.commodityForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),
@@ -114,7 +123,7 @@ export class EditCommodityComponent implements OnInit {
         confirmButtonText: 'Đã hiểu'
       })
     } else {
-      this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(() => {
+      this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(next => {
         Swal.fire({
           title: 'Thành công',
           html: 'Thêm mới thông tin hàng hóa thành công',
@@ -148,5 +157,6 @@ export class EditCommodityComponent implements OnInit {
         }
       }
     );
+
   }
 }

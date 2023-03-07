@@ -1,8 +1,11 @@
+// @ts-ignore
 import {Component, OnInit} from '@angular/core';
 import {CommodityService} from "../../service/commodity.service";
 import Swal from 'sweetalert2';
+// @ts-ignore
 import {Title} from "@angular/platform-browser";
 
+// @ts-ignore
 @Component({
   selector: 'app-list-commodity',
   templateUrl: './list-commodity.component.html',
@@ -97,10 +100,24 @@ export class ListCommodityComponent implements OnInit {
         this.commodity = next;
       })
     }
+  }
 
+  page1(num:number){
+    if (this.search2) {
+      this.commodityService.search2(this.value1, this.value2, num).subscribe(next => {
+        this.commodity = next;
+      })
+    } else {
+      this.commodityService.changePage(num).subscribe(next => {
+        this.commodity = next;
+      })
+    }
   }
 
   search(value: number, value2: string) {
+    if (value2==""){
+      this.getAll()
+    }
     this.value1 = value;
     this.value2 = value2;
     this.search2 = true;
