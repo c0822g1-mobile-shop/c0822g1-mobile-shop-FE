@@ -38,8 +38,8 @@
     </thead>
 
     <tbody>
-    <tr [class.choose]="commodity.id == index" (click)="choice(commodity.id,commodity.name)" style="cursor: pointer"  *ngFor="let commodity of commodity['content'], index as i">
-      <th scope="row">{{i+1}}</th>
+    <tr [class.choose]="commodity.id == index" (click)="choice(commodity.id,commodity.name)" style="cursor: pointer"  *ngFor="let commodity of commodityList['content'], index as i">
+      <td>{{i + 1 + commodityList.number * commodityList.size}}</td>
       <td>{{commodity.name}}</td>
       <td>{{commodity.price | currency: 'VND': 'symbol'}}</td>
       <td>{{commodity.cpu}}</td>

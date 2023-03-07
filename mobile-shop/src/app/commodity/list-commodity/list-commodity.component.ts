@@ -4,6 +4,7 @@ import {CommodityService} from "../../service/commodity.service";
 import Swal from 'sweetalert2';
 // @ts-ignore
 import {Title} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 // @ts-ignore
 @Component({
@@ -16,12 +17,13 @@ export class ListCommodityComponent implements OnInit {
   commodity = []
   item: string;
   index = -1;
+  commodityList;
 
   search2 = false;
   value1 = -1;
   value2 = "";
 
-  constructor(private commodityService: CommodityService,private title:Title) {
+  constructor(private router: Router,private commodityService: CommodityService,private title:Title) {
     this.getAll();
   }
 
@@ -35,6 +37,7 @@ export class ListCommodityComponent implements OnInit {
     this.commodityService.getAll().subscribe(data => {
       console.log(data)
       this.commodity = data;
+      this.commodityList = data
     })
   }
 
@@ -69,6 +72,7 @@ export class ListCommodityComponent implements OnInit {
             showConfirmButton: false,
             timer: 2000
           });
+          this.index = -1;
           this.getAll();
         }, error => {
           console.log(error);
@@ -79,12 +83,12 @@ export class ListCommodityComponent implements OnInit {
 
   nextPage() {
     if (this.search2) {
-      this.commodityService.search2(this.value1, this.value2, this.commodity['number'] + 1).subscribe(next => {
-        this.commodity = next;
+      this.commodityService.search2(this.value1, this.value2, this.commodityList['number'] + 1).subscribe(next => {
+        this.commodityList = next;
       })
     } else {
-      this.commodityService.changePage(this.commodity['number'] + 1).subscribe(next => {
-        this.commodity = next;
+      this.commodityService.changePage(this.commodityList['number'] + 1).subscribe(next => {
+        this.commodityList = next;
       })
     }
 
@@ -92,12 +96,12 @@ export class ListCommodityComponent implements OnInit {
 
   previousPage() {
     if (this.search2) {
-      this.commodityService.search2(this.value1, this.value2, this.commodity['number'] - 1).subscribe(next => {
-        this.commodity = next;
+      this.commodityService.search2(this.value1, this.value2, this.commodityList['number'] - 1).subscribe(next => {
+        this.commodityList = next;
       })
     } else {
-      this.commodityService.changePage(this.commodity['number'] - 1).subscribe(next => {
-        this.commodity = next;
+      this.commodityService.changePage(this.commodityList['number'] - 1).subscribe(next => {
+        this.commodityList = next;
       })
     }
   }
@@ -105,11 +109,11 @@ export class ListCommodityComponent implements OnInit {
   page1(num:number){
     if (this.search2) {
       this.commodityService.search2(this.value1, this.value2, num).subscribe(next => {
-        this.commodity = next;
+        this.commodityList = next;
       })
     } else {
       this.commodityService.changePage(num).subscribe(next => {
-        this.commodity = next;
+        this.commodityList = next;
       })
     }
   }
@@ -133,7 +137,7 @@ export class ListCommodityComponent implements OnInit {
           timer: 2000
         });
       } else {
-        this.commodity = next;
+        this.commodityList = next;
       }
     })
 
