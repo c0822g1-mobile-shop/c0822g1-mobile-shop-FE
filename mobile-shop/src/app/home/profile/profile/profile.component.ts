@@ -93,6 +93,15 @@ export class ProfileComponent implements OnInit {
       this.age = this.form.controls.age.value;
       this.gender = this.form.controls.gender.value;
       this.dateOfBirth = this.form.controls.dateOfBirth.value;
+      this.token.setName(this.name);
+      this.token.setPhoneNumber(this.phoneNumber);
+      this.token.setEmail(this.email);
+      this.token.setAvatar(this.avatar);
+      this.token.setAddress(this.address);
+      this.token.setAge(this.age);
+      this.token.setGender(this.gender);
+      this.token.setDateOfBirth(this.dateOfBirth);
+
       document.getElementById('dismiss').click()
       Swal.fire({
         position: 'center',

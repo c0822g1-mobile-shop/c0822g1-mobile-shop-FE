@@ -1,20 +1,25 @@
 
 <div style="margin-left: 70px;margin-right: 70px">
 <h1 class="text-center" style="margin-top: 150px">Danh sách hàng hóa</h1>
-
 <form style="float: right;margin-right: 10px;margin-bottom: 30px;margin-top: 30px">
   <div>
     <label style="margin-right: 5px">
-      <select #select (change)="choose(select.value)" class="form-select form-control" aria-label="Default select example">
-        <option [value]="0"  selected>Tìm kiếm theo</option>
+      <select #select (change)="choose(select.value)" class="form-select form-control"
+              aria-label="Default select example">
+        <option [value]="0" selected>Tìm kiếm theo</option>
         <option [value]="1">Tên hàng hoá</option>
         <option [value]="2">Giá</option>
         <option [value]="3">Số lượng</option>
       </select>
     </label>
-    <input class="form-control me-2" #input [readOnly]="selects == 0" style="width: 300px;display: inline;margin-right: 5px" type="search" placeholder="Tìm kiếm" aria-label="Search">
-    <button class="btn btn-outline-primary " (click)="search(select.value,input.value)" [disabled]="selects == 0" style="width: 100px;margin-bottom: 5px" type="submit">Tìm kiếm</button>
+    <input class="form-control me-2" #input [readOnly]="selects == 0"
+           style="width: 300px;display: inline;margin-right: 5px" type="search" placeholder="Tìm kiếm"
+           aria-label="Search">
+    <button class="btn btn-outline-primary " (click)="search(select.value,input.value)" [disabled]="selects == 0"
+            style="width: 100px;margin-bottom: 5px" type="submit">Tìm kiếm
+    </button>
   </div>
+
 </form>
 
 
@@ -31,6 +36,7 @@
       <th scope="col" style="width: 300px">Số lượng trong kho (Cái)</th>
     </tr>
     </thead>
+
     <tbody>
     <tr [class.choose]="commodity.id == index" (click)="choice(commodity.id,commodity.name)" style="cursor: pointer"  *ngFor="let commodity of commodity['content'], index as i">
       <th scope="row">{{i+1}}</th>
@@ -44,6 +50,7 @@
   </table>
 </div>
 <div style="margin-bottom: 10px">
+
 <button class="btn btn-outline-success" routerLink="/commodity/create" style="margin-left: 20px; margin-top: 10px">Thêm mới</button>
 <button class="btn btn-outline-primary disabled1" [disabled]="index == -1"  id="edit1" [routerLink]="['/commodity/edit',index]">Chỉnh sửa</button>
 
@@ -60,6 +67,7 @@
     <li class="page-item"><button class="page-link" (click)="nextPage()">Trang sau</button></li>
   </ul>
 </nav>
+
 </div>
 
 </div>

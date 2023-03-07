@@ -22,9 +22,11 @@ export class CommodityService {
   getAll(): Observable<any> {
     return this.httpClient.get<any>(this.URL_COMMODITY + "/list")
   }
+
   getAll2(): Observable<any> {
     return this.httpClient.get<any>(this.URL_COMMODITY + "/getList")
   }
+
   /**
    * Create by: CongBD
    * Date created: 01/03/2023
@@ -55,12 +57,12 @@ export class CommodityService {
    * @param page
    * @return Observable Commodity[]
    */
-  search(id: number,type: string): Observable<Commodity[]> {
-    return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/search/"+id+"/" + type)
+  search(id: number, type: string): Observable<Commodity[]> {
+    return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/search/" + id + "/" + type)
   }
 
-  search2(id: number,type: string,page: number): Observable<Commodity[]> {
-    return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/search/"+id+"/" + type+"?page="+ page)
+  search2(id: number, type: string, page: number): Observable<Commodity[]> {
+    return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/search/" + id + "/" + type + "?page=" + page)
   }
 
   /**
@@ -74,7 +76,6 @@ export class CommodityService {
     const params = request;
     return this.httpClient.get<any>(this.URL_COMMODITY, {params});
   }
-
 
   /**
    * Create by: LongPT
@@ -93,7 +94,6 @@ export class CommodityService {
   }
 
   /**
-   <<<<<<< HEAD
    * Create by: PhucNT
    * Date created: 01/03/2023
    * Function: get list commodity search by name commodity
@@ -141,6 +141,7 @@ export class CommodityService {
     return this.httpClient.get<any>("http://localhost:8080/api/commodity/" + id);
 
   }
+
 
   /**
    * Create by: DanhHD

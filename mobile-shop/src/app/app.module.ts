@@ -27,6 +27,7 @@ import {CommonModule} from "@angular/common";
 
 import {ToastrModule} from "ngx-toastr";
 import {BrowserModule} from "@angular/platform-browser";
+import {ScanQrCodeModule} from "./scan-qr-code/scan-qr-code.module";
 
 
 // @ts-ignore
@@ -38,6 +39,7 @@ import {BrowserModule} from "@angular/platform-browser";
     BodyComponent
   ],
   imports: [
+    ScanQrCodeModule,
     CommonModule,
     SupplierModule,
     BrowserModule,
@@ -53,7 +55,6 @@ import {BrowserModule} from "@angular/platform-browser";
     CommodityModule,
     WarehouseModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     SalesReportModule,
     ToastrModule.forRoot(),
     RouterModule,

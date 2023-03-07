@@ -3,7 +3,6 @@ import {ScanQrCodeService} from "../../service/scan-qr-code.service";
 import {Commodity} from "../../entity/commodity";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
-import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-scan-qr-code',
@@ -28,11 +27,11 @@ export class ScanQrCodeComponent implements OnInit {
 
   constructor(private scanQrService: ScanQrCodeService,
               private router: Router,
-              private toast: ToastrService) { }
+              private toast: ToastrService) {
+  }
 
   ngOnInit(): void {
   }
-
 
 
   /**
@@ -43,12 +42,12 @@ export class ScanQrCodeComponent implements OnInit {
    * @return Observable Commodity
    */
   findByQRCode() {
-    this.scanQrService.findByQRCode(this.selectedQRCode).subscribe(data=>{
+    this.scanQrService.findByQRCode(this.selectedQRCode).subscribe(data => {
       console.log(this.selectedQRCode)
       this.commodities.emit(data);
-    },error => {
+    }, error => {
 
-      this.toast.error("Không có sản phẩm có mã QR này","Thông báo")
+      this.toast.error("Không có sản phẩm có mã QR này", "Thông báo")
       this.router.navigateByUrl("warehouse")
     });
   }
