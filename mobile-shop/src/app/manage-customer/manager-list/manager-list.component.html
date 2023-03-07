@@ -61,7 +61,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of manageInfoJson?.content; index as i">
-      <td>{{i + 1}}</td>
+      <td>{{i + 1+ manageInfoJson.number * manageInfoJson.size}}</td>
       <td>{{item.name}}</td>
       <td *ngIf="item.gender">Nam</td>
       <td *ngIf="!item.gender">Nữ</td>
@@ -177,4 +177,3 @@
     </div>
   </div>
 </div>
-
