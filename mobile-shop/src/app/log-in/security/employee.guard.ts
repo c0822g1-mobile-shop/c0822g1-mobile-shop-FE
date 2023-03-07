@@ -12,11 +12,19 @@ export class EmployeeGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+<<<<<<< HEAD
     if (this.token.getRole() == 'ROLE_ADMIN' || this.token.getRole() == 'ROLE_EMPLOYEE') {
       return true;
 
     }
     return false;
+=======
+    if (this.token.getRole() == 'ROLE_ADMIN' || this.token.getRole() == 'ROLE_EMPLOYEE'){
+      return true;
+
+    }
+    return false
+>>>>>>> origin/supplier-DiemTTT
   }
 
 }

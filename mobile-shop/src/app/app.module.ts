@@ -10,7 +10,8 @@ import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 // @ts-ignore
 import {AngularFireStorageModule} from "@angular/fire/storage";
-// @ts-ignore
+import {HttpClientModule} from "@angular/common/http";
+import {ToastrModule} from "ngx-toastr";// @ts-ignore
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import {WarehouseModule} from "./warehouse/warehouse.module";
@@ -24,8 +25,6 @@ import {CommodityModule} from "./commodity/commodity.module";
 import {SalesReportModule} from "./sales-report/sales-report.module";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
-
-import {ToastrModule} from "ngx-toastr";
 import {BrowserModule} from "@angular/platform-browser";
 
 
@@ -51,6 +50,7 @@ import {BrowserModule} from "@angular/platform-browser";
     ReactiveFormsModule,
     FormsModule,
     CommodityModule,
+    HttpClientModule,
     WarehouseModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
