@@ -17,6 +17,10 @@ export class AdminGuard implements CanActivate {
 
    }
    return false;
+    if (this.token.getRole() == 'ROLE_ADMIN') {
+      return true;
+    }
+    return false;
   }
 
 }

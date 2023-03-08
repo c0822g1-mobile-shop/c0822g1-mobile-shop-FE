@@ -105,7 +105,7 @@ export class CommoditySelectComponent implements OnInit {
    * Function: get by id commodity
    */
   select() {
-    this.commodityService.findById(this.commodity.id).subscribe(data => {
+    this.commodityService.findCommodityById(this.commodity.id).subscribe(data => {
       this.commodity = data;
       this.commodities1.emit(data)
     }, error => {

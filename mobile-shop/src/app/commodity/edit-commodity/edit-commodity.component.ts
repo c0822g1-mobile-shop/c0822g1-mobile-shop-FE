@@ -1,16 +1,22 @@
+// @ts-ignore
 import {Component, Inject, OnInit} from '@angular/core';
+// @ts-ignore
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Trademark} from "../../entity/trademark";
 import {Commodity} from "../../entity/commodity";
 import {CommodityService} from "../../service/commodity.service";
+// @ts-ignore
 import {ActivatedRoute, Router} from "@angular/router";
 import {TrademarkService} from "../../service/trademark.service";
 // @ts-ignore
 import {AngularFireStorage} from "@angular/fire/storage";
+// @ts-ignore
 import {finalize} from "rxjs/operators";
+// @ts-ignore
 import {Observable} from "rxjs";
 import Swal from "sweetalert2";
 
+// @ts-ignore
 @Component({
   selector: 'app-edit-commodity',
   templateUrl: './edit-commodity.component.html',
@@ -24,11 +30,24 @@ export class EditCommodityComponent implements OnInit {
   src: string | undefined;
   downloadURL: Observable<string> | undefined;
   commodities: Commodity[] = [];
+  clickButton = false;
+  errors = {
+    name: '',
+    cpu: '',
+    capacity: '',
+    trademark: '',
+    price: '',
+    image: '',
+    camera: '',
+    selfie: '',
+    screenSize: '',
+    guarantee: '',
+    origin: '',
+    codeQr: ''
+  }
 
-
-  constructor(private router: Router,private commodityService: CommodityService, private activatedRoute: ActivatedRoute,
+  constructor(private router: Router, private commodityService: CommodityService, private activatedRoute: ActivatedRoute,
               private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
-
 
     this.commodityForm = new FormGroup({
       id: new FormControl(''),
@@ -44,7 +63,8 @@ export class EditCommodityComponent implements OnInit {
       guarantee: new FormControl('', [Validators.required, Validators.pattern("[0-9]*"), Validators.maxLength(2)]),
       origin: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*"), Validators.minLength(2), Validators.maxLength(20)]),
       description: new FormControl('', [Validators.required]),
-      codeQr: new FormControl('', [Validators.required, Validators.pattern("[Q][R][0-9]*"), Validators.minLength(5), Validators.maxLength(5)])
+      codeQr: new FormControl('', [Validators.required, Validators.pattern("[Q][R][0-9]*"), Validators.minLength(5), Validators.maxLength(5)]),
+      quantity: new FormControl()
     });
     this.commodityService.findCommodityById(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(next => {
       console.log(this.commodityForm.patchValue(next));
@@ -110,26 +130,63 @@ export class EditCommodityComponent implements OnInit {
   }
 
   editCommodity() {
-    if (this.commodityForm.invalid) {
-      Swal.fire({
-        title: 'Chú ý: Form chưa điền đúng định dạng hoặc chưa điền đầy đủ thông tin!',
-        icon: 'warning',
-        text:'hãy nhập lại thông tin ',
-
-        showConfirmButton: false,
-        timer: 3000
-      })
-    } else {
+    if (this.commodityForm.valid) {
       this.commodityService.editCommodity(this.commodityForm.value.id, this.commodityForm.value).subscribe(() => {
+        this.router.navigateByUrl("/commodity/list")
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Chỉnh sửa thành công',
+          title: 'Chỉnh sửa thành công!',
           showConfirmButton: false,
-          timer: 3000
+          timer: 2000
         });
-        this.router.navigateByUrl('/commodity/list');
+      }, error => {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Chỉnh sửa thất bại!',
+          text: 'Chỉnh sửa thất bại vui lòng điền đúng tất cả thông tin',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        for (let i = 0; i < error.error.length; i++) {
+          if (error.error && error.error[i].field === 'name') {
+            this.errors.name = error.error[i].defaultMessage;
+          }
+          if (error.error && error.error[i].field === 'codeQr') {
+            this.errors.codeQr = error.error[i].defaultMessage;
+          }
+        }
       })
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Chỉnh sửa thất bại!',
+        text: 'Chỉnh sửa thất bại vui lòng điền đúng tất cả thông tin',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
+      this.clickButton = true;
     }
+  }
+
+  cancel() {
+    Swal.fire({
+      title: 'Hủy bỏ',
+      html: 'Bạn có muốn hủy bỏ thêm mới thông tin hàng hóa ?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Hủy',
+      showConfirmButton: true,
+      confirmButtonText: 'Có',
+      confirmButtonColor: 'red'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl("/commodity/list");
+        }
+      }
+    );
   }
 }

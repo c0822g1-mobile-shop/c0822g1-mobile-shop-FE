@@ -14,7 +14,6 @@ export class EmployeeGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.token.getRole() == 'ROLE_ADMIN' || this.token.getRole() == 'ROLE_EMPLOYEE') {
       return true;
-
     }
     return false;
     if (this.token.getRole() == 'ROLE_ADMIN' || this.token.getRole() == 'ROLE_EMPLOYEE'){
@@ -22,6 +21,5 @@ export class EmployeeGuard implements CanActivate {
 
     }
     return false
-  }
-
+    }
 }

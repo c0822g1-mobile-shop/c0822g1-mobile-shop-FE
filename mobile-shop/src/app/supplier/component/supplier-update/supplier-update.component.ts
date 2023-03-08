@@ -19,7 +19,7 @@ export class SupplierUpdateComponent implements OnInit {
     name: new FormControl("", [Validators.required, Validators.maxLength(100)]),
     address: new FormControl("", [Validators.required, Validators.maxLength(200)]),
     phoneNumber: new FormControl("", [Validators.required, Validators.pattern("^(0|\\+84)\\d{9}$")]),
-    email: new FormControl("", [Validators.required, Validators.pattern("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")])
+    email: new FormControl("", [Validators.required, Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"), Validators.minLength(5), Validators.maxLength(150)])
   });
 
   clickButton = false;

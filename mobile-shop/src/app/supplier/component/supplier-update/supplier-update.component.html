@@ -86,7 +86,7 @@
                     Không được để trống.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.phoneNumber.hasError('pattern')) || form.controls.phoneNumber.hasError('pattern') && form.controls.phoneNumber.touched">
-                    Số điện thoại không đúng định dạng.</p>
+                    Số điện thoại không đúng định dạng (Ví dụ: +84937110xxx / 0937110xxx).</p>
                   <p style="color: red; position: absolute"
                      *ngIf="errors.phoneNumber && !form.controls.phoneNumber.hasError('required') && !form.controls.phoneNumber.hasError('pattern')">{{errors.phoneNumber}}</p>
 
@@ -110,7 +110,13 @@
                     Không được để trống.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="(clickButton && form.controls.email.hasError('pattern')) || form.controls.email.hasError('pattern') && form.controls.email.touched">
-                    Email không đúng định dạng.</p>
+                    Email không đúng định dạng (Ví dụ: supplier-email@email.com).</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="form.controls.email.hasError('minlength') && form.controls.email.touched && !form.controls.email.hasError('pattern')">
+                    Email phải từ 5 đến 150 ký tự.</p>
+                  <p style="color: red; position: absolute"
+                     *ngIf="form.controls.email.hasError('maxlength') && form.controls.email.touched && !form.controls.email.hasError('pattern')">
+                    Email phải từ 5 đến 150 ký tự.</p>
                   <p style="color: red; position: absolute"
                      *ngIf="errors.email && !form.controls.email.hasError('required') && !form.controls.email.hasError('pattern')">{{errors.email}}</p>
 

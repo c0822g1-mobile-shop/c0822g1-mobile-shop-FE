@@ -32,6 +32,7 @@ export class SupplierListComponent implements OnInit {
 
   getAll(page: number) {
     this.supplierService.getAll(this.search, page).subscribe(next => {
+      console.log(next)
       // console.log(next)
       // this.supplierList = next;
       // console.log(this.supplierList)

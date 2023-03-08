@@ -8,6 +8,7 @@ import {BillService} from "../../service/bill/bill.service";
 import {Title} from "@angular/platform-browser";
 import {BillHistory} from "../../entity/bill-history";
 import Swal from 'sweetalert2';
+import {CustomerService} from "../../service/customer.service";
 
 
 @Component({
@@ -16,9 +17,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./bill-create.component.css']
 })
 export class BillCreateComponent implements OnInit {
-
-  @Input()
-  customer: User = {};
+  customer1: User = {};
   eventSelected = new EventEmitter();
   @Input()
   commodity: Commodity = {};
@@ -37,7 +36,7 @@ export class BillCreateComponent implements OnInit {
     // email:"trung@gmail.com",
   };
 
-  constructor(private billService: BillService,
+  constructor(private userService:CustomerService,private billService: BillService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private title: Title) {
@@ -72,6 +71,17 @@ export class BillCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(
+      next => {
+        let id = next.get('id');
+        console.log(id)
+        this.userService.findById(parseInt(id)).subscribe(
+          next => {
+            this.customer1 = next;
+          }
+        )
+      }
+    )
   }
 
   saveBill(): void {
@@ -104,5 +114,14 @@ export class BillCreateComponent implements OnInit {
     this.billService.findById(this.userId).subscribe(data => {
       this.userInfo = data;
     })
+  }
+
+  getCustomer(customer: User) {
+    console.log(customer)
+    this.customer1 = customer;
+  }
+
+  getCommodity(commodity: Commodity) {
+    this.commodity = commodity;
   }
 }

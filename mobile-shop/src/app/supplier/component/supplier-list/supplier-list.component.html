@@ -29,7 +29,7 @@
 
         <tr *ngFor="let item of supplierList['content'], index as i" (click)="supplier = item"
             [class.table-active]="item == supplier">
-          <td>{{i + 1 + supplierList.number * supplierList.size}}</td>
+          <td>{{i + 1}}</td>
           <td>{{item?.code}}</td>
           <td class="text-left">{{item?.name}}</td>
           <td class="text-left">{{item?.address | slice: 0:30}}...</td>

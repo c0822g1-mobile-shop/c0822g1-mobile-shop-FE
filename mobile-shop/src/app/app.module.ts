@@ -1,31 +1,28 @@
+import {NgModule} from '@angular/core';
 import {ManageCustomerModule} from "./manage-customer/manage-customer.module";
 import {BillHistoryModule} from "./bill-history/bill-history.module";
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-// @ts-ignore
-// @ts-ignore
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-// @ts-ignore
-// @ts-ignore
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-// @ts-ignore
 import {AngularFireStorageModule} from "@angular/fire/storage";
-import {HttpClientModule} from "@angular/common/http";
-import {ToastrModule} from "ngx-toastr";// @ts-ignore
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
-import {WarehouseModule} from "./warehouse/warehouse.module";
-
-import {SupplierModule} from "./supplier/supplier.module";
-import {HeaderComponent} from "./home/header/header.component";
-import {BodyComponent} from "./home/body/body.component";
-import {FooterComponent} from "./home/footer/footer.component";
-import {HomeModule} from "./home/home.module";
 import {CommodityModule} from "./commodity/commodity.module";
+import {HeaderComponent} from "./home/header/header.component";
+import {FooterComponent} from "./home/footer/footer.component";
+import {BodyComponent} from "./home/body/body.component";
+import {HomeModule} from "./home/home.module";
 import {SalesReportModule} from "./sales-report/sales-report.module";
+import {WarehouseModule} from "./warehouse/warehouse.module";
 import {RouterModule} from "@angular/router";
+import {SupplierModule} from "./supplier/supplier.module";
 import {CommonModule} from "@angular/common";
+import {ToastrModule} from "ngx-toastr";
 import {BrowserModule} from "@angular/platform-browser";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './log-in/security/auth.interceptor';
+import {ScanQrCodeModule} from "./scan-qr-code/scan-qr-code.module";
 
 
 // @ts-ignore
@@ -37,6 +34,7 @@ import {BrowserModule} from "@angular/platform-browser";
     BodyComponent
   ],
   imports: [
+    ScanQrCodeModule,
     CommonModule,
     SupplierModule,
     BrowserModule,
@@ -53,19 +51,19 @@ import {BrowserModule} from "@angular/platform-browser";
     HttpClientModule,
     WarehouseModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    HttpClientModule,
     SalesReportModule,
     ToastrModule.forRoot(),
     RouterModule,
     WarehouseModule,
     AngularFireStorageModule,
-    WarehouseModule,
-    AngularFireStorageModule,
-    WarehouseModule,
-    AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   exports: []
 })

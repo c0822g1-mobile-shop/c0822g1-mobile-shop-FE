@@ -1,6 +1,8 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CommodityRoutingModule } from './commodity-routing.module';
+// @ts-ignore
+import {CommonModule} from '@angular/common';
+import {CommoditySelectComponent} from './commodity-select/commodity-select.component';
+import {CommodityRoutingModule} from './commodity-routing.module';
 import {CreateCommodityComponent} from "./create-commodity/create-commodity.component";
 import {ListCommodityComponent} from './list-commodity/list-commodity.component';
 import {BrowserModule} from "@angular/platform-browser";
@@ -11,8 +13,6 @@ import {EditCommodityComponent} from "./edit-commodity/edit-commodity.component"
 import {environment} from "../../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {AngularFireModule} from "@angular/fire";
-import {CommoditySelectComponent} from "./commodity-select/commodity-select.component";
-
 
 @NgModule({
   imports: [
@@ -27,15 +27,17 @@ import {CommoditySelectComponent} from "./commodity-select/commodity-select.comp
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
+
     declarations: [
     CommoditySelectComponent,
     ListCommodityComponent,
     CreateCommodityComponent,
     EditCommodityComponent,
   ],
-    exports: [
-        CommoditySelectComponent
-    ],
+
+  exports: [
+    CommoditySelectComponent
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CommodityModule {
