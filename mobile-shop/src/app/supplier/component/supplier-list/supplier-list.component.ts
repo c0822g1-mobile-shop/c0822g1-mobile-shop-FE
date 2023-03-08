@@ -32,11 +32,8 @@ export class SupplierListComponent implements OnInit {
 
   getAll(page: number) {
     this.supplierService.getAll(this.search, page).subscribe(next => {
-      // console.log(next)
-      // this.supplierList = next;
-      // console.log(this.supplierList)
-      // // @ts-ignore
-      // this.nums = Array.from(Array(next.totalPages).keys());
+
+      console.log(next)
 
       if (next['content'].length == 0) {
         Swal.fire({
@@ -46,7 +43,7 @@ export class SupplierListComponent implements OnInit {
           text: 'Kết quả bạn cần tìm không có',
           showConfirmButton: false,
           timer: 2000
-        });
+        })
       } else {
         this.supplierList = next;
         // @ts-ignore

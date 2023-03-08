@@ -6,21 +6,21 @@ import {TokenService} from "../service/token.service";
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeeGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(private token:TokenService) {
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.token.getRole() == 'ROLE_ADMIN' || this.token.getRole() == 'ROLE_EMPLOYEE') {
+    if (this.token.getRole() == 'ROLE_ADMIN') {
+      return true;
+
+    }
+    return false;
+    if (this.token.getRole() == 'ROLE_ADMIN') {
       return true;
     }
     return false;
-    if (this.token.getRole() == 'ROLE_ADMIN' || this.token.getRole() == 'ROLE_EMPLOYEE'){
-      return true;
-
-    }
-    return false
   }
-}
 
+}

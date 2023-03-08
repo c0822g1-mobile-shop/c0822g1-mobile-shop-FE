@@ -1,24 +1,25 @@
-<section style="margin-top: 100px">
-  <div class=" py-5">
-    <div class="row d-flex justify-content-center align-items-center">
-      <div class="col-lg-8 col-xl-6">
-        <div class="card rounded-3">
-          <div class="card-body p-4 p-md-4">
+
+<section class="vh-120 gradient-custom ">
+  <div class=" container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-8">
+        <div class="card rounded-3" style="margin-top: 80px">
+          <div class="card-body p-4 p-md-4" >
             <h1 style="text-align: center; font-weight: bold"> Nhập Kho </h1>
             <br>
-
               <div class=" text-center">
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="commodityQR = null">
                   Chọn sản phẩm
                 </button>
                 <button type="reset" class="btn btn-outline-secondary m-4 w-25" data-toggle="modal"
-                        data-target="#exampleModalQR">Quét mã QR
+                        data-target="#exampleModalQR" (click)="commodityQR = null">Quét mã QR
+
                 </button>
               </div>
               <div class="row align-items-center pt-3 pb-2">
                 <div class="col-md-4 ps-3">
 
-                  <label style="font-weight: bold" class="mb-0">Tên Hàng<sup
+                  <label style="font-weight: bold" class="mb-0">Tên hàng<sup
                     style="color: red; font-size: 15px">*</sup></label>
                 </div>
                 <div class="col-md-8 pe-4" *ngIf="commodityQR">
@@ -50,13 +51,13 @@
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
 
-                  <label style="font-weight: bold" for="phone-number" class="mb-0">Số lượng<sup
+                  <label style="font-weight: bold"  class="mb-0">Số lượng<sup
                     style="color: red; font-size: 15px">*</sup></label>
                 </div>
                 <div class="col-md-8 pe-4">
                   <form [formGroup]="form">
-                  <input type="number" id="phone-number" #quantity formControlName="quantity" name="phone-number"
-                         placeholder="Ex: Số Lượng" class="form-control form-control-md"/>
+                  <input type="number"  #quantity formControlName="quantity" name="phone-number"
+                         class="form-control form-control-md"/>
                   <span style="color: red" *ngIf="form.controls.quantity.hasError('required') && form.controls.quantity.touched">Không được để trống</span>
                   <span style="color: red" *ngIf="form.controls.quantity.hasError('min') && form.controls.quantity.touched">Không được bé hơn 0</span>
                   </form>
@@ -64,16 +65,16 @@
               </div>
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
-                  <label style="font-weight: bold">Nhà Cung Cấp</label>
+                  <label style="font-weight: bold"  class="mb-0">Nhà cung cấp<sup
+                    style="color: red; font-size: 15px">*</sup></label>
                 </div>
                 <div class="row col-md-8 pe-4">
                   <div style="display: inline-flex" class="input-group mb-3">
 
-                    <input type="text" [value]="suppliers.name" #supplierss readonly class="form-control w-50"
-                           id="exampleDatepicker4 "
-                           style="margin-left: 15px" placeholder="Ex: Nhà cung cấp"/>
-                    <button type="button" class="btn btn-outline-primary" style="margin-left: 10px" data-toggle="modal"
-                            data-target="#exampleModal1">Tìm Nhà Cung Cấp
+                    <input style="margin-left: 12px" type="text" [value]="suppliers.name" #supplierss readonly class="form-control w-50"
+                    />
+                    <button style="margin-left: 10px" type="button" class="btn btn-outline-primary" data-toggle="modal"
+                            data-target="#exampleModal1">Tìm nhà cung cấp
                     </button>
                   </div>
                 </div>
@@ -90,8 +91,8 @@
     </div>
   </div>
 </section>
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="text-center" id="exampleModalLabel1">Tìm Nhà Cung Cấp</h5>
@@ -102,18 +103,11 @@
       <div class="modal-body">
         <nav class="navbar navbar-expand-lg ">
           <div class="container-fluid">
-            <a style="font-weight: bold" class="navbar-brand" href="#">Tìm Kiếm Theo</a>
-            <select class="form-select m-4 w-25" aria-label="Default select example">
-              <option>Nhà cung cấp</option>
-              <option>Tên nhà cung cấp</option>
-              <option>Địa chỉ</option>
-              <option>Email</option>
-            </select>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <input class="form-control me-2" type="search" #nameSearch placeholder="Tìm Kiếm"
+              <input style="margin-left: 30px" class="form-control me-2" type="search" #nameSearch placeholder="Tìm kiếm theo tên"
                      aria-label="Search">
               <div class="col-md-4 ps-3">
-                <button class="btn btn-outline-primary" style="width: 100px" (click)="search(nameSearch.value)">Tìm
+                <button  class="btn btn-outline-primary" style="width: 100px; margin-left: 30px" (click)="search(nameSearch.value,0)">Tìm
                   Kiếm
                 </button>
               </div>
@@ -122,14 +116,16 @@
         </nav>
         <br>
         <br>
+        <div style="height: 200px" >
+
         <table class="table table-striped table-hover">
           <thead>
-          <tr>
+          <tr class="btn-info">
             <th scope="col">STT</th>
             <th scope="col">Tên Nhà Cung Cấp</th>
             <th scope="col">Địa Chỉ</th>
-            <th scope="col">Số Điện Thoại</th>
             <th scope="col">Email</th>
+            <th scope="col">Số Điện Thoại</th>
           </tr>
           </thead>
           <tbody>
@@ -143,21 +139,16 @@
           </tr>
           </tbody>
         </table>
-        <div style="margin-left: 70%">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Sau</a>
-              </li>
-            </ul>
-          </nav>
+
         </div>
+
+        <nav aria-label="Page navigation example" style="float: right;margin-right: 10px; margin-top: 10px">
+          <ul class="pagination">
+            <li class="page-item"><button class="page-link" (click)="previousPage()">Trang Trước</button></li>
+            <li class="page-item"><b class="page-link">{{findSupplier['number']+1}}</b></li>
+            <li class="page-item"><button class="page-link" (click)="nextPage()">Trang Sau</button></li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>

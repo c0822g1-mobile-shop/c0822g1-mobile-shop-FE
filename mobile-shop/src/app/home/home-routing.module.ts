@@ -9,9 +9,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: '' , component: BodyComponent},
   {path: 'cart' , component: CartComponent},
-  {path: 'home/:name', component: BodyComponent},
   {path: 'home/:name', component: BodyComponent}
-  // {path: '', component: BodyComponent}
 ];
 
 @NgModule({

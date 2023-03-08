@@ -5,8 +5,10 @@ import {TokenService} from "../../service/token.service";
 import {Router} from "@angular/router";
 import {ShareService} from "../../service/share.service";
 import Swal from "sweetalert2";
+// @ts-ignore
 import {Title} from "@angular/platform-browser";
 
+// @ts-ignore
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,11 +38,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.title.setTitle('Trang Đăng Nhập');
-  this.islogged = this.token.isLogger();
-  if (this.islogged) {
-    this.router.navigateByUrl('/')
-  }
+    this.title.setTitle('Trang Đăng Nhập');
+    this.islogged = this.token.isLogger();
+    if (this.islogged) {
+      this.router.navigateByUrl('/')
+    }
   }
 
   login() {

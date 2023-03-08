@@ -1,9 +1,8 @@
+
 // @ts-ignore
-import {BrowserModule} from '@angular/platform-browser';
 // @ts-ignore
 import {NgModule} from '@angular/core';
 // @ts-ignore
-import {HttpClientModule} from "@angular/common/http";
 
 import {ManageCustomerModule} from "./manage-customer/manage-customer.module";
 import {BillHistoryModule} from "./bill-history/bill-history.module";
@@ -28,11 +27,13 @@ import {HomeModule} from "./home/home.module";
 import {SalesReportModule} from "./sales-report/sales-report.module";
 import {WarehouseModule} from "./warehouse/warehouse.module";
 import {RouterModule} from "@angular/router";
-
 import {SupplierModule} from "./supplier/supplier.module";
 import {CommonModule} from "@angular/common";
-
 import {ToastrModule} from "ngx-toastr";
+import {BrowserModule} from "@angular/platform-browser";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './log-in/security/auth.interceptor';
+import {ScanQrCodeModule} from "./scan-qr-code/scan-qr-code.module";
 
 
 // @ts-ignore
@@ -44,6 +45,7 @@ import {ToastrModule} from "ngx-toastr";
     BodyComponent
   ],
   imports: [
+    ScanQrCodeModule,
     CommonModule,
     SupplierModule,
     BrowserModule,
@@ -56,7 +58,8 @@ import {ToastrModule} from "ngx-toastr";
     HomeModule,
     ReactiveFormsModule,
     FormsModule,
-    CommodityModule,
+    WarehouseModule,
+    AngularFireStorageModule,
     HttpClientModule,
     SalesReportModule,
     ToastrModule.forRoot(),
@@ -65,18 +68,13 @@ import {ToastrModule} from "ngx-toastr";
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   exports: []
 })
 export class AppModule {
 }
-
-
-
-
-
-
-
-
-

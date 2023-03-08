@@ -7,7 +7,6 @@ import {Commodity} from "../../entity/commodity";
 import {WarehousingService} from "../../service/warehousing.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import Swal from 'sweetalert2';
-import {error} from "@angular/compiler/src/util";
 
 // @ts-ignore
 @Component({
@@ -23,28 +22,32 @@ export class WareHousingComponent implements OnInit {
   suppliers: Supplier = {
     name: ""
   };
+
+
   commodityQR: Commodity;
   form: FormGroup = new FormGroup({
     quantity: new FormControl("", [Validators.required, Validators.min(0)]),
-    // supplier: new FormControl("", [Validators.required]),
   });
+  page;
   nums;
+  commodity: any;
 
 
   constructor(private findSupplierService: FindSupplierService,
               private wareHousingService: WarehousingService) {
-    this.getAllSupplier(name)
+    this.getAllSupplier(name, 0)
     console.log(this.supplier)
     if (this.supplier != null) {
       this.findSupplierv2(this.supplier)
     }
+
   }
 
   ngOnInit(): void {
   }
 
-  getAllSupplier(name: string) {
-    this.findSupplierService.getAllSupplier(name).subscribe(data => {
+  getAllSupplier(name: string, page: number) {
+    this.findSupplierService.getAllSupplier(name, page).subscribe(data => {
       this.findSupplier = data;
       console.log(data)
     })
@@ -56,11 +59,38 @@ export class WareHousingComponent implements OnInit {
     })
   }
 
-  search(name: string) {
-    this.findSupplierService.getAllSupplier(name).subscribe(data => {
-      this.findSupplier = data;
+  nextPage() {
+    this.findSupplierService.changePage(this.findSupplier['number'] + 1).subscribe(next => {
+      this.findSupplier = next;
     })
   }
+
+  previousPage() {
+    this.findSupplierService.changePage(this.findSupplier['number'] - 1).subscribe(next => {
+      this.findSupplier = next;
+    })
+  }
+
+  search(name: string, page: number) {
+    this.findSupplierService.getAllSupplier(name, page).subscribe(data => {
+      if (data['content'].length == 0) {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'Không tìm thấy',
+          text: 'Kết quả bạn cần tìm không có',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      } else {
+        this.findSupplier = data;
+        // @ts-ignore
+        this.nums = Array.from(Array(next.totalPages).keys());
+      }
+
+    });
+  }
+
 
   handleQrCodeResult(commodity: Commodity) {
     this.commodityQR = commodity;
@@ -68,7 +98,6 @@ export class WareHousingComponent implements OnInit {
   }
 
   save(id: number, quantity: number) {
-
 
     this.wareHousingService.wareHousing(id, quantity).subscribe(next => {
       console.log(next)

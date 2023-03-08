@@ -11,9 +11,10 @@ export interface User {
   email?: string;
   address?: string;
   age?: number;
-  gender?: string;
+  avatar?: string;
+  gender?: boolean;
   dateOfBirth?: string;
-  userRole?: UserRole;
+  role?: string;
   bill?: Bill;
   billHistory?: BillHistory;
 }

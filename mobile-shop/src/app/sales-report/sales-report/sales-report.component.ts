@@ -3,7 +3,9 @@ import {SalesReportService} from "../../service/sales-report.service";
 import {SalesReport} from "../../entity/sales-report";
 // @ts-ignore
 import {Chart} from 'chart.js';
+
 import Swal from 'sweetalert2';
+// @ts-ignore
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 
 @Component({
@@ -12,7 +14,6 @@ import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "
   styleUrls: ['./sales-report.component.css']
 })
 export class SalesReportComponent implements OnInit {
-
   private chart: Chart;
   revenues: number[] = [];
   dateBuy: string[] = [];
@@ -46,7 +47,6 @@ export class SalesReportComponent implements OnInit {
 
 
   toggleCommodityInput(option: string): void {
-
     const commodityIdControl = this.reportForm.get('commodityId');
     if (option === 'option3') {
       this.showCommodityInput = true;
@@ -76,7 +76,7 @@ export class SalesReportComponent implements OnInit {
   salesReport(startDay: string, endDay: string) {
     this.revenues = [];
     this.dateBuy = [];
-    this.drawChart(this.dateBuy, this.revenues);
+    this.drawChart(this.dateBuy,this.revenues);
     const commodityId = this.reportForm.controls['commodityId'].value;
     if (this.radioOptions === 'option1') {
       this.salesReportService.salesReport(startDay.toString(), endDay.toString()).subscribe(data => {
@@ -108,9 +108,8 @@ export class SalesReportComponent implements OnInit {
         }
         console.log(this.revenues)
         console.log(this.dateBuy)
-        this.drawChart(this.dateBuy, this.revenues)
-
-      }, error => {
+        this.drawChart(this.dateBuy,this.revenues)
+      },error=>{
         Swal.fire('', 'Mã sản phẩm này không tồn tại', 'error');
       })
     }

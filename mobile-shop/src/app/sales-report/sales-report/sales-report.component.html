@@ -10,7 +10,7 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <label class="form-label" for="firstName">Từ ngày</label>
+                    <label class="form-label" for="firstName">Từ ngày<span style="color: red">(*)</span></label>
                     <input type="date" #startDay id="firstName" formControlName="startDay"
                            class="form-control form-control-lg"/>
                     <div class="form-control-feedback" style="color: red"
@@ -19,14 +19,12 @@
                     </div>
                   </div>
                 </div>
-
-
                 <div class="col-md-6 mb-4">
-
                   <div class="form-outline">
-                    <label class="form-label" for="lastName">Đến ngày</label>
+                    <label class="form-label" for="lastName">Đến ngày<span style="color: red">(*)</span></label>
                     <input type="date" #endDay id="lastName" formControlName="endDay"
                            class="form-control form-control-lg"/>
+                    <ng-template #block><br></ng-template>
                     <div class="form-control-feedback" style="color: red"
                          *ngIf="reportForm.controls.endDay.hasError('required') && reportForm.controls.endDay.touched">
                       Ngày kết thúc không được để trống
@@ -84,8 +82,7 @@
             </div>
 
             <div class="justify-content-end row">
-              <input class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['']" value="Thoát"/>
-
+              <input class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/home']" value="Thoát"/>
             </div>
           </div>
         </div>
