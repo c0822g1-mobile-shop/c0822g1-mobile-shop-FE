@@ -48,6 +48,7 @@ export class CommodityService {
     return this.httpClient.get<Commodity[]>("http://localhost:8080/api/commodity/list?page=" + page)
   }
 
+
   /**
    * Create by: CongBD
    * Date created: 01/03/2023
@@ -139,6 +140,7 @@ export class CommodityService {
 
   findCommodityById(id): Observable<any> {
     return this.httpClient.get<any>("http://localhost:8080/api/commodity/" + id);
+
   }
 
 
