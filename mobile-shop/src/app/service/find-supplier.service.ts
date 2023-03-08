@@ -15,7 +15,7 @@ export class FindSupplierService {
     return this.httpClient.get<Supplier[]>("http://localhost:8080/supplier/findSupplier?name=" +name + '&page=' +page)
   }
 
-  findSupplier2(id: number){
+  findSupplier1(id: number){
     return this.httpClient.get<Supplier[]>("http://localhost:8080/supplier/supplier?id=" + id);
   }
   changePage(page: number): Observable<Commodity[]> {

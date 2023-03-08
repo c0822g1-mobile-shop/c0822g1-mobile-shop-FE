@@ -21,10 +21,11 @@
                   <label style="font-weight: bold" class="mb-0">Tên hàng<sup
                     style="color: red; font-size: 15px">*</sup></label>
                 </div>
-                <div class="col-md-8 pe-4" *ngIf="commodityQR">
-                  <input
-                    [value]="commodityQR.name" readonly placeholder="Ex: Tên hàng"
-                    class="form-control form-control-md"/>
+                <div class="col-md-8 pe-4" *ngIf="commodityQR" >
+                  <input [value]="commodityQR.name" readonly class="form-control form-control-md"/>
+                </div>
+                <div class="col-md-8 pe-4">
+                  <input [hidden]="commodityQR" placeholder="Tên hàng" readonly class="form-control form-control-md"/>
                 </div>
               </div>
               <div class="row align-items-center pt-4 pb-3">
@@ -34,8 +35,11 @@
                 </div>
                 <div class="col-md-8 pe-4" *ngIf="commodityQR">
                   <input
-                    [value]="commodityQR.price" readonly placeholder="Ex: Giá"
+                    [value]="commodityQR.price" readonly
                     class="form-control form-control-md"/>
+                </div>
+                <div class="col-md-8 pe-4">
+                  <input [hidden]="commodityQR" placeholder="Giá" readonly class="form-control form-control-md"/>
                 </div>
               </div>
               <div class="row align-items-center pt-4 pb-3">
@@ -82,7 +86,7 @@
                 <button type="submit" class="btn btn-outline-primary m-4 w-25"
                         (click)="save(commodityQR.id, +quantity.value)" [disabled]="commodityQR==null || supplierss.value == '' || !form.valid">Lưu
                 </button>
-                <button type="reset" class="btn btn-outline-secondary m-4 w-25" [routerLink]="['/home']">Hủy</button>
+                <button type="reset" class="btn btn-outline-secondary m-4 w-25" [routerLink]="['/']">Thoát</button>
               </div>
           </div>
         </div>
@@ -119,7 +123,7 @@
 
         <table class="table table-striped table-hover">
           <thead>
-          <tr class="btn-info">
+          <tr class="bg-info">
             <th scope="col">STT</th>
             <th scope="col">Tên Nhà Cung Cấp</th>
             <th scope="col">Địa Chỉ</th>

@@ -15,8 +15,11 @@ import Swal from "sweetalert2";
 export class ScanQrCodeComponent implements OnInit {
   qrInfo = [
     'QR001',
-    'QR0099',
+    'Tân',
     'QR002',
+    'QR004',
+    'QR006',
+    'QR007',
   ];
   selectedQR = null;
   private selectedQRCode: string = null;
@@ -50,7 +53,6 @@ export class ScanQrCodeComponent implements OnInit {
       this.commodities.emit(data);
     }, error => {
 
-      this.toast.error("Không có sản phẩm có mã QR này", "Thông báo")
       Swal.fire('', 'Không có sản phẩm có mã QR này', 'error');
       this.router.navigateByUrl("warehouse")
     });

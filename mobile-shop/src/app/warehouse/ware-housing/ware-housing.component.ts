@@ -20,15 +20,11 @@ export class WareHousingComponent implements OnInit {
   suppliers: Supplier = {
     name: ""
   };
-
-
+  nums;
   commodityQR: Commodity;
   form: FormGroup = new FormGroup({
     quantity: new FormControl("", [Validators.required, Validators.min(0)]),
   });
-  page;
-  nums;
-  commodity: any;
 
 
 
@@ -37,13 +33,15 @@ export class WareHousingComponent implements OnInit {
     this.getAllSupplier(name,0)
     console.log(this.supplier)
     if (this.supplier != null) {
-      this.findSupplierv2(this.supplier)
+      this.findSupplier2(this.supplier)
     }
 
   }
 
   ngOnInit(): void {
   }
+
+ /* phương thức showList Supplier*/
 
   getAllSupplier(name: string, page: number) {
     this.findSupplierService.getAllSupplier(name, page).subscribe(data => {
@@ -52,11 +50,12 @@ export class WareHousingComponent implements OnInit {
     })
   }
 
-  findSupplierv2(id: number) {
-    this.findSupplierService.findSupplier2(id).subscribe(next => {
+  findSupplier2(id: number) {
+    this.findSupplierService.findSupplier1(id).subscribe(next => {
       console.log(next)
     })
   }
+
 
   nextPage() {
     this.findSupplierService.changePage(this.findSupplier['number']+1).subscribe(next => {
@@ -97,7 +96,6 @@ export class WareHousingComponent implements OnInit {
   }
 
   save(id: number, quantity: number) {
-
     this.wareHousingService.wareHousing(id, quantity).subscribe(next => {
       console.log(next)
       Swal.fire({
