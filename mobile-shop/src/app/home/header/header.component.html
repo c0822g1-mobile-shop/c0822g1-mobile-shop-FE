@@ -4,7 +4,7 @@
        src="https://firebasestorage.googleapis.com/v0/b/c0822g1-mobile-shop-d949d.appspot.com/o/Thi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn.png?alt=media&token=07d45ac3-ddd9-4d3f-a2ab-1498a059e886">
   <div class="logo">
     <div class="search-box">
-      <input #search type="text" id="srch" placeholder="Tìm kiếm theo tên điện thoại:Iphone...">
+      <input #search type="text" id="srch" placeholder="Tìm kiếm theo tên điện thoại: Iphone...">
       <button (click)="search1(search.value)">
         <svg class="iconm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <path
@@ -16,19 +16,20 @@
   <ul>
     <li *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_EMPLOYEE'">
       <div class="dropdown">
-        <a class="nut_dropdown">Quản lí</a>
+        <a class="nut_dropdown">Quản lý</a>
         <div class="noidung_dropdown">
           <div class="dropdown-row">
-            <a class="dropdown-item" routerLink="/manager/">Quản lý báo cáo</a>
             <a class="dropdown-item" routerLink="/warehouse">Quản lý nhập kho</a>
-          </div>
-          <div class="dropdown-row">
-            <a class="dropdown-item" routerLink="/supplier/list">Quản lý nhà cung cấp</a>
             <a class="dropdown-item" routerLink="/commodity/list">Quản lý hàng hóa</a>
 
           </div>
+          <div class="dropdown-row">
+            <a class="dropdown-item" routerLink="/supplier/list">Quản lý nhà cung cấp</a>
+            <a class="dropdown-item" routerLink="/bill">Quản lý bán hàng</a>
+
+          </div>
           <div class="dropdown-row" *ngIf="role == 'ROLE_ADMIN'">
-            <a class="dropdown-item" routerLink="/bill/">Quản lý bán hàng</a>
+            <a class="dropdown-item" routerLink="/manager/">Quản lý báo cáo</a>
 
             <a class="dropdown-item" [routerLink]="['/sale-report']">Báo cáo bán hàng</a>
           </div>
@@ -42,7 +43,7 @@
           d="M96 96c0-35.3 28.7-64 64-64H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H80c-44.2 0-80-35.8-80-80V128c0-17.7 14.3-32 32-32s32 14.3 32 32V400c0 8.8 7.2 16 16 16s16-7.2 16-16V96zm64 24v80c0 13.3 10.7 24 24 24H424c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24H184c-13.3 0-24 10.7-24 24zm0 184c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm160 0c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H336c-8.8 0-16 7.2-16 16zM160 400c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16zm160 0c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/>
       </svg>
       Tin tức</a></li>
-    <li *ngIf="isLogged == true && role == 'ROLE_CUSTOMER'" style="cursor: pointer" routerLink="/cart"><a>
+    <li style="cursor: pointer" routerLink="/cart"><a>
       <svg class="iconm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
         <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
         <path

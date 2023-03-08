@@ -15,6 +15,7 @@ import {finalize} from "rxjs/operators";
 // @ts-ignore
 import {Observable} from "rxjs";
 import Swal from "sweetalert2";
+import {Title} from "@angular/platform-browser";
 
 // @ts-ignore
 @Component({
@@ -46,25 +47,25 @@ export class EditCommodityComponent implements OnInit {
     codeQr: ''
   }
 
-  constructor(private router: Router, private commodityService: CommodityService, private activatedRoute: ActivatedRoute,
+  constructor(private title: Title, private router: Router, private commodityService: CommodityService, private activatedRoute: ActivatedRoute,
               private trademarkService: TrademarkService, @Inject(AngularFireStorage) private storage: AngularFireStorage) {
 
     this.commodityForm = new FormGroup({
       id: new FormControl(''),
-      name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(200)]),
-      cpu: new FormControl('', [Validators.required, Validators.pattern("[-a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(50)]),
-      capacity: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [G][B]"), Validators.minLength(5), Validators.maxLength(20)]),
+      name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(30)]),
+      cpu: new FormControl('', [Validators.required, Validators.pattern("[-a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(30)]),
+      capacity: new FormControl('', [Validators.required, Validators.pattern("[0-9]+"), Validators.minLength(2), Validators.maxLength(3)]),
       trademark: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, Validators.min(0), Validators.max(2000000000)]),
       image: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
-      camera: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
-      selfie: new FormControl('', [Validators.required, Validators.pattern("[0-9]* [M][P]"), Validators.minLength(2), Validators.maxLength(50)]),
-      screenSize: new FormControl('', [Validators.required, Validators.pattern("[0-9.]* [a-z]*"), Validators.minLength(5), Validators.maxLength(20)]),
+      camera: new FormControl('', [Validators.required, Validators.pattern("[0-9]+"), Validators.maxLength(3)]),
+      selfie: new FormControl('', [Validators.required, Validators.pattern("[0-9]+"), Validators.maxLength(3)]),
+      screenSize: new FormControl('', [Validators.required, Validators.pattern("[0-9]+[.]?[0-9]?"), Validators.maxLength(3)]),
       guarantee: new FormControl('', [Validators.required, Validators.pattern("[0-9]*"), Validators.maxLength(2)]),
-      origin: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*"), Validators.minLength(2), Validators.maxLength(20)]),
-      description: new FormControl('', [Validators.required]),
-      codeQr: new FormControl('', [Validators.required, Validators.pattern("[Q][R][0-9]*"), Validators.minLength(5), Validators.maxLength(5)]),
-      quantity: new FormControl()
+      origin: new FormControl('', [Validators.required, Validators.pattern("[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđA-Z ]*"), Validators.maxLength(10)]),
+      description: new FormControl(''),
+      codeQr: new FormControl(''),
+      quantity: new FormControl('')
     });
     this.commodityService.findCommodityById(this.activatedRoute.snapshot.paramMap.get("id")).subscribe(next => {
       console.log(this.commodityForm.patchValue(next));
@@ -77,6 +78,7 @@ export class EditCommodityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle("Chỉnh sửa thông tin hàng hóa")
     this.commodityService.getAll2().subscribe(next => {
       this.commodities = next;
       console.log(next)

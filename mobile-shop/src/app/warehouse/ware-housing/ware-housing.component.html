@@ -26,6 +26,9 @@
                     [value]="commodityQR.name" readonly placeholder="Ex: Tên hàng"
                     class="form-control form-control-md"/>
                 </div>
+                <div class="col-md-8 pe-4">
+                  <input [hidden]="commodityQR" placeholder="Tên hàng" readonly class="form-control form-control-md"/>
+                </div>
               </div>
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
@@ -37,6 +40,9 @@
                     [value]="commodityQR.price" readonly placeholder="Ex: Giá"
                     class="form-control form-control-md"/>
                 </div>
+                <div class="col-md-8 pe-4">
+                  <input [hidden]="commodityQR" placeholder="Giá" readonly class="form-control form-control-md"/>
+                </div>
               </div>
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
@@ -46,6 +52,7 @@
                 <div class="col-md-8 pe-4" *ngIf="commodityQR">
                   <img style="height: 90px;width: 90px" src="{{commodityQR.image}}">
                 </div>
+
               </div>
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-4 ps-3">
@@ -80,7 +87,7 @@
               </div>
               <div class=" text-center">
                 <button type="submit" class="btn btn-outline-primary m-4 w-25"
-                        (click)="save(commodityQR.id, +quantity.value)" [disabled]="commodityQR==null || supplierss.value == '' || !form.valid">Lưu
+                        (click)="save(commodityQR.id, +quantity.value)" [disabled]="commodityQR==null || supplierss.value == '' || !form.valid">Nhập kho
                 </button>
                 <button type="reset" class="btn btn-outline-secondary m-4 w-25" [routerLink]="['/']">Thoát</button>
               </div>
@@ -119,7 +126,7 @@
 
         <table class="table table-striped table-hover">
           <thead>
-          <tr class="bg-info">
+          <tr class="bg-info" style="color: white">
             <th scope="col">STT</th>
             <th scope="col">Tên Nhà Cung Cấp</th>
             <th scope="col">Địa Chỉ</th>
@@ -132,7 +139,7 @@
               [class.table-active]="x.id == supplier" (click)="suppliers = x" data-dismiss="modal">
             <td>{{i + 1}}</td>
             <td>{{x.name}}</td>
-            <td>{{x.address}}</td>
+            <td>{{x.address | slice: 0:30}}...</td>
             <td>{{x.email}}</td>
             <td>{{x.phoneNumber}}</td>
           </tr>

@@ -1,26 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HomeRoutingModule} from './home-routing.module';
 import {BodyComponent} from "./body/body.component";
 import { CartComponent } from './cart/cart/cart.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import {ReactiveFormsModule} from "@angular/forms";
 
-
-
-
-
-
-
 @NgModule({
   declarations: [
-    CartComponent, ProfileComponent
+    CartComponent, ProfileComponent,BodyComponent
   ],
   exports: [
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
     ReactiveFormsModule
   ]
 })

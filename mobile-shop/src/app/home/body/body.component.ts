@@ -110,12 +110,7 @@ export class BodyComponent implements OnInit {
   }
 
   addToCart(ids: number, images: string, names: string, prices: number) {
-
-
-
-
-
-    if (this.isLogged) {
+    console.log(names)
       if (this.token.getCart() != undefined) {
         this.carts = this.token.getCart();
         this.cart.id = ids;
@@ -136,7 +131,6 @@ export class BodyComponent implements OnInit {
           showConfirmButton: false,
           timer: 2500
         })
-
       } else {
         this.cart.id = ids;
         this.cart.name = names;
@@ -153,9 +147,6 @@ export class BodyComponent implements OnInit {
           timer: 2500
         })
       }
-    } else {
-      document.getElementById("dissmis").click()
-      this.route.navigateByUrl('/login')
-    }
+
   }
 }

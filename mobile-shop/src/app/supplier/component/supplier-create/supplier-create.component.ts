@@ -23,7 +23,7 @@ export class SupplierCreateComponent implements OnInit {
     name: new FormControl("", [Validators.required, Validators.maxLength(100)]),
     address: new FormControl("", [Validators.required, Validators.maxLength(200)]),
     phoneNumber: new FormControl("", [Validators.required, Validators.pattern("^(0|\\+84)\\d{9}$")]),
-    email: new FormControl("", [Validators.required, Validators.pattern("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")])
+    email: new FormControl("", [Validators.required, Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")])
   });
   clickButton = false;
 
@@ -103,5 +103,22 @@ export class SupplierCreateComponent implements OnInit {
     this.errors.address = '';
   }
 
+  cancel() {
+    Swal.fire({
+      title: 'Hủy bỏ',
+      html: 'Bạn có muốn hủy bỏ thêm mới nhà cung cấp ?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Hủy',
+      showConfirmButton: true,
+      confirmButtonText: 'Có',
+      confirmButtonColor: 'red'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl("/supplier/list");
+        }
+      }
+    );
+  }
 
 }

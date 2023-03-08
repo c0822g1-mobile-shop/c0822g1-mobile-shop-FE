@@ -1,4 +1,4 @@
-<div class="mx-5 px-5 pt-3 pb-5">
+<div class="mx-5 px-5 pt-3 pb-5" style="margin-top: 100px">
   <h2 class="text-center fw-bold text-dard">QUẢN LÝ BÁN HÀNG</h2>
   <div class="d-flex justify-content-center">
     <form [formGroup]="formCreateBill" class="w-100  p-3 rounded formCSS">
@@ -38,7 +38,8 @@
 
                 </div>
                 <div class="col-md-7">
-                  <input formControlName="name" [value]="customer1.name" id="name" type="text" class="form-control">
+                  <input formControlName="name" disabled [value]="customer1.name" id="name" type="text"
+                         class="form-control">
                   <!--<span style="color: red">Lưu ý: Tên khách hàng không được để trống</span>-->
                   <div class="text-danger"
                        *ngIf="formCreateBill.controls.name.touched && formCreateBill.controls.name.touched else elseBlock">
@@ -58,7 +59,7 @@
                   <label for="phone"> Số điện thoại <span style="color: red">(*)</span>:</label>
                 </div>
                 <div class="col-md-7">
-                  <input formControlName="phoneNumber" [value]="customer1.phoneNumber" id="phone" type="text"
+                  <input formControlName="phoneNumber" disabled [value]="customer1.phoneNumber" id="phone" type="text"
                          class="form-control">
                   <!--<span style="color: red">Lưu ý: SĐT khách hàng không được để trống</span>-->
                 </div>
@@ -71,7 +72,7 @@
                   <label for="address"> Địa chỉ <span style="color: red">(*)</span>:</label>
                 </div>
                 <div class="col-md-7">
-                  <input formControlName="address" [value]="customer1.address" id="address" type="text"
+                  <input formControlName="address" disabled [value]="customer1.address" id="address" type="text"
                          class="form-control">
                   <!--<span style="color: red">Lưu ý: Địa chỉ khách hàng không được để trống</span>-->
                 </div>
@@ -84,7 +85,8 @@
                   <label for="email"> E-mail <span style="color: red">(*)</span>:</label>
                 </div>
                 <div class="col-md-7">
-                  <input formControlName="email" [value]="customer1.email" id="email" type="text" class="form-control">
+                  <input formControlName="email" disabled [value]="customer1.email" id="email" type="text"
+                         class="form-control">
                   <!--<span style="color: red">Lưu ý: Email khách hàng không được để trống</span>-->
                 </div>
                 <div class="col-md-1"></div>
@@ -93,10 +95,6 @@
               <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-7" style="margin-top: 8px">
-                                                                <span style="font-size: 15px" class="fst-italic">
-              Trường có dấu <span style="color: red"> (*)</span> là bắt
-              buộc,không được bỏ trống
-            </span>
                 </div>
                 <div class="col-md-3">
                 </div>
@@ -149,8 +147,8 @@
                   <label for="productAmount"> Số lượng <span style="color: red">(*)</span>:</label>
                 </div>
                 <div class="col-md-2">
-                  <input formControlName="quantity" id="productAmount" type="text"
-                         [value]="commodity.quantity" disabled class="form-control">
+                  <input #quantity (change)="change(quantity.value)" formControlName="quantity" id="productAmount"
+                         type="text" class="form-control">
                 </div>
                 <div class="col-md-5" style="margin-top: 8px">Cái</div>
 
@@ -176,7 +174,7 @@
           <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-3">
-              <label for="moneyTotal"> Thành tiền :</label>
+              <label for="moneyTotal"> Thành tiền : <span style="color: red">{{total| currency: "VND"}}</span></label>
             </div>
             <div class="col-md-4" style="margin-left: 2.5%">
               <span formControlName="" id="moneyTotal"></span>
@@ -204,13 +202,13 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-8">
-              <input type="checkbox" id="printf" name="printf" value="bil">
-              <label for="printf">In hóa đơn</label>
-            </div>
-          </div>
+<!--          <div class="row">-->
+<!--            <div class="col-md-4"></div>-->
+<!--            <div class="col-md-8">-->
+<!--              <input type="checkbox" id="printf" name="printf" value="bil">-->
+<!--              <label for="printf">In hóa đơn</label>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
         <br>
 
@@ -224,5 +222,6 @@
     </form>
   </div>
 </div>
-<!--<app-customer-select (customer1)="getCustomer($event)"></app-customer-select>-->
-<!--<app-commodity-select (commodities1)="getCommodity($event)"></app-commodity-select>-->
+<app-customer-select (customer1)="getCustomer($event)"></app-customer-select>
+<app-commodity-select (commodities1)="getCommodity($event)"></app-commodity-select>
+

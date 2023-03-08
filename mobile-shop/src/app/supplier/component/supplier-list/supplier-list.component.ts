@@ -72,10 +72,10 @@ export class SupplierListComponent implements OnInit {
     Swal.fire({
       title: 'Bạn có muốn xóa?',
       text: 'Nhà cung cấp: ' + this.supplier?.name,
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
       confirmButtonText: 'Có',
       cancelButtonText: 'Không'
     }).then((result) => {
