@@ -2,9 +2,11 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {SalesReportService} from "../../service/sales-report.service";
 import {SalesReport} from "../../entity/sales-report";
 import Swal from 'sweetalert2';
-// @ts-ignore
+
 import {Chart} from 'chart.js';
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {CommodityService} from "../../service/commodity.service";
+import {Commodity} from "../../entity/commodity";
 
 @Component({
   selector: 'app-sales-report',
@@ -15,16 +17,24 @@ export class SalesReportComponent implements OnInit {
   private chart: Chart;
 
   revenues: number[] = [];
+
   dateBuy: string[] = [];
 
   showCommodityInput: boolean = false;
+
   sales: SalesReport;
 
   reportForm: FormGroup;
 
   radioOptions: string = 'option1';
 
-  constructor(private salesReportService: SalesReportService) {
+  listCommodity: Commodity[];
+
+  constructor(private salesReportService: SalesReportService,
+              private commodityService: CommodityService) {
+    this.commodityService.getAll2().subscribe(data=>{
+      this.listCommodity = data;
+    })
     this.reportForm = new FormGroup({
       startDay: new FormControl("",[Validators.required]),
       endDay: new FormControl("",[Validators.required]),
@@ -58,6 +68,7 @@ export class SalesReportComponent implements OnInit {
     }
   }
 
+
   ngOnInit(): void {
     this.toggleCommodityInput(this.radioOptions)
   }
@@ -84,10 +95,8 @@ export class SalesReportComponent implements OnInit {
       this.salesReportService.getAll(startDay.toString(), endDay.toString()).subscribe(data=>{
         console.log(data)
         for (let i = 0; i < data.length; i++){
-          // @ts-ignore
           this.revenues.push(data[i].revenue);
           console.log(data[i].revenue)
-          // @ts-ignore
           this.dateBuy.push(data[i].buyDate);
         }
         this.drawChart(this.dateBuy,this.revenues)
@@ -99,10 +108,8 @@ export class SalesReportComponent implements OnInit {
       this.salesReportService.getAllById(startDay.toString(), endDay.toString(), +commodityId).subscribe(data=>{
         console.log(data)
         for (let i = 0; i < data.length; i++){
-          // @ts-ignore
           this.revenues.push(data[i].revenue);
           console.log(data[i].revenue)
-          // @ts-ignore
           this.dateBuy.push(data[i].buyDate);
         }
         console.log(this.revenues)
@@ -138,6 +145,4 @@ export class SalesReportComponent implements OnInit {
       }
     })
   }
-
-
 }

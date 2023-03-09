@@ -47,7 +47,9 @@
         </div>
         <div class="product-info">
           <a href="" class="product-cart"></a>
-          <a href="" class="product-name">{{commodity.name | titlecase | slice: 0 :20 }}<span style="background-color: lightgray;color: #007bff;font-weight: 600" *ngIf="commodity.name.length > 20">.....</span></a>
+          <a href="" class="product-name">{{commodity.name | titlecase | slice: 0 :20 }}<span
+            style="background-color: lightgray;color: #007bff;font-weight: 600"
+            *ngIf="commodity.name.length > 20">.....</span></a>
           <div class="product-price">{{commodity.price | currency: "VND"}}</div>
         </div>
       </li>
@@ -80,7 +82,9 @@
         </div>
         <div class="product-info">
           <a href="" class="product-cat"></a>
-          <a href="" class="product-name">{{commodity.name | titlecase | slice: 0 :20 }}<span style="background-color: lightgray;color: #007bff;font-weight: 600" *ngIf="commodity.name.length > 20">.....</span></a>
+          <a href="" class="product-name">{{commodity.name | titlecase | slice: 0 :20 }}<span
+            style="background-color: lightgray;color: #007bff;font-weight: 600"
+            *ngIf="commodity.name.length > 20">.....</span></a>
           <div class="product-price">{{commodity.price  | currency: "VND"}}</div>
         </div>
       </li>
@@ -103,25 +107,25 @@
       </div>
       <div class="modal-body">
         <div class="card">
-          <img [src]="commodity.image" class="card-img-top" style="max-height: 200px">
+          <img [src]="commodity.image" class="card-img-top" style="max-height: 200px; padding: 5px 5px">
           <div class="card-body">
             <h5 class="card-title" style="color: crimson ">{{commodity.name | titlecase }}</h5>
             <p style="color: red; font-weight: bold" class="card-text">{{commodity.price | currency: "VND"}}</p>
           </div>
         </div>
         <div class="card-info">
-          <table>
+          <table class="table table-hover">
             <tr>
               <th>Camera</th>
-              <td>{{commodity.camera}}</td>
+              <td>{{commodity.camera}} MP</td>
             </tr>
             <tr>
               <th>Camera trước</th>
-              <td>{{commodity.selfie}}</td>
+              <td>{{commodity.selfie}} MP</td>
             </tr>
             <tr>
               <th>Dung lượng</th>
-              <td>{{commodity.capacity}}</td>
+              <td>{{commodity.capacity}} MP</td>
             </tr>
             <tr>
               <th>CPU</th>
@@ -129,7 +133,7 @@
             </tr>
             <tr>
               <th>Bảo hành</th>
-              <td>{{commodity.guarantee}}</td>
+              <td>{{commodity.guarantee}} tháng</td>
             </tr>
             <tr>
               <th>Nơi sản xuất</th>

@@ -22,7 +22,6 @@ import {environment} from "../environments/environment";
 import {CommodityModule} from "./commodity/commodity.module";
 import {HeaderComponent} from "./home/header/header.component";
 import {FooterComponent} from "./home/footer/footer.component";
-import {BodyComponent} from "./home/body/body.component";
 import {HomeModule} from "./home/home.module";
 import {SalesReportModule} from "./sales-report/sales-report.module";
 import {WarehouseModule} from "./warehouse/warehouse.module";
@@ -34,6 +33,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './log-in/security/auth.interceptor';
 import {ScanQrCodeModule} from "./scan-qr-code/scan-qr-code.module";
+import {BillModule} from "./bill/bill.module";
 
 
 // @ts-ignore
@@ -42,7 +42,6 @@ import {ScanQrCodeModule} from "./scan-qr-code/scan-qr-code.module";
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    BodyComponent
   ],
   imports: [
     ScanQrCodeModule,
@@ -67,6 +66,7 @@ import {ScanQrCodeModule} from "./scan-qr-code/scan-qr-code.module";
     WarehouseModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    BillModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{
     provide: HTTP_INTERCEPTORS,

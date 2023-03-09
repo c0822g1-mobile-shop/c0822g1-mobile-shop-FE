@@ -15,5 +15,4 @@ import {BrowserModule} from "@angular/platform-browser";
     FormsModule
   ]
 })
-export class ManageCustomerModule {
-}
+export class ManageCustomerModule { }
