@@ -3,6 +3,7 @@ import {UserRole} from "./user-role";
 import {BillHistory} from "./bill-history";
 
 export interface User {
+    avatar?: string;
   id?: number;
   name?: string;
   username?: string;
@@ -11,9 +12,9 @@ export interface User {
   email?: string;
   address?: string;
   age?: number;
-  gender?: string;
+  gender?: boolean;
   dateOfBirth?: string;
-  userRole?: UserRole;
+  role?: string;
   bill?: Bill;
   billHistory?: BillHistory;
 }

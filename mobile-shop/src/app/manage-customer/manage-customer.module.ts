@@ -10,11 +10,9 @@ import {BrowserModule} from "@angular/platform-browser";
 @NgModule({
   declarations: [ManagerListComponent],
   imports: [
-    // BrowserModule,
     CommonModule,
     ManageCustomerRoutingModule,
     FormsModule
   ]
 })
-export class ManageCustomerModule {
-}
+export class ManageCustomerModule { }

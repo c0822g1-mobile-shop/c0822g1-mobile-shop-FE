@@ -12,8 +12,8 @@ import {AngularFireStorageModule} from "@angular/fire/storage";
 // @ts-ignore
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../../environments/environment";
-import {CommodityModule} from "../commodity/commodity.module";
 import {ScanQrCodeModule} from "../scan-qr-code/scan-qr-code.module";
+import {CommodityModule} from "../commodity/commodity.module";
 
 
 // @ts-ignore

@@ -1,3 +1,4 @@
+
 <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -63,10 +64,7 @@
                   <nav aria-label="Page navigation example">
                     <ul class="pagination">
                       <li class="page-item" [ngClass]="customerInfo.first ? 'disabled': ''">
-                        <a role="button" class="page-link" (click)="changePage(0)">Trang đầu</a>
-                      </li>
-                      <li class="page-item" [ngClass]="customerInfo.first ? 'disabled': ''">
-                        <a role="button" class="page-link" (click)="changePage(customerInfo.number - 1)"><</a>
+                        <a role="button" class="page-link" (click)="changePage(customerInfo.number - 1)">Trang trước</a>
                       </li>
                       <li class="page-item" *ngIf="customerInfo.number - 3 > 0">
                         <a role="button" class="page-link"
@@ -103,13 +101,7 @@
                       </li>
                       <li class="page-item" [ngClass]="customerInfo.last ? 'disabled': ''">
                         <a role="button" class="page-link"
-                           (click)="changePage(customerInfo.number + 1)">></a>
-                      </li>
-                      <li class="page-item" [ngClass]="customerInfo.last ? 'disabled': ''">
-                        <a role="button" class="page-link"
-                           (click)="changePage(customerInfo.totalPages - 1)">
-                          Trang cuối
-                        </a>
+                           (click)="changePage(customerInfo.number + 1)">Trang sau</a>
                       </li>
                     </ul>
                   </nav>

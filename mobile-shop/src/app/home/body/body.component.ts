@@ -1,11 +1,16 @@
+
 import {Component, OnInit} from '@angular/core';
+// @ts-ignore
 import {TokenService} from "../../log-in/service/token.service";
 import {Commodity} from "../../entity/commodity";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommodityService} from "../../service/commodity.service";
 import {Cart} from "../../entity/cart";
+// @ts-ignore
 import Swal from 'sweetalert2';
 import {ShareService} from "../../log-in/service/share.service";
+import {Title} from "@angular/platform-browser";
+
 
 
 // @ts-ignore
@@ -16,14 +21,14 @@ import {ShareService} from "../../log-in/service/share.service";
 })
 
 export class BodyComponent implements OnInit {
-  cart: Cart = {
-    id: 0,
-    name: '',
-    image: '',
-    price: 0
-  };
+   cart: Cart ={
+     id : 0,
+     name: '',
+     image: '',
+     price: 0
+   };
+   carts: Cart[] = [];
   isLogged = false;
-  carts: Cart[] = [];
   /**
    * Create by: PhucNT
    *
@@ -44,7 +49,7 @@ export class BodyComponent implements OnInit {
   nameSearch = '';
   commodity: Commodity = {};
 
-  constructor(private token: TokenService, private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private shareService: ShareService, private route: Router) {
+  constructor(private title:Title,private token:TokenService,private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private shareService: ShareService,private route: Router) {
 
     this.activatedRoute.paramMap.subscribe(
       next => {
@@ -56,6 +61,8 @@ export class BodyComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.title.setTitle('Trang chủ')
+    this.isLogged = this.token.isLogger();
     this.loader();
     this.shareService.getClickEvent().subscribe(next => {
       this.loader()
@@ -103,14 +110,15 @@ export class BodyComponent implements OnInit {
   }
 
   addToCart(ids: number, images: string, names: string, prices: number) {
-    if (this.isLogged) {
+    console.log(names)
       if (this.token.getCart() != undefined) {
         this.carts = this.token.getCart();
+        this.cart.id = ids;
         this.cart.name = names;
         this.cart.image = images;
         this.cart.price = prices;
-        if (this.token.checkExist(this.cart.name)) {
-          this.token.upQuantity(this.cart.name, this.carts)
+        if (this.token.checkExist(names)) {
+          this.token.upQuantity(ids, this.carts)
         } else {
           this.cart.quantity = 1;
           this.carts.push(this.cart);
@@ -123,8 +131,8 @@ export class BodyComponent implements OnInit {
           showConfirmButton: false,
           timer: 2500
         })
-
       } else {
+        this.cart.id = ids;
         this.cart.name = names;
         this.cart.image = images;
         this.cart.price = prices;
@@ -139,9 +147,6 @@ export class BodyComponent implements OnInit {
           timer: 2500
         })
       }
-    } else {
-      document.getElementById("dissmis").click()
-      this.route.navigateByUrl('/login')
-    }
+
   }
 }
