@@ -24,11 +24,6 @@
                       *
                       Tên {{checkName.value}} đã tồn tại.</p>
                     <p style="color: red;position: absolute"
-                       *ngIf="(clickButton&&commodityForm.controls.name.hasError('invalidName'))||
-                        commodityForm.controls.name.hasError('invalidName')&&commodityForm.controls.name.touched">
-                      *
-                      Tên {{checkName.value}} đã tồn tại.</p>
-                    <p style="color: red;position: absolute"
                        *ngIf="(clickButton && commodityForm.controls.name.hasError('required'))||
                        commodityForm.controls.name.hasError('required') && commodityForm.controls.name.touched">
                       *
@@ -60,8 +55,8 @@
                   <div class="col-md-9 pe-5" style="position: relative">
                     <select formControlName="trademark" required id="trademark" class="form-control"
                             aria-label="Default select example">
-                      <option value="" >-----Chọn-----</option>
-                      <option  *ngFor="let trademark of trademarkList"
+                      <option value="">-----Chọn-----</option>
+                      <option *ngFor="let trademark of trademarkList"
                               [ngValue]="trademark">{{trademark.name}}</option>
                     </select>
                     <p style="color: red;position: absolute"
@@ -100,7 +95,7 @@
                       style="color: red;font-size: 15px" title="Bắt buộc">*</sup> </label>
                   </div>
                   <div class="col-md-9 pe-5">
-                    <input accept=".jpg, .pdf, .gif, .png" (change)="showPreview($event)" required
+                    <input accept=".jpg, .png, .jpeg, .gif, .pdf" (change)="showPreview($event)" required
                            id="image"
                            class="form-control-file" type="file"/>
                   </div>
@@ -119,8 +114,9 @@
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">
-                    <label for="size" style="font-weight: bold" class="mb-0">Màn hình (inch):<sup
-                      style="color: red;font-size: 15px" title="Bắt buộc">*</sup> </label>
+                    <label for="size" style="font-weight: bold" class="mb-0">Màn
+                      hình (inch):<sup
+                        style="color: red;font-size: 15px" title="Bắt buộc">*</sup> </label>
                   </div>
                   <div class="col-md-9 pe-5" style="position: relative">
                     <input formControlName="screenSize" required id="size" class="form-control" type="text"
@@ -152,7 +148,7 @@
                            placeholder="Vui lòng nhập độ phân giải camera sau (*)">
                     <p style="color: red;position: absolute"
                        *ngIf="(clickButton&&commodityForm.controls.camera.hasError('required'))||
-                       commodityForm.controls.camera.hasError('required')&&commodityForm.controls.camera.touched">
+       commodityForm.controls.camera.hasError('required')&&commodityForm.controls.camera.touched">
                       *
                       Không được để trống.</p>
                     <p style="color: red;position: absolute"
@@ -177,7 +173,7 @@
                            placeholder="Vui lòng nhập độ phân giải camera trước (*)">
                     <p style="color: red;position: absolute"
                        *ngIf="(clickButton&&commodityForm.controls.selfie.hasError('required'))||
-                       commodityForm.controls.selfie.hasError('required')&&commodityForm.controls.selfie.touched">
+       commodityForm.controls.selfie.hasError('required')&&commodityForm.controls.selfie.touched">
                       *
                       Không được để trống.</p>
                     <p style="color: red;position: absolute"
@@ -202,7 +198,7 @@
                            placeholder="Vui lòng nhập loại CPU (*)">
                     <p style="color: red;position: absolute"
                        *ngIf="(clickButton&&commodityForm.controls.cpu.hasError('required'))||
-                       commodityForm.controls.cpu.hasError('required')&&commodityForm.controls.cpu.touched">*
+       commodityForm.controls.cpu.hasError('required')&&commodityForm.controls.cpu.touched">*
                       Không được để trống.</p>
                     <p style="color: red;position: absolute"
                        *ngIf="(clickButton&&commodityForm.controls.cpu.hasError('pattern')&&!commodityForm.controls.cpu.hasError('maxlength'))||
@@ -231,7 +227,7 @@
                            placeholder="Vui lòng nhập dung lượng lưu trữ (*)">
                     <p style="color: red;position: absolute"
                        *ngIf="(clickButton&&commodityForm.controls.capacity.hasError('required'))||
-                       commodityForm.controls.capacity.hasError('required')&&commodityForm.controls.capacity.touched">
+       commodityForm.controls.capacity.hasError('required')&&commodityForm.controls.capacity.touched">
                       *
                       Không được để trống.</p>
                     <p style="color: red;position: absolute"
@@ -261,7 +257,7 @@
                            placeholder="Vui lòng nhập xuất xứ (*)">
                     <p style="color: red;position: absolute"
                        *ngIf="(clickButton&&commodityForm.controls.origin.hasError('required'))||
-                       commodityForm.controls.origin.hasError('required')&&commodityForm.controls.origin.touched">
+       commodityForm.controls.origin.hasError('required')&&commodityForm.controls.origin.touched">
                       *
                       Không được để trống.</p>
                     <p style="color: red;position: absolute"
@@ -278,15 +274,16 @@
                 </div>
                 <div class="row align-items-center py-3">
                   <div class="col-md-3 ps-5">
-                    <label for="guarantee" style="font-weight: bold" class="mb-0">Bảo hành (tháng):<sup
-                      style="color: red;font-size: 15px" title="Bắt buộc">*</sup> </label>
+                    <label for="guarantee" style="font-weight: bold" class="mb-0">Bảo
+                      hành (tháng):<sup
+                        style="color: red;font-size: 15px" title="Bắt buộc">*</sup> </label>
                   </div>
                   <div class="col-md-9 pe-5" style="position: relative">
                     <input formControlName="guarantee" required id="guarantee" class="form-control" type="text"
                            placeholder="Vui lòng nhập thời gian bảo hành (*)">
                     <p style="color: red;position: absolute"
                        *ngIf="(clickButton&&commodityForm.controls.guarantee.hasError('required'))||
-                       commodityForm.controls.guarantee.hasError('required')&&commodityForm.controls.guarantee.touched">
+                        commodityForm.controls.guarantee.hasError('required')&&commodityForm.controls.guarantee.touched">
                       *
                       Không được để trống.</p>
                     <p style="color: red;position: absolute"
@@ -299,6 +296,17 @@
                        commodityForm.controls.guarantee.hasError('maxlength')&&commodityForm.controls.guarantee.touched&&!commodityForm.controls.guarantee.hasError('pattern')">
                       *
                       Không được nhập quá 2 ký tự.</p>
+                  </div>
+                </div>
+                <div class="row align-items-center py-3" style="display: none" disabled>
+                  <div class="col-md-3 ps-5">
+                    <label for="codeQr" style="font-weight: bold" class="mb-0">Mã QR:<sup
+                      style="color: red;font-size: 15px" title="Bắt buộc">*</sup> </label>
+                  </div>
+                  <div class="col-md-9 pe-5" disabled style="display: none">
+                    <input style="display: none" disabled formControlName="codeQr" required
+                           id="codeQr" class="form-control" type="text"
+                           placeholder="Vui lòng nhập mã QR (*)">
                   </div>
                 </div>
                 <div class="row align-items-center py-3">

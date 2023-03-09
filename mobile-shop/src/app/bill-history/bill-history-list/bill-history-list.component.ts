@@ -5,6 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ManageListService} from "../../service/manage-list.service";
 import {User} from "../../entity/user";
 import {BillHistoryInfo} from "../../entity/bill-history-info";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-bill-history-list',
@@ -21,7 +22,7 @@ export class BillHistoryListComponent implements OnInit {
   billHistoryInfos: BillHistoryInfo[] = [];
   billHistoryInfo: BillHistoryInfo = {};
 
-  constructor(private billHistoryService: BillHistoryService,
+  constructor(private title: Title,private billHistoryService: BillHistoryService,
               private activatedRoute: ActivatedRoute,
               private manageListService: ManageListService) {
     this.activatedRoute.paramMap.subscribe(next => {
@@ -34,6 +35,7 @@ export class BillHistoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle("Chi tiết lịch sử mua hàng")
   }
 
 // phương thức lấy theo id

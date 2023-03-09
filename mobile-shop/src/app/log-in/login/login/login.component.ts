@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.title.setTitle('Trang Đăng Nhập');
+  this.title.setTitle('Đăng nhập');
   this.islogged = this.token.isLogger();
   if (this.islogged) {
     this.router.navigateByUrl('/')

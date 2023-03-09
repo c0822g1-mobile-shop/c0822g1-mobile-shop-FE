@@ -23,7 +23,7 @@ ul.products {
   list-style: none;
   justify-content: center;
   width: 100%;
-  margin-left: 70px;
+  margin-left: 120px;
   margin-bottom: 0;
 }
 
@@ -132,7 +132,7 @@ a:hover {
 }
 
 .modal-body {
-  background: linear-gradient(to bottom, #FEB58A, #ff665c);
+  /*background: linear-gradient(to bottom, #FEB58A, #ff665c);*/
   display: inline-block;
 }
 
@@ -155,24 +155,27 @@ a:hover {
 }
 
 .modal-footer {
+  background: linear-gradient(to bottom, #00c6ff, #aaaaaa);
   justify-content: center;
 }
 
 .modal-footer button {
   background-color: orange;
+  color: black;
   border: none;
 }
 
 .modal-footer button:hover {
-  background-color: #ff665c;
+  background-color: yellow;
+  box-shadow:  white;
 }
 
 table, th, td {
-  border: 1px solid white;
   color: black;
 }
 
 table {
+  border: 1px solid black;
   margin-top: 10px;
   border-collapse: collapse;
 }
@@ -181,8 +184,8 @@ table {
   padding: 5px 20px;
 }
 
-.card-info table tr td {
-  padding-right: 260px;
+table th , td {
+  border: 1px solid black;
 }
 
 .product img {
@@ -190,6 +193,7 @@ table {
 }
 .product {
   background-color: lightgray;
+  margin-left: 0;
 }
 a span {
   color: black;

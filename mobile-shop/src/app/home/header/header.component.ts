@@ -18,7 +18,7 @@ import {LoginService} from "../../log-in/service/login.service";
 export class HeaderComponent implements OnInit {
   user: User;
   role = 'none';
-  name = 'Thông tin cá nhân'
+  name = 'Đăng nhập'
   isLogged = false;
   constructor(private login:LoginService,private token: TokenService,private router: Router,private share: ShareService) {
   }
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     this.role = 'none';
-    this.name = 'Thông tin cá nhân';
+    this.name = 'Đăng nhập';
     this.isLogged = false;
     this.token.logout();
     this.router.navigateByUrl('/');

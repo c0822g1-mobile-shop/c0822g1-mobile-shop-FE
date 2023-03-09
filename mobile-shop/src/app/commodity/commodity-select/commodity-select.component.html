@@ -17,28 +17,28 @@
         </form>
         <div class="d-flex justify-content-center" style="margin-top: 20px">
           <button [disabled]="commodity.id == 0" data-dismiss="modal" type="submit" class="btn btn-outline-primary" (click)="select() ; choice = -1">Chọn</button>
-          <button [disabled]="commodity.id == 0" data-dismiss="modal" type="submit" class="btn btn-outline-danger" (click)="commodity.id = 0 ; choice = -1" style="margin-left: 20px">Hủy Chọn</button>
+<!--          <button [disabled]="commodity.id == 0" data-dismiss="modal" type="submit" class="btn btn-outline-danger" (click)="commodity.id = 0 ; choice = -1" style="margin-left: 20px">Hủy Chọn</button>-->
         </div>
-        <table class="table center table-hover" style="margin-top: 30px">
+        <table class="table table-hover" style="margin-top: 30px">
           <thead>
-          <tr>
-            <th style="text-align: center; width: 10%">STT</th>
-            <th style="text-align: center; width: 25%">Tên</th>
-            <th style="text-align: center; width: 15%">Giá(VNĐ)</th>
-            <th style="text-align: center; width: 20%">CPU</th>
-            <th style="text-align: center; width: 20%">Dung lượng</th>
+          <tr class="bg-info" style="color: white">
+            <th style="width: 10%">STT</th>
+            <th style="width: 25%">Tên</th>
+            <th style="width: 15%">Giá(VNĐ)</th>
+            <th style="width: 20%">CPU</th>
+            <th style="width: 20%">Dung lượng</th>
           </tr>
           </thead>
           <tr *ngIf="commodities.length == 0; else elseBlock">
             <td colspan="10" class="text-danger" style="text-align: center"><h4>Không có dữ liệu.</h4></td>
           </tr>
           <ng-template #elseBlock>
-            <tbody class="text-center">
+            <tbody>
             <tr [class.choice]="i == choice" style="cursor: pointer" *ngFor="let item of commodities; index as i" (click)="selectCommodity(item.id,i)">
               <td>{{(i + 1) + (request.page * request.size)}}</td>
               <td>{{item.name}}</td>
               <td>{{item.price}}</td>
-              <td>{{item.cpu}}</td>
+              <td>{{item.cpu | slice: 0: 10}}...</td>
               <td>{{item.capacity}}</td>
             </tr>
             </tbody>
@@ -52,10 +52,7 @@
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item" [ngClass]="commodityInfo.first ? 'disabled': ''">
-                    <a role="button" class="page-link" (click)="changePage(0)">Trang đầu</a>
-                  </li>
-                  <li class="page-item" [ngClass]="commodityInfo.first ? 'disabled': ''">
-                    <a role="button" class="page-link" (click)="changePage(commodityInfo.number - 1)"><</a>
+                    <a role="button" class="page-link" (click)="changePage(commodityInfo.number - 1)">Trang trước</a>
                   </li>
                   <li class="page-item" *ngIf="commodityInfo.number - 3 > 0">
                     <a role="button" class="page-link"
@@ -92,14 +89,9 @@
                   </li>
                   <li class="page-item" [ngClass]="commodityInfo.last ? 'disabled': ''">
                     <a role="button" class="page-link"
-                       (click)="changePage(commodityInfo.number + 1)">></a>
+                       (click)="changePage(commodityInfo.number + 1)">Trang sau</a>
                   </li>
-                  <li class="page-item" [ngClass]="commodityInfo.last ? 'disabled': ''">
-                    <a role="button" class="page-link"
-                       (click)="changePage(commodityInfo.totalPages - 1)">
-                      Trang cuối
-                    </a>
-                  </li>
+
                 </ul>
               </nav>
             </div>
@@ -110,4 +102,3 @@
     </div>
   </div>
 </div>
-

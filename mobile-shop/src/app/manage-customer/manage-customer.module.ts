@@ -14,5 +14,4 @@ import {FormsModule} from "@angular/forms";
     FormsModule
   ]
 })
-export class ManageCustomerModule {
-}
+export class ManageCustomerModule { }

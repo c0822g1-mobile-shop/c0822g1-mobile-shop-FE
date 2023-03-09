@@ -6,7 +6,8 @@ import {BillCreateComponent} from "./bill-create/bill-create.component";
 const routes: Routes = [
   {
     path:'', component: BillCreateComponent
-
+  },{
+  path: 'search/:id',component: BillCreateComponent
   }
 ];
 

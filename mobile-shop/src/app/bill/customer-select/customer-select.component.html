@@ -20,11 +20,15 @@
             kiếm
           </button>
         </form>
+        <div class="d-flex justify-content-center" style="margin-top: 20px">
+          <button [disabled]="customer.id == 0" data-dismiss="modal" type="submit" class="btn btn-outline-primary" (click)="select1() ; choice = -1">Chọn</button>
+          <button [disabled]="customer.id == 0" data-dismiss="modal" type="submit" class="btn btn-outline-danger" (click)="customer.id = 0 ; choice = -1" style="margin-left: 20px">Hủy Chọn</button>
+        </div>
       </div>
       <div>
         <div id="table-wrapper">
           <div id="table-scroll">
-            <table class="table table-striped table-hover center" style="margin-top: 30px">
+            <table class="table table-hover center" style="margin-top: 30px">
               <thead>
               <tr>
                 <th style="text-align: center">STT</th>
@@ -40,8 +44,8 @@
                 <td colspan="10" class="text-danger" style="text-align: center"><h4>Không có dữ liệu.</h4></td>
               </tr>
               <ng-template #elseBlock>
-                <tr [class.choice]="i == choice" style="cursor: pointer" *ngFor="let item of customers; index as i"
-                    (click)="selectCustomer(item.id,i)">
+                <tr [class.choice]="item.id == choice" style="cursor: pointer" *ngFor="let item of customers; index as i"
+                    (click)="selectCustomer(item.id)">
                   <td>{{(i + 1) + (request.page * request.size)}}</td>
                   <td>{{item.name}}</td>
                   <td>{{item.phoneNumber}}</td>
@@ -60,10 +64,7 @@
                   <nav aria-label="Page navigation example">
                     <ul class="pagination">
                       <li class="page-item" [ngClass]="customerInfo.first ? 'disabled': ''">
-                        <a role="button" class="page-link" (click)="changePage(0)">Trang đầu</a>
-                      </li>
-                      <li class="page-item" [ngClass]="customerInfo.first ? 'disabled': ''">
-                        <a role="button" class="page-link" (click)="changePage(customerInfo.number - 1)"><</a>
+                        <a role="button" class="page-link" (click)="changePage(customerInfo.number - 1)">Trang trước</a>
                       </li>
                       <li class="page-item" *ngIf="customerInfo.number - 3 > 0">
                         <a role="button" class="page-link"
@@ -100,13 +101,7 @@
                       </li>
                       <li class="page-item" [ngClass]="customerInfo.last ? 'disabled': ''">
                         <a role="button" class="page-link"
-                           (click)="changePage(customerInfo.number + 1)">></a>
-                      </li>
-                      <li class="page-item" [ngClass]="customerInfo.last ? 'disabled': ''">
-                        <a role="button" class="page-link"
-                           (click)="changePage(customerInfo.totalPages - 1)">
-                          Trang cuối
-                        </a>
+                           (click)="changePage(customerInfo.number + 1)">Trang sau</a>
                       </li>
                     </ul>
                   </nav>

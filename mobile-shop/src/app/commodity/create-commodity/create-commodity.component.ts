@@ -48,7 +48,7 @@ export class CreateCommodityComponent implements OnInit {
   }
   clickButton = false;
 
-  constructor(private title: Title,private router: Router, private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
+  constructor(private title: Title, private router: Router, private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(30)]),
       cpu: new FormControl('', [Validators.required, Validators.pattern("[-a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(30)]),

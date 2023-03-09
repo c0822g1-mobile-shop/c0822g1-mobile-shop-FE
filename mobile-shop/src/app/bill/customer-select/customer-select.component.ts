@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {User} from "../../entity/user";
@@ -23,6 +23,8 @@ export class CustomerSelectComponent implements OnInit {
   name = '';
   address = '';
   customer: User = {};
+  @Output() customer1 = new EventEmitter<User>();
+
   constructor(private customerService: CustomerService,
               private router: Router,
               private titleService: Title) {
@@ -94,9 +96,9 @@ export class CustomerSelectComponent implements OnInit {
    * @param index
    * @param id
    */
-  selectCustomer(id: number, index: number) {
+  selectCustomer(id: number) {
+    this.choice = id;
     this.customer.id = id;
-    this.choice = index;
   }
 
   /**
@@ -104,12 +106,21 @@ export class CustomerSelectComponent implements OnInit {
    * Date create: 01/03/2023
    * Function: get by id customer
    */
-  select() {
+  // select1() {
+  //   // this.router.navigate(['/bill/search/'+ this.choice])
+  //   this.customerService.findById(this.customer.id).subscribe(data => {
+  //     console.log(data)
+  //     this.customer = data;
+  //   }, error => {
+  //     this.customer = {};
+  //   });
+  // }
+  select1() {
     this.customerService.findById(this.customer.id).subscribe(data => {
       this.customer = data;
+      this.customer1.emit(data)
     }, error => {
-      this.customer = {};
+      this.customer = {}
     });
   }
-
 }

@@ -110,7 +110,7 @@ export class ProfileComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Chúc mừng ' + this.user.name + ' đã cập nhật thông tin thành công',
+        title: 'Chúc mừng ' + this.form.controls.name.value + ' đã cập nhật thông tin thành công',
         showConfirmButton: false,
         timer: 2500
       })

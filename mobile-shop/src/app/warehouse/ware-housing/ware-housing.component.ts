@@ -7,6 +7,8 @@ import {Commodity} from "../../entity/commodity";
 import {WarehousingService} from "../../service/warehousing.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import Swal from 'sweetalert2';
+import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 // @ts-ignore
 @Component({
@@ -32,8 +34,9 @@ export class WareHousingComponent implements OnInit {
 
 
 
-  constructor(private findSupplierService: FindSupplierService,
-              private wareHousingService: WarehousingService) {
+  constructor(private title: Title,private findSupplierService: FindSupplierService,
+              private wareHousingService: WarehousingService,
+              private router:Router) {
     this.getAllSupplier(name,0)
     console.log(this.supplier)
     if (this.supplier != null) {
@@ -43,9 +46,11 @@ export class WareHousingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle("Quản lý nhập kho")
   }
 
   getAllSupplier(name: string, page: number) {
+    // @ts-ignore
     this.findSupplierService.getAllSupplier(name, page).subscribe(data => {
       this.findSupplier = data;
       console.log(data)
@@ -107,6 +112,7 @@ export class WareHousingComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000
       });
+      this.router.navigateByUrl('/commodity/list')
     }, error => {
       console.log(error);
     });
