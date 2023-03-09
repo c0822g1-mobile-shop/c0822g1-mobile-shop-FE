@@ -8,6 +8,7 @@ import {BillService} from "../../service/bill/bill.service";
 import {Title} from "@angular/platform-browser";
 import {BillHistory} from "../../entity/bill-history";
 import Swal from 'sweetalert2';
+import {CustomerService} from "../../service/customer.service";
 
 
 @Component({
@@ -16,16 +17,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./bill-create.component.css']
 })
 export class BillCreateComponent implements OnInit {
-
-  @Input()
-  customer: User = {};
+  customer1: User = {};
   eventSelected = new EventEmitter();
   @Input()
   commodity: Commodity = {};
   eventSelected2 = new EventEmitter();
   billHistory: BillHistory = {};
   user: User[] = [];
-
+  quantity?: number = 0;
+  total: number = 0;
   formCreateBill: FormGroup = new FormGroup({});
   userId: number;
   commodityId: number;
@@ -37,7 +37,7 @@ export class BillCreateComponent implements OnInit {
     // email:"trung@gmail.com",
   };
 
-  constructor(private billService: BillService,
+  constructor(private userService: CustomerService, private billService: BillService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private title: Title) {
@@ -72,31 +72,32 @@ export class BillCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(
+      next => {
+        let id = next.get('id');
+        console.log(id)
+        this.userService.findById(parseInt(id)).subscribe(
+          next => {
+            this.customer1 = next;
+          }
+        )
+      }
+    )
   }
 
   saveBill(): void {
-    this.billService.saveBill(this.commodityId, this.userId).subscribe(() => {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-
-      Toast.fire({
+    Swal.fire({
+        position: 'center',
         icon: 'success',
-        title: 'Thanh toán thành công!'
-      }).then(r => location.replace(''))
-
-      // this.router.navigateByUrl("cart");
-    }, error => {
-      console.log(error);
-    });
+        title: 'Thanh toán thành công với tổng tiền là : ' + this.total,
+        color: 'red',
+        text: name,
+        showConfirmButton: false,
+        timer: 2000
+      }
+    );
+    this.formCreateBill.reset()
+    this.total = 0;
   }
 
   choiseCustomer(value: string) {
@@ -105,4 +106,19 @@ export class BillCreateComponent implements OnInit {
       this.userInfo = data;
     })
   }
+
+  getCustomer(customer: User) {
+    console.log(customer)
+    this.customer1 = customer;
+  }
+
+  getCommodity(commodity: Commodity) {
+    this.commodity = commodity;
+  }
+
+  change(value: string) {
+    this.quantity = parseInt(value);
+    this.total = this.quantity * this.commodity.price;
+  }
+
 }

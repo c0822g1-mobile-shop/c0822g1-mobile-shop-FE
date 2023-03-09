@@ -9,6 +9,7 @@ import {Cart} from "../../entity/cart";
 // @ts-ignore
 import Swal from 'sweetalert2';
 import {ShareService} from "../../log-in/service/share.service";
+import {Title} from "@angular/platform-browser";
 
 
 
@@ -48,7 +49,7 @@ export class BodyComponent implements OnInit {
   nameSearch = '';
   commodity: Commodity = {};
 
-  constructor(private token:TokenService,private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private shareService: ShareService,private route: Router) {
+  constructor(private title:Title,private token:TokenService,private commodityService: CommodityService, private activatedRoute: ActivatedRoute, private shareService: ShareService,private route: Router) {
 
     this.activatedRoute.paramMap.subscribe(
       next => {
@@ -60,6 +61,7 @@ export class BodyComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.title.setTitle('Trang chủ')
     this.isLogged = this.token.isLogger();
     this.loader();
     this.shareService.getClickEvent().subscribe(next => {
@@ -108,55 +110,15 @@ export class BodyComponent implements OnInit {
   }
 
   addToCart(ids: number, images: string, names: string, prices: number) {
-
-     if (this.token.getCart() != undefined) {
-       this.carts = this.token.getCart();
-       this.cart.name = names;
-       this.cart.image = images;
-       this.cart.price = prices;
-       if (this.token.checkExist(this.cart.name)) {
-         this.token.upQuantity(this.cart.name,this.carts)
-       } else {
-         this.cart.quantity = 1;
-         this.carts.push(this.cart);
-       }
-       this.token.setCart(this.carts);
-       Swal.fire({
-         position: 'center',
-         icon: 'success',
-         title: 'Đã thêm sản phẩm ' + this.cart.name + ' vào giỏ hàng',
-         showConfirmButton: false,
-         timer: 2500
-       })
-
-     }
-       else {
-       this.cart.name = names;
-       this.cart.image = images;
-       this.cart.price = prices;
-       this.cart.quantity = 1;
-       this.carts.push(this.cart);
-       this.token.setCart(this.carts);
-       Swal.fire({
-         position: 'center',
-         icon: 'success',
-         title: 'Đã thêm sản phẩm ' + this.cart.name + ' vào giỏ hàng',
-         showConfirmButton: false,
-         timer: 2500
-       })
-     }
-
-
-
-
-    if (this.isLogged) {
+    console.log(names)
       if (this.token.getCart() != undefined) {
         this.carts = this.token.getCart();
+        this.cart.id = ids;
         this.cart.name = names;
         this.cart.image = images;
         this.cart.price = prices;
-        if (this.token.checkExist(this.cart.name)) {
-          this.token.upQuantity(this.cart.name, this.carts)
+        if (this.token.checkExist(names)) {
+          this.token.upQuantity(ids, this.carts)
         } else {
           this.cart.quantity = 1;
           this.carts.push(this.cart);
@@ -169,8 +131,8 @@ export class BodyComponent implements OnInit {
           showConfirmButton: false,
           timer: 2500
         })
-
       } else {
+        this.cart.id = ids;
         this.cart.name = names;
         this.cart.image = images;
         this.cart.price = prices;
@@ -185,9 +147,6 @@ export class BodyComponent implements OnInit {
           timer: 2500
         })
       }
-    } else {
-      document.getElementById("dissmis").click()
-      this.route.navigateByUrl('/login')
-    }
+
   }
 }

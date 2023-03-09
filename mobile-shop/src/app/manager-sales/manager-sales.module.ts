@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ManagerSalesRoutingModule } from './manager-sales-routing.module';
 
 
+
 @NgModule({
   declarations: [],
   imports: [

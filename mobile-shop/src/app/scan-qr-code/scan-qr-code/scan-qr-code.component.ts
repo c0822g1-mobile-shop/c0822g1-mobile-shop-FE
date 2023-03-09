@@ -49,8 +49,6 @@ export class ScanQrCodeComponent implements OnInit {
       console.log(this.selectedQRCode)
       this.commodities.emit(data);
     }, error => {
-
-      this.toast.error("Không có sản phẩm có mã QR này", "Thông báo")
       Swal.fire('', 'Không có sản phẩm có mã QR này', 'error');
       this.router.navigateByUrl("warehouse")
     });

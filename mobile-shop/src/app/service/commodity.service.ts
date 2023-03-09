@@ -93,7 +93,9 @@ export class CommodityService {
       '?name=' + name;
     return this.httpClient.get<any>(url, {params});
   }
-
+  findById(id: number): Observable<Commodity> {
+    return this.httpClient.get<Commodity>(`${(this.URL_COMMODITY)}/${id}`);
+  }
   /**
    * Create by: PhucNT
    * Date created: 01/03/2023

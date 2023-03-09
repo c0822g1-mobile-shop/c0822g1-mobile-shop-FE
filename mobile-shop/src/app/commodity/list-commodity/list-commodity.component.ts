@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 // @ts-ignore
 import {Title} from "@angular/platform-browser";
 import {Router} from "@angular/router";
+import {TokenService} from "../../log-in/service/token.service";
 
 // @ts-ignore
 @Component({
@@ -22,8 +23,8 @@ export class ListCommodityComponent implements OnInit {
   search2 = false;
   value1 = -1;
   value2 = "";
-
-  constructor(private router: Router,private commodityService: CommodityService,private title:Title) {
+  role = 'none'
+  constructor(private token:TokenService,private router: Router,private commodityService: CommodityService,private title:Title) {
     this.getAll();
   }
 
@@ -33,6 +34,7 @@ export class ListCommodityComponent implements OnInit {
   }
 
   getAll() {
+    this.role = this.token.getRole();
     this.search2 = false;
     this.commodityService.getAll().subscribe(data => {
       console.log(data)
@@ -58,8 +60,8 @@ export class ListCommodityComponent implements OnInit {
       text: 'Hàng hóa: ' + this.item,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
       confirmButtonText: 'Có',
       cancelButtonText: 'Không'
     }).then((result) => {

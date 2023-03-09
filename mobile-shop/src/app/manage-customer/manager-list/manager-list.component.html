@@ -22,53 +22,55 @@
           </div>
           <div class="col-10">
             <div class="row">
-          <div *ngIf="choise==1">
-            <div class="form-check" >
-              <div class="col-5" style="float: left">
-                <div class="row">
-                <div class="custom-control custom-checkbox">
-                  <div class="col-4" style="float: left">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1">
-                  <label class="custom-control-label" for="customCheck1" (change)="gender.value">Giới tính</label>
-                  </div>
-                  <!--              </div>-->
-                  <div class="col-8" style="float: left">
 
-                  <select #gender name="" id="" style="margin-left: 12%;width: 100%" class="custom-select">
-                    <option value="Nam">Nam</option>
-                    <option value="Nữ">Nữ</option>
-                  </select>
-                  </div>
-                </div>
-                </div>
-              </div >
-              <div class="col-5" style="float: left">
-                <div class="form-check">
-                  <div class="row">
-                    <div class="col-4">
-                      <div class=" custom-checkbox" style="margin-right: 27px;margin-left: 8px;">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2" style="width: 100px">
-                        <label class="custom-control-label" for="customCheck2">Tuổi</label>
+              <div *ngIf="choise==1">
+                <div class="form-check" >
+                  <div class="col-5" style="float: left">
+                    <div class="row">
+                      <div class="custom-control custom-checkbox">
+                        <div class="col-4" style="float: left">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1" (change)="gender.value">Giới tính</label>
+                        </div>
+                        <!--              </div>-->
+                        <div class="col-8" style="float: left">
+
+                          <select #gender name="" id="" style="margin-left: 12%;width: 100%" class="custom-select">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-8">
-                      <div >
-                        <input #age name="age" type="number" class="form-control" placeholder="Nhập tuổi."
-                               aria-label="Username"
-                               aria-describedby="addon-wrapping" style="width: 100%;">
+                  </div >
+                  <div class="col-5" style="float: left">
+                    <div class="form-check">
+                      <div class="row">
+                        <div class="col-4">
+                          <div class=" custom-checkbox" style="margin-right: 27px;margin-left: 8px;">
+                            <input type="checkbox" class="custom-control-input" id="customCheck2" style="width: 100px">
+                            <label class="custom-control-label" for="customCheck2">Tuổi</label>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div >
+                            <input #age name="age" type="number" class="form-control" placeholder="Nhập tuổi."
+                                   aria-label="Username"
+                                   aria-describedby="addon-wrapping" style="width: 100%;">
+                          </div>
+                        </div>
+
                       </div>
                     </div>
-
+                  </div>
+                  <div class="col-2" style="float: right">
+                    <div style="margin-left: 100px">
+                      <button (click)="search(age.value,gender.value,false)" class="btn btn-outline-primary">Lọc</button>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-2" style="float: right">
-              <div style="margin-left: 100px">
-                <button (click)="search(age.value,gender.value,false)" class="btn btn-outline-primary">Lọc</button>
-              </div>
-              </div>
-            </div>
-          </div>
+
             </div>
           </div>
         </div>
@@ -84,7 +86,9 @@
 <div class=" container py-5 h-100">
   <table class=" table table-hover">
     <thead>
-    <tr class="btn-info" style="color: black">
+
+    <tr class="btn-info" style="color: white">
+
       <th>STT</th>
       <th>Họ và tên</th>
       <th>Giới tính</th>
