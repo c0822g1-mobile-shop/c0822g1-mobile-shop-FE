@@ -9,7 +9,6 @@
         <div class="modal-body text-center d-flex justify-content-around row" style="box-sizing: border-box">
           <qr-code *ngFor="let qr of qrInfo; let index = index" [value]="qr" [ngClass]="{'selected': selectedQR === index}" (click)="selectQR(index)" class="btn col-md-3 m-1"></qr-code>
         </div>
-
       </div>
       <div class="modal-footer text-center">
         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
@@ -18,5 +17,4 @@
     </div>
   </div>
 </div>
-
 

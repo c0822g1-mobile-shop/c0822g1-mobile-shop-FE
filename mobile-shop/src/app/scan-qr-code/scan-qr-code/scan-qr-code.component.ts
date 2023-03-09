@@ -16,7 +16,7 @@ export class ScanQrCodeComponent implements OnInit {
   qrInfo = [
     'QR001',
     'QR0099',
-    'QR002'
+    'QR002',
   ];
   selectedQR = null;
   private selectedQRCode: string = null;
@@ -32,6 +32,7 @@ export class ScanQrCodeComponent implements OnInit {
               private router: Router,
               private toast: ToastrService) {
   }
+
   ngOnInit(): void {
   }
 
@@ -48,7 +49,6 @@ export class ScanQrCodeComponent implements OnInit {
       console.log(this.selectedQRCode)
       this.commodities.emit(data);
     }, error => {
-      this.toast.error("Không có sản phẩm có mã QR này", "Thông báo")
       Swal.fire('', 'Không có sản phẩm có mã QR này', 'error');
       this.router.navigateByUrl("warehouse")
     });

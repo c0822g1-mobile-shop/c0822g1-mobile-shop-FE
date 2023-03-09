@@ -7,6 +7,7 @@ import {Commodity} from "../../entity/commodity";
 import {WarehousingService} from "../../service/warehousing.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import Swal from 'sweetalert2';
+import {Router} from "@angular/router";
 
 // @ts-ignore
 @Component({
@@ -15,8 +16,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./ware-housing.component.css']
 })
 export class WareHousingComponent implements OnInit {
-
-  set;
   findSupplier: Supplier [] = [];
   supplier: number;
   suppliers: Supplier = {
@@ -33,9 +32,11 @@ export class WareHousingComponent implements OnInit {
   commodity: any;
 
 
+
   constructor(private findSupplierService: FindSupplierService,
-              private wareHousingService: WarehousingService) {
-    this.getAllSupplier(name, 0)
+              private wareHousingService: WarehousingService,
+              private router:Router) {
+    this.getAllSupplier(name,0)
     console.log(this.supplier)
     if (this.supplier != null) {
       this.findSupplierv2(this.supplier)
@@ -47,6 +48,7 @@ export class WareHousingComponent implements OnInit {
   }
 
   getAllSupplier(name: string, page: number) {
+    // @ts-ignore
     this.findSupplierService.getAllSupplier(name, page).subscribe(data => {
       this.findSupplier = data;
       console.log(data)
@@ -60,19 +62,19 @@ export class WareHousingComponent implements OnInit {
   }
 
   nextPage() {
-    this.findSupplierService.changePage(this.findSupplier['number'] + 1).subscribe(next => {
+    this.findSupplierService.changePage(this.findSupplier['number']+1).subscribe(next => {
       this.findSupplier = next;
     })
   }
 
   previousPage() {
-    this.findSupplierService.changePage(this.findSupplier['number'] - 1).subscribe(next => {
+    this.findSupplierService.changePage(this.findSupplier['number']-1).subscribe(next => {
       this.findSupplier = next;
     })
   }
 
   search(name: string, page: number) {
-    this.findSupplierService.getAllSupplier(name, page).subscribe(data => {
+    this.findSupplierService.getAllSupplier(name,page).subscribe(data => {
       if (data['content'].length == 0) {
         Swal.fire({
           position: 'center',
@@ -108,8 +110,11 @@ export class WareHousingComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000
       });
+      this.router.navigateByUrl('/commodity/list')
     }, error => {
       console.log(error);
     });
   }
+
+
 }

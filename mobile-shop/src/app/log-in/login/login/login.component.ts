@@ -5,10 +5,8 @@ import {TokenService} from "../../service/token.service";
 import {Router} from "@angular/router";
 import {ShareService} from "../../service/share.service";
 import Swal from "sweetalert2";
-// @ts-ignore
 import {Title} from "@angular/platform-browser";
 
-// @ts-ignore
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -79,7 +77,6 @@ export class LoginComponent implements OnInit {
         timer: 2000
       });
     }, error => {
-      console.log(error)
       Swal.fire({
         position: 'center',
         icon: 'error',

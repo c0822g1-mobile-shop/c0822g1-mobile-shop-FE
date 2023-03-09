@@ -16,11 +16,6 @@ export class EmployeeGuard implements CanActivate {
       return true;
     }
     return false;
-    if (this.token.getRole() == 'ROLE_ADMIN' || this.token.getRole() == 'ROLE_EMPLOYEE'){
-      return true;
-
-    }
-    return false
   }
-}
 
+}

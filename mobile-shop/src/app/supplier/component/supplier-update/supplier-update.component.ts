@@ -19,7 +19,7 @@ export class SupplierUpdateComponent implements OnInit {
     name: new FormControl("", [Validators.required, Validators.maxLength(100)]),
     address: new FormControl("", [Validators.required, Validators.maxLength(200)]),
     phoneNumber: new FormControl("", [Validators.required, Validators.pattern("^(0|\\+84)\\d{9}$")]),
-    email: new FormControl("", [Validators.required, Validators.pattern("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")])
+    email: new FormControl("", [Validators.required, Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")])
   });
 
   clickButton = false;
@@ -56,8 +56,8 @@ export class SupplierUpdateComponent implements OnInit {
         icon: 'error',
         title: 'Không tìm thấy nhà cung cấp!',
         text: 'Vui lòng làm mới trang và thử lại',
-        showConfirmButton: false,
-        timer: 2000
+        showConfirmButton: true,
+        confirmButtonColor: '#808080',
       });
 
       this.router.navigateByUrl("supplier/list")
@@ -124,5 +124,23 @@ export class SupplierUpdateComponent implements OnInit {
     this.errors.phoneNumber = '';
     this.errors.name = '';
     this.errors.address = '';
+  }
+
+  cancel() {
+    Swal.fire({
+      title: 'Hủy bỏ',
+      html: 'Bạn có muốn hủy bỏ chỉnh sửa nhà cung cấp ?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Hủy',
+      showConfirmButton: true,
+      confirmButtonText: 'Có',
+      confirmButtonColor: 'red'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl("/supplier/list");
+        }
+      }
+    );
   }
 }

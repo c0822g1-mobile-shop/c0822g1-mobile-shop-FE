@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/commodity-CongBD
 <div style="margin-right: 70px;margin-left: 70px">
   <div class="container-builder" style="margin-top: 80px">
     <br>
@@ -16,7 +20,7 @@
     <div style="height: 350px">
       <table class="table text-center table-hover" style="width: 100%">
         <thead>
-        <tr class="bg-info">
+        <tr class="bg-info" style="color: white">
           <th style="width: 100px">STT</th>
           <th style="width: 100px">MS</th>
           <th style="width: 400px">Tên nhà cung cấp</th>
@@ -27,7 +31,7 @@
         </thead>
         <tbody>
 
-        <tr *ngFor="let item of supplierList['content'], index as i" (click)="supplier = item"
+        <tr style="cursor: pointer" *ngFor="let item of supplierList['content'], index as i" (click)="supplier = item"
             [class.table-active]="item == supplier">
           <td>{{i + 1 + supplierList.number * supplierList.size}}</td>
           <td>{{item?.code}}</td>
@@ -43,10 +47,10 @@
 
   <!--    Phân trang-->
 
-  <div class="container-fluid" *ngIf="supplierList?.content?.length != 0">
+  <div style="cursor: pointer" class="container-fluid" *ngIf="supplierList?.content?.length != 0">
     <nav aria-label="Page navigation example" style="float: right; margin-top: 10px">
       <ul *ngIf="supplierList.totalPages > 3" class="pagination">
-        <li class="page-item"><a class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
+        <li class="page-item"><a style="cursor: pointer" class="page-link" [ngClass]="supplierList.first ? 'disabled': ''"
                                  (click)="getAll(supplierList.number - 1)">Trang trước</a></li>
 
         <li class="page-item" [class.active]="supplierList.pageable.pageNumber < supplierList.totalPages -1"><a
@@ -75,18 +79,15 @@
           (click)="getAll(num)" class="page-link"> {{num + 1}}
         </a></li>
 
-        <li class="page-item"><a class="page-link"
+        <li class="page-item"><a
                                  [ngClass]="supplierList.number + 1 == supplierList.totalPages? 'disabled': ''"
                                  (click)="getAll(supplierList.number + 1)">Trang sau</a></li>
       </ul>
     </nav>
   </div>
 
-  <div class="d-flex justify-content-center" style="position: relative;left: -240px">
-    <button [disabled]="supplier == null" (click)="delete(supplier)" class=" btn btn-outline-danger" data-toggle="modal"
-            data-target="#exampleModal" style="margin-left: 50px"
-            type="submit">
-      Xoá
+  <div class="d-flex justify-content-start" style="position: relative;">
+    <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary" [routerLink]="['/']">Thoát
     </button>
     <button style="margin-left: 10px" type="submit" class=" btn btn-outline-success" routerLink="/supplier/create">
       Thêm mới
@@ -94,7 +95,11 @@
     <button [disabled]="supplier == null" style="margin-left: 10px" type="submit" class=" btn btn-outline-primary"
             (click)="update()">Chỉnh sửa
     </button>
-    <button style="margin-left: 10px" type="submit" class=" btn btn-outline-secondary" [routerLink]="['/']">Thoát
+
+    <button style="margin-left: 10px" *ngIf="role == 'ROLE_ADMIN'" [disabled]="supplier == null" (click)="delete(supplier)" class=" btn btn-outline-danger" data-toggle="modal"
+            data-target="#exampleModal"
+            type="submit">
+      Xoá
     </button>
   </div>
 </div>

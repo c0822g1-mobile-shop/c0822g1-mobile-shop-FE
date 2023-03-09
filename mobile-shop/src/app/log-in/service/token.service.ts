@@ -45,15 +45,17 @@ export class TokenService {
     sessionStorage.removeItem(CART);
     sessionStorage.setItem(CART,JSON.stringify(cart));
   }
-  public upQuantity(name: string,carts: Cart[]) {
+  public upQuantity(id: number,carts: Cart[]) {
     for (let i = 0; i < carts.length; i++) {
-      if (carts[i].name == name) {
-        carts[i].quantity++;
+      if (carts[i].id == id) {
+        carts[i].quantity += 1;
         break
       }
     }
   }
   public checkExist(name: string) {
+    console.log(name)
+    // let cart = this.getCart();
     for (let i = 0; i < this.getCart().length; i++) {
       if (this.getCart()[i].name == name) {
         return true;

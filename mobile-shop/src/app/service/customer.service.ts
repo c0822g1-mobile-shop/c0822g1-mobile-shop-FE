@@ -51,4 +51,8 @@ export class CustomerService {
     '&address=' + address;
     return this.httpClient.get<any>(url, {params});
   }
+
+  findAllCustomer():Observable<any>{
+    return this.httpClient.get<any>(this.URL_CUSTOMER + "/getList")
+  }
 }
