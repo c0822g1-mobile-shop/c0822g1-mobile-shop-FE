@@ -45,6 +45,7 @@ export class CustomerSelectComponent implements OnInit {
     this.name = '';
     this.address = '';
     this.customerService.getAllCustomer(request).subscribe(data => {
+      console.log(data)
       this.customerInfo = data;
       this.customers = data.content;
       this.totalPages = data.totalPages;

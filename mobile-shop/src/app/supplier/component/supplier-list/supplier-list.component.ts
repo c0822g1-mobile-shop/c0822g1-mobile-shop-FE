@@ -32,7 +32,10 @@ export class SupplierListComponent implements OnInit {
   }
 
   getAll(page: number) {
-   this.role = this.token.getRole()
+    if (this.token.getRole() != null) {
+      this.role = this.token.getRole()
+
+    }
     this.supplierService.getAll(this.search, page).subscribe(next => {
       console.log(next)
       // console.log(next)

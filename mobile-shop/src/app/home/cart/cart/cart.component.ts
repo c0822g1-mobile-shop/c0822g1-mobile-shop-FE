@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
       this.length= 0
       this.total = 0;
       this.carts = []
-      this.tokenService.setCart(undefined)
+      this.tokenService.clearCart();
       Swal.fire({
         position: 'center',
         icon: 'success',
