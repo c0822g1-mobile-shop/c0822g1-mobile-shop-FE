@@ -52,7 +52,7 @@ export class CartComponent implements OnInit {
       Swal.fire({
         title: "Bạn chưa đăng nhập!",
         text: "Hãy đăng nhập để tiến hành thanh toán!",
-        icon: "success",
+        icon: "warning",
         buttonsStyling: false,
         confirmButtonText: "Đăng nhập!",
         customClass: {

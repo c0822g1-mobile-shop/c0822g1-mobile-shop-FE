@@ -1,13 +1,9 @@
-
 import {TokenService} from "../../log-in/service/token.service";
-import loader from "@angular-devkit/build-angular/src/angular-cli-files/plugins/single-test-transform";
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ShareService} from "../../log-in/service/share.service";
 import {User} from "../../entity/user";
 import {LoginService} from "../../log-in/service/login.service";
-
-
 
 
 @Component({
@@ -20,9 +16,9 @@ export class HeaderComponent implements OnInit {
   role = 'none';
   name = 'Đăng nhập'
   isLogged = false;
-  constructor(private login:LoginService,private token: TokenService,private router: Router,private share: ShareService) {
-  }
 
+  constructor(private login: LoginService, private token: TokenService, private router: Router, private share: ShareService) {
+  }
 
   ngOnInit(): void {
     this.loader();
@@ -41,6 +37,7 @@ export class HeaderComponent implements OnInit {
       this.role = this.token.getRole();
     }
   }
+
   logout() {
     this.role = 'none';
     this.name = 'Đăng nhập';
@@ -50,7 +47,6 @@ export class HeaderComponent implements OnInit {
   }
 
 
-
   checkProfile() {
     if (!this.isLogged) {
       this.router.navigateByUrl('/login')
@@ -58,8 +54,8 @@ export class HeaderComponent implements OnInit {
       this.router.navigateByUrl('/profile')
     }
   }
-  search1(value: string) {
 
+  search1(value: string) {
     this.share.sendClickEvent()
     this.router.navigate(['home', value])
   }
