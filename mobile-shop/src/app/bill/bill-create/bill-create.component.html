@@ -1,260 +1,227 @@
-<p style="height: 100px">bill create form</p>
+<div class="mx-5 px-5 pt-3 pb-5" style="margin-top: 100px">
+  <h2 class="text-center fw-bold text-dard">QUẢN LÝ BÁN HÀNG</h2>
+  <div class="d-flex justify-content-center">
+    <form [formGroup]="formCreateBill" class="w-100  p-3 rounded formCSS">
+      <!--        <form class="w-50 border border-2 border-success p-3 rounded formCSS">-->
+      <!--      <div class="card" [formGroup]="form">-->
+      <div class="card">
+        <div class="card-header">
+          <label></label>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-7">
+              <h5>Thông tin khách hàng</h5>
+              <br>
+              <div class="row ">
+                <div class="col-md-1"></div>
+                <div class="col-md-5 ">
+                  <!--  <button class="btn btn-outline-primary " (click)="addNewContacts()">-->
+                  <!--   Chọn khách hàng cũ-->
+                  <!--  </button>-->
+                  <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                          data-target="#exampleModal1">
+                    Chọn khách hàng
+                  </button>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <br>
+              <div>
+                <label for="id"></label>
+                <input hidden id="id" type="text" class="form-control form-control-lg" formControlName="id"/>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3" style="margin-top: 8px">
+                  <label for="name">Họ và tên <span style="color: red">(*)</span>:</label>
+
+                </div>
+                <div class="col-md-7">
+                  <input formControlName="name" disabled [value]="customer1.name" id="name" type="text"
+                         class="form-control">
+                  <!--<span style="color: red">Lưu ý: Tên khách hàng không được để trống</span>-->
+                  <div class="text-danger"
+                       *ngIf="formCreateBill.controls.name.touched && formCreateBill.controls.name.touched else elseBlock">
+                    <span *ngIf="formCreateBill.controls.name.hasError('required')">Tên không được để trống.</span>
+                    <span *ngIf="formCreateBill.controls.name.hasError('pattern')">Tên chưa đúng định dạng, vd: Bùi Hùng.</span>
+                  </div>
+                  <ng-template #elseBlock><br></ng-template>
+                </div>
+                <div class="col-md-1"></div>
 
 
-<!--<div class="mx-5 px-5 pt-3 pb-5">-->
-<!--  <h2 class="text-center fw-bold text-dard">QUẢN LÝ BÁN HÀNG</h2>-->
-<!--  <br>-->
-<!--  <div class="d-flex justify-content-center">-->
-<!--    <form class="w-100  p-3 rounded formCSS">-->
-<!--      &lt;!&ndash;        <form class="w-50 border border-2 border-success p-3 rounded formCSS">&ndash;&gt;-->
-<!--&lt;!&ndash;      <div class="card" [formGroup]="form">&ndash;&gt;-->
-<!--      <div class="card" >-->
-<!--        <div class="card-header">-->
-<!--          <label></label>-->
-<!--        </div>-->
-<!--        <div class="card-body">-->
-<!--          <div class="row">-->
-<!--            <div class="col-md-7">-->
-<!--              <h5>Thông tin khách hàng</h5>-->
-<!--              <div class="row ">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-5 ">-->
-<!--&lt;!&ndash;                  <button class="btn btn-outline-primary " (click)="addNewContacts()">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Chọn khách hàng cũ&ndash;&gt;-->
-<!--&lt;!&ndash;                  </button>&ndash;&gt;-->
-<!--                  <button class="btn btn-outline-primary ">-->
-<!--                    Chọn khách hàng cũ-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--                <div class="col-md-5">-->
-<!--&lt;!&ndash;                  <button class="btn btn-outline-primary" (click)="addNewContacts()">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Quét mã QR&ndash;&gt;-->
-<!--&lt;!&ndash;                  </button>&ndash;&gt;-->
-<!--                  <button class="btn btn-outline-primary" >-->
-<!--                    Quét mã QR-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--                <div class="col-md-1"></div>-->
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-3" style="margin-top: 8px">-->
-<!--                  <label for="name">Họ và tên <span style="color: red">(*)</span>:</label>-->
-
-<!--                </div>-->
-<!--                <div class="col-md-7">-->
-<!--                  <input formControlName="fCustomerName" id="name" type="text" class="form-control">-->
-<!--                  &lt;!&ndash;                                    <span style="color: red">Lưu ý: Tên khách hàng không được để trống</span>&ndash;&gt;-->
-<!--                </div>-->
-<!--                <div class="col-md-1"></div>-->
-
-
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-3" style="margin-top: 8px">-->
-<!--                  <label for="phone"> Số điện thoại <span style="color: red">(*)</span>:</label>-->
-<!--                </div>-->
-<!--                <div class="col-md-7">-->
-<!--                  <input formControlName="fCustomerPhone" id="phone" type="text" class="form-control">-->
-<!--                  &lt;!&ndash;                                    <span style="color: red">Lưu ý: SĐT khách hàng không được để trống</span>&ndash;&gt;-->
-<!--                </div>-->
-<!--                <div class="col-md-1"></div>-->
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-3" style="margin-top: 8px">-->
-<!--                  <label for="address"> Địa chỉ <span style="color: red">(*)</span>:</label>-->
-<!--                </div>-->
-<!--                <div class="col-md-7">-->
-<!--                  <input formControlName="fCustomerAddress" id="address" type="text"-->
-<!--                         class="form-control">-->
-<!--                  &lt;!&ndash;                                    <span style="color: red">Lưu ý: Địa chỉ khách hàng không được để trống</span>&ndash;&gt;-->
-<!--                </div>-->
-<!--                <div class="col-md-1"></div>-->
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-3" style="margin-top: 8px">-->
-<!--                  <label for="age"> Tuổi <span style="color: red">(*)</span>:</label>-->
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-<!--                  <input formControlName="fCustomerAge" id="age" type="number" class="form-control">-->
-<!--                </div>-->
-<!--                <div class="col-md-6"></div>-->
-<!--              </div>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-3" style="margin-top: 8px"></div>-->
-<!--                <div class="col-md-7" style="margin-top: 8px">-->
-<!--                  &lt;!&ndash;                                    <span style="color: red">Lưu ý: Tuổi khách hàng không được để trống</span>&ndash;&gt;-->
-<!--                </div>-->
-<!--                <div class="col-md-1"></div>-->
-
-<!--              </div>-->
-
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-3" style="margin-top: 8px">-->
-<!--                  <label for="email"> E-mail <span style="color: red">(*)</span>:</label>-->
-<!--                </div>-->
-<!--                <div class="col-md-7">-->
-<!--                  <input formControlName="fCustomerEmail" id="email" type="text" class="form-control">-->
-<!--                  &lt;!&ndash;                                    <span style="color: red">Lưu ý: Email khách hàng không được để trống</span>&ndash;&gt;-->
-<!--                </div>-->
-<!--                <div class="col-md-1"></div>-->
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-7" style="margin-top: 8px">-->
-<!--                                                                <span style="font-size: 15px" class="fst-italic">-->
-<!--              Trường có dấu <span style="color: red"> (*)</span> là bắt-->
-<!--              buộc,không được bỏ trống-->
-<!--            </span>-->
-<!--                </div>-->
-<!--                <div class="col-md-3">-->
-<!--                </div>-->
-<!--                <div class="col-md-1"></div>-->
-<!--              </div>-->
-<!--              &lt;!&ndash;                            <hr class="hr">&ndash;&gt;-->
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3" style="margin-top: 8px">
+                  <label for="phone"> Số điện thoại <span style="color: red">(*)</span>:</label>
+                </div>
+                <div class="col-md-7">
+                  <input formControlName="phoneNumber" disabled [value]="customer1.phoneNumber" id="phone" type="text"
+                         class="form-control">
+                  <!--<span style="color: red">Lưu ý: SĐT khách hàng không được để trống</span>-->
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3" style="margin-top: 8px">
+                  <label for="address"> Địa chỉ <span style="color: red">(*)</span>:</label>
+                </div>
+                <div class="col-md-7">
+                  <input formControlName="address" disabled [value]="customer1.address" id="address" type="text"
+                         class="form-control">
+                  <!--<span style="color: red">Lưu ý: Địa chỉ khách hàng không được để trống</span>-->
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3" style="margin-top: 8px">
+                  <label for="email"> E-mail <span style="color: red">(*)</span>:</label>
+                </div>
+                <div class="col-md-7">
+                  <input formControlName="email" disabled [value]="customer1.email" id="email" type="text"
+                         class="form-control">
+                  <!--<span style="color: red">Lưu ý: Email khách hàng không được để trống</span>-->
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-7" style="margin-top: 8px">
+                </div>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-1"></div>
+              </div>
 
 
-<!--            </div>-->
-<!--            <div class="col-md-5">-->
-<!--              <h5>Thông tin sản phẩm</h5>-->
+            </div>
+            <div class="col-md-5">
+              <h5>Thông tin sản phẩm</h5>
+              <br>
+              <div class="row ">
+                <div class="col-md-1"></div>
+                <div class="col-md-8 ">
+                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal"
+                          (click)="commodity.id = 0">
+                    Chọn sản phẩm
+                  </button>
+                </div>
+                <div class="col-md-3"></div>
+              </div>
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                  <label for="commodityName"> Tên sản phẩm <span style="color: red">(*)</span>:</label>
+                </div>
+                <div class="col-md-6">
+                  <input formControlName="commodityName" id="commodityName" type="text"
+                         [value]="commodity.name" disabled class="form-control">
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                  <label for="price"> Đơn giá <span style="color: red">(*)</span>:</label>
+                </div>
+                <div class="col-md-4">
+                  <input formControlName="price" id="price" type="text"
+                         [value]="commodity.price" disabled class="form-control"></div>
+                <div class="col-md-3"></div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4" style="margin-top: 8px">
+                  <label for="productAmount"> Số lượng <span style="color: red">(*)</span>:</label>
+                </div>
+                <div class="col-md-2">
+                  <input #quantity (change)="change(quantity.value)" formControlName="quantity" id="productAmount"
+                         type="text" class="form-control">
+                </div>
+                <div class="col-md-5" style="margin-top: 8px">Cái</div>
 
-<!--              <div class="row ">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-8 ">-->
-<!--&lt;!&ndash;                  <button class="btn btn-outline-primary " (click)="addNewContacts()">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Chọn sản phẩm&ndash;&gt;-->
-<!--&lt;!&ndash;                  </button>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <button class="btn btn-outline-primary " (click)="addNewContacts()">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Chọn sản phẩm&ndash;&gt;-->
-<!--&lt;!&ndash;                  </button>&ndash;&gt;-->
-<!--                  <button class="btn btn-outline-primary ">-->
-<!--                    Chọn sản phẩm-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--                <div class="col-md-3"></div>-->
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-4">Tên sản phẩm:</div>-->
-<!--                <div class="col-md-6">-->
-<!--                  <span>iPhone 14</span>-->
-<!--                </div>-->
-<!--                <div class="col-md-1"></div>-->
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-4">Đơn giá:-->
-<!--                </div>-->
-<!--                <div class="col-md-4">-->
-<!--                  <span>29.999.999 &nbsp&nbsp VNĐ</span>-->
-<!--                </div>-->
-<!--                <div class="col-md-3"></div>-->
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-4" style="margin-top: 8px">-->
-<!--                  <label for="productAmount"> Số lượng <span style="color: red">(*)</span>:</label>-->
-<!--                </div>-->
-<!--                <div class="col-md-2">-->
-<!--                  <input formControlName="fProductAmount" id="productAmount" type="number"-->
-<!--                         class="form-control">-->
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4" style="margin-top: 8px"></div>
+                <div class="col-md-7">
+                  <!--<span style="color: red">Lưu ý: Số lượng không được để trống</span>-->
+                </div>
 
-<!--                </div>-->
-<!--                <div class="col-md-5" style="margin-top: 8px">Cái</div>-->
+              </div>
+              <br>
+              <div class="row ">
+                <div class="col-md-1"></div>
+                <div class="col-md-3"></div>
+              </div>
 
-<!--              </div>-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-4" style="margin-top: 8px"></div>-->
-<!--                <div class="col-md-7" >-->
-<!--                  &lt;!&ndash;                                    <span style="color: red">Lưu ý: Số lượng không được để trống</span>&ndash;&gt;-->
-<!--                </div>-->
+            </div>
+          </div>
 
-<!--              </div>-->
-<!--              <br>-->
-<!--              <div class="row ">-->
-<!--                <div class="col-md-1"></div>-->
-<!--                <div class="col-md-8 ">-->
-<!--&lt;!&ndash;                  <button class="btn btn-outline-primary " (click)="addNewContacts()">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Thêm sản phẩm&ndash;&gt;-->
-<!--&lt;!&ndash;                  </button>&ndash;&gt;-->
-<!--                  <button class="btn btn-outline-primary " >-->
-<!--                    Thêm sản phẩm-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--                <div class="col-md-3"></div>-->
-<!--              </div>-->
-<!--              &lt;!&ndash;                            <hr class="hr">&ndash;&gt;-->
+          <hr class="hr">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-3">
+              <label for="moneyTotal"> Thành tiền : <span style="color: red">{{total| currency: "VND"}}</span></label>
+            </div>
+            <div class="col-md-4" style="margin-left: 2.5%">
+              <span formControlName="" id="moneyTotal"></span>
+            </div>
+            <!--                        <div class="col-md-3" style="margin-top: 8px"></div>-->
+            <div class="col-md-1"></div>
+          </div>
+          <br>
 
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          <hr class="hr">-->
-<!--          <div class="row">-->
-<!--            <div class="col-md-4"></div>-->
-<!--            <div class="col-md-3">-->
-<!--              Thành tiền:-->
-<!--            </div>-->
-<!--            <div class="col-md-4" style="margin-left: 2.5%">-->
-<!--              <span>29.999.999 &nbsp&nbsp VNĐ</span>-->
-<!--            </div>-->
-<!--            &lt;!&ndash;                        <div class="col-md-3" style="margin-top: 8px"></div>&ndash;&gt;-->
-<!--            <div class="col-md-1"></div>-->
-<!--          </div>-->
-<!--          <br>-->
-
-<!--          <div class="row">-->
-<!--            <div class="col-md-4"></div>-->
-<!--            <div class="col-md-8">-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-5">Hình thức thanh toán:</div>-->
-<!--                <div class="col-md-7">-->
-<!--                  <form>-->
-<!--                    <input name="pay" id="credit" type="radio" value="credit"/>-->
-<!--                    <label for="credit">Thẻ tín dụng</label>-->
-<!--                    <br>-->
-<!--                    <input name="pay" id="cash" type="radio" value="cash"/>-->
-<!--                    <label for="cash">Tiền mặt</label>-->
-<!--                  </form>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash;                        <div class="col-md-1"></div>&ndash;&gt;-->
-<!--          </div>-->
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-3">Hình thức thanh toán:</div>
+                <div class="col-md-7">
+                  <form>
+                    <input name="pay" id="credit" type="radio" value="credit"/>
+                    <label for="credit">Thẻ tín dụng</label>
+                    <br>
+                    <input name="pay" id="cash" type="radio" value="cash"/>
+                    <label for="cash">Tiền mặt</label>
+                  </form>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+            </div>
+          </div>
 <!--          <div class="row">-->
 <!--            <div class="col-md-4"></div>-->
 <!--            <div class="col-md-8">-->
 <!--              <input type="checkbox" id="printf" name="printf" value="bil">-->
 <!--              <label for="printf">In hóa đơn</label>-->
 <!--            </div>-->
-<!--            &lt;!&ndash;                        <div class="col-md-3"></div>&ndash;&gt;-->
 <!--          </div>-->
-<!--        </div>-->
-<!--        <br>-->
+        </div>
+        <br>
 
-<!--        <div class=" text-center">-->
-<!--&lt;!&ndash;          <button (click)="onSave()" class="btn btn-primary">Tiến hành thanh toán</button>&ndash;&gt;-->
-<!--          <button  class="btn btn-primary">Tiến hành thanh toán</button>-->
-<!--        </div>-->
-<!--        <br>-->
-<!--        <div class="card-footer text-center">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </div>-->
+        <div class=" text-center">
+          <button (click)="saveBill()" class="btn btn-primary">Tiến hành thanh toán</button>
+        </div>
+        <br>
+        <div class="card-footer text-center">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<app-customer-select (customer1)="getCustomer($event)"></app-customer-select>
+<app-commodity-select (commodities1)="getCommodity($event)"></app-commodity-select>
 
-<!--</div>-->

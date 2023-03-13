@@ -1,0 +1,96 @@
+<section class="vh-120 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5 " style="text-align: center">Báo cáo bán hàng</h1>
+            <hr>
+            <form [formGroup]="reportForm" *ngIf="reportForm">
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+
+                    <label class="form-label" for="firstName">Từ ngày<span style="color: red">(*)</span></label>
+                    <input type="date" #startDay id="firstName" formControlName="startDay"
+                           class="form-control form-control-lg"/>
+                    <div class="form-control-feedback" style="color: red"
+                         *ngIf="reportForm.controls.startDay.hasError('required') && reportForm.controls.startDay.touched">
+                      Ngày bắt đầu không được để trống
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <label class="form-label" for="lastName">Đến ngày</label>
+                    <input type="date" #endDay id="lastName" formControlName="endDay"
+                           class="form-control form-control-lg"/>
+                    <div class="form-control-feedback" style="color: red"
+                         *ngIf="reportForm.controls.endDay.hasError('required') && reportForm.controls.endDay.touched">
+                      Ngày kết thúc không được để trống
+                    </div>
+                    <div class="form-control-feedback" style="color: red"
+                         *ngIf="reportForm.hasError('invalidRange') && reportForm.controls.endDay.touched">
+                      Ngày kết thúc không được bé hơn ngày bắt đầu
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3 mb-4 d-flex align-items-center">
+                  <div class="form-outline datepicker ">
+                    <p>Báo cáo: </p>
+                  </div>
+                </div>
+
+                <div class="form-check col-md-4">
+                  <input class="form-check-input" type="radio" #option1 name="radioOptions" id="all" value="option1"
+                         (change)="toggleCommodityInput(option1.value)"/>
+                  <label class="form-check-label" for="all">Tất cả</label>
+                </div>
+
+
+                <div class="form-check col-md-5">
+                  <input class="form-check-input" type="radio" #option2 name="radioOptions" id="theoMa" value="option3"
+                         (change)="toggleCommodityInput(option2.value)"/>
+                  <label class="form-check-label" for="theoMa">Theo tên sản phẩm:</label>
+                  <select *ngIf="showCommodityInput" class="form-control form-control-sm" formControlName="commodityId" [required]="option2.checked">
+                    <option value="">---Chọn sản phẩm---</option>
+                    <option *ngFor="let c of listCommodity" [ngValue]="c.id">{{c.name}}</option>
+                  </select>
+                  <div class="form-control-feedback" style="color: red"
+                       *ngIf="reportForm.controls.commodityId.hasError('required') && reportForm.controls.commodityId.touched">
+                    Không được để trống
+                  </div>
+                </div>
+              </div>
+
+
+              <button class="btn btn-outline-primary" [disabled]="!reportForm.valid"
+                      (click)="salesReport(startDay.value, endDay.value)">Xem
+              </button>
+
+            </form>
+
+
+            <br>
+            <br>
+            <p *ngIf="sales">Tổng số đơn hàng: {{sales.totalQuantity}}</p>
+            <p *ngIf="sales">Tổng doanh thu: {{sales.revenue | currency:'VND':''}} VND</p>
+
+            <div class="row">
+              <canvas id="myChart"></canvas>
+            </div>
+
+            <div class="justify-content-end row">
+              <input class="btn btn-outline-secondary m-2" type="submit" [routerLink]="['/home']" value="Thoát"/>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {BillCreateComponent} from "./bill-create/bill-create.component";
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path:'', component: BillCreateComponent
+  },{
+  path: 'search/:id',component: BillCreateComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

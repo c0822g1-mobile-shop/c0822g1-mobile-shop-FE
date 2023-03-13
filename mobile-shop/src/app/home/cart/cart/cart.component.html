@@ -1,0 +1,33 @@
+<h1 class="text-center" style="margin-top: 150px">Giỏ Hàng</h1>
+<table class="table table-hover" *ngIf="length != 0">
+  <thead>
+  <tr class="bg-info">
+    <th>STT</th>
+    <th>Tên Sản Phẩm</th>
+    <th>Hình Ảnh</th>
+    <th>Đơn Giá</th>
+    <th>Số Lượng</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let x of carts;index as i">
+    <td>{{i + 1}}</td>
+    <td>{{x.name}}</td>
+    <td><img src="{{x.image}}" style="height: 90px;width: 90px"></td>
+    <td>{{x.price | currency: 'VND': 'symbol'}}</td>
+    <td>{{x.quantity}}</td>
+  </tr>
+  <tr>
+    <td colspan="3">Tổng tiền</td>
+    <td colspan="1">{{total  | currency: 'VND': 'symbol'}}</td>
+    <td colspan="1">
+      <button (click)="buy()" class="btn btn-outline-success">Thanh toán</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div *ngIf="length == 0" style="text-align: center;margin-top: 50px">
+  <img src="https://dieuhoanoithat.vn/public/frontend/images/cart-emty.png">
+  <h3 style="color: red">Giỏ hàng trống</h3>
+</div>
+
