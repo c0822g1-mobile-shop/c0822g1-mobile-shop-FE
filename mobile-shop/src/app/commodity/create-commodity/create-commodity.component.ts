@@ -15,6 +15,7 @@ import {CommodityService} from "../../service/commodity.service";
 import {TrademarkService} from "../../service/trademark.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {Title} from "@angular/platform-browser";
+import {TokenService} from "../../log-in/service/token.service";
 
 
 // @ts-ignore
@@ -48,7 +49,7 @@ export class CreateCommodityComponent implements OnInit {
   }
   clickButton = false;
 
-  constructor(private title: Title, private router: Router, private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
+  constructor(private tokenService:TokenService,private title: Title, private router: Router, private commodityService: CommodityService, private trademarkService: TrademarkService, private storage: AngularFireStorage) {
     this.commodityForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(30)]),
       cpu: new FormControl('', [Validators.required, Validators.pattern("[-a-zA-Z0-9\\+ ]*"), Validators.minLength(5), Validators.maxLength(30)]),

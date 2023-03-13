@@ -26,6 +26,10 @@ export class TokenService {
   isLogger() {
     return !!this.getToken();
   }
+  public clearCart() {
+    window.sessionStorage.clear();
+
+  }
   public setStorage(storage: string) {
     localStorage.removeItem(STORAGE);
     localStorage.setItem(STORAGE,storage);

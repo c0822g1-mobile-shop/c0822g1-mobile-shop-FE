@@ -76,6 +76,7 @@ export class BodyComponent implements OnInit {
   getCommodityByQuantitySold(page: number) {
     this.commodityService.getAllByQuantitySold(page).subscribe(data => {
       this.commoditiesByQuantitySold = data.content;
+      console.log(this.commoditiesByQuantitySold)
       this.numberQuantitySold = data.number;
       this.totalPagesQuantitySold = data.totalPages;
       this.firstPageQuantitySold = data.first;
